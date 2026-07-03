@@ -142,8 +142,8 @@ object WasiFileSystem : FileSystem() {
   override fun metadataOrNull(path: Path): FileMetadata? {
     withScopedMemoryAllocator { allocator ->
       val returnPointer = allocator.allocate(64)
-      val preopen = preopenForPath(path) ?: return null
-      val (pathAddress, pathSize) = allocator.write(preopen.relativePath(path))
+      val (preopen, relativePath) = preopenForPath(path) ?: return null
+      val (pathAddress, pathSize) = allocator.write(relativePath)
 
       val errno = path_filestat_get(
         fd = preopen.fd,
@@ -358,8 +358,9 @@ object WasiFileSystem : FileSystem() {
 
   override fun createDirectory(dir: Path, mustCreate: Boolean) {
     withScopedMemoryAllocator { allocator ->
-      val preopen = preopenForPath(dir) ?: throw FileNotFoundException("no preopen: $dir")
-      val (pathAddress, pathSize) = allocator.write(preopen.relativePath(dir))
+      val (preopen, relativePath) = preopenForPath(dir)
+        ?: throw FileNotFoundException("no preopen: $dir")
+      val (pathAddress, pathSize) = allocator.write(relativePath)
 
       val errno = path_create_directory(
         fd = preopen.fd,
@@ -377,12 +378,12 @@ object WasiFileSystem : FileSystem() {
 
   override fun atomicMove(source: Path, target: Path) {
     withScopedMemoryAllocator { allocator ->
-      val sourcePreopen = preopenForPath(source)
+      val (sourcePreopen, sourceRelativePath) = preopenForPath(source)
         ?: throw FileNotFoundException("no preopen: $source")
-      val targetPreopen = preopenForPath(target)
+      val (targetPreopen, targetRelativePath) = preopenForPath(target)
         ?: throw FileNotFoundException("no preopen: $target")
-      val (sourcePathAddress, sourcePathSize) = allocator.write(sourcePreopen.relativePath(source))
-      val (targetPathAddress, targetPathSize) = allocator.write(targetPreopen.relativePath(target))
+      val (sourcePathAddress, sourcePathSize) = allocator.write(sourceRelativePath)
+      val (targetPathAddress, targetPathSize) = allocator.write(targetRelativePath)
 
       val errno = path_rename(
         fd = sourcePreopen.fd,
@@ -402,8 +403,9 @@ object WasiFileSystem : FileSystem() {
 
   override fun delete(path: Path, mustExist: Boolean) {
     withScopedMemoryAllocator { allocator ->
-      val preopen = preopenForPath(path) ?: throw FileNotFoundException("no preopen: $path")
-      val (pathAddress, pathSize) = allocator.write(preopen.relativePath(path))
+      val (preopen, relativePath) = preopenForPath(path)
+        ?: throw FileNotFoundException("no preopen: $path")
+      val (pathAddress, pathSize) = allocator.write(relativePath)
 
       var errno = path_unlink_file(
         fd = preopen.fd,
@@ -433,7 +435,7 @@ object WasiFileSystem : FileSystem() {
 
   override fun createSymlink(source: Path, target: Path) {
     withScopedMemoryAllocator { allocator ->
-      val sourcePreopen = preopenForPath(source)
+      val (sourcePreopen, sourceRelativePath) = preopenForPath(source)
         ?: throw FileNotFoundException("no preopen: $source")
 
       // Always create symlinks relative to their source. Absolute symlinks are trouble because the
@@ -445,7 +447,7 @@ object WasiFileSystem : FileSystem() {
         else -> target.relativeTo(sourceParent)
       }
 
-      val (sourcePathAddress, sourcePathSize) = allocator.write(sourcePreopen.relativePath(source))
+      val (sourcePathAddress, sourcePathSize) = allocator.write(sourceRelativePath)
       val (targetPathAddress, targetPathSize) = allocator.write(targetRelative.toString())
 
       val errno = path_symlink(
@@ -466,8 +468,9 @@ object WasiFileSystem : FileSystem() {
     fdflags: fdflags = 0,
   ): fd {
     withScopedMemoryAllocator { allocator ->
-      val preopen = preopenForPath(path) ?: throw FileNotFoundException("no preopen: $path")
-      val (pathAddress, pathSize) = allocator.write(preopen.relativePath(path))
+      val (preopen, relativePath) = preopenForPath(path)
+        ?: throw FileNotFoundException("no preopen: $path")
+      val (pathAddress, pathSize) = allocator.write(relativePath)
 
       val returnPointer: Pointer = allocator.allocate(4) // fd is u32.
       val errno = path_open(
@@ -491,20 +494,22 @@ object WasiFileSystem : FileSystem() {
 
   /**
    * Returns the preopen whose path is either an ancestor of [path], or whose path [path] is an
-   * ancestor of.
+   * ancestor of, paired with [path] made relative to that preopen.
    *
    * If [path] is an ancestor of our preopen, then operating on the path will ultimately fail with a
    * `notcapable` errno.
    */
-  private fun preopenForPath(path: Path): Preopen? {
-    if (path.isRelative) return relativePathPreopen
+  private fun preopenForPath(path: Path): Pair<Preopen, String>? {
+    if (path.isRelative) return relativePathPreopen to relativePathPreopen.relativePath(path)
 
     val pathSegmentsBytes = path.segmentsBytes
 
-    return preopens.firstOrNull { preopen ->
+    val preopen = preopens.firstOrNull { preopen ->
       val commonSize = minOf(pathSegmentsBytes.size, preopen.segmentsBytes.size)
       preopen.segmentsBytes.subList(0, commonSize) == pathSegmentsBytes.subList(0, commonSize)
-    }
+    } ?: return null
+
+    return preopen to preopen.relativePath(path)
   }
 
   override fun toString() = "okio.WasiFileSystem"
