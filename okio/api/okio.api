@@ -656,6 +656,9 @@ public final class okio/Okio {
 	public static final fun hashingSource (Lokio/Source;Ljava/security/MessageDigest;)Lokio/HashingSource;
 	public static final fun hashingSource (Lokio/Source;Ljavax/crypto/Mac;)Lokio/HashingSource;
 	public static final fun inMemorySocketPair (J)[Lokio/Socket;
+	public static final fun limit (Lokio/Source;J)Lokio/Source;
+	public static final fun limit (Lokio/Source;JZ)Lokio/Source;
+	public static synthetic fun limit$default (Lokio/Source;JZILjava/lang/Object;)Lokio/Source;
 	public static final fun openZip (Lokio/FileSystem;Lokio/Path;)Lokio/FileSystem;
 	public static final fun sink (Ljava/io/File;)Lokio/Sink;
 	public static final fun sink (Ljava/io/File;Z)Lokio/Sink;
