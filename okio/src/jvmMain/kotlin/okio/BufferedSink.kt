@@ -102,4 +102,12 @@ actual sealed interface BufferedSink : Sink, WritableByteChannel {
 
   /** Returns an output stream that writes to this sink. */
   fun outputStream(): OutputStream
+
+  /**
+   * Returns an appendable that encodes strings as UTF-8 and writes them to this sink.
+   *
+   * If the last character of any [Appendable.append] call is an unpaired high surrogate, that
+   * character will be saved in an attempt to pair it with a low surrogate in the following call.
+   */
+  fun utf8Appendable(): Appendable
 }

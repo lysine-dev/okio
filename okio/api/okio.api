@@ -169,6 +169,7 @@ public final class okio/Buffer : java/lang/Cloneable, java/nio/channels/ByteChan
 	public final fun snapshot (I)Lokio/ByteString;
 	public fun timeout ()Lokio/Timeout;
 	public fun toString ()Ljava/lang/String;
+	public fun utf8Appendable ()Ljava/lang/Appendable;
 	public fun write (Ljava/nio/ByteBuffer;)I
 	public fun write (Lokio/Buffer;J)V
 	public fun write (Lokio/ByteString;)Lokio/Buffer;
@@ -237,6 +238,7 @@ public abstract interface class okio/BufferedSink : java/nio/channels/WritableBy
 	public abstract fun flush ()V
 	public abstract fun getBuffer ()Lokio/Buffer;
 	public abstract fun outputStream ()Ljava/io/OutputStream;
+	public abstract fun utf8Appendable ()Ljava/lang/Appendable;
 	public abstract fun write (Lokio/ByteString;)Lokio/BufferedSink;
 	public abstract fun write (Lokio/ByteString;II)Lokio/BufferedSink;
 	public abstract fun write (Lokio/Source;J)Lokio/BufferedSink;

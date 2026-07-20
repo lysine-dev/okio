@@ -15,7 +15,11 @@
  */
 package okio
 
+import assertk.assertThat
+import assertk.assertions.hasMessage
+import assertk.assertions.isEqualTo
 import java.io.EOFException
+import kotlin.test.assertFailsWith
 import kotlin.text.Charsets.UTF_8
 import okio.ByteString.Companion.decodeHex
 import okio.ByteString.Companion.of
@@ -23,7 +27,6 @@ import okio.TestUtil.SEGMENT_SIZE
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
 import org.junit.Test
 
 class Utf8Test {
@@ -117,10 +120,8 @@ class Utf8Test {
   @Test
   fun readEmptyBufferThrowsEofException() {
     val buffer = Buffer()
-    try {
+    assertFailsWith<EOFException> {
       buffer.readUtf8CodePoint()
-      fail()
-    } catch (expected: EOFException) {
     }
   }
 
@@ -136,10 +137,8 @@ class Utf8Test {
   fun readMissingContinuationBytesThrowsEofException() {
     val buffer = Buffer()
     buffer.writeByte(0xdf)
-    try {
+    assertFailsWith<EOFException> {
       buffer.readUtf8CodePoint()
-      fail()
-    } catch (expected: EOFException) {
     }
     assertFalse(buffer.exhausted()) // Prefix byte wasn't consumed.
   }
@@ -207,12 +206,10 @@ class Utf8Test {
   @Test
   fun writeCodePointBeyondUnicodeMaximum() {
     val buffer = Buffer()
-    try {
+    val expected = assertFailsWith<IllegalArgumentException> {
       buffer.writeUtf8CodePoint(0x110000)
-      fail()
-    } catch (expected: IllegalArgumentException) {
-      assertEquals("Unexpected code point: 0x110000", expected.message)
     }
+    assertThat(expected).hasMessage("Unexpected code point: 0x110000")
   }
 
   @Test
@@ -235,25 +232,17 @@ class Utf8Test {
 
   @Test
   fun sizeBoundsCheck() {
-    try {
+    assertFailsWith<NullPointerException> {
       null!!.utf8Size(0, 0)
-      fail()
-    } catch (expected: NullPointerException) {
     }
-    try {
+    assertFailsWith<IllegalArgumentException> {
       "abc".utf8Size(-1, 2)
-      fail()
-    } catch (expected: IllegalArgumentException) {
     }
-    try {
+    assertFailsWith<IllegalArgumentException> {
       "abc".utf8Size(2, 1)
-      fail()
-    } catch (expected: IllegalArgumentException) {
     }
-    try {
+    assertFailsWith<IllegalArgumentException> {
       "abc".utf8Size(1, 4)
-      fail()
-    } catch (expected: IllegalArgumentException) {
     }
   }
 
@@ -303,5 +292,69 @@ class Utf8Test {
     // Confirm we are consistent when measuring lengths.
     assertEquals(expectedUtf8.size.toLong(), string.utf8Size())
     assertEquals(expectedUtf8.size.toLong(), string.utf8Size(0, string.length))
+
+    // Confirm Appendable APIs works.
+    assertBufferAppendableWriteString(string, expectedUtf8)
+    assertBufferAppendableWriteChars(string, expectedUtf8)
+    assertBufferedSinkAppendableWriteString(string, expectedUtf8)
+    assertBufferedSinkAppendableWriteChars(string, expectedUtf8)
+  }
+
+  private fun assertBufferAppendableWriteString(string: String, expectedUtf8: ByteString) {
+    val buffer = Buffer()
+    buffer.utf8Appendable().append("abc${string}xyz")
+
+    assertThat(buffer.readUtf8(3)).isEqualTo("abc")
+    assertThat(buffer.readByteString(buffer.size - 3)).isEqualTo(expectedUtf8)
+    assertThat(buffer.readUtf8(3)).isEqualTo("xyz")
+  }
+
+  private fun assertBufferAppendableWriteChars(string: String, expectedUtf8: ByteString) {
+    val buffer = Buffer()
+    val appendable = buffer.utf8Appendable()
+    appendable.append('a')
+    appendable.append('b')
+    appendable.append('c')
+    for (c in string) {
+      appendable.append(c)
+    }
+    appendable.append('x')
+    appendable.append('y')
+    appendable.append('z')
+
+    assertThat(buffer.readUtf8(3)).isEqualTo("abc")
+    assertThat(buffer.readByteString(buffer.size - 3)).isEqualTo(expectedUtf8)
+    assertThat(buffer.readUtf8(3)).isEqualTo("xyz")
+  }
+
+  private fun assertBufferedSinkAppendableWriteString(string: String, expectedUtf8: ByteString) {
+    val data = Buffer()
+    val sink = (data as Sink).buffer()
+    sink.utf8Appendable().append("abc${string}xyz")
+    sink.emit()
+
+    assertThat(data.readUtf8(3)).isEqualTo("abc")
+    assertThat(data.readByteString(data.size - 3)).isEqualTo(expectedUtf8)
+    assertThat(data.readUtf8(3)).isEqualTo("xyz")
+  }
+
+  private fun assertBufferedSinkAppendableWriteChars(string: String, expectedUtf8: ByteString) {
+    val data = Buffer()
+    val sink = (data as Sink).buffer()
+    val appendable = sink.utf8Appendable()
+    appendable.append('a')
+    appendable.append('b')
+    appendable.append('c')
+    for (c in string) {
+      appendable.append(c)
+    }
+    appendable.append('x')
+    appendable.append('y')
+    appendable.append('z')
+    sink.emit()
+
+    assertThat(data.readUtf8(3)).isEqualTo("abc")
+    assertThat(data.readByteString(data.size - 3)).isEqualTo(expectedUtf8)
+    assertThat(data.readUtf8(3)).isEqualTo("xyz")
   }
 }

@@ -928,7 +928,7 @@ internal inline fun Buffer.commonReadUtf8CodePoint(): Int {
     codePoint > 0x10ffff -> {
       REPLACEMENT_CODE_POINT // Reject code points larger than the Unicode maximum.
     }
-    codePoint in 0xd800..0xdfff -> {
+    codePoint.isSurrogate -> {
       REPLACEMENT_CODE_POINT // Reject partial surrogates.
     }
     codePoint < min -> {
@@ -983,32 +983,15 @@ internal inline fun Buffer.commonWriteUtf8(string: String, beginIndex: Int, endI
         i++
       }
 
-      c < 0xd800 || c > 0xdfff -> {
-        // Emit a 16-bit character with 3 bytes.
-        val tail = writableSegment(3)
-        /* ktlint-disable no-multi-spaces */
-        tail.data[tail.limit    ] = (c shr 12          or 0xe0).toByte() // 1110xxxx
-        tail.data[tail.limit + 1] = (c shr  6 and 0x3f or 0x80).toByte() // 10xxxxxx
-        tail.data[tail.limit + 2] = (c        and 0x3f or 0x80).toByte() // 10xxxxxx
-        /* ktlint-enable no-multi-spaces */
-        tail.limit += 3
-        size += 3L
-        i++
-      }
-
-      else -> {
-        // c is a surrogate. Make sure it is a high surrogate & that its successor is a low
-        // surrogate. If not, the UTF-16 is invalid, in which case we emit a replacement
-        // character.
+      c.isHighSurrogate -> {
+        // c is a high surrogate. Make sure its successor is a low surrogate. If not, the UTF-16 is
+        // invalid, in which case we emit a replacement character.
         val low = (if (i + 1 < endIndex) string[i + 1].code else 0)
-        if (c > 0xdbff || low !in 0xdc00..0xdfff) {
+        if (!low.isLowSurrogate) {
           writeByte('?'.code)
           i++
         } else {
-          // UTF-16 high surrogate: 110110xxxxxxxxxx (10 bits)
-          // UTF-16 low surrogate:  110111yyyyyyyyyy (10 bits)
-          // Unicode code point:    00010000000000000000 + xxxxxxxxxxyyyyyyyyyy (21 bits)
-          val codePoint = 0x010000 + (c and 0x03ff shl 10 or (low and 0x03ff))
+          val codePoint = combineSurrogates(c, low)
 
           // Emit a 21-bit character with 4 bytes.
           val tail = writableSegment(4)
@@ -1022,6 +1005,25 @@ internal inline fun Buffer.commonWriteUtf8(string: String, beginIndex: Int, endI
           size += 4L
           i += 2
         }
+      }
+
+      c.isLowSurrogate -> {
+        // Low surrogate should have followed a high surrogate. Emit a replacement character.
+        writeByte('?'.code)
+        i++
+      }
+
+      else -> {
+        // Emit a 16-bit character with 3 bytes.
+        val tail = writableSegment(3)
+        /* ktlint-disable no-multi-spaces */
+        tail.data[tail.limit    ] = (c shr 12          or 0xe0).toByte() // 1110xxxx
+        tail.data[tail.limit + 1] = (c shr  6 and 0x3f or 0x80).toByte() // 10xxxxxx
+        tail.data[tail.limit + 2] = (c        and 0x3f or 0x80).toByte() // 10xxxxxx
+        /* ktlint-enable no-multi-spaces */
+        tail.limit += 3
+        size += 3L
+        i++
       }
     }
   }
@@ -1045,7 +1047,7 @@ internal inline fun Buffer.commonWriteUtf8CodePoint(codePoint: Int): Buffer {
       tail.limit += 2
       size += 2L
     }
-    codePoint in 0xd800..0xdfff -> {
+    codePoint.isSurrogate -> {
       // Emit a replacement character for a partial surrogate.
       writeByte('?'.code)
     }

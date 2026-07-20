@@ -131,6 +131,31 @@ internal actual class RealBufferedSink actual constructor(
     }
   }
 
+  override fun utf8Appendable(): Appendable {
+    return object : Appendable {
+      private val delegate = buffer.utf8Appendable()
+
+      override fun append(charSequence: CharSequence?) = apply {
+        delegate.append(charSequence)
+        emitCompleteSegments()
+      }
+
+      override fun append(
+        charSequence: CharSequence?,
+        start: Int,
+        end: Int,
+      ) = apply {
+        delegate.append(charSequence, start, end)
+        emitCompleteSegments()
+      }
+
+      override fun append(c: Char) = apply {
+        delegate.append(c)
+        emitCompleteSegments()
+      }
+    }
+  }
+
   actual override fun flush() = commonFlush()
 
   override fun isOpen() = !closed

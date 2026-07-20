@@ -27,6 +27,7 @@ import java.security.InvalidKeyException
 import java.security.MessageDigest
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+import okio.internal.combineSurrogates
 import okio.internal.commonClear
 import okio.internal.commonClose
 import okio.internal.commonCompleteSegmentByteCount
@@ -72,6 +73,8 @@ import okio.internal.commonWriteLong
 import okio.internal.commonWriteShort
 import okio.internal.commonWriteUtf8
 import okio.internal.commonWriteUtf8CodePoint
+import okio.internal.isHighSurrogate
+import okio.internal.isLowSurrogate
 
 actual class Buffer : BufferedSource, BufferedSink, Cloneable, ByteChannel {
   @JvmField internal actual var head: Segment? = null
@@ -99,6 +102,70 @@ actual class Buffer : BufferedSource, BufferedSink, Cloneable, ByteChannel {
       override fun close() {}
 
       override fun toString(): String = "${this@Buffer}.outputStream()"
+    }
+  }
+
+  override fun utf8Appendable(): Appendable {
+    return object : Appendable {
+      private var savedHighSurrogate: Int = 0
+
+      override fun append(charSequence: CharSequence?) =
+        append(charSequence, 0, charSequence?.length ?: "null".length)
+
+      override fun append(
+        charSequence: CharSequence?,
+        beginIndex: Int,
+        endIndex: Int,
+      ) = apply {
+        val string = charSequence?.toString() ?: "null"
+
+        require(beginIndex >= 0) { "beginIndex < 0: $beginIndex" }
+        require(endIndex >= beginIndex) { "endIndex < beginIndex: $endIndex < $beginIndex" }
+        require(endIndex <= string.length) { "endIndex > string.length: $endIndex > ${string.length}" }
+
+        if (beginIndex == endIndex) return@apply
+
+        // If we have a saved high surrogate, check if the first character is a low surrogate.
+        var beginIndex = beginIndex
+        if (savedHighSurrogate != 0) {
+          if (string[beginIndex].code.isLowSurrogate) {
+            writeUtf8CodePoint(combineSurrogates(savedHighSurrogate, string[beginIndex++].code))
+          } else {
+            writeByte('?'.code) // Our high surrogate was unmatched.
+          }
+          savedHighSurrogate = 0
+        }
+
+        // If the last character is a high surrogate, save it for later.
+        var endIndex = endIndex
+        if (beginIndex < endIndex && string[endIndex - 1].code.isHighSurrogate) {
+          savedHighSurrogate = string[--endIndex].code
+        }
+
+        writeUtf8(string, beginIndex, endIndex)
+      }
+
+      override fun append(c: Char) = apply {
+        var c = c.code
+
+        // If we have a saved high surrogate, check if c is a low surrogate.
+        if (savedHighSurrogate != 0) {
+          if (c.isLowSurrogate) {
+            c = combineSurrogates(savedHighSurrogate, c)
+          } else {
+            writeByte('?'.code) // Our high surrogate was unmatched.
+          }
+          savedHighSurrogate = 0
+        }
+
+        // If c is a high surrogate, save it for later.
+        if (c.isHighSurrogate) {
+          savedHighSurrogate = c
+          return@apply
+        }
+
+        writeUtf8CodePoint(c)
+      }
     }
   }
 
