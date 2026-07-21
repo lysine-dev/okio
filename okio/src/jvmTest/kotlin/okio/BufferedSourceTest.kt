@@ -815,7 +815,7 @@ class BufferedSourceTest(
 
   /**
    * With [Factory.OneByteAtATimeSource], this code was extremely slow.
-   * https://github.com/square/okio/issues/171
+   * https://github.com/lysine-dev/okio/issues/171
    */
   @Test
   fun indexOfByteStringAcrossSegmentBoundaries() {

@@ -1,7 +1,7 @@
 site_name: Okio
-site_url: https://square.github.io/okio
+site_url: https://lysine.dev/okio
 repo_name: Okio
-repo_url: https://github.com/square/okio
+repo_url: https://github.com/lysine-dev/okio
 site_description: "A modern I/O library for Android, Kotlin, and Java."
 site_author: Square, Inc.
 remote_branch: gh-pages
@@ -72,7 +72,7 @@ nav:
     - 'okio': 3.x/okio/okio/okio/index.html
     - 'fakefilesystem': 3.x/okio-fakefilesystem/okio-fakefilesystem/okio.fakefilesystem/-fake-file-system/index.html
     - 'nodefilesystem': 3.x/okio-nodefilesystem/okio-nodefilesystem/okio/-node-js-file-system/index.html
-  - '1.x API ⏏': https://square.github.io/okio/1.x/okio/
+  - '1.x API ⏏': https://lysine.dev/okio/1.x/okio/
   - 'Change Log': changelog.md
   - 'File System': file_system.md
   - 'Multiplatform': multiplatform.md

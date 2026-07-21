@@ -47,4 +47,4 @@ if a `run finished` line is printed in the logcat logs:
 ```
 
 
-[okhttp_android_test]: https://github.com/square/okhttp/tree/master/android-test
+[okhttp_android_test]: https://github.com/lysine-dev/okhttp/tree/master/android-test

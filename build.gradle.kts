@@ -115,7 +115,7 @@ allprojects {
       pom {
         description.set("A modern I/O library for Android, Java, and Kotlin Multiplatform.")
         name.set(project.name)
-        url.set("https://github.com/square/okio/")
+        url.set("https://github.com/lysine-dev/okio/")
         licenses {
           license {
             name.set("The Apache Software License, Version 2.0")
@@ -124,9 +124,9 @@ allprojects {
           }
         }
         scm {
-          url.set("https://github.com/square/okio/")
-          connection.set("scm:git:git://github.com/square/okio.git")
-          developerConnection.set("scm:git:ssh://git@github.com/square/okio.git")
+          url.set("https://github.com/lysine-dev/okio/")
+          connection.set("scm:git:git://github.com/lysine-dev/okio.git")
+          developerConnection.set("scm:git:ssh://git@github.com/lysine-dev/okio.git")
         }
         developers {
           developer {

@@ -1080,4 +1080,4 @@ _2014-04-08_
 [maven_provided]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html
 [preview1]: https://github.com/WebAssembly/WASI/blob/main/legacy/preview1/docs.md
 [watchosX86]: https://blog.jetbrains.com/kotlin/2023/02/update-regarding-kotlin-native-targets/
-[xor_utf8]: https://github.com/square/okio/blob/bbb29c459e5ccf0f286e0b17ccdcacd7ac4bc2a9/okio/src/main/kotlin/okio/Utf8.kt#L302
+[xor_utf8]: https://github.com/lysine-dev/okio/blob/bbb29c459e5ccf0f286e0b17ccdcacd7ac4bc2a9/okio/src/main/kotlin/okio/Utf8.kt#L302

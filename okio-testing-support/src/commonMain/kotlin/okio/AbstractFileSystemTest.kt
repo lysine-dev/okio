@@ -1471,7 +1471,7 @@ abstract class AbstractFileSystemTest(
     assertInRange(metadata.lastAccessedAt, minTime, maxTime)
   }
 
-  /** https://github.com/square/okio/issues/1755 */
+  /** https://github.com/lysine-dev/okio/issues/1755 */
   @Test
   fun fileMetadataTimestampsAreDistinct() {
     if (fileSystem.isFakeFileSystem) return

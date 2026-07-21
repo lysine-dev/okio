@@ -21,7 +21,7 @@ package okio
 import kotlin.jvm.JvmName
 
 /**
- * A sink that uses [DEFLATE](http://tools.ietf.org/html/rfc1951) to
+ * A sink that uses [DEFLATE](https://tools.ietf.org/html/rfc1951) to
  * compress data written to another source.
  *
  * ### Sync flush

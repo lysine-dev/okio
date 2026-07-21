@@ -726,7 +726,7 @@ class CommonBufferedSourceTest(
 
   /**
    * With [BufferedSourceFactory.OneByteAtATimeSource], this code was extremely slow.
-   * https://github.com/square/okio/issues/171
+   * https://github.com/lysine-dev/okio/issues/171
    */
   @Test fun indexOfByteStringAcrossSegmentBoundaries() {
     sink.writeUtf8("a".repeat(Segment.SIZE * 2 - 3))

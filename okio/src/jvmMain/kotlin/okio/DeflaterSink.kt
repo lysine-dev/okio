@@ -54,7 +54,7 @@ actual class DeflaterSink internal actual constructor(
     }
 
     // Deflater still holds a reference to the most recent segment's byte array. That can cause
-    // problems in JNI, so clear it now. https://github.com/square/okio/issues/1608
+    // problems in JNI, so clear it now. https://github.com/lysine-dev/okio/issues/1608
     deflater.setInput(EMPTY_BYTE_ARRAY, 0, 0)
   }
 

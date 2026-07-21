@@ -23,7 +23,7 @@ import kotlin.jvm.JvmName
 import okio.internal.CRC32
 
 /**
- * A source that uses [GZIP](http://www.ietf.org/rfc/rfc1952.txt) to
+ * A source that uses [GZIP](https://www.ietf.org/rfc/rfc1952.txt) to
  * decompress data read from another source.
  */
 class GzipSource(source: Source) : Source {

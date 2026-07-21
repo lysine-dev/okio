@@ -516,7 +516,7 @@ internal inline fun Buffer.commonWriteHexadecimalUnsignedLong(v: Long): Buffer {
   }
 
   // Mask every bit below the most significant bit to a 1
-  // http://aggregate.org/MAGIC/#Most%20Significant%201%20Bit
+  // https://aggregate.org/MAGIC/#Most%20Significant%201%20Bit
   var x = v
   x = x or (x ushr 1)
   x = x or (x ushr 2)
@@ -526,7 +526,7 @@ internal inline fun Buffer.commonWriteHexadecimalUnsignedLong(v: Long): Buffer {
   x = x or (x ushr 32)
 
   // Count the number of 1s
-  // http://aggregate.org/MAGIC/#Population%20Count%20(Ones%20Count)
+  // https://aggregate.org/MAGIC/#Population%20Count%20(Ones%20Count)
   x -= x ushr 1 and 0x5555555555555555
   x = (x ushr 2 and 0x3333333333333333) + (x and 0x3333333333333333)
   x = (x ushr 4) + x and 0x0f0f0f0f0f0f0f0f

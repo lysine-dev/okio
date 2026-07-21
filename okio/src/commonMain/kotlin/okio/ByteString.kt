@@ -45,12 +45,12 @@ internal constructor(data: ByteArray) : Comparable<ByteString> {
   fun utf8(): String
 
   /**
-   * Returns this byte string encoded as [Base64](http://www.ietf.org/rfc/rfc2045.txt). In violation
+   * Returns this byte string encoded as [Base64](https://www.ietf.org/rfc/rfc2045.txt). In violation
    * of the RFC, the returned string does not wrap lines at 76 columns.
    */
   fun base64(includePadding: Boolean = true): String
 
-  /** Returns this byte string encoded as [URL-safe Base64](http://www.ietf.org/rfc/rfc4648.txt). */
+  /** Returns this byte string encoded as [URL-safe Base64](https://www.ietf.org/rfc/rfc4648.txt). */
   fun base64Url(includePadding: Boolean = true): String
 
   /** Returns this byte string encoded in hexadecimal. */
