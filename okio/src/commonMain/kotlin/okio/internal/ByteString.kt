@@ -352,7 +352,7 @@ internal fun String.decodeHexIgnoreWhitespace(): ByteString {
   var r = 0
   val result = ByteArray(length / 2)
 
-  byte@ while (i < length) {
+  byte@while (i < length) {
     val d1 = decodeHexDigitIgnoreWhitespace(this[i++])
     if (d1 == -1) continue
 
@@ -382,4 +382,3 @@ private fun decodeHexDigitIgnoreWhitespace(c: Char): Int {
     else -> throw IllegalArgumentException("Unexpected hex digit: $c")
   }
 }
-
