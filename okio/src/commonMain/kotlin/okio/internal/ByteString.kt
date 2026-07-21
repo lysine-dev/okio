@@ -21,6 +21,7 @@ import kotlin.jvm.JvmName
 import okio.BASE64_URL_SAFE
 import okio.Buffer
 import okio.ByteString
+import okio.ByteString.Companion.toByteString
 import okio.REPLACEMENT_CODE_POINT
 import okio.and
 import okio.arrayRangeEquals
@@ -345,3 +346,40 @@ private fun codePointIndexToCharIndex(s: ByteArray, codePointCount: Int): Int {
   }
   return charCount
 }
+
+internal fun String.decodeHexIgnoreWhitespace(): ByteString {
+  var i = 0
+  var r = 0
+  val result = ByteArray(length / 2)
+
+  byte@ while (i < length) {
+    val d1 = decodeHexDigitIgnoreWhitespace(this[i++])
+    if (d1 == -1) continue
+
+    while (i < length) {
+      val d2 = decodeHexDigitIgnoreWhitespace(this[i++])
+      if (d2 == -1) continue
+
+      result[r++] = ((d1 shl 4) + d2).toByte()
+      continue@byte
+    }
+
+    throw IllegalArgumentException("Expected an even number of hex digits but was: ${r * 2 + 1}")
+  }
+
+  return when {
+    r < result.size -> result.toByteString(0, r)
+    else -> ByteString(result)
+  }
+}
+
+private fun decodeHexDigitIgnoreWhitespace(c: Char): Int {
+  return when (c) {
+    in '0'..'9' -> c - '0'
+    in 'a'..'f' -> c - 'a' + 10
+    in 'A'..'F' -> c - 'A' + 10
+    ' ', '\r', '\n', '\t' -> -1
+    else -> throw IllegalArgumentException("Unexpected hex digit: $c")
+  }
+}
+

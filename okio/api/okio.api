@@ -326,6 +326,7 @@ public class okio/ByteString : java/io/Serializable, java/lang/Comparable {
 	public static synthetic fun copyInto$default (Lokio/ByteString;I[BIIILjava/lang/Object;)V
 	public static final fun decodeBase64 (Ljava/lang/String;)Lokio/ByteString;
 	public static final fun decodeHex (Ljava/lang/String;)Lokio/ByteString;
+	public static final fun decodeHex (Ljava/lang/String;Z)Lokio/ByteString;
 	public static final fun encodeString (Ljava/lang/String;Ljava/nio/charset/Charset;)Lokio/ByteString;
 	public static final fun encodeUtf8 (Ljava/lang/String;)Lokio/ByteString;
 	public final fun endsWith (Lokio/ByteString;)Z
@@ -386,6 +387,7 @@ public final class okio/ByteString$Companion {
 	public final fun -deprecated_read (Ljava/io/InputStream;I)Lokio/ByteString;
 	public final fun decodeBase64 (Ljava/lang/String;)Lokio/ByteString;
 	public final fun decodeHex (Ljava/lang/String;)Lokio/ByteString;
+	public final fun decodeHex (Ljava/lang/String;Z)Lokio/ByteString;
 	public final fun encodeString (Ljava/lang/String;Ljava/nio/charset/Charset;)Lokio/ByteString;
 	public static synthetic fun encodeString$default (Lokio/ByteString$Companion;Ljava/lang/String;Ljava/nio/charset/Charset;ILjava/lang/Object;)Lokio/ByteString;
 	public final fun encodeUtf8 (Ljava/lang/String;)Lokio/ByteString;

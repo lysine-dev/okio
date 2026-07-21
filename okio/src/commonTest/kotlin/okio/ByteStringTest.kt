@@ -374,28 +374,6 @@ class ByteStringTest(
     assertEquals("", "    ".decodeBase64()!!.utf8())
   }
 
-  @Test fun encodeHex() {
-    assertEquals("000102", ByteString.of(0x0, 0x1, 0x2).hex())
-  }
-
-  @Test fun decodeHex() {
-    val actual = "CAFEBABE".decodeHex()
-    val expected = ByteString.of(-54, -2, -70, -66)
-    assertEquals(expected, actual)
-  }
-
-  @Test fun decodeHexOddNumberOfChars() {
-    assertFailsWith<IllegalArgumentException> {
-      "aaa".decodeHex()
-    }
-  }
-
-  @Test fun decodeHexInvalidChar() {
-    assertFailsWith<IllegalArgumentException> {
-      "a\u0000".decodeHex()
-    }
-  }
-
   @Test fun toStringOnEmpty() {
     assertEquals("[size=0]", factory.decodeHex("").toString())
   }

@@ -218,5 +218,14 @@ internal constructor(data: ByteArray) : Comparable<ByteString> {
     /** Decodes the hex-encoded bytes and returns their value a byte string. */
     @JvmStatic
     fun String.decodeHex(): ByteString
+
+    /**
+     * Decodes the hex-encoded bytes and returns their value a byte string.
+     *
+     * @param ignoreWhitespace true to skip ASCII whitespace characters (space, tab, carriage
+     *   return and line feed). Otherwise, this throws if whitespace is present otherwise.
+     */
+    @JvmStatic
+    fun String.decodeHex(ignoreWhitespace: Boolean): ByteString
   }
 }
