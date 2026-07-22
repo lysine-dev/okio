@@ -192,4 +192,11 @@ internal class NioFileSystemWrappingFileSystem(private val nioFileSystem: NioFil
   }
 
   override fun toString() = nioFileSystem::class.simpleName!!
+
+  @Suppress("NewApi")
+  @Throws(IOException::class)
+  override fun lock(
+    path: Path,
+    mode: LockMode,
+  ): FileLock = lock(path.resolve(), mode)
 }

@@ -16,6 +16,7 @@
 package okio
 
 import java.nio.file.FileSystem as JavaNioFileSystem
+import kotlin.Throws
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 import okio.Path.Companion.toPath
@@ -141,6 +142,14 @@ actual abstract class FileSystem : Closeable {
 
   @Throws(IOException::class)
   actual override fun close() {
+  }
+
+  @Throws(IOException::class)
+  actual open fun lock(
+    path: Path,
+    mode: LockMode,
+  ): FileLock {
+    throw IOException("This file system does not support locking.")
   }
 
   actual companion object {

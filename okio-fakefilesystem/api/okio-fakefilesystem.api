@@ -25,6 +25,7 @@ public final class okio/fakefilesystem/FakeFileSystem : okio/FileSystem {
 	public final fun getWorkingDirectory ()Lokio/Path;
 	public fun list (Lokio/Path;)Ljava/util/List;
 	public fun listOrNull (Lokio/Path;)Ljava/util/List;
+	public fun lock (Lokio/Path;Lokio/LockMode;)Lokio/FileLock;
 	public fun metadataOrNull (Lokio/Path;)Lokio/FileMetadata;
 	public final fun openPaths ()Ljava/util/List;
 	public fun openReadOnly (Lokio/Path;)Lokio/FileHandle;
@@ -40,5 +41,10 @@ public final class okio/fakefilesystem/FakeFileSystem : okio/FileSystem {
 	public fun sink (Lokio/Path;Z)Lokio/Sink;
 	public fun source (Lokio/Path;)Lokio/Source;
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class okio/fakefilesystem/FakeFileSystemLock {
+	public fun <init> (Lokio/Path;)V
+	public final fun lock (Lokio/LockMode;)Lokio/FileLock;
 }
 
