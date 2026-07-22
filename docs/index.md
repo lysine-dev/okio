@@ -135,14 +135,14 @@ License
     limitations under the License.
 
  [1]: https://github.com/lysine-dev/okhttp
- [3]: https://lysine.dev/okio/3.x/okio/okio/okio/-byte-string/index.html
- [4]: https://lysine.dev/okio/3.x/okio/okio/okio/-buffer/index.html
- [5]: https://lysine.dev/okio/3.x/okio/okio/okio/-source/index.html
- [6]: https://lysine.dev/okio/3.x/okio/okio/okio/-sink/index.html
- [7]: https://lysine.dev/okio/3.x/okio/okio/okio/-buffered-source/index.html
- [8]: https://lysine.dev/okio/3.x/okio/okio/okio/-buffered-sink/index.html
+ [3]: https://lysine.dev/okio/3.x/okio/okio/-byte-string/
+ [4]: https://lysine.dev/okio/3.x/okio/okio/-buffer/
+ [5]: https://lysine.dev/okio/3.x/okio/okio/-source/
+ [6]: https://lysine.dev/okio/3.x/okio/okio/-sink/
+ [7]: https://lysine.dev/okio/3.x/okio/okio/-buffered-source/
+ [8]: https://lysine.dev/okio/3.x/okio/okio/-buffered-sink/
  [changelog]: https://lysine.dev/okio/changelog/
- [javadoc]: https://lysine.dev/okio/2.x/okio/okio/index.html
+ [javadoc]: https://lysine.dev/okio/3.x/okio/okio/
  [kotlin]: https://kotlinlang.org/
  [ok_libraries_talk]: https://www.youtube.com/watch?v=WvyScM_S88c
  [ok_libraries_slides]: https://speakerdeck.com/jakewharton/a-few-ok-libraries-droidcon-mtl-2015

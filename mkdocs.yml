@@ -59,7 +59,7 @@ markdown_extensions:
   - pymdownx.smartsymbols
   - pymdownx.superfences
   - pymdownx.tabbed:
-      alternate_style: true 
+      alternate_style: true
   - pymdownx.tilde
   - tables
 
@@ -68,11 +68,14 @@ nav:
   - 'Stack Overflow ⏏': https://stackoverflow.com/questions/tagged/okio?sort=active
   - 'Recipes': recipes.md
   - 'java.io Recipes': java_io_recipes.md
-  - '3.x API':
-    - 'okio': 3.x/okio/okio/okio/index.html
-    - 'fakefilesystem': 3.x/okio-fakefilesystem/okio-fakefilesystem/okio.fakefilesystem/-fake-file-system/index.html
-    - 'nodefilesystem': 3.x/okio-nodefilesystem/okio-nodefilesystem/okio/-node-js-file-system/index.html
-  - '1.x API ⏏': https://lysine.dev/okio/1.x/okio/
+  - '3.x API ⏏':
+    - 'okio': 3.x/okio/okio/index.html
+    - 'assetfilesystem': 3.x/okio-assetfilesystem/okio.assetfilesystem/
+    - 'fakefilesystem': 3.x/okio-fakefilesystem/okio.fakefilesystem/
+    - 'nodefilesystem': 3.x/okio-nodefilesystem/okio/
+    - 'wasifilesystem': 3.x/okio-wasifilesystem/okio/-wasi-file-system/
+  - '1.x API ⏏': https://lysine.dev/okio/2.x/okio/okio/
+  - '2.x API ⏏': https://lysine.dev/okio/1.x/okio/
   - 'Change Log': changelog.md
   - 'File System': file_system.md
   - 'Multiplatform': multiplatform.md
