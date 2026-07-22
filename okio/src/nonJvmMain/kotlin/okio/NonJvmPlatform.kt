@@ -16,8 +16,6 @@
 
 package okio
 
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
 import okio.internal.commonAsUtf8ToByteArray
 import okio.internal.commonToUtf8String
 
@@ -30,22 +28,6 @@ internal actual fun String.asUtf8ToByteArray(): ByteArray = commonAsUtf8ToByteAr
 actual open class ArrayIndexOutOfBoundsException actual constructor(
   message: String?,
 ) : IndexOutOfBoundsException(message)
-
-actual class Lock {
-  companion object {
-    val instance = Lock()
-  }
-}
-
-internal actual fun newLock(): Lock = Lock.instance
-
-actual inline fun <T> Lock.withLock(action: () -> T): T {
-  contract {
-    callsInPlace(action, InvocationKind.EXACTLY_ONCE)
-  }
-
-  return action()
-}
 
 actual open class IOException actual constructor(
   message: String?,

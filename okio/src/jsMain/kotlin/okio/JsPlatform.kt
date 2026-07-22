@@ -15,6 +15,9 @@
  */
 package okio
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
+
 /*
  * This file exposes Node.js `os` and `path` APIs to Kotlin/JS, using reasonable default behaviors
  * if those symbols aren't available.
@@ -50,3 +53,16 @@ private val path: dynamic
 
 internal val tmpdir: String
   get() = os?.tmpdir() as? String ?: "/tmp"
+
+actual typealias Lock = Unit
+
+internal actual fun newLock(): Lock = Unit
+internal actual inline fun Lock.destroy() = Unit
+
+actual inline fun <T> Lock.withLock(action: () -> T): T {
+  contract {
+    callsInPlace(action, InvocationKind.EXACTLY_ONCE)
+  }
+
+  return action()
+}
