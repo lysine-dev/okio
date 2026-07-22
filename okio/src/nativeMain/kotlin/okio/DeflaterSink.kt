@@ -28,7 +28,6 @@ actual class DeflaterSink internal actual constructor(
     deflater: Deflater,
   ) : this(sink.buffer(), deflater)
 
-  @Throws(IOException::class)
   actual override fun write(source: Buffer, byteCount: Long) {
     checkOffsetAndCount(source.size, 0, byteCount)
 
@@ -40,7 +39,6 @@ actual class DeflaterSink internal actual constructor(
     )
   }
 
-  @Throws(IOException::class)
   actual override fun flush() {
     deflater.flush = Z_SYNC_FLUSH
     deflater.dataProcessor.writeBytesFromSource(
@@ -56,7 +54,6 @@ actual class DeflaterSink internal actual constructor(
     return sink.timeout()
   }
 
-  @Throws(IOException::class)
   internal actual fun finishDeflate() {
     deflater.flush = Z_FINISH
     deflater.dataProcessor.writeBytesFromSource(
@@ -66,7 +63,6 @@ actual class DeflaterSink internal actual constructor(
     )
   }
 
-  @Throws(IOException::class)
   actual override fun close() {
     if (deflater.dataProcessor.closed) return
 

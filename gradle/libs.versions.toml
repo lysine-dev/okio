@@ -1,7 +1,7 @@
 [versions]
-burst = "2.10.2"
+burst = "2.11.0"
 jmh = "1.37"
-kotlin = "2.2.21"
+kotlin = "2.3.10"
 # Set to lower version than KGP version to maximize compatibility
 kotlinCoreLibrariesVersion = "2.1.21"
 ktlint = "0.48.2"

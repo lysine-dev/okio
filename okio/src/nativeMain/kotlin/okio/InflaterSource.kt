@@ -24,7 +24,6 @@ actual class InflaterSource internal actual constructor(
     inflater: Inflater,
   ) : this(source.buffer(), inflater)
 
-  @Throws(IOException::class)
   actual override fun read(sink: Buffer, byteCount: Long): Long {
     require(byteCount >= 0L) { "byteCount < 0: $byteCount" }
 

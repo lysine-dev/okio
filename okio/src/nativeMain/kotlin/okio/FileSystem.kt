@@ -113,7 +113,6 @@ actual abstract class FileSystem : Closeable {
   @Throws(IOException::class)
   actual abstract fun createSymlink(source: Path, target: Path)
 
-  @Throws(IOException::class)
   actual override fun close() {
   }
 
