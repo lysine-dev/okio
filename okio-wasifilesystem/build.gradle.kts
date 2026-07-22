@@ -4,9 +4,7 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 
 plugins {
   kotlin("multiplatform")
-  // TODO: Restore Dokka once this issue is resolved.
-  //     https://github.com/Kotlin/dokka/issues/3038
-  // id("org.jetbrains.dokka")
+  id("org.jetbrains.dokka")
   id("app.cash.burst")
   id("com.vanniktech.maven.publish.base")
   id("build-support")
