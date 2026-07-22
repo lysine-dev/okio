@@ -22,7 +22,7 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.gradle.DokkaExtension
 import org.jetbrains.dokka.gradle.DokkaPlugin
 
-val dokkaEnabled = System.getProperty("okio.build.dokka", "true").toBoolean()
+val dokkaEnabled = System.getProperty("okio.build.dokka", "false").toBoolean()
 
 fun Project.configureRootDokka() {
   if (!dokkaEnabled) return
