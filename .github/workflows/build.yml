@@ -149,6 +149,8 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'lysine-dev/okio' && github.ref == 'refs/heads/master'
     needs: [jvm, all-platforms, emulator]
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
