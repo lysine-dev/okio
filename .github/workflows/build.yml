@@ -125,7 +125,7 @@ jobs:
 
   publish:
     runs-on: macos-26
-    if: github.repository == 'square/okio' && github.ref == 'refs/heads/master'
+    if: github.repository == 'lysine-dev/okio' && github.ref == 'refs/heads/master'
     needs: [jvm, all-platforms, emulator]
 
     steps:
@@ -144,11 +144,10 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_CENTRAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_SECRET_KEY }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_SECRET_PASSPHRASE }}
 
   publish-website:
     runs-on: ubuntu-latest
-    if: github.repository == 'square/okio' && github.ref == 'refs/heads/master'
+    if: github.repository == 'lysine-dev/okio' && github.ref == 'refs/heads/master'
     needs: [jvm, all-platforms, emulator]
 
     steps:
@@ -182,7 +181,7 @@ jobs:
         if: success()
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_CLIPPY_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: site
           SINGLE_COMMIT: true
