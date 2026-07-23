@@ -30,6 +30,9 @@ actual typealias ArrayIndexOutOfBoundsException = java.lang.ArrayIndexOutOfBound
 
 actual typealias Lock = ReentrantLock
 
+internal actual fun getCurrentThreadId() = Thread.currentThread().id
+internal actual fun getAvailableProcessors() = Runtime.getRuntime().availableProcessors()
+
 internal actual fun newLock(): Lock = ReentrantLock()
 
 actual inline fun <T> Lock.withLock(action: () -> T): T {
