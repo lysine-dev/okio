@@ -179,6 +179,34 @@ class PathTest {
   }
 
   @Test
+  fun windowsVolumeLetterWithForwardSlash() {
+    val path = "C:/".toPath()
+    assertEquals(path, path.normalized())
+    assertEquals("C:/".toPath(), path.root)
+    assertEquals(listOf(), path.segments)
+    assertEquals("C:/", path.toString())
+    assertNull(path.parent)
+    assertEquals('C', path.volumeLetter)
+    assertEquals("", path.name)
+    assertTrue(path.isAbsolute)
+    assertTrue(path.isRoot)
+  }
+
+  @Test
+  fun windowsAbsolutePathWithVolumeLetterAndForwardSlash() {
+    val path = "C:/Windows/notepad.exe".toPath()
+    assertEquals(path, path.normalized())
+    assertEquals("C:/".toPath(), path.root)
+    assertEquals(listOf("Windows", "notepad.exe"), path.segments)
+    assertEquals("C:/Windows/notepad.exe", path.toString())
+    assertEquals("C:/Windows".toPath(), path.parent)
+    assertEquals('C', path.volumeLetter)
+    assertEquals("notepad.exe", path.name)
+    assertTrue(path.isAbsolute)
+    assertFalse(path.isRoot)
+  }
+
+  @Test
   fun windowsAbsolutePath() {
     val path = "\\".toPath()
     assertEquals(path, path.normalized())
