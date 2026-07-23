@@ -1,0 +1,3895 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A modern I/O library for Android, Kotlin, and Java.">
+      
+      
+        <meta name="author" content="Square, Inc.">
+      
+      
+        <link rel="canonical" href="https://lysine.dev/okio/changelog/">
+      
+      
+        <link rel="prev" href="../3.x/okio/okio/">
+      
+      
+        <link rel="next" href="../file_system/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/icon-square.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Change Log - Okio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/app.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="white">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#change-log" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Okio" class="md-header__button md-logo" aria-label="Okio" data-md-component="logo">
+      
+  <img src="../images/icon-square.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Okio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Change Log
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="white"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="white"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lysine-dev/okio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Okio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Okio" class="md-nav__button md-logo" aria-label="Okio" data-md-component="logo">
+      
+  <img src="../images/icon-square.png" alt="logo">
+
+    </a>
+    Okio
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lysine-dev/okio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Okio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://stackoverflow.com/questions/tagged/okio?sort=active" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stack Overflow ⏏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../java_io_recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    java.io Recipes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3.x API ⏏
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3.x API ⏏
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.x/okio/okio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    okio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.x/okio-assetfilesystem/okio.assetfilesystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    assetfilesystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.x/okio-fakefilesystem/okio.fakefilesystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    fakefilesystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.x/okio-nodefilesystem/okio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    nodefilesystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.x/okio-wasifilesystem/okio/-wasi-file-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    wasifilesystem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://lysine.dev/okio/2.x/okio/okio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2.x API ⏏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://lysine.dev/okio/1.x/okio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1.x API ⏏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change Log
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unreleased" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unreleased
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3180" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.18.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3170" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.17.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3164" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3163" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3162" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3161" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3160" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.15.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3140" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.14.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.13.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.12.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.11.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.10.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.10.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.10.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-391" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.9.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-390" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-380" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-370" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-360" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1176" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-350" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-340" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.4.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.3.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-320" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.2.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-310" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.11
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.10
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.9
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.8
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.7
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-2100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.10.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-290" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-280" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-270" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-260" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-250" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1175" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-240" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-230" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.3.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1174" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.2.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1173" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1172" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.2.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-220" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.2.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1171" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1170" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1160" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.16.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-210" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.0.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-200-rc1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.0.0-RC1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.15.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1140" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.14.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.13.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.12.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.11.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.10.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-190" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-180" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-170" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-160" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-140" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.4.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.3.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.2.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.0.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.0.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-090" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-080" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-070" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-061" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.6.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-060" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-050" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../file_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiplatform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplatform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_of_conduct/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code of Conduct
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unreleased" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unreleased
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3180" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.18.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3170" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.17.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3164" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3163" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3162" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3161" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3160" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.16.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.15.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3140" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.14.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.13.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.12.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.11.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.10.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.10.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-3100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.10.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-391" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.9.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-390" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-380" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-370" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-360" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1176" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-350" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-340" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.4.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.3.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-320" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.2.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-310" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.11
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.10
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.9
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.8
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.7
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-300-alpha1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 3.0.0-alpha.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-2100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.10.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-290" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-280" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-270" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-260" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-250" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1175" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-240" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.4.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-230" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.3.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1174" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.2.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1173" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1172" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.2.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-220" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.2.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1171" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1170" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.17.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1160" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.16.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-210" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.0.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-200-rc1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 2.0.0-RC1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.15.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1140" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.14.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.13.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.12.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.11.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-1100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.10.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-190" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-180" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-170" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-160" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-140" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.4.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.3.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-120" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.2.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.0.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-100" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 1.0.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-090" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.9.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-080" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.8.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-070" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.7.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-061" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.6.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-060" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.6.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version-050" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version 0.5.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="change-log">Change Log<a class="headerlink" href="#change-log" title="Permanent link">&para;</a></h1>
+<h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">&para;</a></h2>
+<ul>
+<li>None yet.</li>
+</ul>
+<h2 id="version-3180">Version 3.18.0<a class="headerlink" href="#version-3180" title="Permanent link">&para;</a></h2>
+<p><em>2026-07-21</em></p>
+<ul>
+<li>Fix: Use wide character APIs to better support of non-UTF-8 filesystems on Windows.</li>
+<li>Fix: Don&rsquo;t crash in <code>AssetFileSystem.exists()</code> when the underlying storage throws a
+   <code>FileNotFoundException</code>.</li>
+<li>Fix: Load WASI paths relative to their <code>preopen</code>. The platform behavior recently changed in
+   NodeJS, causing our <code>WasiFileSystem</code> to be unable to access files!</li>
+<li>New: Optionally ignore whitespace when decoding hexadecimal.</li>
+<li>New: Optionally omit padding when encoding Base64.</li>
+<li>New: <code>BufferedSource.readUInt()</code>, <code>BufferedSink.writeUInt()</code>, and similar functions for <code>UByte</code>,
+   <code>UShort</code> and <code>ULong</code>. Also add support for unsigned and little-endian.</li>
+<li>New: <code>BufferedSink.utf8Appendable()</code>. Use this to adapt an Okio sink to an <code>Appendable</code>.</li>
+<li>New: <code>Source.limit()</code> returns a wrapped source with a strict limit on how many bytes are
+   returned.</li>
+<li>New: <code>ByteString.equals(other, constantTime)</code> for subtle defense against timing attacks.</li>
+</ul>
+<h2 id="version-3170">Version 3.17.0<a class="headerlink" href="#version-3170" title="Permanent link">&para;</a></h2>
+<p><em>2026-03-11</em></p>
+<ul>
+<li>
+<p>New: Adjust down the Kotlin stdlib dependency to <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.21">Kotlin 2.1.21</a>. Okio is built
+   with an up-to-date Kotlin compiler (2.2.21), but depends on an older kotlin-stdlib. We&rsquo;re doing
+   this so you can update Okio and Kotlin independently.</p>
+</li>
+<li>
+<p>Fix: Return the correct timestamp in <code>FileMetadata.createdAtMillis</code> on Kotlin/Native on UNIX
+   platforms. We were incorrectly using the POSIX <code>ctime</code> (<em>change</em> time) instead of the
+   <code>birthtime</code>. With this fix Okio now prefers <code>statx()</code> over <code>stat()</code> on native platforms. This
+   API first appeared in Linux in 4.11 (2017) and Android in API 30 (2020).</p>
+</li>
+</ul>
+<h2 id="version-3164">Version 3.16.4<a class="headerlink" href="#version-3164" title="Permanent link">&para;</a></h2>
+<p><em>2025-11-17</em></p>
+<ul>
+<li>Fix: Don&rsquo;t delay triggering timeouts. In 3.16.0 we introduced a regression that caused timeouts
+  to fire later than they were supposed to.</li>
+</ul>
+<h2 id="version-3163">Version 3.16.3<a class="headerlink" href="#version-3163" title="Permanent link">&para;</a></h2>
+<p><em>2025-11-14</em></p>
+<p>This release is the same as 3.16.2. We forgot to cherry-pick a commit before we released!</p>
+<h2 id="version-3162">Version 3.16.2<a class="headerlink" href="#version-3162" title="Permanent link">&para;</a></h2>
+<p><em>2025-10-14</em></p>
+<ul>
+<li>Fix: <code>okio-assetfilesystem</code> APIs now correctly restored as visible to Kotlin.</li>
+</ul>
+<h2 id="version-3161">Version 3.16.1<a class="headerlink" href="#version-3161" title="Permanent link">&para;</a></h2>
+<p><em>2025-10-09</em></p>
+<ul>
+<li>Fix: Don&rsquo;t crash when calling <code>Socket.shutdownOutput()</code> or <code>shutdownInput()</code> on an <code>SSLSocket</code> on
+   Android API 21. This method throws an <code>UnsupportedOperationException</code>, so we now catch that and
+   close the underlying stream instead.</li>
+</ul>
+<h2 id="version-3160">Version 3.16.0<a class="headerlink" href="#version-3160" title="Permanent link">&para;</a></h2>
+<p><em>2025-07-29</em></p>
+<ul>
+<li>
+<p>Fix: Change <code>Socket.asOkioSocket()</code> to resolve its source <code>InputStream</code> and <code>OutputStream</code>
+   eagerly. This will throw a <code>SocketException</code> immediately if the socket isn’t connected.
+   This behavior is consistent with our similar APIs, <code>Socket.source()</code> and <code>Socket.sink()</code>.</p>
+</li>
+<li>
+<p>Fix: Optimize <code>AsyncTimeout</code> on systems with a very large number of active timeouts. This class
+   originally kept active timeouts in a linked list; with this update the internal data structure is
+   a binary heap. The old runtime was 𝑂(𝑛²) to activate 𝑛 timeouts; with this optimization the
+   runtime is 𝑂(𝑛 log 𝑛).</p>
+</li>
+<li>
+<p>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.0">Kotlin 2.2.0</a>.</p>
+</li>
+</ul>
+<h2 id="version-3150">Version 3.15.0<a class="headerlink" href="#version-3150" title="Permanent link">&para;</a></h2>
+<p><em>2025-07-01</em></p>
+<ul>
+<li>
+<p>Upgrade: <a href="https://github.com/Kotlin/kotlinx-datetime?tab=readme-ov-file#deprecation-of-instant">kotlinx-datetime 0.7.0-0.6.x-compat</a>. The previous 3.14.0
+   release, <code>FakeFileSystem</code> broke binary-compatibility for calls to <code>FakeFileSystem()</code>. This
+   restores that compatibility.</p>
+</li>
+<li>
+<p>Breaking: Change <code>FakeFileSystem.clock</code> from a JVM field to a property. This avoids a crash
+   running Okio in a Gradle 8.x plugin. This change is not binary-compatible.</p>
+</li>
+</ul>
+<h2 id="version-3140">Version 3.14.0<a class="headerlink" href="#version-3140" title="Permanent link">&para;</a></h2>
+<p><em>2025-06-28</em></p>
+<ul>
+<li>Upgrade: <a href="https://github.com/Kotlin/kotlinx-datetime/releases/tag/v0.7.0">kotlinx-datetime 0.7.0</a>. This impacts the <code>okio-fakefilesystem</code>
+   artifact only. This is a binary-incompatible backwards-incompatible change that cannot co-exist
+   with previous releases of <code>okio-fakefilesystem</code>! If you observe a <code>NoSuchMethodError</code> calling
+   <code>FakeFileSystem.init</code>, update the calling code to this release (or newer) and recompile. We don&rsquo;t
+   like imposing backwards-incompatible changes like this on you and do so regretfully.</li>
+</ul>
+<h2 id="version-3130">Version 3.13.0<a class="headerlink" href="#version-3130" title="Permanent link">&para;</a></h2>
+<p><em>2025-06-13</em></p>
+<ul>
+<li>New: <code>okio.Socket</code> interface. This is a first step towards low-level streaming networking support
+   for Kotlin/Multiplatform. This release provides two JVM-only implementations: <code>asOkioSocket()</code>
+   adapts a <code>java.net.Socket</code> to our new interface, and <code>inMemorySocketPair()</code> returns a pair of
+   mutually-connected sockets. We also anticipate that this interface will be a useful abstraction
+   for proxies and tunnels.</li>
+<li>New: In-development snapshots are now published to the <a href="https://central.sonatype.org/publish/publish-portal-snapshots/">Central Portal Snapshots repository</a>.</li>
+</ul>
+<h2 id="version-3120">Version 3.12.0<a class="headerlink" href="#version-3120" title="Permanent link">&para;</a></h2>
+<p><em>2025-05-27</em></p>
+<ul>
+<li>New: Support an optional end index when searching with <code>BufferedSource.indexOf()</code>.</li>
+<li>Fix: Don&rsquo;t do unnecessary work in <code>BufferedSource.rangeEquals()</code>.</li>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.21">Kotlin 2.1.21</a>.</li>
+</ul>
+<h2 id="version-3110">Version 3.11.0<a class="headerlink" href="#version-3110" title="Permanent link">&para;</a></h2>
+<p><em>2025-04-09</em></p>
+<ul>
+<li>Fix: Clear the deflater&rsquo;s byte array reference</li>
+<li>New: Faster implementation of <code>String.decodeHex()</code> on Kotlin/JS.</li>
+<li>New: Declare <code>EXACTLY_ONCE</code> execution for blocks like <code>Closeable.use {}</code> and <code>FileSystem.read {}</code>.</li>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.20">Kotlin 2.1.20</a>.</li>
+</ul>
+<h2 id="version-3102">Version 3.10.2<a class="headerlink" href="#version-3102" title="Permanent link">&para;</a></h2>
+<p><em>2025-01-08</em></p>
+<ul>
+<li>Fix: <code>okio-nodefilesystem</code> artifact is no longer empty.</li>
+</ul>
+<h2 id="version-3101">Version 3.10.1<a class="headerlink" href="#version-3101" title="Permanent link">&para;</a></h2>
+<p><em>2025-01-07</em></p>
+<ul>
+<li>New: <code>FileSystem.close()</code> may prevent future access and/or clean up associated resources depending on the backing implementation. <code>FakeFileSystem</code> will prevent future operations once closed.</li>
+<li><code>InputStream</code>s created from <code>BufferedSource.inputStream()</code> now have a more efficient version of <code>InputStream.transferTo()</code> which reduces memory copies.</li>
+<li><code>okio-nodefilesystem</code> is no longer publised as a JS project, but a Kotlin multiplatform project with only a JS target. ~This change should not affect consumers in any way, and is motivated by the Kotlin Gradle plugin deprecating the JS-only plugin.~ Please use 3.10.2 to ensure this change actually does not affect your builds.</li>
+</ul>
+<h2 id="version-3100">Version 3.10.0<a class="headerlink" href="#version-3100" title="Permanent link">&para;</a></h2>
+<p><em>2025-01-06</em></p>
+<p>This version is equivalent to the subsequent 3.10.1, but it did not fully publish to Maven Central due to infrastructure problems.</p>
+<h2 id="version-391">Version 3.9.1<a class="headerlink" href="#version-391" title="Permanent link">&para;</a></h2>
+<p><em>2024-09-12</em></p>
+<ul>
+<li>Fix: Support paths containing a single dot (&ldquo;.&rdquo;) in <code>Path.relativeTo</code>.</li>
+<li>Fix: Do not read from the upstream source when a 0-byte read is requested.</li>
+<li>Fix: Update kotlinx.datetime to 0.6.0 to correct a Gradle module metadata problem with 0.5.0.
+   Note: this artifact is only used in &lsquo;okio-fakefilesystem&rsquo; and &lsquo;okio-nodefilesystem&rsquo; and not in the Okio core.</li>
+</ul>
+<h2 id="version-390">Version 3.9.0<a class="headerlink" href="#version-390" title="Permanent link">&para;</a></h2>
+<p><em>2024-03-12</em></p>
+<ul>
+<li>New: <code>FileSystem.SYSTEM</code> can be used in source sets that target both Kotlin/Native and
+   Kotlin/JVM. Previously, we had this symbol in each source set but it wasn&rsquo;t available to
+   common source sets.</li>
+<li>New: <code>COpaquePointer.readByteString(...)</code> creates a ByteString from a memory address.</li>
+<li>New: Support <code>InflaterSource</code>, <code>DeflaterSink</code>, <code>GzipSink</code>, and <code>GzipSource</code> in Kotlin/Native.</li>
+<li>New: Support openZip() on Kotlin/Native. One known bug in this implementation is that
+   <code>FileMetadata.lastModifiedAtMillis()</code> is interpreted as UTC and not the host machine&rsquo;s time zone.</li>
+<li>New: Prefer NTFS timestamps in ZIP file systems&rsquo; metadata. This avoids the time zone problems
+   of ZIP&rsquo;s built-in DOS timestamps, and the 2038 time bombs of ZIP&rsquo;s extended timestamps.</li>
+<li>Fix: Don&rsquo;t leak file handles to opened JAR files open in <code>FileSystem.RESOURCES</code>.</li>
+<li>Fix: Don&rsquo;t throw a <code>NullPointerException</code> if <code>Closeable.use { ... }</code> returns null.</li>
+</ul>
+<h2 id="version-380">Version 3.8.0<a class="headerlink" href="#version-380" title="Permanent link">&para;</a></h2>
+<p><em>2024-02-09</em></p>
+<ul>
+<li>New: <code>TypedOptions</code> works like <code>Options</code>, but it returns a <code>T</code> rather than an index.</li>
+<li>Fix: Don&rsquo;t leave sinks open when there&rsquo;s a race in <code>Pipe.fold()</code>.</li>
+</ul>
+<h2 id="version-370">Version 3.7.0<a class="headerlink" href="#version-370" title="Permanent link">&para;</a></h2>
+<p><em>2023-12-16</em></p>
+<ul>
+<li>New: <code>Timeout.cancel()</code> prevents a timeout from firing.</li>
+<li>Breaking: Drop the <code>watchosX86</code> Kotlin/Native target. From <a href="https://blog.jetbrains.com/kotlin/2023/02/update-regarding-kotlin-native-targets/">the Kotlin blog</a>,
+   <em>‘This is an obsolete simulator for Intel Macs. Use the watchosX64 target instead.’</em></li>
+<li>New: Add the <code>watchosDeviceArm64</code> Kotlin/Native target.</li>
+<li>New: <code>Timeout</code> APIs that accept <code>kotlin.time.Duration</code>.</li>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.21">Kotlin 1.9.21</a>.</li>
+</ul>
+<h2 id="version-360">Version 3.6.0<a class="headerlink" href="#version-360" title="Permanent link">&para;</a></h2>
+<p><em>2023-10-01</em></p>
+<ul>
+<li>Fix: Don&rsquo;t leak file handles when using <code>metadata</code> functions on <code>ZipFileSystem</code>. We had a bug
+   where we were closing the <code>.zip</code> file, but not a stream inside of it. We would have prevented
+   this bug if only we’d used <code>FakeFileSystem.checkNoOpenFiles()</code> in our tests!</li>
+<li>Fix: Don&rsquo;t build an index of a class loader&rsquo;s resources in <code>ResourceFileSystem.read()</code>. This
+   operation doesn&rsquo;t need this index, and building it is potentially expensive.</li>
+<li>New: Experimentally support Linux on ARM64 for Kotlin/Native targets (<code>linuxArm64</code>). Note that
+   we haven&rsquo;t yet added CI test coverage for this platform.</li>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.10">Kotlin 1.9.10</a>.</li>
+</ul>
+<h2 id="version-1176">Version 1.17.6<a class="headerlink" href="#version-1176" title="Permanent link">&para;</a></h2>
+<p><em>2023-10-01</em></p>
+<ul>
+<li>Fix: Don&rsquo;t crash decoding GZIP files when the optional extra data (<code>XLEN</code>) is 32 KiB or larger.</li>
+</ul>
+<h2 id="version-350">Version 3.5.0<a class="headerlink" href="#version-350" title="Permanent link">&para;</a></h2>
+<p><em>2023-08-02</em></p>
+<ul>
+<li>New: Support the WebAssembly (WASM) platform. Okio&rsquo;s support for WASM is experimental, but
+   improving, just like Kotlin&rsquo;s own support for WASM.</li>
+<li>New: Adapt WebAssembly System Interface (WASI) API&rsquo;s as an Okio FileSystem using
+   <code>WasiFileSystem</code>. This is in the new <code>okio-wasifilesystem</code> module. It requires the <a href="https://github.com/WebAssembly/WASI/blob/main/legacy/preview1/docs.md">preview1</a>
+   WASI API. We’ll make backwards-incompatible upgrades to new WASI API versions as they become
+   available.</li>
+<li>Fix: Return relative paths in the NIO adapter FileSystem when required. <code>FileSystem.list()</code>
+   had always returned absolute paths, even when the target directory was supplied as a relative
+   path.</li>
+<li>Fix: Don&rsquo;t crash when reading into an empty array using <code>FileHandle</code> on Kotlin/Native.</li>
+<li>Upgrade: <a href="https://kotlinlang.org/docs/whatsnew19.html">Kotlin 1.9.0</a>.</li>
+</ul>
+<h2 id="version-340">Version 3.4.0<a class="headerlink" href="#version-340" title="Permanent link">&para;</a></h2>
+<p><em>2023-07-07</em></p>
+<ul>
+<li>New: Adapt a Java NIO FileSystem (<code>java.nio.file.FileSystem</code>) as an Okio FileSystem using
+   <code>fileSystem.asOkioFileSystem()</code>.</li>
+<li>New: Adapt Android’s <code>AssetManager</code> as an Okio FileSystem using <code>AssetFileSystem</code>. This is in the
+   new <code>okio-assetfilesystem</code> module. Android applications should prefer this over
+   <code>FileSystem.RESOURCES</code> as it’s faster to load.</li>
+<li>Fix: Don&rsquo;t crash decoding GZIP files when the optional extra data (<code>XLEN</code>) is 32 KiB or larger.</li>
+<li>Fix: Resolve symlinks in <code>FakeFileSystem.canonicalize()</code>.</li>
+<li>Fix: Report the correct <code>createdAtMillis</code> in <code>NodeJsFileSystem</code> file metadata. We were
+   incorrectly using <code>ctimeMs</code>, where <code>c</code> means <em>changed</em>, not <em>created</em>.</li>
+<li>Fix: <code>UnsafeCursor</code> is now <code>Closeable</code>.</li>
+</ul>
+<h2 id="version-330">Version 3.3.0<a class="headerlink" href="#version-330" title="Permanent link">&para;</a></h2>
+<p><em>2023-01-07</em></p>
+<ul>
+<li>Fix: Don&rsquo;t leak resources when <code>use {}</code> is used with a non-local return. We introduced this
+   performance and stability bug by not considering that non-local returns execute neither the
+   <code>return</code> nor <code>catch</code> control flows.</li>
+<li>Fix: Use a sealed interface for <code>BufferedSink</code> and <code>BufferedSource</code>. These were never intended
+   for end-users to implement, and we&rsquo;re happy that Kotlin now allows us to express that in our API.</li>
+<li>New: Change internal locks from <code>synchronized</code> to <code>ReentrantLock</code> and <code>Condition</code>. We expect this
+   to improve help when using Okio with Java virtual threads (<a href="https://wiki.openjdk.org/display/loom/Getting+started">Project Loom</a>).</li>
+<li>Upgrade: <a href="https://kotlinlang.org/docs/whatsnew18.html">Kotlin 1.8.0</a>.</li>
+</ul>
+<h2 id="version-320">Version 3.2.0<a class="headerlink" href="#version-320" title="Permanent link">&para;</a></h2>
+<p><em>2022-06-26</em></p>
+<ul>
+<li>Fix: Configure the multiplatform artifact (<code>com.squareup.okio:okio:3.x.x</code>) to depend on the
+   JVM artifact (<code>com.squareup.okio:okio-jvm:3.x.x</code>) for Maven builds. This should work-around an
+   issue where Maven doesn&rsquo;t interpret Gradle metadata.</li>
+<li>Fix: Change <code>CipherSource</code> and <code>CipherSink</code> to recover if the cipher doesn&rsquo;t support streaming.
+   This should work around a crash with AES/GCM ciphers on Android.</li>
+<li>New: Enable compatibility with non-hierarchical projects.</li>
+</ul>
+<h2 id="version-310">Version 3.1.0<a class="headerlink" href="#version-310" title="Permanent link">&para;</a></h2>
+<p><em>2022-04-19</em></p>
+<ul>
+<li>Upgrade: <a href="https://blog.jetbrains.com/kotlin/2022/04/kotlin-1-6-20-released/">Kotlin 1.6.20</a>.</li>
+<li>New: Support <a href="https://kotlinlang.org/docs/multiplatform-hierarchy.html">Hierarchical project structure</a>. If you&rsquo;re using Okio in a
+   multiplatform project please upgrade your project to Kotlin 1.6.20 (or newer) to take advantage
+   of this. With hierarchical projects it&rsquo;s easier to use properties like <code>FileSystem.SYSTEM</code> that
+   are available on most Okio platforms but not all of them.</li>
+<li>New: <code>ForwardingSource</code> is now available on all platforms.</li>
+<li>New: The <code>watchosX64</code> platform is now supported.</li>
+<li>Fix: Don&rsquo;t crash in `NSData.toByteString()&rsquo; when the input is empty.</li>
+<li>Fix: Support empty ZIP files in <code>FileSystem.openZip()</code>.</li>
+<li>Fix: Throw in <code>canonicalize()</code> of ZIP file systems if the path doesn&rsquo;t exist.</li>
+<li>Fix: Don&rsquo;t require ZIP files start with a local file header.</li>
+<li>New: <code>okio.ProtocolException</code> is a new exception type for multiplatform users. (It is aliased to
+   <code>java.net.ProtocolException</code> on JVM platforms).</li>
+</ul>
+<h2 id="version-300">Version 3.0.0<a class="headerlink" href="#version-300" title="Permanent link">&para;</a></h2>
+<p><em>2021-10-28</em></p>
+<p>This is the first stable release of Okio 3.x. This release is strongly backwards-compatible with
+Okio 2.x, and the new major version signifies new capabilities more than it does backwards
+incompatibility.</p>
+<p>Most users should be able to upgrade from 2.x by just changing the version. If you&rsquo;re using Okio
+in a Kotlin Multiplatform project, you&rsquo;ll need to drop the <code>-multiplatform</code> suffix in your Gradle
+dependencies.</p>
+<ul>
+<li>New: Remove <code>@ExperimentalFileSystem</code>. This annotation is no longer necessary as the file system
+   is no longer experimental!</li>
+<li>New: Path no longer aggressively normalizes <code>..</code> segments. Use <code>Path.normalize()</code> to apply these
+   based on the content of the path, or <code>FileSystem.canonicalize()</code> to do it honoring any symlinks
+   on a particular file system.</li>
+<li>New: Publish a <a href="https://docs.gradle.org/6.2/userguide/platforms.html#sub:bom_import">bill of materials (BOM)</a> for Okio. Depend on this from Gradle or Maven to
+   keep all of your Okio artifacts on the same version, even if they&rsquo;re declared via transitive
+   dependencies. You can even omit versions when declaring other Okio dependencies.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">api</span><span class="p">(</span><span class="n">platform</span><span class="p">(</span><span class="s">&quot;com.squareup.okio:okio-bom:3.0.0&quot;</span><span class="p">))</span>
+<span class="w">   </span><span class="n">api</span><span class="p">(</span><span class="s">&quot;com.squareup.okio:okio&quot;</span><span class="p">)</span><span class="w">                </span><span class="c1">// No version!</span>
+<span class="w">   </span><span class="n">api</span><span class="p">(</span><span class="s">&quot;com.squareup.okio:okio-fakefilesystem&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// No version!</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>New: <code>FileSystem.delete()</code> silently succeeds when deleting a file that doesn&rsquo;t exist. Use
+   the new <code>mustExist</code> parameter to trigger an exception instead.</li>
+<li>New: <code>FileSystem.createDirectories()</code> silently succeeds when creating a directory that already
+   exists. Use the new <code>mustCreate</code> parameter to trigger an exception instead.</li>
+<li>New: <code>FileSystem</code> offers Java-language overloads where appropriate. Previously functions that
+   had default parameters were potentially awkward to invoke from Java.</li>
+<li>New: <code>Timeout.intersectWith()</code> returns a value instead of <code>Unit</code>. This is a binary-incompatible
+   change. We expect that this public API is very rarely used outside of Okio itself.</li>
+<li>Fix: Change <code>BufferedSource.readDecimalLong()</code> to fail if the input value is just <code>-</code>. Previously
+   Okio incorrectly returned <code>0</code> for this.</li>
+</ul>
+<h2 id="version-300-alpha11">Version 3.0.0-alpha.11<a class="headerlink" href="#version-300-alpha11" title="Permanent link">&para;</a></h2>
+<p><em>2021-10-23</em></p>
+<ul>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.31">Kotlin 1.5.31</a>.</li>
+<li>Upgrade: <a href="https://github.com/Kotlin/kotlinx-datetime/releases/tag/v0.3.0">kotlinx-datetime 0.3.0</a>. (This is a dependency of <code>okio-fakefilesystem</code>
+   only.)</li>
+<li>New: Support creating and accessing symlinks. We were reluctant to include symlinks in our API
+   (to keep it small!) but decided that supporting them was essential to properly implement
+   recursive traversal.</li>
+<li>New: <code>FileMetadata.extras</code> can track metadata for custom <code>FileSystem</code> implementations.</li>
+<li>New: Support Apple Silicon Kotlin/Native targets (<code>macosArm64</code>, <code>iosSimulatorArm64</code>,
+   <code>tvosSimulatorArm64</code>, and <code>watchosSimulatorArm64</code>).</li>
+<li>New: <code>FileSystem.listRecursively()</code> returns a <code>Sequence</code> that includes all of a directory&rsquo;s
+   children, and all of their children recursively. The implementation does a lazy, depth-first
+   traversal.</li>
+<li>New: <code>Path.relativeTo()</code> computes how to get from one path to another.</li>
+<li>New: <code>Path.root</code> and <code>Path.segments</code>. These APIs decompose a path into its component parts.</li>
+<li>New: <code>FileSystem.listOrNull()</code> returns a directory&rsquo;s children, or null if the path doesn&rsquo;t
+   reference a readable directory.</li>
+<li>New: Option to fail if the file being updated doesn&rsquo;t already exist: <code>mustExist</code>. Use this to
+   avoid creating a new file when your intention is to update an existing file.</li>
+<li>New: Option to fail if a file being created already exists: <code>mustCreate</code>. Use this to avoid
+   updating an existing file when your intention is to create a new file.</li>
+<li>Fix: Restore support for Kotlin/JS on browser platforms. We were relying on NodeJS-only features
+   to fetch the local directory separator (<code>/</code> or <code>\</code>) and temporary directory.</li>
+<li>Fix: Don&rsquo;t ignore the caller&rsquo;s specified write offset running Okio on Kotlin/Native on Linux.
+   (<code>FileHandle.write()</code> was broken and always appended to the end of the file.)</li>
+</ul>
+<h2 id="version-300-alpha10">Version 3.0.0-alpha.10<a class="headerlink" href="#version-300-alpha10" title="Permanent link">&para;</a></h2>
+<p><em>2021-09-09</em></p>
+<p>This release drops the <code>-multiplatform</code> suffix on Kotlin Multiplatform artifacts. All artifacts now
+share the same name (like <code>com.squareup.okio:okio:3.0.0-alpha.10</code>) for both Kotlin/JVM and Kotlin
+Multiplatform.</p>
+<ul>
+<li>Fix: Don&rsquo;t crash in <code>ResourceFileSystem</code> when classpath <code>.jar</code> files have special characters in
+   their paths.</li>
+</ul>
+<h2 id="version-300-alpha9">Version 3.0.0-alpha.9<a class="headerlink" href="#version-300-alpha9" title="Permanent link">&para;</a></h2>
+<p><em>2021-08-01</em></p>
+<ul>
+<li>New: <code>ByteString.copyInto()</code> saves an allocation when extracting data from a <code>ByteString</code>.</li>
+<li>Fix: Create <code>FileHandle.protectedSize()</code> to match other abstract functions.</li>
+<li>Fix: Open files in binary mode on Windows. Without this, files that contain <code>0x1a</code> will be
+   truncated prematurely.</li>
+</ul>
+<h2 id="version-300-alpha8">Version 3.0.0-alpha.8<a class="headerlink" href="#version-300-alpha8" title="Permanent link">&para;</a></h2>
+<p><em>2021-07-13</em></p>
+<ul>
+<li>Fix: Don&rsquo;t crash on duplicate entries in a .zip file.</li>
+<li>Fix: Change <code>FileSystem.RESOURCES</code> to initialize itself lazily.</li>
+</ul>
+<h2 id="version-300-alpha7">Version 3.0.0-alpha.7<a class="headerlink" href="#version-300-alpha7" title="Permanent link">&para;</a></h2>
+<p><em>2021-07-12</em></p>
+<ul>
+<li>Fix: Change <code>ResourceFileSystem</code> to load roots eagerly. We had a bug where <code>list()</code> on the root
+   returned an empty list even if resources were present.</li>
+<li>New: <code>FileHandle.reposition()</code> can seek on a source or sink returned by that <code>FileHandle</code>.</li>
+<li>New: Move the system resources instance to <code>FileSystem.RESOURCES</code>.</li>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.20">Kotlin 1.5.20</a>.</li>
+</ul>
+<h2 id="version-300-alpha6">Version 3.0.0-alpha.6<a class="headerlink" href="#version-300-alpha6" title="Permanent link">&para;</a></h2>
+<p><em>2021-06-01</em></p>
+<ul>
+<li>New: <code>FileHandle</code> supports random access reads, writes, and resizes on files. Create an instance
+   with <code>FileSystem.openReadOnly()</code> or <code>FileSystem.openReadWrite()</code>.</li>
+<li>New: Remove <code>Cursor</code> which is obsoleted by <code>FileHandle</code>. (<code>UnsafeCursor</code> is still around!)</li>
+<li>New: Add support for the new intermediate representation (IR) artifacts in Kotlin/JS. We still
+   support the legacy artifact format.</li>
+<li>New: Support tvOS (tvosArm64, tvosX64) in multiplatform.</li>
+<li>New: Change <code>ResourceFileSystem</code> to omit <code>.class</code> files when indexing <code>.zip</code> files. We expect
+   this to lower the memory footprint of <code>ResourceFileSystem</code>.</li>
+<li>Fix: Don&rsquo;t crash on background thread access in Kotlin/Native. We had to apply <code>@SharedImmutable</code>
+   and run our test suite on a background thread.</li>
+</ul>
+<h2 id="version-300-alpha5">Version 3.0.0-alpha.5<a class="headerlink" href="#version-300-alpha5" title="Permanent link">&para;</a></h2>
+<p><em>2021-04-27</em></p>
+<ul>
+<li>New: Promote the <code>ZipFileSystem</code> and <code>ResourceFileSystem</code> to the main Okio module. These are
+   currently JVM-only. The <code>okio-zipfilesystem</code> module is no longer published.</li>
+</ul>
+<h2 id="version-300-alpha4">Version 3.0.0-alpha.4<a class="headerlink" href="#version-300-alpha4" title="Permanent link">&para;</a></h2>
+<p><em>2021-04-14</em></p>
+<ul>
+<li>Fix: Rename internal classes to avoid name collisions. We were seeing problems due to having
+   multiple files named <code>-Platform.kt</code>.</li>
+</ul>
+<h2 id="version-300-alpha3">Version 3.0.0-alpha.3<a class="headerlink" href="#version-300-alpha3" title="Permanent link">&para;</a></h2>
+<p><em>2021-04-06</em></p>
+<ul>
+<li>New: Move <code>NodeJsFileSystem</code> into its own module. Having it built-in prevented Okio from working
+   in a browser where there&rsquo;s no synchronous file system API. This is in the <code>okio-nodefilesystem</code>
+   artifact.</li>
+</ul>
+<h2 id="version-300-alpha2">Version 3.0.0-alpha.2<a class="headerlink" href="#version-300-alpha2" title="Permanent link">&para;</a></h2>
+<p><em>2021-03-24</em></p>
+<ul>
+<li>New: Require Java 8+ for Okio 3.x.</li>
+<li>New: <code>Cursor</code> supports random access reads on a <code>Source</code>.</li>
+<li>New: <code>FileSystem.openZip(path)</code> returns a file system backed by a <code>.zip</code> file. This is in the
+   <code>okio-zipfilesystem</code> artifact.</li>
+</ul>
+<h2 id="version-300-alpha1">Version 3.0.0-alpha.1<a class="headerlink" href="#version-300-alpha1" title="Permanent link">&para;</a></h2>
+<p><em>2021-01-07</em></p>
+<ul>
+<li>New: Experimental file system API. The <code>Path</code>, <code>FileMetadata</code>, <code>FileSystem</code> and
+  <code>ForwardingFileSystem</code> types are subject to API changes in a future release.</li>
+<li>New: Experimental <code>okio-fakefilesystem</code> artifact.</li>
+</ul>
+<h2 id="version-2100">Version 2.10.0<a class="headerlink" href="#version-2100" title="Permanent link">&para;</a></h2>
+<p><em>2021-01-07</em></p>
+<ul>
+<li>New: Support Windows (mingwX64) in multiplatform.</li>
+<li>New: Support watchOS (watchosArm32, watchosArm64, watchosX86) in multiplatform.</li>
+<li>New: Support <code>HashingSource</code>, <code>HashingSink</code>, buffer hash functions, and <code>UnsafeCursor</code> on non-JVM
+  platforms. Previously these were all JVM-only.</li>
+<li>New: Implement <code>Closeable</code> on <code>Sink</code> and <code>Source</code> on non-JVM platforms. Okio now includes a
+  multiplatform <code>okio.Closeable</code> interface and corresponding <code>use {}</code> extension. Closing resources
+  when you&rsquo;re done with them shouldn&rsquo;t be JVM-only!</li>
+<li>New: <code>Sink.hashingSink</code> and <code>Source.hashingSource</code> functions that accept
+  <code>java.security.MessageDigest</code> and <code>javax.crypto.Mac</code> instances. Use these when your hash function
+  isn&rsquo;t built-in.</li>
+<li>Fix: Don&rsquo;t crash with a <code>ShortBufferException</code> in <code>CipherSink</code> and <code>CipherSource</code> on Android.
+  (Android may throw a <code>ShortBufferException</code> even if the buffer is not too short. We now
+  avoid this problem!)</li>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.20">Kotlin 1.4.20</a>.</li>
+</ul>
+<h2 id="version-290">Version 2.9.0<a class="headerlink" href="#version-290" title="Permanent link">&para;</a></h2>
+<p><em>2020-10-04</em></p>
+<ul>
+<li>Fix: Don&rsquo;t corrupt the <code>Buffer</code> when writing a slice of a segmented <code>ByteString</code>. We had a severe
+   bug where <code>ByteString</code> instances created with <code>snapshot()</code> and <code>readByteString()</code> incorrectly
+   adjusted the buffer&rsquo;s size by their full length, not the length of the slice. This would have
+   caused buffer reads to crash! We do not believe data was silently corrupted.</li>
+<li>New: <code>CipherSink</code> and <code>CipherSource</code>. Use these with <code>javax.crypto.Cipher</code> to encrypt and decrypt
+   streams of data. This is a low-level encryption API; most applications should use higher-level
+   APIs like TLS when available.</li>
+<li>New: Promote hash functions <code>md5</code>, <code>sha1()</code>, <code>sha512()</code>, and <code>sha256()</code> to common Kotlin. These
+   are currently only available on <code>ByteString</code>, multiplatform support for <code>HashingSource</code>,
+   <code>HashingSink</code>, and <code>Buffer</code> should come in a follow-up release. We wrote and optimized our own
+   implementations of these hash functions in Kotlin. On JVM and Android platforms Okio still uses
+   the platform&rsquo;s built-in hash functions.</li>
+<li>New: Support OSGi metadata.</li>
+<li>Upgrade: <a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.10">Kotlin 1.4.10</a>.</li>
+</ul>
+<h2 id="version-280">Version 2.8.0<a class="headerlink" href="#version-280" title="Permanent link">&para;</a></h2>
+<p><em>2020-08-17</em></p>
+<ul>
+<li>New: Upgrade to Kotlin 1.4.0.</li>
+</ul>
+<h2 id="version-270">Version 2.7.0<a class="headerlink" href="#version-270" title="Permanent link">&para;</a></h2>
+<p><em>2020-07-07</em></p>
+<ul>
+<li>
+<p>New: <code>Pipe.cancel()</code> causes in-progress and future reads and writes on the pipe to immediately
+   fail with an <code>IOException</code>. The streams may still be canceled normally.</p>
+</li>
+<li>
+<p>New: Enlarge Okio&rsquo;s internal segment pool from a fixed 64 KiB total to 64 KiB per processor. For
+   example, on an Intel i9 8-core/16-thread machine the segment pool now uses up to 1 MiB of memory.</p>
+</li>
+<li>
+<p>New: Migrate from <code>synchronized</code> to lock-free when accessing the segment pool. Combined with the
+   change above we saw throughput increase 3x on a synthetic benchmark designed to create
+   contention.</p>
+</li>
+</ul>
+<h2 id="version-260">Version 2.6.0<a class="headerlink" href="#version-260" title="Permanent link">&para;</a></h2>
+<p><em>2020-04-22</em></p>
+<ul>
+<li>New: <code>InflaterSource.readOrInflate()</code> is like <code>InflaterSource.read()</code>, except it will return 0 if
+   consuming deflated bytes from the underlying stream did not produce new inflated bytes.</li>
+</ul>
+<h2 id="version-250">Version 2.5.0<a class="headerlink" href="#version-250" title="Permanent link">&para;</a></h2>
+<p><em>2020-03-20</em></p>
+<ul>
+<li>New: Upgrade to Kotlin 1.3.70.</li>
+</ul>
+<h2 id="version-243">Version 2.4.3<a class="headerlink" href="#version-243" title="Permanent link">&para;</a></h2>
+<p><em>2019-12-20</em></p>
+<ul>
+<li>New: Upgrade to Kotlin 1.3.61.</li>
+</ul>
+<h2 id="version-242">Version 2.4.2<a class="headerlink" href="#version-242" title="Permanent link">&para;</a></h2>
+<p><em>2019-12-11</em></p>
+<ul>
+<li>Fix: Don&rsquo;t crash when an <code>InputStream</code> source is exhausted exactly at a buffer segment boundary.
+   We had a bug where a sequence of reads could violate a buffer&rsquo;s invariants, and this could result
+   in a crash when subsequent reads encountered an unexpected empty segment.</li>
+</ul>
+<h2 id="version-1175">Version 1.17.5<a class="headerlink" href="#version-1175" title="Permanent link">&para;</a></h2>
+<p><em>2019-12-11</em></p>
+<ul>
+<li>Fix: Don&rsquo;t crash when an <code>InputStream</code> source is exhausted exactly at a buffer segment boundary.
+   We had a bug where a sequence of reads could violate a buffer&rsquo;s invariants, and this could result
+   in a crash when subsequent reads encountered an unexpected empty segment.</li>
+</ul>
+<h2 id="version-241">Version 2.4.1<a class="headerlink" href="#version-241" title="Permanent link">&para;</a></h2>
+<p><em>2019-10-04</em></p>
+<ul>
+<li>Fix: Don&rsquo;t cache hash code and UTF-8 string in <code>ByteString</code> on Kotlin/Native which prevented freezing.</li>
+</ul>
+<h2 id="version-240">Version 2.4.0<a class="headerlink" href="#version-240" title="Permanent link">&para;</a></h2>
+<p><em>2019-08-26</em></p>
+<ul>
+<li>New: Upgrade to Kotlin 1.3.50.</li>
+</ul>
+<h2 id="version-230">Version 2.3.0<a class="headerlink" href="#version-230" title="Permanent link">&para;</a></h2>
+<p><em>2019-07-29</em></p>
+<p><strong>This release changes our build from Kotlin-JVM to Kotlin-multiplatform (which includes JVM).</strong>
+Both native and JavaScript platforms are unstable preview releases and subject to
+backwards-incompatible changes in forthcoming releases.</p>
+<p>To try Okio in a multiplatform project use this Maven coordinate:</p>
+<div class="highlight"><pre><span></span><code><span class="n">api</span><span class="p">(</span><span class="err">&#39;</span><span class="n">com</span><span class="p">.</span><span class="na">squareup</span><span class="p">.</span><span class="na">okio</span><span class="p">:</span><span class="n">okio</span><span class="o">-</span><span class="n">multiplatform</span><span class="p">:</span><span class="m">2.3</span><span class="p">.</span><span class="m">0</span><span class="err">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>You’ll also need to <a href="https://blog.gradle.org/gradle-metadata-1.0">enable Gradle metadata</a> in your project&rsquo;s settings. The
+artifact name for JVM projects has not changed.</p>
+<ul>
+<li>New: Upgrade to Kotlin 1.3.40.</li>
+<li>Fix: Use Gradle <code>api</code> instead of <code>implementation</code> for the kotlin-stdlib dependency.</li>
+<li>Fix: Don&rsquo;t block unless strictly necessary in <code>BufferedSource.peek()</code>.</li>
+</ul>
+<h2 id="version-1174">Version 1.17.4<a class="headerlink" href="#version-1174" title="Permanent link">&para;</a></h2>
+<p><em>2019-04-29</em></p>
+<ul>
+<li>Fix: Don&rsquo;t block unless strictly necessary in <code>BufferedSource.peek()</code>.</li>
+</ul>
+<h2 id="version-222">Version 2.2.2<a class="headerlink" href="#version-222" title="Permanent link">&para;</a></h2>
+<p><em>2019-01-28</em></p>
+<ul>
+<li>Fix: Make <code>Pipe.fold()</code> close the underlying sink when necessary.</li>
+</ul>
+<h2 id="version-1173">Version 1.17.3<a class="headerlink" href="#version-1173" title="Permanent link">&para;</a></h2>
+<p><em>2019-01-28</em></p>
+<ul>
+<li>Fix: Make <code>Pipe.fold()</code> close the underlying sink when necessary.</li>
+</ul>
+<h2 id="version-1172">Version 1.17.2<a class="headerlink" href="#version-1172" title="Permanent link">&para;</a></h2>
+<p><em>2019-01-17</em></p>
+<ul>
+<li>Fix: Make <code>Pipe.fold()</code> flush the underlying sink.</li>
+</ul>
+<h2 id="version-221">Version 2.2.1<a class="headerlink" href="#version-221" title="Permanent link">&para;</a></h2>
+<p><em>2019-01-17</em></p>
+<ul>
+<li>Fix: Make <code>Pipe.fold()</code> flush the underlying sink.</li>
+</ul>
+<h2 id="version-220">Version 2.2.0<a class="headerlink" href="#version-220" title="Permanent link">&para;</a></h2>
+<p><em>2019-01-16</em></p>
+<ul>
+<li>
+<p>New: <code>Throttler</code> limits sources and sinks to a maximum desired throughput. Multiple sources and
+   sinks can be attached to the same throttler and their combined throughput will not exceed the
+   desired throughput. Multiple throttlers can also be used on the same source or sink and they will
+   all be honored.</p>
+</li>
+<li>
+<p>New: <code>Pipe.fold()</code> replaces the actively-readable <code>Source</code> with a passively-writable <code>Sink</code>.
+   This can be used to forward one sink to a target that is initially undetermined.</p>
+</li>
+<li>
+<p>New: Optimize performance of ByteStrings created with <code>Buffer.snapshot()</code>.</p>
+</li>
+</ul>
+<h2 id="version-1171">Version 1.17.1<a class="headerlink" href="#version-1171" title="Permanent link">&para;</a></h2>
+<p><em>2019-01-16</em></p>
+<ul>
+<li>Fix: Make the newly-backported <code>Pipe.fold()</code> public.</li>
+</ul>
+<h2 id="version-1170">Version 1.17.0<a class="headerlink" href="#version-1170" title="Permanent link">&para;</a></h2>
+<p><em>2019-01-16</em></p>
+<ul>
+<li>New: Backport <code>Pipe.fold()</code> to Okio 1.x.</li>
+</ul>
+<h2 id="version-1160">Version 1.16.0<a class="headerlink" href="#version-1160" title="Permanent link">&para;</a></h2>
+<p><em>2018-10-08</em></p>
+<ul>
+<li>New: Backport <code>BufferedSource.peek()</code> and <code>BufferedSource.getBuffer()</code> to Okio 1.x.</li>
+<li>Fix: Enforce timeouts when closing <code>AsyncTimeout</code> sources.</li>
+</ul>
+<h2 id="version-210">Version 2.1.0<a class="headerlink" href="#version-210" title="Permanent link">&para;</a></h2>
+<p><em>2018-09-22</em></p>
+<ul>
+<li>
+<p>New: <code>BufferedSource.peek()</code> returns another <code>BufferedSource</code> that reads ahead on the current
+   source. Use this to process the same data multiple times.</p>
+</li>
+<li>
+<p>New: Deprecate <code>BufferedSource.buffer()</code>, replacing it with either <code>BufferedSource.getBuffer()</code>
+   (in Java) or <code>BufferedSource.buffer</code> (in Kotlin). We have done likewise for <code>BufferedSink</code>.
+   When we introduced the new extension method <code>Source.buffer()</code> in Okio 2.0 we inadvertently
+   collided with an existing method. This fixes that.</p>
+</li>
+<li>
+<p>New: Improve performance of <code>Buffer.writeUtf8()</code>. This comes alongside initial implementation of
+   UTF-8 encoding and decoding in JavaScript which <a href="https://github.com/lysine-dev/okio/blob/bbb29c459e5ccf0f286e0b17ccdcacd7ac4bc2a9/okio/src/main/kotlin/okio/Utf8.kt#L302">uses XOR masks</a> for great performance.</p>
+</li>
+</ul>
+<h2 id="version-200">Version 2.0.0<a class="headerlink" href="#version-200" title="Permanent link">&para;</a></h2>
+<p><em>2018-08-27</em></p>
+<p>This release commits to a stable 2.0 API. Read the 2.0.0-RC1 changes for advice on upgrading from
+1.x to 2.x.</p>
+<p>We&rsquo;ve also added APIs to ease migration for Kotlin users. They use Kotlin&rsquo;s <code>@Deprecated</code> annotation
+to help you change call sites from the 1.x style to the 2.x style.</p>
+<h2 id="version-200-rc1">Version 2.0.0-RC1<a class="headerlink" href="#version-200-rc1" title="Permanent link">&para;</a></h2>
+<p><em>2018-07-26</em></p>
+<p>Okio 2 is a major release that upgrades the library&rsquo;s implementation language from Java to Kotlin.</p>
+<p>Okio 2.x is <strong>binary-compatible</strong> with Okio 1.x and does not change any behavior. Classes and .jar
+files compiled against 1.x can be used with 2.x without recompiling.</p>
+<p>Okio 2.x is <strong>.java source compatible</strong> with Okio 1.x in all but one corner case. In Okio 1.x
+<code>Buffer</code> would throw an unchecked <code>IllegalStateException</code> when attempting to read more bytes than
+available. Okio 2.x now throws a checked <code>EOFException</code> in this case. This is now consistent with
+the behavior of its <code>BufferedSource</code> interface. Java callers that don&rsquo;t already catch <code>IOException</code>
+will now need to.</p>
+<p>Okio 2.x is <strong>.kt source-incompatible</strong> with Okio 1.x. This release adopts Kotlin idioms where they
+are available.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Java</th>
+<th style="text-align: left;">Kotlin</th>
+<th style="text-align: left;">Idiom</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Buffer.getByte()</td>
+<td style="text-align: left;">operator fun Buffer.get()</td>
+<td style="text-align: left;">operator function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Buffer.size()</td>
+<td style="text-align: left;">val Buffer.size</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.decodeBase64(String)</td>
+<td style="text-align: left;">fun String.decodeBase64()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.decodeHex(String)</td>
+<td style="text-align: left;">fun String.decodeHex()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.encodeString(String, Charset)</td>
+<td style="text-align: left;">fun String.encode(Charset)</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.encodeUtf8(String)</td>
+<td style="text-align: left;">fun String.encodeUtf8()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.getByte()</td>
+<td style="text-align: left;">operator fun ByteString.get()</td>
+<td style="text-align: left;">operator function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.of(ByteBuffer)</td>
+<td style="text-align: left;">fun ByteBuffer.toByteString()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.of(byte[], int, int)</td>
+<td style="text-align: left;">fun ByteArray.toByteString()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.read(InputStream, int)</td>
+<td style="text-align: left;">fun InputStream.readByteString(Int)</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ByteString.size()</td>
+<td style="text-align: left;">val ByteString.size</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">DeflaterSink(Sink)</td>
+<td style="text-align: left;">fun Sink.deflater()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">ForwardingSink.delegate()</td>
+<td style="text-align: left;">val ForwardingSink.delegate</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">ForwardingSource.delegate()</td>
+<td style="text-align: left;">val ForwardingSource.delegate</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">GzipSink(Sink, Deflater)</td>
+<td style="text-align: left;">fun Sink.gzip()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">GzipSink.deflater()</td>
+<td style="text-align: left;">val GzipSink.deflater</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">GzipSource(Source)</td>
+<td style="text-align: left;">fun Source.gzip()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">HashingSink.hash()</td>
+<td style="text-align: left;">val HashingSink.hash</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">HashingSource.hash()</td>
+<td style="text-align: left;">val HashingSource.hash</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">InflaterSink(Source)</td>
+<td style="text-align: left;">fun Source.inflater()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.appendingSink(File)</td>
+<td style="text-align: left;">fun File.appendingSink()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.blackhole()</td>
+<td style="text-align: left;">fun blackholeSink()</td>
+<td style="text-align: left;">top level function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.buffer(Sink)</td>
+<td style="text-align: left;">fun Sink.buffer()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.buffer(Source)</td>
+<td style="text-align: left;">fun Source.buffer()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.sink(File)</td>
+<td style="text-align: left;">fun File.sink()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.sink(OutputStream)</td>
+<td style="text-align: left;">fun OutputStream.sink()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.sink(Path)</td>
+<td style="text-align: left;">fun Path.sink()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.sink(Socket)</td>
+<td style="text-align: left;">fun Socket.sink()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.source(File)</td>
+<td style="text-align: left;">fun File.source()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.source(InputStream)</td>
+<td style="text-align: left;">fun InputStream.source()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.source(Path)</td>
+<td style="text-align: left;">fun Path.source()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Okio.source(Socket)</td>
+<td style="text-align: left;">fun Socket.source()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pipe.sink()</td>
+<td style="text-align: left;">val Pipe.sink</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pipe.source()</td>
+<td style="text-align: left;">val Pipe.source</td>
+<td style="text-align: left;">val</td>
+</tr>
+<tr>
+<td style="text-align: left;">Utf8.size(String)</td>
+<td style="text-align: left;">fun String.utf8Size()</td>
+<td style="text-align: left;">extension function</td>
+</tr>
+</tbody>
+</table>
+<p>Okio 2.x has <strong>similar performance</strong> to Okio 1.x. We benchmarked both versions to find potential
+performance regressions. We found one regression and fixed it: we were using <code>==</code> instead of <code>===</code>.</p>
+<p>Other changes in this release:</p>
+<ul>
+<li>
+<p>New: Add a dependency on kotlin-stdlib. Okio&rsquo;s transitive dependencies grow from none in 1.x to
+   three in 2.x. These are kotlin-stdlib (939 KiB), kotlin-stdlib-common (104 KiB), and JetBrains&rsquo;
+   annotations (17 KiB).</p>
+</li>
+<li>
+<p>New: Change Okio to build with Gradle instead of Maven.</p>
+</li>
+</ul>
+<h2 id="version-1150">Version 1.15.0<a class="headerlink" href="#version-1150" title="Permanent link">&para;</a></h2>
+<p><em>2018-07-18</em></p>
+<ul>
+<li>New: Trie-based <code>Buffer.select()</code>. This improves performance when selecting
+   among large lists of options.</li>
+<li>Fix: Retain interrupted state when throwing <code>InterruptedIOException</code>.</li>
+</ul>
+<h2 id="version-1140">Version 1.14.0<a class="headerlink" href="#version-1140" title="Permanent link">&para;</a></h2>
+<p><em>2018-02-11</em></p>
+<ul>
+<li>New: <code>Buffer.UnsafeCursor</code> provides direct access to Okio internals. This API
+   is like Okio&rsquo;s version of Java reflection: it&rsquo;s a very powerful API that can
+   be used for great things and dangerous things alike. The documentation is
+   extensive and anyone using it should review it carefully before proceeding!</li>
+<li>New: Change <code>BufferedSource</code> to implement <code>java.nio.ReadableByteChannel</code> and
+   <code>BufferedSink</code> to implement <code>java.nio.WritableByteChannel</code>. Now it&rsquo;s a little
+   easier to interop between Okio and NIO.</li>
+<li>New: Automatic module name of <code>okio</code> for use with the Java Platform Module
+   System.</li>
+<li>New: Optimize <code>Buffer.getByte()</code> to search backwards when doing so will be
+   more efficient.</li>
+<li>Fix: Honor the requested byte count in <code>InflaterSource</code>. Previously this
+   class could return more bytes than requested.</li>
+<li>Fix: Improve a performance bug in <code>AsyncTimeout.sink().write()</code>.</li>
+</ul>
+<h2 id="version-1130">Version 1.13.0<a class="headerlink" href="#version-1130" title="Permanent link">&para;</a></h2>
+<p><em>2017-05-12</em></p>
+<ul>
+<li>
+<p><strong>Okio now uses <code>@Nullable</code> to annotate all possibly-null values.</strong> We&rsquo;ve
+   added a compile-time dependency on the JSR 305 annotations. This is a
+   <a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">provided</a> dependency and does not need to be included in
+   your build configuration, <code>.jar</code> file, or <code>.apk</code>. We use
+   <code>@ParametersAreNonnullByDefault</code> and all parameters and return types are
+   never null unless explicitly annotated <code>@Nullable</code>.</p>
+</li>
+<li>
+<p><strong>Warning: this release is source-incompatible for Kotlin users.</strong>
+   Nullability was previously ambiguous and lenient but now the compiler will
+   enforce strict null checks.</p>
+</li>
+</ul>
+<h2 id="version-1120">Version 1.12.0<a class="headerlink" href="#version-1120" title="Permanent link">&para;</a></h2>
+<p><em>2017-04-11</em></p>
+<ul>
+<li><strong>Fix: Change Pipe&rsquo;s sink.flush() to not block.</strong> Previously closing a pipe&rsquo;s
+   sink would block until the source had been exhausted. In practice this
+   blocked the caller for no benefit.</li>
+<li><strong>Fix: Change <code>writeUtf8CodePoint()</code> to emit <code>?</code> for partial surrogates.</strong>
+   The previous behavior was inconsistent: given a malformed string with a
+   partial surrogate, <code>writeUtf8()</code> emitted <code>?</code> but <code>writeUtf8CodePoint()</code> threw
+   an <code>IllegalArgumentException</code>. Most applications will never encounter partial
+   surrogates, but for those that do this behavior was unexpected.</li>
+<li>New: Allow length of <code>readUtf8LineStrict()</code> to be limited.</li>
+<li>New: <code>Utf8.size()</code> method to get the number of bytes required to encode a
+   string as UTF-8. This may be useful for length-prefixed encodings.</li>
+<li>New: SHA-512 hash and HMAC APIs.</li>
+</ul>
+<h2 id="version-1110">Version 1.11.0<a class="headerlink" href="#version-1110" title="Permanent link">&para;</a></h2>
+<p><em>2016-10-11</em></p>
+<ul>
+<li><strong>Fix: The four-argument overload of <code>Buffer.writeString()</code> had a major bug
+   where it didn&rsquo;t respect offsets if the specified charset was UTF-8.</strong> This
+   was because our short-circuit optimization omitted necessary offset
+   parameters.</li>
+<li>New: HMAC support in <code>HashingSource</code>, <code>HashingSink</code>, <code>ByteString</code>, and
+   <code>Buffer</code>. This makes it easy to create a keyed-hash message authentication
+   code (HMAC) wherever your data is. Unlike the other hashes, HMAC uses a
+   <code>ByteString</code> secret key for authentication.</li>
+<li>New: <code>ByteString.of(ByteBuffer)</code> makes it easier to mix NIO with Okio.</li>
+</ul>
+<h2 id="version-1100">Version 1.10.0<a class="headerlink" href="#version-1100" title="Permanent link">&para;</a></h2>
+<p><em>2016-08-28</em></p>
+<ul>
+<li>Fix: Support reading files larger than 2 GiB with <code>GzipSource</code>. Previously
+   attempting to decompress such files would fail due to an overflow when
+   validating the total length.</li>
+<li>Fix: Exit the watchdog thread after being idle for 60 seconds. This should
+   make it possible for class unloaders to fully unload Okio.</li>
+<li>New: <code>Okio.blackhole()</code> returns a sink where all bytes written are discarded.
+   This is Okio&rsquo;s equivalent of <code>/dev/null</code>.</li>
+<li>New: Encode a string with any charset using <code>ByteString.encodeString()</code> and
+   decode strings in any charset using <code>ByteString.string()</code>. Most applications
+   should prefer <code>ByteString.encodeUtf8()</code> and <code>ByteString.utf8()</code> unless it&rsquo;s
+   necessary to support a legacy charset.</li>
+<li>New: <code>GzipSink.deflater()</code> makes it possible to configure the compression
+   level.</li>
+</ul>
+<h2 id="version-190">Version 1.9.0<a class="headerlink" href="#version-190" title="Permanent link">&para;</a></h2>
+<p><em>2016-07-01</em></p>
+<ul>
+<li>New: <code>Pipe</code> makes it easy to connect a producer thread to a consumer thread.
+   Reads block until data is available to read. Writes block if the pipe&rsquo;s is
+   full. Both sources and sinks support timeouts.</li>
+<li>New: <code>BufferedSource.rangeEquals()</code> makes it easy to compare a range in a
+   stream to an expected value. This does the right thing: it blocks to load
+   the data required return a definitive result. But it won&rsquo;t block
+   unnecessarily.</li>
+<li>New: <code>Timeout.waitUntilNotified()</code> makes it possible to use nice timeout
+   abstractions on Java&rsquo;s built-in wait/notify primitives.</li>
+<li>Fix: Don&rsquo;t return incorrect results when <code>HashingSource</code> does large reads.
+   There was a bug where it wasn&rsquo;t traversing through the segments of the buffer
+   being hashed. This means that <code>HashingSource</code> was returning incorrect answers
+   for any writes that spanned multiple segment boundaries.</li>
+</ul>
+<h2 id="version-180">Version 1.8.0<a class="headerlink" href="#version-180" title="Permanent link">&para;</a></h2>
+<p><em>2016-05-02</em></p>
+<ul>
+<li>New: <code>BufferedSource.select(Options)</code> API for reading one of a set of
+   expected values.</li>
+<li>New: Make <code>ByteString.toString()</code> and <code>Buffer.toString()</code> friendlier.
+   These methods return text if the byte string is valid UTF-8.</li>
+<li>New: APIs to match byte strings: <code>indexOf()</code>, <code>startsWith()</code>, and
+   <code>endsWith()</code>.</li>
+</ul>
+<h2 id="version-170">Version 1.7.0<a class="headerlink" href="#version-170" title="Permanent link">&para;</a></h2>
+<p><em>2016-04-10</em></p>
+<ul>
+<li>New: Change the segment size to 8 KiB. This has been reported to dramatically
+   improve performance in some applications.</li>
+<li>New: <code>md5()</code>, <code>sha1()</code>, and <code>sha256()</code> methods on <code>Buffer</code>. Also add a
+   <code>sha1()</code> method on <code>ByteString</code> for symmetry.</li>
+<li>New: <code>HashingSource</code> and <code>HashingSink</code>. These classes are Okio’s equivalent
+   to the JDK’s <code>DigestInputStream</code> and <code>DigestOutputStream</code>. They offer
+   convenient <code>md5()</code>, <code>sha1()</code>, and <code>sha256()</code> factory methods to avoid an
+   impossible <code>NoSuchAlgorithmException</code>.</li>
+<li>New: <code>ByteString.asByteBuffer()</code>.</li>
+<li>Fix: Limit snapshot byte strings to requested size.</li>
+<li>Fix: Change write timeouts to have a maximum write size. Previously large
+   writes could easly suffer timeouts because the entire write was subject to a
+   single timeout.</li>
+<li>Fix: Recover from EBADF failures, which could be triggered by asynchronously
+   closing a stream on older versions of Android.</li>
+<li>Fix: Don&rsquo;t share segments if doing so only saves a small copy. This should
+   improve performance for all applications.</li>
+<li>Fix: Optimize <code>BufferedSource.indexOfElement()</code> and <code>indexOf(ByteString)</code>.
+   Previously this method had a bug that caused it to be very slow on large
+   buffers.</li>
+</ul>
+<h2 id="version-160">Version 1.6.0<a class="headerlink" href="#version-160" title="Permanent link">&para;</a></h2>
+<p><em>2015-08-25</em></p>
+<ul>
+<li>New: <code>BufferedSource.indexOf(ByteString)</code> searches a source for the next
+   occurrence of a byte string.</li>
+<li>Fix: Recover from unexpected <code>AssertionError</code> thrown on Android 4.2.2 and
+   earlier when asynchronously closing a socket.</li>
+</ul>
+<h2 id="version-150">Version 1.5.0<a class="headerlink" href="#version-150" title="Permanent link">&para;</a></h2>
+<p><em>2015-06-19</em></p>
+<ul>
+<li>Sockets streams now throw <code>SocketTimeoutException</code>. This builds on new
+   extension point in <code>AsyncTimeout</code> to customize the exception when a timeout
+   occurs.</li>
+<li>New: <code>ByteString</code> now implements <code>Comparable</code>. The comparison sorts bytes as
+   unsigned: {@code ff} sorts after {@code 00}.</li>
+</ul>
+<h2 id="version-140">Version 1.4.0<a class="headerlink" href="#version-140" title="Permanent link">&para;</a></h2>
+<p><em>2015-05-16</em></p>
+<ul>
+<li><strong>Timeout exception changed.</strong> Previously <code>Timeout.throwIfReached()</code> would
+   throw <code>InterruptedIOException</code> on thread interruption, and <code>IOException</code> if
+   the deadline was reached. Now it throws <code>InterruptedIOException</code> in both
+   cases.</li>
+<li>Fix: throw <code>EOFException</code> when attempting to read digits from an empty
+   source. Previously this would crash with an unchecked exception.</li>
+<li>New: APIs to read and write UTF-8 code points without allocating strings.</li>
+<li>New: <code>BufferedSink</code> can now write substrings directly, potentially saving an
+   allocation for some callers.</li>
+<li>New: <code>ForwardingTimeout</code> class.</li>
+</ul>
+<h2 id="version-130">Version 1.3.0<a class="headerlink" href="#version-130" title="Permanent link">&para;</a></h2>
+<p><em>2015-03-16</em></p>
+<ul>
+<li>New: Read and write signed decimal and unsigned hexadecimal values in
+   <code>BufferedSource</code> and <code>BufferedSink</code>. Unlike the alternatives, these methods
+   don’t do any memory allocations!</li>
+<li>New: Segment sharing. This improves the runtime of operations like
+   <code>Buffer.clone()</code> and <code>Buffer.copyTo()</code> by sharing underlying segments between
+   buffers.</li>
+<li>New: <code>Buffer.snapshot()</code> returns an immutable snapshot of a buffer as a
+   <code>ByteString</code>. This builds on segment sharing so that snapshots are shallow,
+   immutable copies.</li>
+<li>New: <code>ByteString.rangeEquals()</code>.</li>
+<li>New: <code>ByteString.md5()</code> and <code>ByteString.sha256()</code>.</li>
+<li>New: <code>ByteString.base64Url()</code> returns URL-safe Base64. The existing
+   decoding method has been extended to support URL-safe Base64 input.</li>
+<li>New: <code>ByteString.substring()</code> returns a prefix, infix, or suffix.</li>
+<li>New: <code>Sink</code> now implements <code>java.io.Flushable</code>.</li>
+<li>Fix: <code>Buffer.write(Source, long)</code> now always writes fully. The previous
+   behavior would return as soon as any data had been written; this was
+   inconsistent with all other <em>write()</em> methods in the API.</li>
+<li>Fix: don&rsquo;t leak empty segments in DeflaterSink and InflaterSource. (This was
+   unlikely to cause problems in practice.)</li>
+</ul>
+<h2 id="version-120">Version 1.2.0<a class="headerlink" href="#version-120" title="Permanent link">&para;</a></h2>
+<p><em>2014-12-30</em></p>
+<ul>
+<li>Fix: <code>Okio.buffer()</code> <em>always</em> buffers for better predictability.</li>
+<li>Fix: Provide context when <code>readUtf8LineStrict()</code> throws.</li>
+<li>Fix: Buffers do not call through the <code>Source</code> on zero-byte writes.</li>
+</ul>
+<h2 id="version-110">Version 1.1.0<a class="headerlink" href="#version-110" title="Permanent link">&para;</a></h2>
+<p><em>2014-12-11</em></p>
+<ul>
+<li>Do UTF-8 encoding natively for a performance increase, particularly on Android.</li>
+<li>New APIs: <code>BufferedSink.emit()</code>, <code>BufferedSource.request()</code> and <code>BufferedSink.indexOfElement()</code>.</li>
+<li>Fixed a performance bug in <code>Buffer.indexOf()</code></li>
+</ul>
+<h2 id="version-101">Version 1.0.1<a class="headerlink" href="#version-101" title="Permanent link">&para;</a></h2>
+<p><em>2014-08-08</em></p>
+<ul>
+<li>Added <code>read(byte[])</code>, <code>read(byte[], offset, byteCount)</code>,  and
+   <code>void readFully(byte[])</code> to <code>BufferedSource</code>.</li>
+<li>Refined declared checked exceptions on <code>Buffer</code> methods.</li>
+</ul>
+<h2 id="version-100">Version 1.0.0<a class="headerlink" href="#version-100" title="Permanent link">&para;</a></h2>
+<p><em>2014-05-23</em></p>
+<ul>
+<li>Bumped release version. No other changes!</li>
+</ul>
+<h2 id="version-090">Version 0.9.0<a class="headerlink" href="#version-090" title="Permanent link">&para;</a></h2>
+<p><em>2014-05-03</em></p>
+<ul>
+<li>Use 0 as a sentinel for no timeout.</li>
+<li>Make AsyncTimeout public.</li>
+<li>Remove checked exception from Buffer.readByteArray.</li>
+</ul>
+<h2 id="version-080">Version 0.8.0<a class="headerlink" href="#version-080" title="Permanent link">&para;</a></h2>
+<p><em>2014-04-24</em></p>
+<ul>
+<li>Eagerly verify preconditions on public APIs.</li>
+<li>Quick return on Buffer instance equivalence.</li>
+<li>Add delegate types for Sink and Source.</li>
+<li>Small changes to the way deadlines are managed.</li>
+<li>Add append variant of Okio.sink for File.</li>
+<li>Methods to exhaust BufferedSource to byte[] and ByteString.</li>
+</ul>
+<h2 id="version-070">Version 0.7.0<a class="headerlink" href="#version-070" title="Permanent link">&para;</a></h2>
+<p><em>2014-04-18</em></p>
+<ul>
+<li>Don&rsquo;t use getters in timeout.</li>
+<li>Use the watchdog to interrupt sockets that have reached deadlines.</li>
+<li>Add java.io and java.nio file source/sink helpers.</li>
+</ul>
+<h2 id="version-061">Version 0.6.1<a class="headerlink" href="#version-061" title="Permanent link">&para;</a></h2>
+<p><em>2014-04-17</em></p>
+<ul>
+<li>Methods to read a buffered source fully in UTF-8 or supplied charset.</li>
+<li>API to read a byte[] directly.</li>
+<li>New methods to move all data from a source to a sink.</li>
+<li>Fix a bug on input stream exhaustion.</li>
+</ul>
+<h2 id="version-060">Version 0.6.0<a class="headerlink" href="#version-060" title="Permanent link">&para;</a></h2>
+<p><em>2014-04-15</em></p>
+<ul>
+<li>Make ByteString serializable.</li>
+<li>New API: <code>ByteString.of(byte[] data, int offset, int byteCount)</code></li>
+<li>New API: stream-based copy, write, and read helpers.</li>
+</ul>
+<h2 id="version-050">Version 0.5.0<a class="headerlink" href="#version-050" title="Permanent link">&para;</a></h2>
+<p><em>2014-04-08</em></p>
+<ul>
+<li>Initial public release.</li>
+<li>Imported from OkHttp.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2019 Square, Inc.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/squareeng" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://stackoverflow.com/questions/tagged/okio?sort=active" target="_blank" rel="noopener" title="stackoverflow.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M291 311 95.3 269.7 87.1 309l195.7 41zm51-87L188.5 95.7 163 126.5l153.5 128.3zm-31.2 39.7L129.5 179l-16.7 36.5L294 300zM262.3 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H43V320H3v160h359.5V320h-40z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

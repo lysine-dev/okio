@@ -1,0 +1,704 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>FakeFileSystem</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    okio-parent
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">3.19.0-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":okio-fakefilesystem/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":okio-fakefilesystem/commonMain" data-filter=":okio-fakefilesystem/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    okio-parent
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="okio-fakefilesystem::okio.fakefilesystem/FakeFileSystem///PointingToDeclaration//-1731967004">
+  <div class="breadcrumbs"><a href="../../index.html">okio-fakefilesystem</a><span class="delimiter">/</span><a href="../index.html">okio.fakefilesystem</a><span class="delimiter">/</span><span class="current">FakeFileSystem</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Fake</span><wbr><span>File</span><wbr><span><span>System</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">FakeFileSystem</a> : <a href="../../../okio/okio/-file-system/index.html">FileSystem</a></div><p class="paragraph">A fully in-memory file system useful for testing. It includes features to support writing better tests.</p><p class="paragraph">Use <a href="open-paths.html">openPaths</a> to see which paths have been opened for read or write, but not yet closed. Tests should call <a href="check-no-open-files.html">checkNoOpenFiles</a> in <code class="lang-kotlin">tearDown()</code> to confirm that no file streams were leaked.</p><p class="paragraph"></p><p class="paragraph">Strict By Default</p> -----------------<p></p><p class="paragraph">These actions are not allowed and throw an <a href="../../../okio/okio/-i-o-exception/index.html">IOException</a> if attempted:</p><ul><li><p class="paragraph">Moving a file that is currently open for reading or writing.</p></li><li><p class="paragraph">Deleting a file that is currently open for reading or writing.</p></li><li><p class="paragraph">Moving a file to a path that currently resolves to an empty directory.</p></li><li><p class="paragraph">Reading and writing the same file at the same time.</p></li><li><p class="paragraph">Opening a file for writing that is already open for writing.</p></li></ul><p class="paragraph">Programs that do not attempt any of the above operations should work fine on both UNIX and Windows systems. Relax these constraints individually or call <a href="emulate-windows.html">emulateWindows</a> or <a href="emulate-unix.html">emulateUnix</a>; to apply the constraints of a particular operating system.</p><p class="paragraph"></p><p class="paragraph">Closeable</p> ---------<p></p><p class="paragraph">This file system cannot be used after it is closed. Closing it does not close any of its open streams; those must be closed directly.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="739789842%2FConstructors%2F-1731967004" anchor-label="FakeFileSystem" id="739789842%2FConstructors%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-fake-file-system.html"><span>Fake</span><wbr><span>File</span><wbr><span><span>System</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="739789842%2FConstructors%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">clock<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-clock/index.html">Clock</a><span class="token operator"> = </span>kotlin.time.Clock.System</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1522455757%2FProperties%2F-1731967004" anchor-label="allowClobberingEmptyDirectories" id="-1522455757%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="allow-clobbering-empty-directories.html"><span>allow</span><wbr><span>Clobbering</span><wbr><span>Empty</span><wbr><span><span>Directories</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1522455757%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="allow-clobbering-empty-directories.html">allowClobberingEmptyDirectories</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">True to allow the target of an <a href="atomic-move.html">atomicMove</a> operation to be an empty directory. Windows file systems typically allow files to replace empty directories; UNIX file systems do not.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-84866219%2FProperties%2F-1731967004" anchor-label="allowDeletingOpenFiles" id="-84866219%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="allow-deleting-open-files.html"><span>allow</span><wbr><span>Deleting</span><wbr><span>Open</span><wbr><span><span>Files</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-84866219%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="allow-deleting-open-files.html">allowDeletingOpenFiles</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">True to allow files to be deleted even if they're currently open for read or write. UNIX file systems typically allow open files to be deleted; Windows file systems do not.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1998905787%2FProperties%2F-1731967004" anchor-label="allowMovingOpenFiles" id="1998905787%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="allow-moving-open-files.html"><span>allow</span><wbr><span>Moving</span><wbr><span>Open</span><wbr><span><span>Files</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1998905787%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="allow-moving-open-files.html">allowMovingOpenFiles</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">True to allow files to be moved even if they're currently open for read or write. UNIX file systems typically allow open files to be moved; Windows file systems do not.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1965359726%2FProperties%2F-1731967004" anchor-label="allowReadsWhileWriting" id="-1965359726%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="allow-reads-while-writing.html"><span>allow</span><wbr><span>Reads</span><wbr><span>While</span><wbr><span><span>Writing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1965359726%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="allow-reads-while-writing.html">allowReadsWhileWriting</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">True to permit a file to have a <a href="source.html">source</a> and <a href="sink.html">sink</a> open at the same time. Both Windows and UNIX file systems permit this but the result may be undefined.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-474731890%2FProperties%2F-1731967004" anchor-label="allowSymlinks" id="-474731890%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="allow-symlinks.html"><span>allow</span><wbr><span><span>Symlinks</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-474731890%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="allow-symlinks.html">allowSymlinks</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">True to allow symlinks to be created. UNIX file systems typically allow symlinks; Windows file systems do not. Setting this to false after creating a symlink does not prevent that symlink from being returned or used.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="32572865%2FProperties%2F-1731967004" anchor-label="allowWritesWhileWriting" id="32572865%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="allow-writes-while-writing.html"><span>allow</span><wbr><span>Writes</span><wbr><span>While</span><wbr><span><span>Writing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="32572865%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="allow-writes-while-writing.html">allowWritesWhileWriting</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">True to permit a file to have multiple <a href="sink.html">sinks</a> open at the same time. Both Windows and UNIX file systems permit this but the result may be undefined.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2116648220%2FProperties%2F-1731967004" anchor-label="allPaths" id="-2116648220%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="all-paths.html"><span>all</span><wbr><span><span>Paths</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2116648220%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"allPaths"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="all-paths.html">allPaths</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Canonical paths for every file and directory in this file system. This omits file system roots like <code class="lang-kotlin">C:\</code> and <code class="lang-kotlin">/</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-209219173%2FProperties%2F-1731967004" anchor-label="clock" id="-209219173%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clock.html"><span><span>clock</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-209219173%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="clock.html">clock</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-clock/index.html">Clock</a></div><div class="brief "><p class="paragraph">Returns the clock used to timestamp files.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-699291739%2FProperties%2F-1731967004" anchor-label="openPaths" id="-699291739%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="open-paths.html"><span>open</span><wbr><span><span>Paths</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-699291739%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"openPaths"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="open-paths.html">openPaths</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Canonical paths currently opened for reading or writing in the order they were opened. This may contain duplicates if a single path is open by multiple readers.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2116105045%2FProperties%2F-1731967004" anchor-label="workingDirectory" id="2116105045%2FProperties%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="working-directory.html"><span>working</span><wbr><span><span>Directory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2116105045%2FProperties%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="working-directory.html">workingDirectory</a><span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></div><div class="brief "><p class="paragraph">An absolute path with this file system's current working directory. Relative paths will be resolved against this directory when they are used.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1471270721%2FFunctions%2F-1731967004" anchor-label="appendingSink" id="1471270721%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="appending-sink.html"><span>appending</span><wbr><span><span>Sink</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1471270721%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="appending-sink.html"><span class="token function">appendingSink</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustExist<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-sink/index.html">Sink</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1127032686%2FFunctions%2F-1731967004" anchor-label="atomicMove" id="1127032686%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="atomic-move.html"><span>atomic</span><wbr><span><span>Move</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1127032686%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="atomic-move.html"><span class="token function">atomicMove</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">source<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">target<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-798042592%2FFunctions%2F-1731967004" anchor-label="canonicalize" id="-798042592%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="canonicalize.html"><span><span>canonicalize</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-798042592%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="canonicalize.html"><span class="token function">canonicalize</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-122577107%2FFunctions%2F-1731967004" anchor-label="checkNoOpenFiles" id="-122577107%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="check-no-open-files.html"><span>check</span><wbr><span>No</span><wbr><span>Open</span><wbr><span><span>Files</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-122577107%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="check-no-open-files.html"><span class="token function">checkNoOpenFiles</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Confirm that all files that have been opened on this file system (with <a href="source.html">source</a>, <a href="sink.html">sink</a>, and <a href="appending-sink.html">appendingSink</a>) have since been closed. Call this in your test's <code class="lang-kotlin">tearDown()</code> function to confirm that your program hasn't leaked any open files.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2105584369%2FFunctions%2F-1731967004" anchor-label="close" id="2105584369%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="close.html"><span><span>close</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2105584369%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="close.html"><span class="token function">close</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="419090610%2FFunctions%2F-1731967004" anchor-label="copy" id="419090610%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#419090610%2FFunctions%2F-1731967004"><span><span>copy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="419090610%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#419090610%2FFunctions%2F-1731967004"><span class="token function">copy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">source<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">target<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1133903352%2FFunctions%2F-1731967004" anchor-label="createDirectories" id="1133903352%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1133903352%2FFunctions%2F-1731967004"><span>create</span><wbr><span><span>Directories</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1133903352%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="index.html#1133903352%2FFunctions%2F-1731967004"><span class="token function">createDirectories</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dir<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustCreate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1108556651%2FFunctions%2F-1731967004" anchor-label="createDirectory" id="1108556651%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-directory.html"><span>create</span><wbr><span><span>Directory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1108556651%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="create-directory.html"><span class="token function">createDirectory</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dir<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustCreate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1648830495%2FFunctions%2F-1731967004" anchor-label="createSymlink" id="1648830495%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-symlink.html"><span>create</span><wbr><span><span>Symlink</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1648830495%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="create-symlink.html"><span class="token function">createSymlink</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">source<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">target<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-732119559%2FFunctions%2F-1731967004" anchor-label="delete" id="-732119559%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="delete.html"><span><span>delete</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-732119559%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="delete.html"><span class="token function">delete</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustExist<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1932614451%2FFunctions%2F-1731967004" anchor-label="deleteRecursively" id="1932614451%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1932614451%2FFunctions%2F-1731967004"><span>delete</span><wbr><span><span>Recursively</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1932614451%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1932614451%2FFunctions%2F-1731967004"><span class="token function">deleteRecursively</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fileOrDirectory<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustExist<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-526160850%2FFunctions%2F-1731967004" anchor-label="emulateUnix" id="-526160850%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="emulate-unix.html"><span>emulate</span><wbr><span><span>Unix</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-526160850%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="emulate-unix.html"><span class="token function">emulateUnix</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Configure this file system to use a UNIX-like working directory (<code class="lang-kotlin">/</code>, unless the working directory is already UNIX-like) and to follow a UNIX-like policy on what operations are permitted.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="456237825%2FFunctions%2F-1731967004" anchor-label="emulateWindows" id="456237825%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="emulate-windows.html"><span>emulate</span><wbr><span><span>Windows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="456237825%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="emulate-windows.html"><span class="token function">emulateWindows</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Configure this file system to use a Windows-like working directory (<code class="lang-kotlin">F:\</code>, unless the working directory is already Windows-like) and to follow a Windows-like policy on what operations are permitted.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1094583673%2FFunctions%2F-1731967004" anchor-label="exists" id="-1094583673%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1094583673%2FFunctions%2F-1731967004"><span><span>exists</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1094583673%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="index.html#-1094583673%2FFunctions%2F-1731967004"><span class="token function">exists</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-463707298%2FFunctions%2F-1731967004" anchor-label="list" id="-463707298%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="list.html"><span><span>list</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-463707298%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="list.html"><span class="token function">list</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dir<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1702937480%2FFunctions%2F-1731967004" anchor-label="listOrNull" id="1702937480%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="list-or-null.html"><span>list</span><wbr><span>Or</span><wbr><span><span>Null</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1702937480%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="list-or-null.html"><span class="token function">listOrNull</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dir<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1381599590%2FFunctions%2F-1731967004" anchor-label="listRecursively" id="1381599590%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1381599590%2FFunctions%2F-1731967004"><span>list</span><wbr><span><span>Recursively</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1381599590%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1381599590%2FFunctions%2F-1731967004"><span class="token function">listRecursively</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dir<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">followSymlinks<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.sequences/-sequence/index.html">Sequence</a><span class="token operator">&lt;</span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-218291494%2FFunctions%2F-1731967004" anchor-label="metadata" id="-218291494%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-218291494%2FFunctions%2F-1731967004"><span><span>metadata</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-218291494%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">fun </span><a href="index.html#-218291494%2FFunctions%2F-1731967004"><span class="token function">metadata</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-file-metadata/index.html">FileMetadata</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1964674279%2FFunctions%2F-1731967004" anchor-label="metadataOrNull" id="-1964674279%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="metadata-or-null.html"><span>metadata</span><wbr><span>Or</span><wbr><span><span>Null</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1964674279%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="metadata-or-null.html"><span class="token function">metadataOrNull</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-file-metadata/index.html">FileMetadata</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2038591988%2FFunctions%2F-1731967004" anchor-label="openReadOnly" id="-2038591988%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="open-read-only.html"><span>open</span><wbr><span>Read</span><wbr><span><span>Only</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2038591988%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="open-read-only.html"><span class="token function">openReadOnly</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-file-handle/index.html">FileHandle</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-59172441%2FFunctions%2F-1731967004" anchor-label="openReadWrite" id="-59172441%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="open-read-write.html"><span>open</span><wbr><span>Read</span><wbr><span><span>Write</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-59172441%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="open-read-write.html"><span class="token function">openReadWrite</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustCreate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">mustExist<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-file-handle/index.html">FileHandle</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1037056394%2FFunctions%2F-1731967004" anchor-label="read" id="-1037056394%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1037056394%2FFunctions%2F-1731967004"><span><span>read</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1037056394%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#-1037056394%2FFunctions%2F-1731967004">T</a><span class="token operator">&gt; </span><a href="index.html#-1037056394%2FFunctions%2F-1731967004"><span class="token function">read</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">readerAction<span class="token operator">: </span><a href="../../../okio/okio/-buffered-source/index.html">BufferedSource</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="index.html#-1037056394%2FFunctions%2F-1731967004">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#-1037056394%2FFunctions%2F-1731967004">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1452343026%2FFunctions%2F-1731967004" anchor-label="setExtra" id="-1452343026%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-extra.html"><span>set</span><wbr><span><span>Extra</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1452343026%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="set-extra.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="set-extra.html"><span class="token function">setExtra</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><span class="token keyword">out </span><a href="set-extra.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="set-extra.html">T</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the metadata of type <a href="set-extra.html">type</a> on <a href="set-extra.html">path</a> to <a href="set-extra.html">value</a>. If <a href="set-extra.html">value</a> is null this clears that metadata.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2117486831%2FFunctions%2F-1731967004" anchor-label="sink" id="-2117486831%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sink.html"><span><span>sink</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2117486831%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sink.html"><span class="token function">sink</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustCreate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-sink/index.html">Sink</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1049223013%2FFunctions%2F-1731967004" anchor-label="source" id="-1049223013%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="source.html"><span><span>source</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1049223013%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="source.html"><span class="token function">source</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../okio/okio/-source/index.html">Source</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="637543717%2FFunctions%2F-1731967004" anchor-label="toString" id="637543717%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="637543717%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1005639157%2FFunctions%2F-1731967004" anchor-label="write" id="1005639157%2FFunctions%2F-1731967004" data-filterable-set=":okio-fakefilesystem/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio-fakefilesystem/commonMain" data-filterable-set=":okio-fakefilesystem/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1005639157%2FFunctions%2F-1731967004"><span><span>write</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1005639157%2FFunctions%2F-1731967004"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio-fakefilesystem/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="index.html#1005639157%2FFunctions%2F-1731967004">T</a><span class="token operator">&gt; </span><a href="index.html#1005639157%2FFunctions%2F-1731967004"><span class="token function">write</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><a href="../../../okio/okio/-path/index.html">Path</a><span class="token punctuation">, </span></span><span class="parameter ">mustCreate<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter ">writerAction<span class="token operator">: </span><a href="../../../okio/okio/-buffered-sink/index.html">BufferedSink</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="index.html#1005639157%2FFunctions%2F-1731967004">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html#1005639157%2FFunctions%2F-1731967004">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
