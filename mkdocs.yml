@@ -74,8 +74,8 @@ nav:
     - 'fakefilesystem': 3.x/okio-fakefilesystem/okio.fakefilesystem/
     - 'nodefilesystem': 3.x/okio-nodefilesystem/okio/
     - 'wasifilesystem': 3.x/okio-wasifilesystem/okio/-wasi-file-system/
-  - '1.x API ⏏': https://lysine.dev/okio/2.x/okio/okio/
-  - '2.x API ⏏': https://lysine.dev/okio/1.x/okio/
+  - '2.x API ⏏': https://lysine.dev/okio/2.x/okio/okio/
+  - '1.x API ⏏': https://lysine.dev/okio/1.x/okio/
   - 'Change Log': changelog.md
   - 'File System': file_system.md
   - 'Multiplatform': multiplatform.md
