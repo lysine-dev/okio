@@ -72,7 +72,13 @@ internal actual constructor(
 
   actual open fun base64(includePadding: Boolean): String = commonBase64(includePadding = includePadding)
 
+  @Deprecated(message = "for binary compatibility", level = DeprecationLevel.HIDDEN)
+  fun base64(): String = commonBase64(includePadding = false)
+
   actual open fun base64Url(includePadding: Boolean): String = commonBase64Url(includePadding = includePadding)
+
+  @Deprecated(message = "for binary compatibility", level = DeprecationLevel.HIDDEN)
+  fun base64Url(): String = commonBase64(includePadding = false)
 
   actual open fun hex(): String = commonHex()
 
