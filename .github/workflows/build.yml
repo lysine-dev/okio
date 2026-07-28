@@ -5,7 +5,7 @@ on:
   workflow_dispatch: {}
   push:
     branches:
-      - 'master'
+      - 'main'
     tags-ignore:
       - '**'
 
@@ -125,7 +125,7 @@ jobs:
 
   publish:
     runs-on: macos-26
-    if: github.repository == 'lysine-dev/okio' && github.ref == 'refs/heads/master'
+    if: github.repository == 'lysine-dev/okio' && github.ref == 'refs/heads/main'
     needs: [jvm, all-platforms, emulator]
 
     steps:
@@ -147,7 +147,7 @@ jobs:
 
   publish-website:
     runs-on: ubuntu-latest
-    if: github.repository == 'lysine-dev/okio' && github.ref == 'refs/heads/master'
+    if: github.repository == 'lysine-dev/okio' && github.ref == 'refs/heads/main'
     needs: [jvm, all-platforms, emulator]
     permissions:
       contents: write
