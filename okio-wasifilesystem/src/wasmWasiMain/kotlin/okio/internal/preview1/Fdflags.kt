@@ -8,19 +8,19 @@ package okio.internal.preview1
  *
  * File descriptor flags.
  */
-typealias fdflags = Short
+internal typealias fdflags = Short
 
 /** Data written to the file is always appended to the file's end. */
-val fdflags_append: Short = (1 shl 0).toShort()
+internal val fdflags_append: Short = (1 shl 0).toShort()
 
 /** Write according to synchronized I/O data integrity completion. Only the data stored in the file is synchronized. */
-val fdflags_dsync: Short = (1 shl 1).toShort()
+internal val fdflags_dsync: Short = (1 shl 1).toShort()
 
 /** Non-blocking mode. */
-val fdflags_nonblock: Short = (1 shl 2).toShort()
+internal val fdflags_nonblock: Short = (1 shl 2).toShort()
 
 /** Synchronized read I/O operations. */
-val fdflags_rsync: Short = (1 shl 3).toShort()
+internal val fdflags_rsync: Short = (1 shl 3).toShort()
 
 /** Write according to synchronized I/O file integrity completion. In addition to synchronizing the data stored in the file, the implementation may also synchronously update the file's metadata. */
-val fdflags_sync: Short = (1 shl 4).toShort()
+internal val fdflags_sync: Short = (1 shl 4).toShort()

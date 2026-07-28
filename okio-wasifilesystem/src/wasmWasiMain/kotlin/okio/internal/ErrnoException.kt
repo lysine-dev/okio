@@ -19,7 +19,7 @@ import okio.IOException
 import okio.internal.preview1.Errno
 import okio.internal.preview1.errno
 
-class ErrnoException(
+internal class ErrnoException(
   val errno: Errno,
 ) : IOException(errno.name) {
   constructor(errno: errno) : this(Errno.entries[errno.toInt()])

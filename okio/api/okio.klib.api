@@ -569,8 +569,6 @@ open class okio/Timeout { // okio/Timeout|null[0]
     }
 }
 
-final fun (kotlin/ByteArray).okio.internal/commonToUtf8String(kotlin/Int = ..., kotlin/Int = ...): kotlin/String // okio.internal/commonToUtf8String|commonToUtf8String@kotlin.ByteArray(kotlin.Int;kotlin.Int){}[0]
-final fun (kotlin/String).okio.internal/commonAsUtf8ToByteArray(): kotlin/ByteArray // okio.internal/commonAsUtf8ToByteArray|commonAsUtf8ToByteArray@kotlin.String(){}[0]
 final fun (kotlin/String).okio/utf8Size(kotlin/Int = ..., kotlin/Int = ...): kotlin/Long // okio/utf8Size|utf8Size@kotlin.String(kotlin.Int;kotlin.Int){}[0]
 final fun (okio/Sink).okio/buffer(): okio/BufferedSink // okio/buffer|buffer@okio.Sink(){}[0]
 final fun (okio/Source).okio/buffer(): okio/BufferedSource // okio/buffer|buffer@okio.Source(){}[0]
@@ -592,16 +590,6 @@ final inline fun <#A: okio/BufferedSink> (#A).okio/writeULongLe(kotlin/ULong): #
 final inline fun <#A: okio/BufferedSink> (#A).okio/writeUShort(kotlin/UShort): #A // okio/writeUShort|writeUShort@0:0(kotlin.UShort){0§<okio.BufferedSink>}[0]
 final inline fun <#A: okio/BufferedSink> (#A).okio/writeUShortLe(kotlin/UShort): #A // okio/writeUShortLe|writeUShortLe@0:0(kotlin.UShort){0§<okio.BufferedSink>}[0]
 final inline fun <#A: okio/Closeable?, #B: kotlin/Any?> (#A).okio/use(kotlin/Function1<#A, #B>): #B // okio/use|use@0:0(kotlin.Function1<0:0,0:1>){0§<okio.Closeable?>;1§<kotlin.Any?>}[0]
-
-// Targets: [native]
-final class okio.internal/CRC32 { // okio.internal/CRC32|null[0]
-    constructor <init>() // okio.internal/CRC32.<init>|<init>(){}[0]
-
-    final fun getValue(): kotlin/Long // okio.internal/CRC32.getValue|getValue(){}[0]
-    final fun reset() // okio.internal/CRC32.reset|reset(){}[0]
-    final fun update(kotlin/ByteArray) // okio.internal/CRC32.update|update(kotlin.ByteArray){}[0]
-    final fun update(kotlin/ByteArray, kotlin/Int, kotlin/Int) // okio.internal/CRC32.update|update(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
-}
 
 // Targets: [native]
 final class okio/Deflater { // okio/Deflater|null[0]

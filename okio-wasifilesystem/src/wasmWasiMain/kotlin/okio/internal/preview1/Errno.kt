@@ -4,7 +4,7 @@
 package okio.internal.preview1
 
 @Suppress("ktlint:enum-entry-name-case")
-enum class Errno {
+internal enum class Errno {
   /** `success`: No error occurred. System call completed successfully. */
   success,
 

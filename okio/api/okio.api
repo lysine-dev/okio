@@ -860,9 +860,3 @@ public final class okio/_JvmPlatformKt {
 	public static final fun withLock (Ljava/util/concurrent/locks/ReentrantLock;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
 }
 
-public final class okio/internal/_Utf8Kt {
-	public static final fun commonAsUtf8ToByteArray (Ljava/lang/String;)[B
-	public static final fun commonToUtf8String ([BII)Ljava/lang/String;
-	public static synthetic fun commonToUtf8String$default ([BIIILjava/lang/Object;)Ljava/lang/String;
-}
-
