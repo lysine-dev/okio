@@ -24,7 +24,7 @@ fun Project.configureBinaryCompatibilityValidator() {
   plugins.withType<BinaryCompatibilityValidatorPlugin> {
     extensions.configure<ApiValidationExtension> {
       klib {
-        enabled = true
+        enabled = kmpNativeEnabled || kmpWasmEnabled
       }
     }
   }
