@@ -18,6 +18,7 @@
   "INVISIBLE_MEMBER",
   "INVISIBLE_REFERENCE",
 )
+
 package com.squareup.okio.benchmarks
 
 import okio.internal.commonAsUtf8ToByteArray
