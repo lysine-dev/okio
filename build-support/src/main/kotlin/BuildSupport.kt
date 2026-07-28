@@ -46,6 +46,7 @@ class BuildSupport : Plugin<Project> {
     }
 
     project.configureDokka()
+    project.configureBinaryCompatibilityValidator()
   }
 }
 

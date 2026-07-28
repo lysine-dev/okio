@@ -23,7 +23,7 @@ buildscript {
     classpath(libs.burst.gradle.plugin)
     classpath(libs.dokka)
     classpath(libs.jmh.gradle.plugin)
-    classpath(libs.binaryCompatibilityValidator)
+    classpath(libs.binary.compatibility.validator.gradle.plugin)
     classpath(libs.spotless)
     classpath(libs.bnd)
     classpath(libs.vanniktech.publish.plugin)
