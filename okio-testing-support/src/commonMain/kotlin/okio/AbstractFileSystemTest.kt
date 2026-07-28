@@ -308,7 +308,10 @@ abstract class AbstractFileSystemTest(
 
     try {
       assertEquals(
-        listOf("api".toPath() / "okio.api".toPath()),
+        listOf(
+          "api".toPath() / "okio.api",
+          "api".toPath() / "okio.klib.api",
+        ),
         fileSystem.list("api".toPath()),
         // List some entries to help debugging.
         fileSystem.listRecursively(".".toPath()).take(5).toList().joinToString(),
@@ -359,7 +362,10 @@ abstract class AbstractFileSystemTest(
 
     try {
       assertEquals(
-        listOf("api".toPath() / "okio.api".toPath()),
+        listOf(
+          "api".toPath() / "okio.api",
+          "api".toPath() / "okio.klib.api",
+        ),
         fileSystem.listOrNull("api".toPath()),
         // List some entries to help debugging.
         fileSystem.listRecursively(".".toPath()).take(5).toList().joinToString(),
