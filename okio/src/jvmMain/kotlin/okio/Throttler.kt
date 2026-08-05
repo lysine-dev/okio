@@ -49,6 +49,13 @@ class Throttler internal constructor(
   private var waitByteCount: Long = 8 * 1024 // 8 KiB.
   private var maxByteCount: Long = 256 * 1024 // 256 KiB.
 
+  /**
+   * When true, the next call to [byteCountOrWaitNanos] discards any future allocation and
+   * restarts the schedule at the supplied `now`. This makes [bytesPerSecond] rate changes take
+   * effect immediately instead of waiting out bytes allocated under a previous rate.
+   */
+  private var resetAllocation = false
+
   val lock: ReentrantLock = ReentrantLock()
   val condition: Condition = lock.newCondition()
 
@@ -69,6 +76,9 @@ class Throttler internal constructor(
       this.bytesPerSecond = bytesPerSecond
       this.waitByteCount = waitByteCount
       this.maxByteCount = maxByteCount
+      // Drop any allocation scheduled into the future under the previous rate so the new
+      // throughput applies on the next take instead of waiting out the old schedule.
+      resetAllocation = true
       condition.signalAll()
     }
   }
@@ -96,6 +106,11 @@ class Throttler internal constructor(
    * nanos; if it is positive it should be interpreted as a byte count.
    */
   internal fun byteCountOrWaitNanos(now: Long, byteCount: Long): Long {
+    if (resetAllocation) {
+      allocatedUntil = now
+      resetAllocation = false
+    }
+
     if (bytesPerSecond == 0L) return byteCount // No limits.
 
     val idleInNanos = maxOf(allocatedUntil - now, 0L)

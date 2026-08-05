@@ -108,6 +108,29 @@ class ThrottlerTakeTest {
     assertElapsed(1000L)
   }
 
+  /**
+   * Increasing the rate used to leave the previous allocation schedule in place, so reads kept
+   * waiting for bytes scheduled under the old (slower) rate. Rate changes should apply immediately.
+   * https://github.com/square/okio/issues/1822
+   */
+  @Test fun bytesPerSecondIncreaseAppliesImmediately() {
+    throttler.bytesPerSecond(bytesPerSecond = 10, waitByteCount = 5, maxByteCount = 10)
+
+    // Exhaust the bucket; further takes would wait under the 10 B/s schedule.
+    assertThat(take(100L)).isEqualTo(10L)
+    assertElapsed(0L)
+
+    // Raise the rate substantially. The new limit must apply without waiting out the old schedule.
+    throttler.bytesPerSecond(bytesPerSecond = 20, waitByteCount = 5, maxByteCount = 10)
+
+    assertThat(take(100L)).isEqualTo(10L)
+    assertElapsed(0L)
+
+    // Subsequent takes still honor the new sustained rate (20 B/s → 250 ms per 5 bytes).
+    assertThat(take(100L)).isEqualTo(5L)
+    assertElapsed(250L)
+  }
+
   /** Take at least the minimum and up to `byteCount` bytes, sleeping once if necessary. */
   private fun take(byteCount: Long): Long {
     val byteCountOrWaitNanos = throttler.byteCountOrWaitNanos(nowNanos, byteCount)
