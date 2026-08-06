@@ -42,7 +42,17 @@ internal class DefaultSocket(val socket: JavaNetSocket) : Socket {
   override val sink: Sink = SocketSink()
 
   override fun cancel() {
-    socket.close()
+    try {
+      socket.close()
+    } catch (rethrown: RuntimeException) {
+      if (rethrown.message == "bio == null") {
+        // Conscrypt in Android 10 and 11 may throw closing an SSLSocket. This is safe to ignore.
+        // https://issuetracker.google.com/issues/177450597
+        return
+      }
+      throw rethrown
+    } catch (_: IOException) {
+    }
   }
 
   override fun toString() = socket.toString()
