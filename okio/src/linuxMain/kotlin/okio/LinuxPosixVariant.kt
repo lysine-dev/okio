@@ -37,6 +37,8 @@ import platform.posix.lstat
 import platform.posix.stat
 import platform.posix.syscall
 
+internal expect var isStatXSupported: Boolean
+
 /**
  * Prefer `statx()` if it's available. Fall back to `stat()` which doesn't have a field for
  * `createdAt`.
@@ -44,45 +46,52 @@ import platform.posix.syscall
 @OptIn(UnsafeNumber::class)
 internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetadata? {
   memScoped {
-    val statx = alloc<statx>()
-    val result = syscall(
-      __NR_statx.convert(),
-      AT_FDCWD,
-      path.toString(),
-      AT_SYMLINK_NOFOLLOW,
-      STATX_BASIC_STATS or STATX_BTIME,
-      statx.ptr,
-    ).convert<Int>()
-    if (result == 0) {
-      return FileMetadata(
-        isRegularFile = statx.stx_mode.toInt() and S_IFMT == S_IFREG,
-        isDirectory = statx.stx_mode.toInt() and S_IFMT == S_IFDIR,
-        symlinkTarget = symlinkTarget(statx.stx_mode.toInt(), path),
-        size = statx.stx_size.toLong(),
-        createdAtMillis = when {
-          statx.stx_mask and STATX_BTIME != 0U -> statx.stx_btime.epochMillis
-          else -> statx.stx_mtime.epochMillis
-        },
-        lastModifiedAtMillis = statx.stx_mtime.epochMillis,
-        lastAccessedAtMillis = statx.stx_atime.epochMillis,
-      )
-    }
-
-    // Recover if statx() isn't available. It first appeared in Linux in 4.11 (2017-04-30) and
-    // Android in API 30 (2020-09-08).
-    if (errno == ENOSYS) {
-      val stat = alloc<stat>()
-      if (lstat(path.toString(), stat.ptr) == 0) {
+    if (isStatXSupported) {
+      val statx = alloc<statx>()
+      val result = syscall(
+        __NR_statx.convert(),
+        AT_FDCWD,
+        path.toString(),
+        AT_SYMLINK_NOFOLLOW,
+        STATX_BASIC_STATS or STATX_BTIME,
+        statx.ptr,
+      ).convert<Int>()
+      if (result == 0) {
         return FileMetadata(
-          isRegularFile = stat.st_mode.toInt() and S_IFMT == S_IFREG,
-          isDirectory = stat.st_mode.toInt() and S_IFMT == S_IFDIR,
-          symlinkTarget = symlinkTarget(stat.st_mode.toInt(), path),
-          size = stat.st_size,
-          createdAtMillis = stat.st_mtim.epochMillis,
-          lastModifiedAtMillis = stat.st_mtim.epochMillis,
-          lastAccessedAtMillis = stat.st_atim.epochMillis,
+          isRegularFile = statx.stx_mode.toInt() and S_IFMT == S_IFREG,
+          isDirectory = statx.stx_mode.toInt() and S_IFMT == S_IFDIR,
+          symlinkTarget = symlinkTarget(statx.stx_mode.toInt(), path),
+          size = statx.stx_size.toLong(),
+          createdAtMillis = when {
+            statx.stx_mask and STATX_BTIME != 0U -> statx.stx_btime.epochMillis
+            else -> statx.stx_mtime.epochMillis
+          },
+          lastModifiedAtMillis = statx.stx_mtime.epochMillis,
+          lastAccessedAtMillis = statx.stx_atime.epochMillis,
         )
       }
+
+      // Recover if statx() isn't available. It first appeared in Linux in 4.11 (2017-04-30) and
+      // Android in API 30 (2020-09-08).
+      if (errno == ENOSYS) {
+        isStatXSupported = false
+      } else {
+        if (errno == ENOENT) return null
+        throw errnoToIOException(errno)
+      }
+    }
+
+    val stat = alloc<stat>()
+    if (lstat(path.toString(), stat.ptr) == 0) {
+      return FileMetadata(
+        isRegularFile = stat.st_mode.toInt() and S_IFMT == S_IFREG,
+        isDirectory = stat.st_mode.toInt() and S_IFMT == S_IFDIR,
+        symlinkTarget = symlinkTarget(stat.st_mode.toInt(), path),
+        size = stat.st_size,
+        createdAtMillis = stat.st_mtim.epochMillis,
+        lastModifiedAtMillis = stat.st_mtim.epochMillis,
+        lastAccessedAtMillis = stat.st_atim.epochMillis,
+      )
     }
 
     if (errno == ENOENT) return null

@@ -176,6 +176,7 @@ kotlin {
                 children = linuxTargets,
               ).also { linuxMain ->
                 linuxMain.dependsOn(nonAppleMain)
+                createSourceSet("linuxNonAndroidMain", parent = linuxMain, children = linuxTargets)
                 createSourceSet("androidNativeMain", parent = linuxMain, children = androidNativeTargets)
               }
               createSourceSet(
