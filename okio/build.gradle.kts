@@ -189,9 +189,8 @@ kotlin {
                   children = appleTargets - "macosX64",
                 )
               }
+              createSourceSet("unixNonAndroidMain", parent = unixMain, children = appleTargets + linuxTargets)
             }
-
-          createSourceSet("nativeNonAndroidMain", parent = nativeMain, children = appleTargets + mingwTargets + linuxTargets)
         }
 
       createSourceSet("nativeTest", parent = commonTest, children = androidNativeTargets + mingwTargets + linuxTargets)

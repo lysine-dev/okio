@@ -15,7 +15,6 @@
  */
 package okio.internal
 
-import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.CPointer
 import okio.Closeable
 import okio.Path
@@ -29,7 +28,7 @@ import platform.posix.dirent
  * [PosixDirectory] provides platform-specific implementation
  * for `DIR`-related functionality.
  */
-internal expect value class PosixDirectory(private val dir: COpaquePointer) : Closeable {
+internal interface PosixDirectory : Closeable {
   fun nextEntry(): CPointer<dirent>?
   override fun close()
 }
