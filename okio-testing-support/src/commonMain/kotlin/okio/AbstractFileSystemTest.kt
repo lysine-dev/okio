@@ -52,8 +52,8 @@ abstract class AbstractFileSystemTest(
   private val isNodeJsFileSystem = fileSystem::class.simpleName?.startsWith("NodeJs") ?: false
   private val isWasiFileSystem = fileSystem::class.simpleName?.startsWith("Wasi") ?: false
   private val isWrappingJimFileSystem = this::class.simpleName?.contains("JimFileSystem") ?: false
-  private val isAndroidNativeFileSystem = getEnv("ANDROID_DATA") != null &&
-    fileSystem::class.simpleName?.startsWith("Posix") ?: false
+  private val isAndroidNativeFileSystem = fileSystem::class.simpleName?.startsWith("Posix") ?: false &&
+    getEnv("ANDROID_DATA") != null
 
   @Test
   fun doesNotExistsWithInvalidPathDoesNotThrow() {
