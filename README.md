@@ -25,5 +25,5 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
     
- [1]: https://github.com/square/okhttp
- [okio]: https://square.github.io/okio/
+ [1]: https://github.com/lysine-dev/okhttp
+ [okio]: https://lysine.dev/okio/

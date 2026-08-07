@@ -201,6 +201,31 @@ class ByteStringTest(
     assertEquals(ByteString.of(), factory.decodeHex(""))
   }
 
+  @Test fun equalsConstantTime() {
+    val byteString = factory.decodeHex("000102")
+    assertTrue(byteString.equals(byteString, constantTime = true))
+    assertTrue(byteString.equals("000102".decodeHex(), constantTime = true))
+    assertFalse(byteString.equals("800102".decodeHex(), constantTime = true))
+    assertFalse(byteString.equals("000180".decodeHex(), constantTime = true))
+    assertFalse(byteString.equals("0001".decodeHex(), constantTime = true))
+    assertFalse(byteString.equals("00010203".decodeHex(), constantTime = true))
+  }
+
+  @Test fun equalsConstantTimeEmptyTest() {
+    assertTrue(factory.decodeHex("").equals(ByteString.EMPTY, constantTime = true))
+    assertFalse(factory.decodeHex("").equals("00".decodeHex(), constantTime = true))
+  }
+
+  @Test fun equalsNotConstantTime() {
+    val byteString = factory.decodeHex("000102")
+    assertTrue(byteString.equals(byteString, constantTime = false))
+    assertTrue(byteString.equals("000102".decodeHex(), constantTime = false))
+    assertFalse(byteString.equals("800102".decodeHex(), constantTime = false))
+    assertFalse(byteString.equals("000180".decodeHex(), constantTime = false))
+    assertFalse(byteString.equals("0001".decodeHex(), constantTime = false))
+    assertFalse(byteString.equals("00010203".decodeHex(), constantTime = false))
+  }
+
   private val bronzeHorseman = "На берегу пустынных волн"
 
   @Test fun utf8() {
@@ -347,28 +372,6 @@ class ByteStringTest(
     assertEquals("\u0000\u0000\u0000", " AA A\r\nA ".decodeBase64()!!.utf8())
     assertEquals("\u0000\u0000\u0000", "A    AAA".decodeBase64()!!.utf8())
     assertEquals("", "    ".decodeBase64()!!.utf8())
-  }
-
-  @Test fun encodeHex() {
-    assertEquals("000102", ByteString.of(0x0, 0x1, 0x2).hex())
-  }
-
-  @Test fun decodeHex() {
-    val actual = "CAFEBABE".decodeHex()
-    val expected = ByteString.of(-54, -2, -70, -66)
-    assertEquals(expected, actual)
-  }
-
-  @Test fun decodeHexOddNumberOfChars() {
-    assertFailsWith<IllegalArgumentException> {
-      "aaa".decodeHex()
-    }
-  }
-
-  @Test fun decodeHexInvalidChar() {
-    assertFailsWith<IllegalArgumentException> {
-      "a\u0000".decodeHex()
-    }
   }
 
   @Test fun toStringOnEmpty() {

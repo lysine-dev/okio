@@ -15,15 +15,16 @@
  */
 package okio
 
-import kotlinx.cinterop.ByteVarOf
+import kotlinx.cinterop.UShortVarOf
 import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.toKString
 import platform.windows.DWORD
 import platform.windows.ERROR_FILE_NOT_FOUND
 import platform.windows.ERROR_PATH_NOT_FOUND
 import platform.windows.FORMAT_MESSAGE_FROM_SYSTEM
 import platform.windows.FORMAT_MESSAGE_IGNORE_INSERTS
-import platform.windows.FormatMessageA
+import platform.windows.FormatMessageW
 import platform.windows.GetLastError
 import platform.windows.LANG_NEUTRAL
 import platform.windows.SUBLANG_DEFAULT
@@ -39,8 +40,8 @@ internal fun lastErrorToIOException(): IOException {
 internal fun lastErrorString(lastError: DWORD): String {
   memScoped {
     val messageMaxSize = 2048
-    val message = allocArray<ByteVarOf<Byte>>(messageMaxSize)
-    FormatMessageA(
+    val message = allocArray<UShortVarOf<UShort>>(messageMaxSize)
+    FormatMessageW(
       dwFlags = (FORMAT_MESSAGE_FROM_SYSTEM or FORMAT_MESSAGE_IGNORE_INSERTS).toUInt(),
       lpSource = null,
       dwMessageId = lastError,
@@ -49,6 +50,6 @@ internal fun lastErrorString(lastError: DWORD): String {
       nSize = messageMaxSize.toUInt(),
       Arguments = null,
     )
-    return Buffer().writeNullTerminated(message).readUtf8().trim()
+    return message.toKString()
   }
 }

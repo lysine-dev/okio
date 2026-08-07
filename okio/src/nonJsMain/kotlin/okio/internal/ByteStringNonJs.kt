@@ -24,11 +24,10 @@ import okio.ByteString
 internal actual inline fun String.commonDecodeHex(): ByteString {
   require(length % 2 == 0) { "Unexpected hex string: $this" }
 
-  val result = ByteArray(length / 2)
-  for (i in result.indices) {
+  val result = ByteArray(length / 2) { i ->
     val d1 = decodeHexDigit(this[i * 2]) shl 4
     val d2 = decodeHexDigit(this[i * 2 + 1])
-    result[i] = (d1 + d2).toByte()
+    (d1 + d2).toByte()
   }
   return ByteString(result)
 }

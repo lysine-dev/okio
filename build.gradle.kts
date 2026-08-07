@@ -8,7 +8,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
@@ -24,7 +23,7 @@ buildscript {
     classpath(libs.burst.gradle.plugin)
     classpath(libs.dokka)
     classpath(libs.jmh.gradle.plugin)
-    classpath(libs.binaryCompatibilityValidator)
+    classpath(libs.binary.compatibility.validator.gradle.plugin)
     classpath(libs.spotless)
     classpath(libs.bnd)
     classpath(libs.vanniktech.publish.plugin)
@@ -51,40 +50,6 @@ allprojects {
   repositories {
     mavenCentral()
     google()
-  }
-
-  tasks.withType<DokkaTask>().configureEach {
-    dokkaSourceSets.configureEach {
-      reportUndocumented.set(false)
-      skipDeprecated.set(true)
-      jdkVersion.set(8)
-      perPackageOption {
-        matchingRegex.set("com\\.squareup.okio.*")
-        suppress.set(true)
-      }
-      perPackageOption {
-        matchingRegex.set("okio\\.internal.*")
-        suppress.set(true)
-      }
-    }
-
-    if (name == "dokkaHtml") {
-      outputDirectory.set(file("${rootDir}/docs/3.x/${project.name}"))
-      pluginsMapConfiguration.set(
-        mapOf(
-          "org.jetbrains.dokka.base.DokkaBase" to """
-          {
-            "customStyleSheets": [
-              "${rootDir.toString().replace('\\', '/')}/docs/css/dokka-logo.css"
-            ],
-            "customAssets" : [
-              "${rootDir.toString().replace('\\', '/')}/docs/images/icon-square.png"
-            ]
-          }
-          """.trimIndent()
-        )
-      )
-    }
   }
 
   plugins.withId("com.vanniktech.maven.publish.base") {
@@ -115,7 +80,7 @@ allprojects {
       pom {
         description.set("A modern I/O library for Android, Java, and Kotlin Multiplatform.")
         name.set(project.name)
-        url.set("https://github.com/square/okio/")
+        url.set("https://github.com/lysine-dev/okio/")
         licenses {
           license {
             name.set("The Apache Software License, Version 2.0")
@@ -124,9 +89,9 @@ allprojects {
           }
         }
         scm {
-          url.set("https://github.com/square/okio/")
-          connection.set("scm:git:git://github.com/square/okio.git")
-          developerConnection.set("scm:git:ssh://git@github.com/square/okio.git")
+          url.set("https://github.com/lysine-dev/okio/")
+          connection.set("scm:git:git://github.com/lysine-dev/okio.git")
+          developerConnection.set("scm:git:ssh://git@github.com/lysine-dev/okio.git")
         }
         developers {
           developer {
@@ -235,3 +200,5 @@ allprojects {
     environment("OKIO_ROOT", rootDir.toString())
   }
 }
+
+configureRootDokka()

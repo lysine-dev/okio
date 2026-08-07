@@ -9,7 +9,8 @@
 set -ex
 
 # Generate the API docs
-./gradlew dokkaHtml
+./gradlew dokkaGeneratePublicationHtml -Dkjs=true -Dkwasm=true -Dokio.build.dokka=true
+mv build/dokka/html docs/3.x
 
 # Copy in special files that GitHub wants in the project root.
 cp CHANGELOG.md docs/changelog.md

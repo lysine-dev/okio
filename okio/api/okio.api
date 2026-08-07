@@ -43,6 +43,23 @@ public final class okio/-InflaterSourceExtensions {
 	public static synthetic fun inflate$default (Lokio/Source;Ljava/util/zip/Inflater;ILjava/lang/Object;)Lokio/InflaterSource;
 }
 
+public final class okio/-Unsigned {
+	public static final fun readUByte (Lokio/BufferedSource;)B
+	public static final fun readUInt (Lokio/BufferedSource;)I
+	public static final fun readUIntLe (Lokio/BufferedSource;)I
+	public static final fun readULong (Lokio/BufferedSource;)J
+	public static final fun readULongLe (Lokio/BufferedSource;)J
+	public static final fun readUShort (Lokio/BufferedSource;)S
+	public static final fun readUShortLe (Lokio/BufferedSource;)S
+	public static final fun writeUByte-EK-6454 (Lokio/BufferedSink;B)Lokio/BufferedSink;
+	public static final fun writeUInt-Qn1smSk (Lokio/BufferedSink;I)Lokio/BufferedSink;
+	public static final fun writeUIntLe-Qn1smSk (Lokio/BufferedSink;I)Lokio/BufferedSink;
+	public static final fun writeULong-2TYgG_w (Lokio/BufferedSink;J)Lokio/BufferedSink;
+	public static final fun writeULongLe-2TYgG_w (Lokio/BufferedSink;J)Lokio/BufferedSink;
+	public static final fun writeUShort-i8woANY (Lokio/BufferedSink;S)Lokio/BufferedSink;
+	public static final fun writeUShortLe-i8woANY (Lokio/BufferedSink;S)Lokio/BufferedSink;
+}
+
 public class okio/AsyncTimeout : okio/Timeout {
 	public fun <init> ()V
 	public final fun access$newTimeoutException (Ljava/io/IOException;)Ljava/io/IOException;
@@ -152,6 +169,7 @@ public final class okio/Buffer : java/lang/Cloneable, java/nio/channels/ByteChan
 	public final fun snapshot (I)Lokio/ByteString;
 	public fun timeout ()Lokio/Timeout;
 	public fun toString ()Ljava/lang/String;
+	public fun utf8Appendable ()Ljava/lang/Appendable;
 	public fun write (Ljava/nio/ByteBuffer;)I
 	public fun write (Lokio/Buffer;J)V
 	public fun write (Lokio/ByteString;)Lokio/Buffer;
@@ -220,6 +238,7 @@ public abstract interface class okio/BufferedSink : java/nio/channels/WritableBy
 	public abstract fun flush ()V
 	public abstract fun getBuffer ()Lokio/Buffer;
 	public abstract fun outputStream ()Ljava/io/OutputStream;
+	public abstract fun utf8Appendable ()Ljava/lang/Appendable;
 	public abstract fun write (Lokio/ByteString;)Lokio/BufferedSink;
 	public abstract fun write (Lokio/ByteString;II)Lokio/BufferedSink;
 	public abstract fun write (Lokio/Source;J)Lokio/BufferedSink;
@@ -309,11 +328,13 @@ public class okio/ByteString : java/io/Serializable, java/lang/Comparable {
 	public static synthetic fun copyInto$default (Lokio/ByteString;I[BIIILjava/lang/Object;)V
 	public static final fun decodeBase64 (Ljava/lang/String;)Lokio/ByteString;
 	public static final fun decodeHex (Ljava/lang/String;)Lokio/ByteString;
+	public static final fun decodeHex (Ljava/lang/String;Z)Lokio/ByteString;
 	public static final fun encodeString (Ljava/lang/String;Ljava/nio/charset/Charset;)Lokio/ByteString;
 	public static final fun encodeUtf8 (Ljava/lang/String;)Lokio/ByteString;
 	public final fun endsWith (Lokio/ByteString;)Z
 	public final fun endsWith ([B)Z
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun equals (Lokio/ByteString;Z)Z
 	public final fun getByte (I)B
 	public fun hashCode ()I
 	public fun hex ()Ljava/lang/String;
@@ -368,6 +389,7 @@ public final class okio/ByteString$Companion {
 	public final fun -deprecated_read (Ljava/io/InputStream;I)Lokio/ByteString;
 	public final fun decodeBase64 (Ljava/lang/String;)Lokio/ByteString;
 	public final fun decodeHex (Ljava/lang/String;)Lokio/ByteString;
+	public final fun decodeHex (Ljava/lang/String;Z)Lokio/ByteString;
 	public final fun encodeString (Ljava/lang/String;Ljava/nio/charset/Charset;)Lokio/ByteString;
 	public static synthetic fun encodeString$default (Lokio/ByteString$Companion;Ljava/lang/String;Ljava/nio/charset/Charset;ILjava/lang/Object;)Lokio/ByteString;
 	public final fun encodeUtf8 (Ljava/lang/String;)Lokio/ByteString;
@@ -655,6 +677,9 @@ public final class okio/Okio {
 	public static final fun hashingSource (Lokio/Source;Ljava/security/MessageDigest;)Lokio/HashingSource;
 	public static final fun hashingSource (Lokio/Source;Ljavax/crypto/Mac;)Lokio/HashingSource;
 	public static final fun inMemorySocketPair (J)[Lokio/Socket;
+	public static final fun limit (Lokio/Source;J)Lokio/Source;
+	public static final fun limit (Lokio/Source;JZ)Lokio/Source;
+	public static synthetic fun limit$default (Lokio/Source;JZILjava/lang/Object;)Lokio/Source;
 	public static final fun openZip (Lokio/FileSystem;Lokio/Path;)Lokio/FileSystem;
 	public static final fun sink (Ljava/io/File;)Lokio/Sink;
 	public static final fun sink (Ljava/io/File;Z)Lokio/Sink;
@@ -833,11 +858,5 @@ public final class okio/Utf8 {
 
 public final class okio/_JvmPlatformKt {
 	public static final fun withLock (Ljava/util/concurrent/locks/ReentrantLock;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
-}
-
-public final class okio/internal/_Utf8Kt {
-	public static final fun commonAsUtf8ToByteArray (Ljava/lang/String;)[B
-	public static final fun commonToUtf8String ([BII)Ljava/lang/String;
-	public static synthetic fun commonToUtf8String$default ([BIIILjava/lang/Object;)Ljava/lang/String;
 }
 

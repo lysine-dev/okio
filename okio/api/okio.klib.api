@@ -1,0 +1,681 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, tvosArm64, tvosSimulatorArm64, tvosX64, wasmJs, wasmWasi, watchosArm32, watchosArm64, watchosDeviceArm64, watchosSimulatorArm64, watchosX64]
+// Alias: native => [iosArm64, iosSimulatorArm64, iosX64, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, tvosArm64, tvosSimulatorArm64, tvosX64, watchosArm32, watchosArm64, watchosDeviceArm64, watchosSimulatorArm64, watchosX64]
+// Alias: apple => [iosArm64, iosSimulatorArm64, iosX64, macosArm64, macosX64, tvosArm64, tvosSimulatorArm64, tvosX64, watchosArm32, watchosArm64, watchosDeviceArm64, watchosSimulatorArm64, watchosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.squareup.okio:okio>
+open annotation class okio/ExperimentalFileSystem : kotlin/Annotation { // okio/ExperimentalFileSystem|null[0]
+    constructor <init>() // okio/ExperimentalFileSystem.<init>|<init>(){}[0]
+}
+
+abstract interface okio/Closeable { // okio/Closeable|null[0]
+    abstract fun close() // okio/Closeable.close|close(){}[0]
+}
+
+abstract interface okio/Sink : okio/Closeable { // okio/Sink|null[0]
+    abstract fun close() // okio/Sink.close|close(){}[0]
+    abstract fun flush() // okio/Sink.flush|flush(){}[0]
+    abstract fun timeout(): okio/Timeout // okio/Sink.timeout|timeout(){}[0]
+    abstract fun write(okio/Buffer, kotlin/Long) // okio/Sink.write|write(okio.Buffer;kotlin.Long){}[0]
+}
+
+abstract interface okio/Socket { // okio/Socket|null[0]
+    abstract val sink // okio/Socket.sink|{}sink[0]
+        abstract fun <get-sink>(): okio/Sink // okio/Socket.sink.<get-sink>|<get-sink>(){}[0]
+    abstract val source // okio/Socket.source|{}source[0]
+        abstract fun <get-source>(): okio/Source // okio/Socket.source.<get-source>|<get-source>(){}[0]
+
+    abstract fun cancel() // okio/Socket.cancel|cancel(){}[0]
+}
+
+abstract interface okio/Source : okio/Closeable { // okio/Source|null[0]
+    abstract fun close() // okio/Source.close|close(){}[0]
+    abstract fun read(okio/Buffer, kotlin/Long): kotlin/Long // okio/Source.read|read(okio.Buffer;kotlin.Long){}[0]
+    abstract fun timeout(): okio/Timeout // okio/Source.timeout|timeout(){}[0]
+}
+
+sealed interface okio/BufferedSink : okio/Sink { // okio/BufferedSink|null[0]
+    abstract val buffer // okio/BufferedSink.buffer|{}buffer[0]
+        abstract fun <get-buffer>(): okio/Buffer // okio/BufferedSink.buffer.<get-buffer>|<get-buffer>(){}[0]
+
+    abstract fun emit(): okio/BufferedSink // okio/BufferedSink.emit|emit(){}[0]
+    abstract fun emitCompleteSegments(): okio/BufferedSink // okio/BufferedSink.emitCompleteSegments|emitCompleteSegments(){}[0]
+    abstract fun write(kotlin/ByteArray): okio/BufferedSink // okio/BufferedSink.write|write(kotlin.ByteArray){}[0]
+    abstract fun write(kotlin/ByteArray, kotlin/Int, kotlin/Int): okio/BufferedSink // okio/BufferedSink.write|write(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    abstract fun write(okio/ByteString): okio/BufferedSink // okio/BufferedSink.write|write(okio.ByteString){}[0]
+    abstract fun write(okio/ByteString, kotlin/Int, kotlin/Int): okio/BufferedSink // okio/BufferedSink.write|write(okio.ByteString;kotlin.Int;kotlin.Int){}[0]
+    abstract fun write(okio/Source, kotlin/Long): okio/BufferedSink // okio/BufferedSink.write|write(okio.Source;kotlin.Long){}[0]
+    abstract fun writeAll(okio/Source): kotlin/Long // okio/BufferedSink.writeAll|writeAll(okio.Source){}[0]
+    abstract fun writeByte(kotlin/Int): okio/BufferedSink // okio/BufferedSink.writeByte|writeByte(kotlin.Int){}[0]
+    abstract fun writeDecimalLong(kotlin/Long): okio/BufferedSink // okio/BufferedSink.writeDecimalLong|writeDecimalLong(kotlin.Long){}[0]
+    abstract fun writeHexadecimalUnsignedLong(kotlin/Long): okio/BufferedSink // okio/BufferedSink.writeHexadecimalUnsignedLong|writeHexadecimalUnsignedLong(kotlin.Long){}[0]
+    abstract fun writeInt(kotlin/Int): okio/BufferedSink // okio/BufferedSink.writeInt|writeInt(kotlin.Int){}[0]
+    abstract fun writeIntLe(kotlin/Int): okio/BufferedSink // okio/BufferedSink.writeIntLe|writeIntLe(kotlin.Int){}[0]
+    abstract fun writeLong(kotlin/Long): okio/BufferedSink // okio/BufferedSink.writeLong|writeLong(kotlin.Long){}[0]
+    abstract fun writeLongLe(kotlin/Long): okio/BufferedSink // okio/BufferedSink.writeLongLe|writeLongLe(kotlin.Long){}[0]
+    abstract fun writeShort(kotlin/Int): okio/BufferedSink // okio/BufferedSink.writeShort|writeShort(kotlin.Int){}[0]
+    abstract fun writeShortLe(kotlin/Int): okio/BufferedSink // okio/BufferedSink.writeShortLe|writeShortLe(kotlin.Int){}[0]
+    abstract fun writeUtf8(kotlin/String): okio/BufferedSink // okio/BufferedSink.writeUtf8|writeUtf8(kotlin.String){}[0]
+    abstract fun writeUtf8(kotlin/String, kotlin/Int, kotlin/Int): okio/BufferedSink // okio/BufferedSink.writeUtf8|writeUtf8(kotlin.String;kotlin.Int;kotlin.Int){}[0]
+    abstract fun writeUtf8CodePoint(kotlin/Int): okio/BufferedSink // okio/BufferedSink.writeUtf8CodePoint|writeUtf8CodePoint(kotlin.Int){}[0]
+}
+
+sealed interface okio/BufferedSource : okio/Source { // okio/BufferedSource|null[0]
+    abstract val buffer // okio/BufferedSource.buffer|{}buffer[0]
+        abstract fun <get-buffer>(): okio/Buffer // okio/BufferedSource.buffer.<get-buffer>|<get-buffer>(){}[0]
+
+    abstract fun <#A1: kotlin/Any> select(okio/TypedOptions<#A1>): #A1? // okio/BufferedSource.select|select(okio.TypedOptions<0:0>){0§<kotlin.Any>}[0]
+    abstract fun exhausted(): kotlin/Boolean // okio/BufferedSource.exhausted|exhausted(){}[0]
+    abstract fun indexOf(kotlin/Byte): kotlin/Long // okio/BufferedSource.indexOf|indexOf(kotlin.Byte){}[0]
+    abstract fun indexOf(kotlin/Byte, kotlin/Long): kotlin/Long // okio/BufferedSource.indexOf|indexOf(kotlin.Byte;kotlin.Long){}[0]
+    abstract fun indexOf(kotlin/Byte, kotlin/Long, kotlin/Long): kotlin/Long // okio/BufferedSource.indexOf|indexOf(kotlin.Byte;kotlin.Long;kotlin.Long){}[0]
+    abstract fun indexOf(okio/ByteString): kotlin/Long // okio/BufferedSource.indexOf|indexOf(okio.ByteString){}[0]
+    abstract fun indexOf(okio/ByteString, kotlin/Long): kotlin/Long // okio/BufferedSource.indexOf|indexOf(okio.ByteString;kotlin.Long){}[0]
+    abstract fun indexOf(okio/ByteString, kotlin/Long, kotlin/Long): kotlin/Long // okio/BufferedSource.indexOf|indexOf(okio.ByteString;kotlin.Long;kotlin.Long){}[0]
+    abstract fun indexOfElement(okio/ByteString): kotlin/Long // okio/BufferedSource.indexOfElement|indexOfElement(okio.ByteString){}[0]
+    abstract fun indexOfElement(okio/ByteString, kotlin/Long): kotlin/Long // okio/BufferedSource.indexOfElement|indexOfElement(okio.ByteString;kotlin.Long){}[0]
+    abstract fun peek(): okio/BufferedSource // okio/BufferedSource.peek|peek(){}[0]
+    abstract fun rangeEquals(kotlin/Long, okio/ByteString): kotlin/Boolean // okio/BufferedSource.rangeEquals|rangeEquals(kotlin.Long;okio.ByteString){}[0]
+    abstract fun rangeEquals(kotlin/Long, okio/ByteString, kotlin/Int, kotlin/Int): kotlin/Boolean // okio/BufferedSource.rangeEquals|rangeEquals(kotlin.Long;okio.ByteString;kotlin.Int;kotlin.Int){}[0]
+    abstract fun read(kotlin/ByteArray): kotlin/Int // okio/BufferedSource.read|read(kotlin.ByteArray){}[0]
+    abstract fun read(kotlin/ByteArray, kotlin/Int, kotlin/Int): kotlin/Int // okio/BufferedSource.read|read(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    abstract fun readAll(okio/Sink): kotlin/Long // okio/BufferedSource.readAll|readAll(okio.Sink){}[0]
+    abstract fun readByte(): kotlin/Byte // okio/BufferedSource.readByte|readByte(){}[0]
+    abstract fun readByteArray(): kotlin/ByteArray // okio/BufferedSource.readByteArray|readByteArray(){}[0]
+    abstract fun readByteArray(kotlin/Long): kotlin/ByteArray // okio/BufferedSource.readByteArray|readByteArray(kotlin.Long){}[0]
+    abstract fun readByteString(): okio/ByteString // okio/BufferedSource.readByteString|readByteString(){}[0]
+    abstract fun readByteString(kotlin/Long): okio/ByteString // okio/BufferedSource.readByteString|readByteString(kotlin.Long){}[0]
+    abstract fun readDecimalLong(): kotlin/Long // okio/BufferedSource.readDecimalLong|readDecimalLong(){}[0]
+    abstract fun readFully(kotlin/ByteArray) // okio/BufferedSource.readFully|readFully(kotlin.ByteArray){}[0]
+    abstract fun readFully(okio/Buffer, kotlin/Long) // okio/BufferedSource.readFully|readFully(okio.Buffer;kotlin.Long){}[0]
+    abstract fun readHexadecimalUnsignedLong(): kotlin/Long // okio/BufferedSource.readHexadecimalUnsignedLong|readHexadecimalUnsignedLong(){}[0]
+    abstract fun readInt(): kotlin/Int // okio/BufferedSource.readInt|readInt(){}[0]
+    abstract fun readIntLe(): kotlin/Int // okio/BufferedSource.readIntLe|readIntLe(){}[0]
+    abstract fun readLong(): kotlin/Long // okio/BufferedSource.readLong|readLong(){}[0]
+    abstract fun readLongLe(): kotlin/Long // okio/BufferedSource.readLongLe|readLongLe(){}[0]
+    abstract fun readShort(): kotlin/Short // okio/BufferedSource.readShort|readShort(){}[0]
+    abstract fun readShortLe(): kotlin/Short // okio/BufferedSource.readShortLe|readShortLe(){}[0]
+    abstract fun readUtf8(): kotlin/String // okio/BufferedSource.readUtf8|readUtf8(){}[0]
+    abstract fun readUtf8(kotlin/Long): kotlin/String // okio/BufferedSource.readUtf8|readUtf8(kotlin.Long){}[0]
+    abstract fun readUtf8CodePoint(): kotlin/Int // okio/BufferedSource.readUtf8CodePoint|readUtf8CodePoint(){}[0]
+    abstract fun readUtf8Line(): kotlin/String? // okio/BufferedSource.readUtf8Line|readUtf8Line(){}[0]
+    abstract fun readUtf8LineStrict(): kotlin/String // okio/BufferedSource.readUtf8LineStrict|readUtf8LineStrict(){}[0]
+    abstract fun readUtf8LineStrict(kotlin/Long): kotlin/String // okio/BufferedSource.readUtf8LineStrict|readUtf8LineStrict(kotlin.Long){}[0]
+    abstract fun request(kotlin/Long): kotlin/Boolean // okio/BufferedSource.request|request(kotlin.Long){}[0]
+    abstract fun require(kotlin/Long) // okio/BufferedSource.require|require(kotlin.Long){}[0]
+    abstract fun select(okio/Options): kotlin/Int // okio/BufferedSource.select|select(okio.Options){}[0]
+    abstract fun skip(kotlin/Long) // okio/BufferedSource.skip|skip(kotlin.Long){}[0]
+}
+
+abstract class okio/FileHandle : okio/Closeable { // okio/FileHandle|null[0]
+    constructor <init>(kotlin/Boolean) // okio/FileHandle.<init>|<init>(kotlin.Boolean){}[0]
+
+    final val lock // okio/FileHandle.lock|{}lock[0]
+        final fun <get-lock>(): okio/Lock // okio/FileHandle.lock.<get-lock>|<get-lock>(){}[0]
+    final val readWrite // okio/FileHandle.readWrite|{}readWrite[0]
+        final fun <get-readWrite>(): kotlin/Boolean // okio/FileHandle.readWrite.<get-readWrite>|<get-readWrite>(){}[0]
+
+    abstract fun protectedClose() // okio/FileHandle.protectedClose|protectedClose(){}[0]
+    abstract fun protectedFlush() // okio/FileHandle.protectedFlush|protectedFlush(){}[0]
+    abstract fun protectedRead(kotlin/Long, kotlin/ByteArray, kotlin/Int, kotlin/Int): kotlin/Int // okio/FileHandle.protectedRead|protectedRead(kotlin.Long;kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    abstract fun protectedResize(kotlin/Long) // okio/FileHandle.protectedResize|protectedResize(kotlin.Long){}[0]
+    abstract fun protectedSize(): kotlin/Long // okio/FileHandle.protectedSize|protectedSize(){}[0]
+    abstract fun protectedWrite(kotlin/Long, kotlin/ByteArray, kotlin/Int, kotlin/Int) // okio/FileHandle.protectedWrite|protectedWrite(kotlin.Long;kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    final fun appendingSink(): okio/Sink // okio/FileHandle.appendingSink|appendingSink(){}[0]
+    final fun close() // okio/FileHandle.close|close(){}[0]
+    final fun flush() // okio/FileHandle.flush|flush(){}[0]
+    final fun position(okio/Sink): kotlin/Long // okio/FileHandle.position|position(okio.Sink){}[0]
+    final fun position(okio/Source): kotlin/Long // okio/FileHandle.position|position(okio.Source){}[0]
+    final fun read(kotlin/Long, kotlin/ByteArray, kotlin/Int, kotlin/Int): kotlin/Int // okio/FileHandle.read|read(kotlin.Long;kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    final fun read(kotlin/Long, okio/Buffer, kotlin/Long): kotlin/Long // okio/FileHandle.read|read(kotlin.Long;okio.Buffer;kotlin.Long){}[0]
+    final fun reposition(okio/Sink, kotlin/Long) // okio/FileHandle.reposition|reposition(okio.Sink;kotlin.Long){}[0]
+    final fun reposition(okio/Source, kotlin/Long) // okio/FileHandle.reposition|reposition(okio.Source;kotlin.Long){}[0]
+    final fun resize(kotlin/Long) // okio/FileHandle.resize|resize(kotlin.Long){}[0]
+    final fun sink(kotlin/Long = ...): okio/Sink // okio/FileHandle.sink|sink(kotlin.Long){}[0]
+    final fun size(): kotlin/Long // okio/FileHandle.size|size(){}[0]
+    final fun source(kotlin/Long = ...): okio/Source // okio/FileHandle.source|source(kotlin.Long){}[0]
+    final fun write(kotlin/Long, kotlin/ByteArray, kotlin/Int, kotlin/Int) // okio/FileHandle.write|write(kotlin.Long;kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    final fun write(kotlin/Long, okio/Buffer, kotlin/Long) // okio/FileHandle.write|write(kotlin.Long;okio.Buffer;kotlin.Long){}[0]
+}
+
+abstract class okio/FileSystem : okio/Closeable { // okio/FileSystem|null[0]
+    constructor <init>() // okio/FileSystem.<init>|<init>(){}[0]
+
+    abstract fun appendingSink(okio/Path, kotlin/Boolean = ...): okio/Sink // okio/FileSystem.appendingSink|appendingSink(okio.Path;kotlin.Boolean){}[0]
+    abstract fun atomicMove(okio/Path, okio/Path) // okio/FileSystem.atomicMove|atomicMove(okio.Path;okio.Path){}[0]
+    abstract fun canonicalize(okio/Path): okio/Path // okio/FileSystem.canonicalize|canonicalize(okio.Path){}[0]
+    abstract fun createDirectory(okio/Path, kotlin/Boolean = ...) // okio/FileSystem.createDirectory|createDirectory(okio.Path;kotlin.Boolean){}[0]
+    abstract fun createSymlink(okio/Path, okio/Path) // okio/FileSystem.createSymlink|createSymlink(okio.Path;okio.Path){}[0]
+    abstract fun delete(okio/Path, kotlin/Boolean = ...) // okio/FileSystem.delete|delete(okio.Path;kotlin.Boolean){}[0]
+    abstract fun list(okio/Path): kotlin.collections/List<okio/Path> // okio/FileSystem.list|list(okio.Path){}[0]
+    abstract fun listOrNull(okio/Path): kotlin.collections/List<okio/Path>? // okio/FileSystem.listOrNull|listOrNull(okio.Path){}[0]
+    abstract fun metadataOrNull(okio/Path): okio/FileMetadata? // okio/FileSystem.metadataOrNull|metadataOrNull(okio.Path){}[0]
+    abstract fun openReadOnly(okio/Path): okio/FileHandle // okio/FileSystem.openReadOnly|openReadOnly(okio.Path){}[0]
+    abstract fun openReadWrite(okio/Path, kotlin/Boolean = ..., kotlin/Boolean = ...): okio/FileHandle // okio/FileSystem.openReadWrite|openReadWrite(okio.Path;kotlin.Boolean;kotlin.Boolean){}[0]
+    abstract fun sink(okio/Path, kotlin/Boolean = ...): okio/Sink // okio/FileSystem.sink|sink(okio.Path;kotlin.Boolean){}[0]
+    abstract fun source(okio/Path): okio/Source // okio/FileSystem.source|source(okio.Path){}[0]
+    final fun createDirectories(okio/Path, kotlin/Boolean = ...) // okio/FileSystem.createDirectories|createDirectories(okio.Path;kotlin.Boolean){}[0]
+    final fun exists(okio/Path): kotlin/Boolean // okio/FileSystem.exists|exists(okio.Path){}[0]
+    final fun metadata(okio/Path): okio/FileMetadata // okio/FileSystem.metadata|metadata(okio.Path){}[0]
+    final inline fun <#A1: kotlin/Any?> read(okio/Path, kotlin/Function1<okio/BufferedSource, #A1>): #A1 // okio/FileSystem.read|read(okio.Path;kotlin.Function1<okio.BufferedSource,0:0>){0§<kotlin.Any?>}[0]
+    final inline fun <#A1: kotlin/Any?> write(okio/Path, kotlin/Boolean = ..., kotlin/Function1<okio/BufferedSink, #A1>): #A1 // okio/FileSystem.write|write(okio.Path;kotlin.Boolean;kotlin.Function1<okio.BufferedSink,0:0>){0§<kotlin.Any?>}[0]
+    open fun close() // okio/FileSystem.close|close(){}[0]
+    open fun copy(okio/Path, okio/Path) // okio/FileSystem.copy|copy(okio.Path;okio.Path){}[0]
+    open fun deleteRecursively(okio/Path, kotlin/Boolean = ...) // okio/FileSystem.deleteRecursively|deleteRecursively(okio.Path;kotlin.Boolean){}[0]
+    open fun listRecursively(okio/Path, kotlin/Boolean = ...): kotlin.sequences/Sequence<okio/Path> // okio/FileSystem.listRecursively|listRecursively(okio.Path;kotlin.Boolean){}[0]
+
+    final object Companion { // okio/FileSystem.Companion|null[0]
+        final val SYSTEM_TEMPORARY_DIRECTORY // okio/FileSystem.Companion.SYSTEM_TEMPORARY_DIRECTORY|{}SYSTEM_TEMPORARY_DIRECTORY[0]
+            final fun <get-SYSTEM_TEMPORARY_DIRECTORY>(): okio/Path // okio/FileSystem.Companion.SYSTEM_TEMPORARY_DIRECTORY.<get-SYSTEM_TEMPORARY_DIRECTORY>|<get-SYSTEM_TEMPORARY_DIRECTORY>(){}[0]
+
+        // Targets: [native]
+        final val SYSTEM // okio/FileSystem.Companion.SYSTEM|{}SYSTEM[0]
+            final fun <get-SYSTEM>(): okio/FileSystem // okio/FileSystem.Companion.SYSTEM.<get-SYSTEM>|<get-SYSTEM>(){}[0]
+    }
+}
+
+abstract class okio/ForwardingFileSystem : okio/FileSystem { // okio/ForwardingFileSystem|null[0]
+    constructor <init>(okio/FileSystem) // okio/ForwardingFileSystem.<init>|<init>(okio.FileSystem){}[0]
+
+    final val delegate // okio/ForwardingFileSystem.delegate|{}delegate[0]
+        final fun <get-delegate>(): okio/FileSystem // okio/ForwardingFileSystem.delegate.<get-delegate>|<get-delegate>(){}[0]
+
+    open fun appendingSink(okio/Path, kotlin/Boolean): okio/Sink // okio/ForwardingFileSystem.appendingSink|appendingSink(okio.Path;kotlin.Boolean){}[0]
+    open fun atomicMove(okio/Path, okio/Path) // okio/ForwardingFileSystem.atomicMove|atomicMove(okio.Path;okio.Path){}[0]
+    open fun canonicalize(okio/Path): okio/Path // okio/ForwardingFileSystem.canonicalize|canonicalize(okio.Path){}[0]
+    open fun close() // okio/ForwardingFileSystem.close|close(){}[0]
+    open fun createDirectory(okio/Path, kotlin/Boolean) // okio/ForwardingFileSystem.createDirectory|createDirectory(okio.Path;kotlin.Boolean){}[0]
+    open fun createSymlink(okio/Path, okio/Path) // okio/ForwardingFileSystem.createSymlink|createSymlink(okio.Path;okio.Path){}[0]
+    open fun delete(okio/Path, kotlin/Boolean) // okio/ForwardingFileSystem.delete|delete(okio.Path;kotlin.Boolean){}[0]
+    open fun list(okio/Path): kotlin.collections/List<okio/Path> // okio/ForwardingFileSystem.list|list(okio.Path){}[0]
+    open fun listOrNull(okio/Path): kotlin.collections/List<okio/Path>? // okio/ForwardingFileSystem.listOrNull|listOrNull(okio.Path){}[0]
+    open fun listRecursively(okio/Path, kotlin/Boolean): kotlin.sequences/Sequence<okio/Path> // okio/ForwardingFileSystem.listRecursively|listRecursively(okio.Path;kotlin.Boolean){}[0]
+    open fun metadataOrNull(okio/Path): okio/FileMetadata? // okio/ForwardingFileSystem.metadataOrNull|metadataOrNull(okio.Path){}[0]
+    open fun onPathParameter(okio/Path, kotlin/String, kotlin/String): okio/Path // okio/ForwardingFileSystem.onPathParameter|onPathParameter(okio.Path;kotlin.String;kotlin.String){}[0]
+    open fun onPathResult(okio/Path, kotlin/String): okio/Path // okio/ForwardingFileSystem.onPathResult|onPathResult(okio.Path;kotlin.String){}[0]
+    open fun openReadOnly(okio/Path): okio/FileHandle // okio/ForwardingFileSystem.openReadOnly|openReadOnly(okio.Path){}[0]
+    open fun openReadWrite(okio/Path, kotlin/Boolean, kotlin/Boolean): okio/FileHandle // okio/ForwardingFileSystem.openReadWrite|openReadWrite(okio.Path;kotlin.Boolean;kotlin.Boolean){}[0]
+    open fun sink(okio/Path, kotlin/Boolean): okio/Sink // okio/ForwardingFileSystem.sink|sink(okio.Path;kotlin.Boolean){}[0]
+    open fun source(okio/Path): okio/Source // okio/ForwardingFileSystem.source|source(okio.Path){}[0]
+    open fun toString(): kotlin/String // okio/ForwardingFileSystem.toString|toString(){}[0]
+}
+
+abstract class okio/ForwardingSource : okio/Source { // okio/ForwardingSource|null[0]
+    constructor <init>(okio/Source) // okio/ForwardingSource.<init>|<init>(okio.Source){}[0]
+
+    final val delegate // okio/ForwardingSource.delegate|{}delegate[0]
+        final fun <get-delegate>(): okio/Source // okio/ForwardingSource.delegate.<get-delegate>|<get-delegate>(){}[0]
+
+    open fun close() // okio/ForwardingSource.close|close(){}[0]
+    open fun read(okio/Buffer, kotlin/Long): kotlin/Long // okio/ForwardingSource.read|read(okio.Buffer;kotlin.Long){}[0]
+    open fun timeout(): okio/Timeout // okio/ForwardingSource.timeout|timeout(){}[0]
+    open fun toString(): kotlin/String // okio/ForwardingSource.toString|toString(){}[0]
+}
+
+final class <#A: kotlin/Any> okio/TypedOptions : kotlin.collections/AbstractList<#A>, kotlin.collections/RandomAccess { // okio/TypedOptions|null[0]
+    constructor <init>(kotlin.collections/List<#A>, okio/Options) // okio/TypedOptions.<init>|<init>(kotlin.collections.List<1:0>;okio.Options){}[0]
+
+    final val size // okio/TypedOptions.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // okio/TypedOptions.size.<get-size>|<get-size>(){}[0]
+
+    final fun get(kotlin/Int): #A // okio/TypedOptions.get|get(kotlin.Int){}[0]
+
+    final object Companion { // okio/TypedOptions.Companion|null[0]
+        final inline fun <#A2: kotlin/Any> of(kotlin.collections/Iterable<#A2>, kotlin/Function1<#A2, okio/ByteString>): okio/TypedOptions<#A2> // okio/TypedOptions.Companion.of|of(kotlin.collections.Iterable<0:0>;kotlin.Function1<0:0,okio.ByteString>){0§<kotlin.Any>}[0]
+    }
+}
+
+final class okio/Buffer : okio/BufferedSink, okio/BufferedSource { // okio/Buffer|null[0]
+    constructor <init>() // okio/Buffer.<init>|<init>(){}[0]
+
+    final val buffer // okio/Buffer.buffer|{}buffer[0]
+        final fun <get-buffer>(): okio/Buffer // okio/Buffer.buffer.<get-buffer>|<get-buffer>(){}[0]
+
+    final var size // okio/Buffer.size|{}size[0]
+        final fun <get-size>(): kotlin/Long // okio/Buffer.size.<get-size>|<get-size>(){}[0]
+
+    final fun <#A1: kotlin/Any> select(okio/TypedOptions<#A1>): #A1? // okio/Buffer.select|select(okio.TypedOptions<0:0>){0§<kotlin.Any>}[0]
+    final fun clear() // okio/Buffer.clear|clear(){}[0]
+    final fun close() // okio/Buffer.close|close(){}[0]
+    final fun completeSegmentByteCount(): kotlin/Long // okio/Buffer.completeSegmentByteCount|completeSegmentByteCount(){}[0]
+    final fun copy(): okio/Buffer // okio/Buffer.copy|copy(){}[0]
+    final fun copyTo(okio/Buffer, kotlin/Long = ...): okio/Buffer // okio/Buffer.copyTo|copyTo(okio.Buffer;kotlin.Long){}[0]
+    final fun copyTo(okio/Buffer, kotlin/Long = ..., kotlin/Long): okio/Buffer // okio/Buffer.copyTo|copyTo(okio.Buffer;kotlin.Long;kotlin.Long){}[0]
+    final fun emit(): okio/Buffer // okio/Buffer.emit|emit(){}[0]
+    final fun emitCompleteSegments(): okio/Buffer // okio/Buffer.emitCompleteSegments|emitCompleteSegments(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // okio/Buffer.equals|equals(kotlin.Any?){}[0]
+    final fun exhausted(): kotlin/Boolean // okio/Buffer.exhausted|exhausted(){}[0]
+    final fun flush() // okio/Buffer.flush|flush(){}[0]
+    final fun get(kotlin/Long): kotlin/Byte // okio/Buffer.get|get(kotlin.Long){}[0]
+    final fun hashCode(): kotlin/Int // okio/Buffer.hashCode|hashCode(){}[0]
+    final fun hmacSha1(okio/ByteString): okio/ByteString // okio/Buffer.hmacSha1|hmacSha1(okio.ByteString){}[0]
+    final fun hmacSha256(okio/ByteString): okio/ByteString // okio/Buffer.hmacSha256|hmacSha256(okio.ByteString){}[0]
+    final fun hmacSha512(okio/ByteString): okio/ByteString // okio/Buffer.hmacSha512|hmacSha512(okio.ByteString){}[0]
+    final fun indexOf(kotlin/Byte): kotlin/Long // okio/Buffer.indexOf|indexOf(kotlin.Byte){}[0]
+    final fun indexOf(kotlin/Byte, kotlin/Long): kotlin/Long // okio/Buffer.indexOf|indexOf(kotlin.Byte;kotlin.Long){}[0]
+    final fun indexOf(kotlin/Byte, kotlin/Long, kotlin/Long): kotlin/Long // okio/Buffer.indexOf|indexOf(kotlin.Byte;kotlin.Long;kotlin.Long){}[0]
+    final fun indexOf(okio/ByteString): kotlin/Long // okio/Buffer.indexOf|indexOf(okio.ByteString){}[0]
+    final fun indexOf(okio/ByteString, kotlin/Long): kotlin/Long // okio/Buffer.indexOf|indexOf(okio.ByteString;kotlin.Long){}[0]
+    final fun indexOf(okio/ByteString, kotlin/Long, kotlin/Long): kotlin/Long // okio/Buffer.indexOf|indexOf(okio.ByteString;kotlin.Long;kotlin.Long){}[0]
+    final fun indexOfElement(okio/ByteString): kotlin/Long // okio/Buffer.indexOfElement|indexOfElement(okio.ByteString){}[0]
+    final fun indexOfElement(okio/ByteString, kotlin/Long): kotlin/Long // okio/Buffer.indexOfElement|indexOfElement(okio.ByteString;kotlin.Long){}[0]
+    final fun md5(): okio/ByteString // okio/Buffer.md5|md5(){}[0]
+    final fun peek(): okio/BufferedSource // okio/Buffer.peek|peek(){}[0]
+    final fun rangeEquals(kotlin/Long, okio/ByteString): kotlin/Boolean // okio/Buffer.rangeEquals|rangeEquals(kotlin.Long;okio.ByteString){}[0]
+    final fun rangeEquals(kotlin/Long, okio/ByteString, kotlin/Int, kotlin/Int): kotlin/Boolean // okio/Buffer.rangeEquals|rangeEquals(kotlin.Long;okio.ByteString;kotlin.Int;kotlin.Int){}[0]
+    final fun read(kotlin/ByteArray): kotlin/Int // okio/Buffer.read|read(kotlin.ByteArray){}[0]
+    final fun read(kotlin/ByteArray, kotlin/Int, kotlin/Int): kotlin/Int // okio/Buffer.read|read(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    final fun read(okio/Buffer, kotlin/Long): kotlin/Long // okio/Buffer.read|read(okio.Buffer;kotlin.Long){}[0]
+    final fun readAll(okio/Sink): kotlin/Long // okio/Buffer.readAll|readAll(okio.Sink){}[0]
+    final fun readAndWriteUnsafe(okio/Buffer.UnsafeCursor = ...): okio/Buffer.UnsafeCursor // okio/Buffer.readAndWriteUnsafe|readAndWriteUnsafe(okio.Buffer.UnsafeCursor){}[0]
+    final fun readByte(): kotlin/Byte // okio/Buffer.readByte|readByte(){}[0]
+    final fun readByteArray(): kotlin/ByteArray // okio/Buffer.readByteArray|readByteArray(){}[0]
+    final fun readByteArray(kotlin/Long): kotlin/ByteArray // okio/Buffer.readByteArray|readByteArray(kotlin.Long){}[0]
+    final fun readByteString(): okio/ByteString // okio/Buffer.readByteString|readByteString(){}[0]
+    final fun readByteString(kotlin/Long): okio/ByteString // okio/Buffer.readByteString|readByteString(kotlin.Long){}[0]
+    final fun readDecimalLong(): kotlin/Long // okio/Buffer.readDecimalLong|readDecimalLong(){}[0]
+    final fun readFully(kotlin/ByteArray) // okio/Buffer.readFully|readFully(kotlin.ByteArray){}[0]
+    final fun readFully(okio/Buffer, kotlin/Long) // okio/Buffer.readFully|readFully(okio.Buffer;kotlin.Long){}[0]
+    final fun readHexadecimalUnsignedLong(): kotlin/Long // okio/Buffer.readHexadecimalUnsignedLong|readHexadecimalUnsignedLong(){}[0]
+    final fun readInt(): kotlin/Int // okio/Buffer.readInt|readInt(){}[0]
+    final fun readIntLe(): kotlin/Int // okio/Buffer.readIntLe|readIntLe(){}[0]
+    final fun readLong(): kotlin/Long // okio/Buffer.readLong|readLong(){}[0]
+    final fun readLongLe(): kotlin/Long // okio/Buffer.readLongLe|readLongLe(){}[0]
+    final fun readShort(): kotlin/Short // okio/Buffer.readShort|readShort(){}[0]
+    final fun readShortLe(): kotlin/Short // okio/Buffer.readShortLe|readShortLe(){}[0]
+    final fun readUnsafe(okio/Buffer.UnsafeCursor = ...): okio/Buffer.UnsafeCursor // okio/Buffer.readUnsafe|readUnsafe(okio.Buffer.UnsafeCursor){}[0]
+    final fun readUtf8(): kotlin/String // okio/Buffer.readUtf8|readUtf8(){}[0]
+    final fun readUtf8(kotlin/Long): kotlin/String // okio/Buffer.readUtf8|readUtf8(kotlin.Long){}[0]
+    final fun readUtf8CodePoint(): kotlin/Int // okio/Buffer.readUtf8CodePoint|readUtf8CodePoint(){}[0]
+    final fun readUtf8Line(): kotlin/String? // okio/Buffer.readUtf8Line|readUtf8Line(){}[0]
+    final fun readUtf8LineStrict(): kotlin/String // okio/Buffer.readUtf8LineStrict|readUtf8LineStrict(){}[0]
+    final fun readUtf8LineStrict(kotlin/Long): kotlin/String // okio/Buffer.readUtf8LineStrict|readUtf8LineStrict(kotlin.Long){}[0]
+    final fun request(kotlin/Long): kotlin/Boolean // okio/Buffer.request|request(kotlin.Long){}[0]
+    final fun require(kotlin/Long) // okio/Buffer.require|require(kotlin.Long){}[0]
+    final fun select(okio/Options): kotlin/Int // okio/Buffer.select|select(okio.Options){}[0]
+    final fun sha1(): okio/ByteString // okio/Buffer.sha1|sha1(){}[0]
+    final fun sha256(): okio/ByteString // okio/Buffer.sha256|sha256(){}[0]
+    final fun sha512(): okio/ByteString // okio/Buffer.sha512|sha512(){}[0]
+    final fun skip(kotlin/Long) // okio/Buffer.skip|skip(kotlin.Long){}[0]
+    final fun snapshot(): okio/ByteString // okio/Buffer.snapshot|snapshot(){}[0]
+    final fun snapshot(kotlin/Int): okio/ByteString // okio/Buffer.snapshot|snapshot(kotlin.Int){}[0]
+    final fun timeout(): okio/Timeout // okio/Buffer.timeout|timeout(){}[0]
+    final fun toString(): kotlin/String // okio/Buffer.toString|toString(){}[0]
+    final fun write(kotlin/ByteArray): okio/Buffer // okio/Buffer.write|write(kotlin.ByteArray){}[0]
+    final fun write(kotlin/ByteArray, kotlin/Int, kotlin/Int): okio/Buffer // okio/Buffer.write|write(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    final fun write(okio/Buffer, kotlin/Long) // okio/Buffer.write|write(okio.Buffer;kotlin.Long){}[0]
+    final fun write(okio/ByteString): okio/Buffer // okio/Buffer.write|write(okio.ByteString){}[0]
+    final fun write(okio/ByteString, kotlin/Int, kotlin/Int): okio/Buffer // okio/Buffer.write|write(okio.ByteString;kotlin.Int;kotlin.Int){}[0]
+    final fun write(okio/Source, kotlin/Long): okio/Buffer // okio/Buffer.write|write(okio.Source;kotlin.Long){}[0]
+    final fun writeAll(okio/Source): kotlin/Long // okio/Buffer.writeAll|writeAll(okio.Source){}[0]
+    final fun writeByte(kotlin/Int): okio/Buffer // okio/Buffer.writeByte|writeByte(kotlin.Int){}[0]
+    final fun writeDecimalLong(kotlin/Long): okio/Buffer // okio/Buffer.writeDecimalLong|writeDecimalLong(kotlin.Long){}[0]
+    final fun writeHexadecimalUnsignedLong(kotlin/Long): okio/Buffer // okio/Buffer.writeHexadecimalUnsignedLong|writeHexadecimalUnsignedLong(kotlin.Long){}[0]
+    final fun writeInt(kotlin/Int): okio/Buffer // okio/Buffer.writeInt|writeInt(kotlin.Int){}[0]
+    final fun writeIntLe(kotlin/Int): okio/Buffer // okio/Buffer.writeIntLe|writeIntLe(kotlin.Int){}[0]
+    final fun writeLong(kotlin/Long): okio/Buffer // okio/Buffer.writeLong|writeLong(kotlin.Long){}[0]
+    final fun writeLongLe(kotlin/Long): okio/Buffer // okio/Buffer.writeLongLe|writeLongLe(kotlin.Long){}[0]
+    final fun writeShort(kotlin/Int): okio/Buffer // okio/Buffer.writeShort|writeShort(kotlin.Int){}[0]
+    final fun writeShortLe(kotlin/Int): okio/Buffer // okio/Buffer.writeShortLe|writeShortLe(kotlin.Int){}[0]
+    final fun writeUtf8(kotlin/String): okio/Buffer // okio/Buffer.writeUtf8|writeUtf8(kotlin.String){}[0]
+    final fun writeUtf8(kotlin/String, kotlin/Int, kotlin/Int): okio/Buffer // okio/Buffer.writeUtf8|writeUtf8(kotlin.String;kotlin.Int;kotlin.Int){}[0]
+    final fun writeUtf8CodePoint(kotlin/Int): okio/Buffer // okio/Buffer.writeUtf8CodePoint|writeUtf8CodePoint(kotlin.Int){}[0]
+
+    final class UnsafeCursor : okio/Closeable { // okio/Buffer.UnsafeCursor|null[0]
+        constructor <init>() // okio/Buffer.UnsafeCursor.<init>|<init>(){}[0]
+
+        final var buffer // okio/Buffer.UnsafeCursor.buffer|{}buffer[0]
+            final fun <get-buffer>(): okio/Buffer? // okio/Buffer.UnsafeCursor.buffer.<get-buffer>|<get-buffer>(){}[0]
+            final fun <set-buffer>(okio/Buffer?) // okio/Buffer.UnsafeCursor.buffer.<set-buffer>|<set-buffer>(okio.Buffer?){}[0]
+        final var data // okio/Buffer.UnsafeCursor.data|{}data[0]
+            final fun <get-data>(): kotlin/ByteArray? // okio/Buffer.UnsafeCursor.data.<get-data>|<get-data>(){}[0]
+            final fun <set-data>(kotlin/ByteArray?) // okio/Buffer.UnsafeCursor.data.<set-data>|<set-data>(kotlin.ByteArray?){}[0]
+        final var end // okio/Buffer.UnsafeCursor.end|{}end[0]
+            final fun <get-end>(): kotlin/Int // okio/Buffer.UnsafeCursor.end.<get-end>|<get-end>(){}[0]
+            final fun <set-end>(kotlin/Int) // okio/Buffer.UnsafeCursor.end.<set-end>|<set-end>(kotlin.Int){}[0]
+        final var offset // okio/Buffer.UnsafeCursor.offset|{}offset[0]
+            final fun <get-offset>(): kotlin/Long // okio/Buffer.UnsafeCursor.offset.<get-offset>|<get-offset>(){}[0]
+            final fun <set-offset>(kotlin/Long) // okio/Buffer.UnsafeCursor.offset.<set-offset>|<set-offset>(kotlin.Long){}[0]
+        final var readWrite // okio/Buffer.UnsafeCursor.readWrite|{}readWrite[0]
+            final fun <get-readWrite>(): kotlin/Boolean // okio/Buffer.UnsafeCursor.readWrite.<get-readWrite>|<get-readWrite>(){}[0]
+            final fun <set-readWrite>(kotlin/Boolean) // okio/Buffer.UnsafeCursor.readWrite.<set-readWrite>|<set-readWrite>(kotlin.Boolean){}[0]
+        final var start // okio/Buffer.UnsafeCursor.start|{}start[0]
+            final fun <get-start>(): kotlin/Int // okio/Buffer.UnsafeCursor.start.<get-start>|<get-start>(){}[0]
+            final fun <set-start>(kotlin/Int) // okio/Buffer.UnsafeCursor.start.<set-start>|<set-start>(kotlin.Int){}[0]
+
+        final fun close() // okio/Buffer.UnsafeCursor.close|close(){}[0]
+        final fun expandBuffer(kotlin/Int): kotlin/Long // okio/Buffer.UnsafeCursor.expandBuffer|expandBuffer(kotlin.Int){}[0]
+        final fun next(): kotlin/Int // okio/Buffer.UnsafeCursor.next|next(){}[0]
+        final fun resizeBuffer(kotlin/Long): kotlin/Long // okio/Buffer.UnsafeCursor.resizeBuffer|resizeBuffer(kotlin.Long){}[0]
+        final fun seek(kotlin/Long): kotlin/Int // okio/Buffer.UnsafeCursor.seek|seek(kotlin.Long){}[0]
+    }
+}
+
+final class okio/FileMetadata { // okio/FileMetadata|null[0]
+    constructor <init>(kotlin/Boolean = ..., kotlin/Boolean = ..., okio/Path? = ..., kotlin/Long? = ..., kotlin/Long? = ..., kotlin/Long? = ..., kotlin/Long? = ..., kotlin.collections/Map<kotlin.reflect/KClass<*>, kotlin/Any> = ...) // okio/FileMetadata.<init>|<init>(kotlin.Boolean;kotlin.Boolean;okio.Path?;kotlin.Long?;kotlin.Long?;kotlin.Long?;kotlin.Long?;kotlin.collections.Map<kotlin.reflect.KClass<*>,kotlin.Any>){}[0]
+
+    final val createdAtMillis // okio/FileMetadata.createdAtMillis|{}createdAtMillis[0]
+        final fun <get-createdAtMillis>(): kotlin/Long? // okio/FileMetadata.createdAtMillis.<get-createdAtMillis>|<get-createdAtMillis>(){}[0]
+    final val extras // okio/FileMetadata.extras|{}extras[0]
+        final fun <get-extras>(): kotlin.collections/Map<kotlin.reflect/KClass<*>, kotlin/Any> // okio/FileMetadata.extras.<get-extras>|<get-extras>(){}[0]
+    final val isDirectory // okio/FileMetadata.isDirectory|{}isDirectory[0]
+        final fun <get-isDirectory>(): kotlin/Boolean // okio/FileMetadata.isDirectory.<get-isDirectory>|<get-isDirectory>(){}[0]
+    final val isRegularFile // okio/FileMetadata.isRegularFile|{}isRegularFile[0]
+        final fun <get-isRegularFile>(): kotlin/Boolean // okio/FileMetadata.isRegularFile.<get-isRegularFile>|<get-isRegularFile>(){}[0]
+    final val lastAccessedAtMillis // okio/FileMetadata.lastAccessedAtMillis|{}lastAccessedAtMillis[0]
+        final fun <get-lastAccessedAtMillis>(): kotlin/Long? // okio/FileMetadata.lastAccessedAtMillis.<get-lastAccessedAtMillis>|<get-lastAccessedAtMillis>(){}[0]
+    final val lastModifiedAtMillis // okio/FileMetadata.lastModifiedAtMillis|{}lastModifiedAtMillis[0]
+        final fun <get-lastModifiedAtMillis>(): kotlin/Long? // okio/FileMetadata.lastModifiedAtMillis.<get-lastModifiedAtMillis>|<get-lastModifiedAtMillis>(){}[0]
+    final val size // okio/FileMetadata.size|{}size[0]
+        final fun <get-size>(): kotlin/Long? // okio/FileMetadata.size.<get-size>|<get-size>(){}[0]
+    final val symlinkTarget // okio/FileMetadata.symlinkTarget|{}symlinkTarget[0]
+        final fun <get-symlinkTarget>(): okio/Path? // okio/FileMetadata.symlinkTarget.<get-symlinkTarget>|<get-symlinkTarget>(){}[0]
+
+    final fun <#A1: kotlin/Any> extra(kotlin.reflect/KClass<out #A1>): #A1? // okio/FileMetadata.extra|extra(kotlin.reflect.KClass<out|0:0>){0§<kotlin.Any>}[0]
+    final fun copy(kotlin/Boolean = ..., kotlin/Boolean = ..., okio/Path? = ..., kotlin/Long? = ..., kotlin/Long? = ..., kotlin/Long? = ..., kotlin/Long? = ..., kotlin.collections/Map<kotlin.reflect/KClass<*>, kotlin/Any> = ...): okio/FileMetadata // okio/FileMetadata.copy|copy(kotlin.Boolean;kotlin.Boolean;okio.Path?;kotlin.Long?;kotlin.Long?;kotlin.Long?;kotlin.Long?;kotlin.collections.Map<kotlin.reflect.KClass<*>,kotlin.Any>){}[0]
+    final fun toString(): kotlin/String // okio/FileMetadata.toString|toString(){}[0]
+}
+
+final class okio/HashingSink : okio/Sink { // okio/HashingSink|null[0]
+    final val hash // okio/HashingSink.hash|{}hash[0]
+        final fun <get-hash>(): okio/ByteString // okio/HashingSink.hash.<get-hash>|<get-hash>(){}[0]
+
+    final fun close() // okio/HashingSink.close|close(){}[0]
+    final fun flush() // okio/HashingSink.flush|flush(){}[0]
+    final fun timeout(): okio/Timeout // okio/HashingSink.timeout|timeout(){}[0]
+    final fun write(okio/Buffer, kotlin/Long) // okio/HashingSink.write|write(okio.Buffer;kotlin.Long){}[0]
+
+    final object Companion { // okio/HashingSink.Companion|null[0]
+        final fun hmacSha1(okio/Sink, okio/ByteString): okio/HashingSink // okio/HashingSink.Companion.hmacSha1|hmacSha1(okio.Sink;okio.ByteString){}[0]
+        final fun hmacSha256(okio/Sink, okio/ByteString): okio/HashingSink // okio/HashingSink.Companion.hmacSha256|hmacSha256(okio.Sink;okio.ByteString){}[0]
+        final fun hmacSha512(okio/Sink, okio/ByteString): okio/HashingSink // okio/HashingSink.Companion.hmacSha512|hmacSha512(okio.Sink;okio.ByteString){}[0]
+        final fun md5(okio/Sink): okio/HashingSink // okio/HashingSink.Companion.md5|md5(okio.Sink){}[0]
+        final fun sha1(okio/Sink): okio/HashingSink // okio/HashingSink.Companion.sha1|sha1(okio.Sink){}[0]
+        final fun sha256(okio/Sink): okio/HashingSink // okio/HashingSink.Companion.sha256|sha256(okio.Sink){}[0]
+        final fun sha512(okio/Sink): okio/HashingSink // okio/HashingSink.Companion.sha512|sha512(okio.Sink){}[0]
+    }
+}
+
+final class okio/HashingSource : okio/Source { // okio/HashingSource|null[0]
+    final val hash // okio/HashingSource.hash|{}hash[0]
+        final fun <get-hash>(): okio/ByteString // okio/HashingSource.hash.<get-hash>|<get-hash>(){}[0]
+
+    final fun close() // okio/HashingSource.close|close(){}[0]
+    final fun read(okio/Buffer, kotlin/Long): kotlin/Long // okio/HashingSource.read|read(okio.Buffer;kotlin.Long){}[0]
+    final fun timeout(): okio/Timeout // okio/HashingSource.timeout|timeout(){}[0]
+
+    final object Companion { // okio/HashingSource.Companion|null[0]
+        final fun hmacSha1(okio/Source, okio/ByteString): okio/HashingSource // okio/HashingSource.Companion.hmacSha1|hmacSha1(okio.Source;okio.ByteString){}[0]
+        final fun hmacSha256(okio/Source, okio/ByteString): okio/HashingSource // okio/HashingSource.Companion.hmacSha256|hmacSha256(okio.Source;okio.ByteString){}[0]
+        final fun hmacSha512(okio/Source, okio/ByteString): okio/HashingSource // okio/HashingSource.Companion.hmacSha512|hmacSha512(okio.Source;okio.ByteString){}[0]
+        final fun md5(okio/Source): okio/HashingSource // okio/HashingSource.Companion.md5|md5(okio.Source){}[0]
+        final fun sha1(okio/Source): okio/HashingSource // okio/HashingSource.Companion.sha1|sha1(okio.Source){}[0]
+        final fun sha256(okio/Source): okio/HashingSource // okio/HashingSource.Companion.sha256|sha256(okio.Source){}[0]
+        final fun sha512(okio/Source): okio/HashingSource // okio/HashingSource.Companion.sha512|sha512(okio.Source){}[0]
+    }
+}
+
+final class okio/Lock { // okio/Lock|null[0]
+    constructor <init>() // okio/Lock.<init>|<init>(){}[0]
+
+    final object Companion { // okio/Lock.Companion|null[0]
+        final val instance // okio/Lock.Companion.instance|{}instance[0]
+            final fun <get-instance>(): okio/Lock // okio/Lock.Companion.instance.<get-instance>|<get-instance>(){}[0]
+    }
+}
+
+final class okio/Options : kotlin.collections/AbstractList<okio/ByteString>, kotlin.collections/RandomAccess { // okio/Options|null[0]
+    final val size // okio/Options.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // okio/Options.size.<get-size>|<get-size>(){}[0]
+
+    final fun get(kotlin/Int): okio/ByteString // okio/Options.get|get(kotlin.Int){}[0]
+
+    final object Companion { // okio/Options.Companion|null[0]
+        final fun of(kotlin/Array<out okio/ByteString>...): okio/Options // okio/Options.Companion.of|of(kotlin.Array<out|okio.ByteString>...){}[0]
+    }
+}
+
+final class okio/Path : kotlin/Comparable<okio/Path> { // okio/Path|null[0]
+    final val isAbsolute // okio/Path.isAbsolute|{}isAbsolute[0]
+        final fun <get-isAbsolute>(): kotlin/Boolean // okio/Path.isAbsolute.<get-isAbsolute>|<get-isAbsolute>(){}[0]
+    final val isRelative // okio/Path.isRelative|{}isRelative[0]
+        final fun <get-isRelative>(): kotlin/Boolean // okio/Path.isRelative.<get-isRelative>|<get-isRelative>(){}[0]
+    final val isRoot // okio/Path.isRoot|{}isRoot[0]
+        final fun <get-isRoot>(): kotlin/Boolean // okio/Path.isRoot.<get-isRoot>|<get-isRoot>(){}[0]
+    final val name // okio/Path.name|{}name[0]
+        final fun <get-name>(): kotlin/String // okio/Path.name.<get-name>|<get-name>(){}[0]
+    final val nameBytes // okio/Path.nameBytes|{}nameBytes[0]
+        final fun <get-nameBytes>(): okio/ByteString // okio/Path.nameBytes.<get-nameBytes>|<get-nameBytes>(){}[0]
+    final val parent // okio/Path.parent|{}parent[0]
+        final fun <get-parent>(): okio/Path? // okio/Path.parent.<get-parent>|<get-parent>(){}[0]
+    final val root // okio/Path.root|{}root[0]
+        final fun <get-root>(): okio/Path? // okio/Path.root.<get-root>|<get-root>(){}[0]
+    final val segments // okio/Path.segments|{}segments[0]
+        final fun <get-segments>(): kotlin.collections/List<kotlin/String> // okio/Path.segments.<get-segments>|<get-segments>(){}[0]
+    final val segmentsBytes // okio/Path.segmentsBytes|{}segmentsBytes[0]
+        final fun <get-segmentsBytes>(): kotlin.collections/List<okio/ByteString> // okio/Path.segmentsBytes.<get-segmentsBytes>|<get-segmentsBytes>(){}[0]
+    final val volumeLetter // okio/Path.volumeLetter|{}volumeLetter[0]
+        final fun <get-volumeLetter>(): kotlin/Char? // okio/Path.volumeLetter.<get-volumeLetter>|<get-volumeLetter>(){}[0]
+
+    final fun compareTo(okio/Path): kotlin/Int // okio/Path.compareTo|compareTo(okio.Path){}[0]
+    final fun div(kotlin/String): okio/Path // okio/Path.div|div(kotlin.String){}[0]
+    final fun div(okio/ByteString): okio/Path // okio/Path.div|div(okio.ByteString){}[0]
+    final fun div(okio/Path): okio/Path // okio/Path.div|div(okio.Path){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // okio/Path.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // okio/Path.hashCode|hashCode(){}[0]
+    final fun normalized(): okio/Path // okio/Path.normalized|normalized(){}[0]
+    final fun relativeTo(okio/Path): okio/Path // okio/Path.relativeTo|relativeTo(okio.Path){}[0]
+    final fun resolve(kotlin/String, kotlin/Boolean = ...): okio/Path // okio/Path.resolve|resolve(kotlin.String;kotlin.Boolean){}[0]
+    final fun resolve(okio/ByteString, kotlin/Boolean = ...): okio/Path // okio/Path.resolve|resolve(okio.ByteString;kotlin.Boolean){}[0]
+    final fun resolve(okio/Path, kotlin/Boolean = ...): okio/Path // okio/Path.resolve|resolve(okio.Path;kotlin.Boolean){}[0]
+    final fun toString(): kotlin/String // okio/Path.toString|toString(){}[0]
+
+    final object Companion { // okio/Path.Companion|null[0]
+        final val DIRECTORY_SEPARATOR // okio/Path.Companion.DIRECTORY_SEPARATOR|{}DIRECTORY_SEPARATOR[0]
+            final fun <get-DIRECTORY_SEPARATOR>(): kotlin/String // okio/Path.Companion.DIRECTORY_SEPARATOR.<get-DIRECTORY_SEPARATOR>|<get-DIRECTORY_SEPARATOR>(){}[0]
+
+        final fun (kotlin/String).toPath(kotlin/Boolean = ...): okio/Path // okio/Path.Companion.toPath|toPath@kotlin.String(kotlin.Boolean){}[0]
+    }
+}
+
+final class okio/ProtocolException : okio/IOException { // okio/ProtocolException|null[0]
+    constructor <init>(kotlin/String) // okio/ProtocolException.<init>|<init>(kotlin.String){}[0]
+}
+
+open class okio/ArrayIndexOutOfBoundsException : kotlin/IndexOutOfBoundsException { // okio/ArrayIndexOutOfBoundsException|null[0]
+    constructor <init>(kotlin/String?) // okio/ArrayIndexOutOfBoundsException.<init>|<init>(kotlin.String?){}[0]
+}
+
+open class okio/ByteString : kotlin/Comparable<okio/ByteString> { // okio/ByteString|null[0]
+    final val size // okio/ByteString.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // okio/ByteString.size.<get-size>|<get-size>(){}[0]
+
+    final fun base64(): kotlin/String // okio/ByteString.base64|base64(){}[0]
+    final fun base64Url(): kotlin/String // okio/ByteString.base64Url|base64Url(){}[0]
+    final fun endsWith(kotlin/ByteArray): kotlin/Boolean // okio/ByteString.endsWith|endsWith(kotlin.ByteArray){}[0]
+    final fun endsWith(okio/ByteString): kotlin/Boolean // okio/ByteString.endsWith|endsWith(okio.ByteString){}[0]
+    final fun equals(okio/ByteString, kotlin/Boolean): kotlin/Boolean // okio/ByteString.equals|equals(okio.ByteString;kotlin.Boolean){}[0]
+    final fun get(kotlin/Int): kotlin/Byte // okio/ByteString.get|get(kotlin.Int){}[0]
+    final fun hmacSha1(okio/ByteString): okio/ByteString // okio/ByteString.hmacSha1|hmacSha1(okio.ByteString){}[0]
+    final fun hmacSha256(okio/ByteString): okio/ByteString // okio/ByteString.hmacSha256|hmacSha256(okio.ByteString){}[0]
+    final fun hmacSha512(okio/ByteString): okio/ByteString // okio/ByteString.hmacSha512|hmacSha512(okio.ByteString){}[0]
+    final fun indexOf(okio/ByteString, kotlin/Int = ...): kotlin/Int // okio/ByteString.indexOf|indexOf(okio.ByteString;kotlin.Int){}[0]
+    final fun lastIndexOf(okio/ByteString, kotlin/Int = ...): kotlin/Int // okio/ByteString.lastIndexOf|lastIndexOf(okio.ByteString;kotlin.Int){}[0]
+    final fun md5(): okio/ByteString // okio/ByteString.md5|md5(){}[0]
+    final fun sha1(): okio/ByteString // okio/ByteString.sha1|sha1(){}[0]
+    final fun sha256(): okio/ByteString // okio/ByteString.sha256|sha256(){}[0]
+    final fun sha512(): okio/ByteString // okio/ByteString.sha512|sha512(){}[0]
+    final fun startsWith(kotlin/ByteArray): kotlin/Boolean // okio/ByteString.startsWith|startsWith(kotlin.ByteArray){}[0]
+    final fun startsWith(okio/ByteString): kotlin/Boolean // okio/ByteString.startsWith|startsWith(okio.ByteString){}[0]
+    open fun base64(kotlin/Boolean = ...): kotlin/String // okio/ByteString.base64|base64(kotlin.Boolean){}[0]
+    open fun base64Url(kotlin/Boolean = ...): kotlin/String // okio/ByteString.base64Url|base64Url(kotlin.Boolean){}[0]
+    open fun compareTo(okio/ByteString): kotlin/Int // okio/ByteString.compareTo|compareTo(okio.ByteString){}[0]
+    open fun copyInto(kotlin/Int = ..., kotlin/ByteArray, kotlin/Int = ..., kotlin/Int) // okio/ByteString.copyInto|copyInto(kotlin.Int;kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    open fun equals(kotlin/Any?): kotlin/Boolean // okio/ByteString.equals|equals(kotlin.Any?){}[0]
+    open fun hashCode(): kotlin/Int // okio/ByteString.hashCode|hashCode(){}[0]
+    open fun hex(): kotlin/String // okio/ByteString.hex|hex(){}[0]
+    open fun indexOf(kotlin/ByteArray, kotlin/Int = ...): kotlin/Int // okio/ByteString.indexOf|indexOf(kotlin.ByteArray;kotlin.Int){}[0]
+    open fun lastIndexOf(kotlin/ByteArray, kotlin/Int = ...): kotlin/Int // okio/ByteString.lastIndexOf|lastIndexOf(kotlin.ByteArray;kotlin.Int){}[0]
+    open fun rangeEquals(kotlin/Int, kotlin/ByteArray, kotlin/Int, kotlin/Int): kotlin/Boolean // okio/ByteString.rangeEquals|rangeEquals(kotlin.Int;kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    open fun rangeEquals(kotlin/Int, okio/ByteString, kotlin/Int, kotlin/Int): kotlin/Boolean // okio/ByteString.rangeEquals|rangeEquals(kotlin.Int;okio.ByteString;kotlin.Int;kotlin.Int){}[0]
+    open fun substring(kotlin/Int = ..., kotlin/Int = ...): okio/ByteString // okio/ByteString.substring|substring(kotlin.Int;kotlin.Int){}[0]
+    open fun toAsciiLowercase(): okio/ByteString // okio/ByteString.toAsciiLowercase|toAsciiLowercase(){}[0]
+    open fun toAsciiUppercase(): okio/ByteString // okio/ByteString.toAsciiUppercase|toAsciiUppercase(){}[0]
+    open fun toByteArray(): kotlin/ByteArray // okio/ByteString.toByteArray|toByteArray(){}[0]
+    open fun toString(): kotlin/String // okio/ByteString.toString|toString(){}[0]
+    open fun utf8(): kotlin/String // okio/ByteString.utf8|utf8(){}[0]
+
+    final object Companion { // okio/ByteString.Companion|null[0]
+        final val EMPTY // okio/ByteString.Companion.EMPTY|{}EMPTY[0]
+            final fun <get-EMPTY>(): okio/ByteString // okio/ByteString.Companion.EMPTY.<get-EMPTY>|<get-EMPTY>(){}[0]
+
+        final fun (kotlin/ByteArray).toByteString(kotlin/Int = ..., kotlin/Int = ...): okio/ByteString // okio/ByteString.Companion.toByteString|toByteString@kotlin.ByteArray(kotlin.Int;kotlin.Int){}[0]
+        final fun (kotlin/String).decodeBase64(): okio/ByteString? // okio/ByteString.Companion.decodeBase64|decodeBase64@kotlin.String(){}[0]
+        final fun (kotlin/String).decodeHex(): okio/ByteString // okio/ByteString.Companion.decodeHex|decodeHex@kotlin.String(){}[0]
+        final fun (kotlin/String).decodeHex(kotlin/Boolean): okio/ByteString // okio/ByteString.Companion.decodeHex|decodeHex@kotlin.String(kotlin.Boolean){}[0]
+        final fun (kotlin/String).encodeUtf8(): okio/ByteString // okio/ByteString.Companion.encodeUtf8|encodeUtf8@kotlin.String(){}[0]
+        final fun of(kotlin/ByteArray...): okio/ByteString // okio/ByteString.Companion.of|of(kotlin.ByteArray...){}[0]
+
+        // Targets: [apple]
+        final fun (platform.Foundation/NSData).toByteString(): okio/ByteString // okio/ByteString.Companion.toByteString|toByteString@platform.Foundation.NSData(){}[0]
+    }
+}
+
+open class okio/EOFException : okio/IOException { // okio/EOFException|null[0]
+    constructor <init>() // okio/EOFException.<init>|<init>(){}[0]
+    constructor <init>(kotlin/String?) // okio/EOFException.<init>|<init>(kotlin.String?){}[0]
+}
+
+open class okio/FileNotFoundException : okio/IOException { // okio/FileNotFoundException|null[0]
+    constructor <init>(kotlin/String?) // okio/FileNotFoundException.<init>|<init>(kotlin.String?){}[0]
+}
+
+open class okio/IOException : kotlin/Exception { // okio/IOException|null[0]
+    constructor <init>() // okio/IOException.<init>|<init>(){}[0]
+    constructor <init>(kotlin/String?) // okio/IOException.<init>|<init>(kotlin.String?){}[0]
+    constructor <init>(kotlin/String?, kotlin/Throwable?) // okio/IOException.<init>|<init>(kotlin.String?;kotlin.Throwable?){}[0]
+}
+
+open class okio/Timeout { // okio/Timeout|null[0]
+    constructor <init>() // okio/Timeout.<init>|<init>(){}[0]
+
+    final object Companion { // okio/Timeout.Companion|null[0]
+        final val NONE // okio/Timeout.Companion.NONE|{}NONE[0]
+            final fun <get-NONE>(): okio/Timeout // okio/Timeout.Companion.NONE.<get-NONE>|<get-NONE>(){}[0]
+    }
+}
+
+final fun (kotlin/String).okio/utf8Size(kotlin/Int = ..., kotlin/Int = ...): kotlin/Long // okio/utf8Size|utf8Size@kotlin.String(kotlin.Int;kotlin.Int){}[0]
+final fun (okio/Sink).okio/buffer(): okio/BufferedSink // okio/buffer|buffer@okio.Sink(){}[0]
+final fun (okio/Source).okio/buffer(): okio/BufferedSource // okio/buffer|buffer@okio.Source(){}[0]
+final fun (okio/Source).okio/limit(kotlin/Long, kotlin/Boolean = ...): okio/Source // okio/limit|limit@okio.Source(kotlin.Long;kotlin.Boolean){}[0]
+final fun okio/blackholeSink(): okio/Sink // okio/blackholeSink|blackholeSink(){}[0]
+final inline fun (okio/BufferedSource).okio/readUByte(): kotlin/UByte // okio/readUByte|readUByte@okio.BufferedSource(){}[0]
+final inline fun (okio/BufferedSource).okio/readUInt(): kotlin/UInt // okio/readUInt|readUInt@okio.BufferedSource(){}[0]
+final inline fun (okio/BufferedSource).okio/readUIntLe(): kotlin/UInt // okio/readUIntLe|readUIntLe@okio.BufferedSource(){}[0]
+final inline fun (okio/BufferedSource).okio/readULong(): kotlin/ULong // okio/readULong|readULong@okio.BufferedSource(){}[0]
+final inline fun (okio/BufferedSource).okio/readULongLe(): kotlin/ULong // okio/readULongLe|readULongLe@okio.BufferedSource(){}[0]
+final inline fun (okio/BufferedSource).okio/readUShort(): kotlin/UShort // okio/readUShort|readUShort@okio.BufferedSource(){}[0]
+final inline fun (okio/BufferedSource).okio/readUShortLe(): kotlin/UShort // okio/readUShortLe|readUShortLe@okio.BufferedSource(){}[0]
+final inline fun <#A: kotlin/Any?> (okio/Lock).okio/withLock(kotlin/Function0<#A>): #A // okio/withLock|withLock@okio.Lock(kotlin.Function0<0:0>){0§<kotlin.Any?>}[0]
+final inline fun <#A: okio/BufferedSink> (#A).okio/writeUByte(kotlin/UByte): #A // okio/writeUByte|writeUByte@0:0(kotlin.UByte){0§<okio.BufferedSink>}[0]
+final inline fun <#A: okio/BufferedSink> (#A).okio/writeUInt(kotlin/UInt): #A // okio/writeUInt|writeUInt@0:0(kotlin.UInt){0§<okio.BufferedSink>}[0]
+final inline fun <#A: okio/BufferedSink> (#A).okio/writeUIntLe(kotlin/UInt): #A // okio/writeUIntLe|writeUIntLe@0:0(kotlin.UInt){0§<okio.BufferedSink>}[0]
+final inline fun <#A: okio/BufferedSink> (#A).okio/writeULong(kotlin/ULong): #A // okio/writeULong|writeULong@0:0(kotlin.ULong){0§<okio.BufferedSink>}[0]
+final inline fun <#A: okio/BufferedSink> (#A).okio/writeULongLe(kotlin/ULong): #A // okio/writeULongLe|writeULongLe@0:0(kotlin.ULong){0§<okio.BufferedSink>}[0]
+final inline fun <#A: okio/BufferedSink> (#A).okio/writeUShort(kotlin/UShort): #A // okio/writeUShort|writeUShort@0:0(kotlin.UShort){0§<okio.BufferedSink>}[0]
+final inline fun <#A: okio/BufferedSink> (#A).okio/writeUShortLe(kotlin/UShort): #A // okio/writeUShortLe|writeUShortLe@0:0(kotlin.UShort){0§<okio.BufferedSink>}[0]
+final inline fun <#A: okio/Closeable?, #B: kotlin/Any?> (#A).okio/use(kotlin/Function1<#A, #B>): #B // okio/use|use@0:0(kotlin.Function1<0:0,0:1>){0§<okio.Closeable?>;1§<kotlin.Any?>}[0]
+
+// Targets: [native]
+final class okio/Deflater { // okio/Deflater|null[0]
+    constructor <init>() // okio/Deflater.<init>|<init>(){}[0]
+    constructor <init>(kotlin/Int, kotlin/Boolean) // okio/Deflater.<init>|<init>(kotlin.Int;kotlin.Boolean){}[0]
+
+    final var flush // okio/Deflater.flush|{}flush[0]
+        final fun <get-flush>(): kotlin/Int // okio/Deflater.flush.<get-flush>|<get-flush>(){}[0]
+        final fun <set-flush>(kotlin/Int) // okio/Deflater.flush.<set-flush>|<set-flush>(kotlin.Int){}[0]
+
+    final fun end() // okio/Deflater.end|end(){}[0]
+    final fun getBytesRead(): kotlin/Long // okio/Deflater.getBytesRead|getBytesRead(){}[0]
+}
+
+// Targets: [native]
+final class okio/DeflaterSink : okio/Sink { // okio/DeflaterSink|null[0]
+    constructor <init>(okio/Sink, okio/Deflater) // okio/DeflaterSink.<init>|<init>(okio.Sink;okio.Deflater){}[0]
+
+    final fun close() // okio/DeflaterSink.close|close(){}[0]
+    final fun flush() // okio/DeflaterSink.flush|flush(){}[0]
+    final fun timeout(): okio/Timeout // okio/DeflaterSink.timeout|timeout(){}[0]
+    final fun write(okio/Buffer, kotlin/Long) // okio/DeflaterSink.write|write(okio.Buffer;kotlin.Long){}[0]
+}
+
+// Targets: [native]
+final class okio/GzipSink : okio/Sink { // okio/GzipSink|null[0]
+    constructor <init>(okio/Sink) // okio/GzipSink.<init>|<init>(okio.Sink){}[0]
+
+    final val deflater // okio/GzipSink.deflater|{}deflater[0]
+        final fun <get-deflater>(): okio/Deflater // okio/GzipSink.deflater.<get-deflater>|<get-deflater>(){}[0]
+
+    final fun close() // okio/GzipSink.close|close(){}[0]
+    final fun deflater(): okio/Deflater // okio/GzipSink.deflater|deflater(){}[0]
+    final fun flush() // okio/GzipSink.flush|flush(){}[0]
+    final fun timeout(): okio/Timeout // okio/GzipSink.timeout|timeout(){}[0]
+    final fun write(okio/Buffer, kotlin/Long) // okio/GzipSink.write|write(okio.Buffer;kotlin.Long){}[0]
+}
+
+// Targets: [native]
+final class okio/GzipSource : okio/Source { // okio/GzipSource|null[0]
+    constructor <init>(okio/Source) // okio/GzipSource.<init>|<init>(okio.Source){}[0]
+
+    final fun close() // okio/GzipSource.close|close(){}[0]
+    final fun read(okio/Buffer, kotlin/Long): kotlin/Long // okio/GzipSource.read|read(okio.Buffer;kotlin.Long){}[0]
+    final fun timeout(): okio/Timeout // okio/GzipSource.timeout|timeout(){}[0]
+}
+
+// Targets: [native]
+final class okio/Inflater { // okio/Inflater|null[0]
+    constructor <init>() // okio/Inflater.<init>|<init>(){}[0]
+    constructor <init>(kotlin/Boolean) // okio/Inflater.<init>|<init>(kotlin.Boolean){}[0]
+
+    final fun end() // okio/Inflater.end|end(){}[0]
+    final fun getBytesWritten(): kotlin/Long // okio/Inflater.getBytesWritten|getBytesWritten(){}[0]
+}
+
+// Targets: [native]
+final class okio/InflaterSource : okio/Source { // okio/InflaterSource|null[0]
+    constructor <init>(okio/Source, okio/Inflater) // okio/InflaterSource.<init>|<init>(okio.Source;okio.Inflater){}[0]
+
+    final fun close() // okio/InflaterSource.close|close(){}[0]
+    final fun read(okio/Buffer, kotlin/Long): kotlin/Long // okio/InflaterSource.read|read(okio.Buffer;kotlin.Long){}[0]
+    final fun timeout(): okio/Timeout // okio/InflaterSource.timeout|timeout(){}[0]
+}
+
+// Targets: [native]
+final val okio/SYSTEM // okio/SYSTEM|@okio.FileSystem.Companion{}SYSTEM[0]
+    final inline fun (okio/FileSystem.Companion).<get-SYSTEM>(): okio/FileSystem // okio/SYSTEM.<get-SYSTEM>|<get-SYSTEM>@okio.FileSystem.Companion(){}[0]
+
+// Targets: [native]
+final fun (kotlinx.cinterop/CPointer<out kotlinx.cinterop/CPointed>).okio/readByteString(kotlin/Int): okio/ByteString // okio/readByteString|readByteString@kotlinx.cinterop.CPointer<out|kotlinx.cinterop.CPointed>(kotlin.Int){}[0]
+
+// Targets: [native]
+final fun (okio/FileSystem).okio/openZip(okio/Path): okio/FileSystem // okio/openZip|openZip@okio.FileSystem(okio.Path){}[0]
+
+// Targets: [native]
+final inline fun (okio/Sink).okio/deflate(okio/Deflater = ...): okio/DeflaterSink // okio/deflate|deflate@okio.Sink(okio.Deflater){}[0]
+
+// Targets: [native]
+final inline fun (okio/Sink).okio/gzip(): okio/GzipSink // okio/gzip|gzip@okio.Sink(){}[0]
+
+// Targets: [native]
+final inline fun (okio/Source).okio/gzip(): okio/GzipSource // okio/gzip|gzip@okio.Source(){}[0]
+
+// Targets: [native]
+final inline fun (okio/Source).okio/inflate(okio/Inflater = ...): okio/InflaterSource // okio/inflate|inflate@okio.Source(okio.Inflater){}[0]
+
+// Targets: [apple]
+final fun (platform.Foundation/NSData).okio/toByteString(): okio/ByteString // okio/toByteString|toByteString@platform.Foundation.NSData(){}[0]

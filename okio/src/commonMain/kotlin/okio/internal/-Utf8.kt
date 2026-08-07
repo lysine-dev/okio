@@ -24,7 +24,7 @@ import okio.processUtf8Bytes
 // to everything else. Putting them in this file, `-Utf8.kt`, makes them invisible to
 // Java but still visible to Kotlin.
 
-fun ByteArray.commonToUtf8String(beginIndex: Int = 0, endIndex: Int = size): String {
+internal fun ByteArray.commonToUtf8String(beginIndex: Int = 0, endIndex: Int = size): String {
   if (beginIndex < 0 || endIndex > size || beginIndex > endIndex) {
     throw ArrayIndexOutOfBoundsException("size=$size beginIndex=$beginIndex endIndex=$endIndex")
   }
@@ -38,7 +38,7 @@ fun ByteArray.commonToUtf8String(beginIndex: Int = 0, endIndex: Int = size): Str
   return chars.concatToString(0, length)
 }
 
-fun String.commonAsUtf8ToByteArray(): ByteArray {
+internal fun String.commonAsUtf8ToByteArray(): ByteArray {
   val bytes = ByteArray(4 * length)
 
   // Assume ASCII until a UTF-8 code point is observed. This is ugly but yields

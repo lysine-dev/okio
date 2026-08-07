@@ -15,7 +15,7 @@
  */
 package okio.internal
 
-expect class CRC32() {
+internal expect class CRC32() {
   fun update(content: ByteArray, offset: Int, byteCount: Int)
   fun update(content: ByteArray)
   fun getValue(): Long

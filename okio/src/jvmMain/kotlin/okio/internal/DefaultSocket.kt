@@ -42,7 +42,17 @@ internal class DefaultSocket(val socket: JavaNetSocket) : Socket {
   override val sink: Sink = SocketSink()
 
   override fun cancel() {
-    socket.close()
+    try {
+      socket.close()
+    } catch (rethrown: RuntimeException) {
+      if (rethrown.message == "bio == null") {
+        // Conscrypt in Android 10 and 11 may throw closing an SSLSocket. This is safe to ignore.
+        // https://issuetracker.google.com/issues/177450597
+        return
+      }
+      throw rethrown
+    } catch (_: IOException) {
+    }
   }
 
   override fun toString() = socket.toString()
@@ -96,7 +106,7 @@ internal class DefaultSocket(val socket: JavaNetSocket) : Socket {
               socket.shutdownOutput()
             } catch (_: UnsupportedOperationException) {
               // Android API 21's SSLSocket doesn't implement this! So close the whole socket.
-              // https://github.com/square/okhttp/issues/9123
+              // https://github.com/lysine-dev/okhttp/issues/9123
               outputStream.close()
             }
           }
@@ -156,7 +166,7 @@ internal class DefaultSocket(val socket: JavaNetSocket) : Socket {
               socket.shutdownInput()
             } catch (_: UnsupportedOperationException) {
               // Android API 21's SSLSocket doesn't implement this! So close the whole socket.
-              // https://github.com/square/okhttp/issues/9123
+              // https://github.com/lysine-dev/okhttp/issues/9123
               inputStream.close()
             }
           }

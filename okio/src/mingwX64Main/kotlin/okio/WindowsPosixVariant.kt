@@ -17,9 +17,11 @@ package okio
 
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.alloc
+import kotlinx.cinterop.get
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
 import kotlinx.cinterop.toKString
+import kotlinx.cinterop.wcstr
 import okio.Path.Companion.toPath
 import platform.posix.EACCES
 import platform.posix.ENOENT
@@ -28,24 +30,30 @@ import platform.posix.PATH_MAX
 import platform.posix.S_IFDIR
 import platform.posix.S_IFMT
 import platform.posix.S_IFREG
-import platform.posix._fullpath
 import platform.posix._stat64
+import platform.posix._wclosedir
+import platform.posix._wdirent
+import platform.posix._wfopen
+import platform.posix._wfullpath
+import platform.posix._wgetenv
+import platform.posix._wmkdir
+import platform.posix._wopendir
+import platform.posix._wreaddir
+import platform.posix._wremove
+import platform.posix._wrmdir
+import platform.posix._wstat64
 import platform.posix.errno
-import platform.posix.fopen
 import platform.posix.free
-import platform.posix.getenv
-import platform.posix.mkdir
-import platform.posix.remove
-import platform.posix.rmdir
+import platform.posix.set_posix_errno
 import platform.windows.CREATE_NEW
-import platform.windows.CreateFileA
+import platform.windows.CreateFileW
 import platform.windows.FILE_ATTRIBUTE_NORMAL
 import platform.windows.FILE_SHARE_WRITE
 import platform.windows.GENERIC_READ
 import platform.windows.GENERIC_WRITE
 import platform.windows.INVALID_HANDLE_VALUE
 import platform.windows.MOVEFILE_REPLACE_EXISTING
-import platform.windows.MoveFileExA
+import platform.windows.MoveFileExW
 import platform.windows.OPEN_ALWAYS
 import platform.windows.OPEN_EXISTING
 
@@ -53,13 +61,13 @@ internal actual val PLATFORM_TEMPORARY_DIRECTORY: Path
   get() {
     // Windows' built-in APIs check the TEMP, TMP, and USERPROFILE environment variables in order.
     // https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-gettemppatha?redirectedfrom=MSDN
-    val temp = getenv("TEMP")
+    val temp = _wgetenv("TEMP".wcstr)
     if (temp != null) return temp.toKString().toPath()
 
-    val tmp = getenv("TMP")
+    val tmp = _wgetenv("TMP".wcstr)
     if (tmp != null) return tmp.toKString().toPath()
 
-    val userProfile = getenv("USERPROFILE")
+    val userProfile = _wgetenv("USERPROFILE".wcstr)
     if (userProfile != null) return userProfile.toKString().toPath()
 
     return "\\Windows\\TEMP".toPath()
@@ -68,13 +76,13 @@ internal actual val PLATFORM_TEMPORARY_DIRECTORY: Path
 internal actual val PLATFORM_DIRECTORY_SEPARATOR = "\\"
 
 internal actual fun PosixFileSystem.variantDelete(path: Path, mustExist: Boolean) {
-  val pathString = path.toString()
+  val pathString = path.toString().wcstr
 
-  if (remove(pathString) == 0) return
+  if (_wremove(pathString) == 0) return
 
   // If remove failed with EACCES, it might be a directory. Try that.
   if (errno == EACCES) {
-    if (rmdir(pathString) == 0) return
+    if (_wrmdir(pathString) == 0) return
   }
   if (errno == ENOENT) {
     if (mustExist) {
@@ -87,20 +95,58 @@ internal actual fun PosixFileSystem.variantDelete(path: Path, mustExist: Boolean
   throw errnoToIOException(EACCES)
 }
 
+internal actual fun PosixFileSystem.variantList(dir: Path, throwOnFailure: Boolean): List<Path>? {
+  val opendir = _wopendir(dir.toString().wcstr)
+
+  if (opendir == null) {
+    if (throwOnFailure) {
+      throw errnoToIOException(errno)
+    }
+    return null
+  }
+
+  try {
+    val result = mutableListOf<Path>()
+    set_posix_errno(0) // If readdir() returns null it's either the end or an error.
+    while (true) {
+      val dirent: CPointer<_wdirent> = _wreaddir(opendir) ?: break
+      val childPath = dirent[0].d_name.toKString().toPath()
+
+      if (childPath == SELF_DIRECTORY_ENTRY || childPath == PARENT_DIRECTORY_ENTRY) {
+        continue // exclude '.' and '..' from the results.
+      }
+
+      result += dir / childPath
+    }
+
+    if (errno != 0) {
+      if (throwOnFailure) {
+        throw errnoToIOException(errno)
+      } else {
+        return null
+      }
+    }
+
+    result.sort()
+    return result
+  } finally {
+    _wclosedir(opendir) // Ignore errno from closedir.
+  }
+}
+
 internal actual fun PosixFileSystem.variantMkdir(dir: Path): Int {
-  return mkdir(dir.toString())
+  return _wmkdir(dir.toString().wcstr)
 }
 
 internal actual fun PosixFileSystem.variantCanonicalize(path: Path): Path {
   // Note that _fullpath() returns normally if the file doesn't exist.
-  val fullpath = _fullpath(null, path.toString(), PATH_MAX.toULong())
+  val fullpath = _wfullpath(null, path.toString().wcstr, PATH_MAX.toULong())
     ?: throw errnoToIOException(errno)
   try {
-    val pathString = Buffer().writeNullTerminated(fullpath).readUtf8()
-    if (platform.posix.access(pathString, 0) != 0 && errno == ENOENT) {
+    if (platform.posix._waccess(fullpath, 0) != 0 && errno == ENOENT) {
       throw FileNotFoundException("no such file")
     }
-    return pathString.toPath()
+    return fullpath.toKString().toPath()
   } finally {
     free(fullpath)
   }
@@ -109,7 +155,7 @@ internal actual fun PosixFileSystem.variantCanonicalize(path: Path): Path {
 internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetadata? {
   return memScoped {
     val stat = alloc<_stat64>()
-    if (_stat64(path.toString(), stat.ptr) != 0) {
+    if (_wstat64(path.toString().wcstr, stat.ptr) != 0) {
       if (errno == ENOENT) return null
       throw errnoToIOException(errno)
     }
@@ -126,13 +172,13 @@ internal actual fun PosixFileSystem.variantMetadataOrNull(path: Path): FileMetad
 }
 
 internal actual fun PosixFileSystem.variantMove(source: Path, target: Path) {
-  if (MoveFileExA(source.toString(), target.toString(), MOVEFILE_REPLACE_EXISTING.toUInt()) == 0) {
+  if (MoveFileExW(source.toString(), target.toString(), MOVEFILE_REPLACE_EXISTING.toUInt()) == 0) {
     throw lastErrorToIOException()
   }
 }
 
 internal actual fun PosixFileSystem.variantSource(file: Path): Source {
-  val openFile: CPointer<FILE> = fopen(file.toString(), "rb")
+  val openFile: CPointer<FILE> = _wfopen(file.toString().wcstr, "rb".wcstr)
     ?: throw errnoToIOException(errno)
   return FileSource(openFile)
 }
@@ -140,7 +186,7 @@ internal actual fun PosixFileSystem.variantSource(file: Path): Source {
 internal actual fun PosixFileSystem.variantSink(file: Path, mustCreate: Boolean): Sink {
   // We're non-atomically checking file existence because Windows errors if we use the `x` flag along with `w`.
   if (mustCreate && exists(file)) throw IOException("$file already exists.")
-  val openFile: CPointer<FILE> = fopen(file.toString(), "wb")
+  val openFile: CPointer<FILE> = _wfopen(file.toString().wcstr, "wb".wcstr)
     ?: throw errnoToIOException(errno)
   return FileSink(openFile)
 }
@@ -150,13 +196,13 @@ internal actual fun PosixFileSystem.variantAppendingSink(file: Path, mustExist: 
   // doesn't allow opening for appending, and we don't currently have a way to move the cursor to
   // the end of the file. We are then forcing existence non-atomically.
   if (mustExist && !exists(file)) throw IOException("$file doesn't exist.")
-  val openFile: CPointer<FILE> = fopen(file.toString(), "ab")
+  val openFile: CPointer<FILE> = _wfopen(file.toString().wcstr, "ab".wcstr)
     ?: throw errnoToIOException(errno)
   return FileSink(openFile)
 }
 
 internal actual fun PosixFileSystem.variantOpenReadOnly(file: Path): FileHandle {
-  val openFile = CreateFileA(
+  val openFile = CreateFileW(
     lpFileName = file.toString(),
     dwDesiredAccess = GENERIC_READ,
     dwShareMode = FILE_SHARE_WRITE.toUInt(),
@@ -186,7 +232,7 @@ internal actual fun PosixFileSystem.variantOpenReadWrite(
     else -> OPEN_ALWAYS.toUInt()
   }
 
-  val openFile = CreateFileA(
+  val openFile = CreateFileW(
     lpFileName = file.toString(),
     dwDesiredAccess = GENERIC_READ or GENERIC_WRITE.toUInt(),
     dwShareMode = FILE_SHARE_WRITE.toUInt(),

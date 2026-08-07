@@ -4,14 +4,14 @@
 package okio.internal.preview1
 
 /** `u32`. */
-typealias size = Int
+internal typealias size = Int
 
 /**
  * `Handle`.
  *
  * A file descriptor handle.
  */
-typealias fd = Int
+internal typealias fd = Int
 
 /**
  * `u64`.
@@ -20,7 +20,7 @@ typealias fd = Int
  *
  * The value 0 signifies the start of the directory.
  */
-typealias dircookie = Long
+internal typealias dircookie = Long
 
 /**
  * `Variant`.
@@ -29,26 +29,26 @@ typealias dircookie = Long
  * provided by this API; some are used in higher-level library layers, and others are provided
  * merely for alignment with POSIX.
  */
-typealias errno = Short
+internal typealias errno = Short
 
 /**
  * `u64`.
  *
  * File serial number that is unique within its file system.
  */
-typealias inode = Long
+internal typealias inode = Long
 
 /**
  * `u32`.
  *
  * The type for the [`dirent::d_namlen`](#dirent.d_namlen) field of [`dirent`](#dirent) struct.
  */
-typealias dirnamelen = Int
+internal typealias dirnamelen = Int
 
 /**
  * `Pointer<u8>`.
  */
-typealias PointerU8 = Int
+internal typealias PointerU8 = Int
 
 /**
  * path_create_directory(fd: fd, path: string) -> Result<(), errno>

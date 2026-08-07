@@ -11,7 +11,7 @@ package okio.internal.preview1
  * Bit0:
  * symlink_follow:
  */
-typealias lookupflags = Int
+internal typealias lookupflags = Int
 
 /** As long as the resolved path corresponds to a symbolic link, it is expanded. */
-val lookupflags_symlink_follow = 1 shl 0
+internal val lookupflags_symlink_follow = 1 shl 0

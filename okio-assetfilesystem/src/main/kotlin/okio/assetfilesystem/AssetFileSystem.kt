@@ -67,7 +67,13 @@ private class AssetFileSystem(
     // Both non-existent paths and paths to existing files return an empty array when listing.
     // Determine if a path exists by checking if its name is present in the parent's list.
     val parent = checkNotNull(parent) { "Path has no parent. Did you canonicalize? $this" }
-    val children = assets.list(parent.toAssetRelativePathString()).orEmpty()
+
+    val children = try {
+      assets.list(parent.toAssetRelativePathString()).orEmpty()
+    } catch (_: FileNotFoundException) {
+      emptyArray()
+    }
+
     return name in children
   }
 

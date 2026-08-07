@@ -22,6 +22,8 @@ gradlePlugin {
 }
 
 dependencies {
+  implementation(libs.dokka)
   implementation(libs.kotlin.gradle.plugin)
   implementation(libs.tapmoc.gradle.plugin)
+  implementation(libs.binary.compatibility.validator.gradle.plugin)
 }

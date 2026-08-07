@@ -44,6 +44,9 @@ class BuildSupport : Plugin<Project> {
       sourceCompatibility = JavaVersion.VERSION_1_8.toString()
       targetCompatibility = JavaVersion.VERSION_1_8.toString()
     }
+
+    project.configureDokka()
+    project.configureBinaryCompatibilityValidator()
   }
 }
 

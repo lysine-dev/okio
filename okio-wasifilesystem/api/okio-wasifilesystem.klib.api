@@ -1,0 +1,24 @@
+// Klib ABI Dump
+// Targets: [wasmWasi]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.squareup.okio:okio-wasifilesystem>
+final object okio/WasiFileSystem : okio/FileSystem { // okio/WasiFileSystem|null[0]
+    final fun appendingSink(okio/Path, kotlin/Boolean): okio/Sink // okio/WasiFileSystem.appendingSink|appendingSink(okio.Path;kotlin.Boolean){}[0]
+    final fun atomicMove(okio/Path, okio/Path) // okio/WasiFileSystem.atomicMove|atomicMove(okio.Path;okio.Path){}[0]
+    final fun canonicalize(okio/Path): okio/Path // okio/WasiFileSystem.canonicalize|canonicalize(okio.Path){}[0]
+    final fun createDirectory(okio/Path, kotlin/Boolean) // okio/WasiFileSystem.createDirectory|createDirectory(okio.Path;kotlin.Boolean){}[0]
+    final fun createSymlink(okio/Path, okio/Path) // okio/WasiFileSystem.createSymlink|createSymlink(okio.Path;okio.Path){}[0]
+    final fun delete(okio/Path, kotlin/Boolean) // okio/WasiFileSystem.delete|delete(okio.Path;kotlin.Boolean){}[0]
+    final fun list(okio/Path): kotlin.collections/List<okio/Path> // okio/WasiFileSystem.list|list(okio.Path){}[0]
+    final fun listOrNull(okio/Path): kotlin.collections/List<okio/Path>? // okio/WasiFileSystem.listOrNull|listOrNull(okio.Path){}[0]
+    final fun metadataOrNull(okio/Path): okio/FileMetadata? // okio/WasiFileSystem.metadataOrNull|metadataOrNull(okio.Path){}[0]
+    final fun openReadOnly(okio/Path): okio/FileHandle // okio/WasiFileSystem.openReadOnly|openReadOnly(okio.Path){}[0]
+    final fun openReadWrite(okio/Path, kotlin/Boolean, kotlin/Boolean): okio/FileHandle // okio/WasiFileSystem.openReadWrite|openReadWrite(okio.Path;kotlin.Boolean;kotlin.Boolean){}[0]
+    final fun sink(okio/Path, kotlin/Boolean): okio/Sink // okio/WasiFileSystem.sink|sink(okio.Path;kotlin.Boolean){}[0]
+    final fun source(okio/Path): okio/Source // okio/WasiFileSystem.source|source(okio.Path){}[0]
+    final fun toString(): kotlin/String // okio/WasiFileSystem.toString|toString(){}[0]
+}

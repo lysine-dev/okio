@@ -92,7 +92,7 @@ This is similar to the other [write example](recipes.md#write-a-text-file-javako
     ```
 
 
-[ReadJavaIoFileLineByLineKt]: https://github.com/square/okio/blob/master/samples/src/jvmMain/kotlin/okio/samples/ReadJavaIoFileLineByLine.kt
-[ReadJavaIoFileLineByLine]: https://github.com/square/okio/blob/master/samples/src/jvmMain/java/okio/samples/ReadJavaIoFileLineByLine.java
-[WriteJavaIoFileKt]: https://github.com/square/okio/blob/master/samples/src/jvmMain/kotlin/okio/samples/WriteJavaIoFile.kt
-[WriteJavaIoFile]: https://github.com/square/okio/blob/master/samples/src/jvmMain/java/okio/samples/WriteJavaIoFile.java
+[ReadJavaIoFileLineByLineKt]: https://github.com/lysine-dev/okio/blob/master/samples/src/jvmMain/kotlin/okio/samples/ReadJavaIoFileLineByLine.kt
+[ReadJavaIoFileLineByLine]: https://github.com/lysine-dev/okio/blob/master/samples/src/jvmMain/java/okio/samples/ReadJavaIoFileLineByLine.java
+[WriteJavaIoFileKt]: https://github.com/lysine-dev/okio/blob/master/samples/src/jvmMain/kotlin/okio/samples/WriteJavaIoFile.kt
+[WriteJavaIoFile]: https://github.com/lysine-dev/okio/blob/master/samples/src/jvmMain/java/okio/samples/WriteJavaIoFile.java

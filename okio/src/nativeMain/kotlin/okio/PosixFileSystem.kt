@@ -21,11 +21,10 @@ import okio.internal.openPosixDirectory
 import okio.internal.toPath
 import platform.posix.EEXIST
 import platform.posix.errno
-import platform.posix.set_posix_errno
 
 internal object PosixFileSystem : FileSystem() {
-  private val SELF_DIRECTORY_ENTRY = ".".toPath()
-  private val PARENT_DIRECTORY_ENTRY = "..".toPath()
+  internal val SELF_DIRECTORY_ENTRY = ".".toPath()
+  internal val PARENT_DIRECTORY_ENTRY = "..".toPath()
 
   override fun canonicalize(path: Path) = variantCanonicalize(path)
 
@@ -35,39 +34,7 @@ internal object PosixFileSystem : FileSystem() {
 
   override fun listOrNull(dir: Path): List<Path>? = list(dir, throwOnFailure = false)
 
-  private fun list(dir: Path, throwOnFailure: Boolean): List<Path>? {
-    val posixDir = openPosixDirectory(dir)
-      ?: if (throwOnFailure) throw errnoToIOException(errno) else return null
-    posixDir.use {
-      val result = mutableListOf<Path>()
-      val buffer = Buffer()
-
-      set_posix_errno(0) // If readdir() returns null it's either the end or an error.
-      while (true) {
-        val dirent = it.nextEntry() ?: break
-        val childPath = buffer.writeNullTerminated(
-          bytes = dirent[0].d_name,
-        ).toPath(normalize = true)
-
-        if (childPath == SELF_DIRECTORY_ENTRY || childPath == PARENT_DIRECTORY_ENTRY) {
-          continue // exclude '.' and '..' from the results.
-        }
-
-        result += dir / childPath
-      }
-
-      if (errno != 0) {
-        if (throwOnFailure) {
-          throw errnoToIOException(errno)
-        } else {
-          return null
-        }
-      }
-
-      result.sort()
-      return result
-    }
-  }
+  private fun list(dir: Path, throwOnFailure: Boolean): List<Path>? = variantList(dir, throwOnFailure)
 
   override fun openReadOnly(file: Path) = variantOpenReadOnly(file)
 

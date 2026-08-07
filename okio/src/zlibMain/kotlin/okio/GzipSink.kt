@@ -24,7 +24,7 @@ import okio.internal.CRC32
 import okio.internal.DEFAULT_COMPRESSION
 
 /**
- * A sink that uses [GZIP](http://www.ietf.org/rfc/rfc1952.txt) to
+ * A sink that uses [GZIP](https://www.ietf.org/rfc/rfc1952.txt) to
  * compress written data to another sink.
  *
  * ### Sync flush

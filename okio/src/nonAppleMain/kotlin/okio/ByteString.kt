@@ -31,6 +31,7 @@ import okio.internal.commonDecodeHex
 import okio.internal.commonEncodeUtf8
 import okio.internal.commonEndsWith
 import okio.internal.commonEquals
+import okio.internal.commonEqualsConstantTime
 import okio.internal.commonGetByte
 import okio.internal.commonGetSize
 import okio.internal.commonHashCode
@@ -49,6 +50,7 @@ import okio.internal.commonToByteString
 import okio.internal.commonToString
 import okio.internal.commonUtf8
 import okio.internal.commonWrite
+import okio.internal.decodeHexIgnoreWhitespace
 
 actual open class ByteString
 internal actual constructor(
@@ -70,7 +72,13 @@ internal actual constructor(
 
   actual open fun base64(includePadding: Boolean): String = commonBase64(includePadding = includePadding)
 
+  @Deprecated(message = "for binary compatibility", level = DeprecationLevel.HIDDEN)
+  fun base64(): String = commonBase64(includePadding = false)
+
   actual open fun base64Url(includePadding: Boolean): String = commonBase64Url(includePadding = includePadding)
+
+  @Deprecated(message = "for binary compatibility", level = DeprecationLevel.HIDDEN)
+  fun base64Url(): String = commonBase64(includePadding = false)
 
   actual open fun hex(): String = commonHex()
 
@@ -162,6 +170,9 @@ internal actual constructor(
 
   actual override fun equals(other: Any?) = commonEquals(other)
 
+  actual fun equals(other: ByteString, constantTime: Boolean) =
+    if (constantTime) commonEqualsConstantTime(other) else this == other
+
   actual override fun hashCode() = commonHashCode()
 
   actual override fun compareTo(other: ByteString) = commonCompareTo(other)
@@ -185,5 +196,10 @@ internal actual constructor(
     actual fun String.decodeBase64(): ByteString? = commonDecodeBase64()
 
     actual fun String.decodeHex() = commonDecodeHex()
+
+    actual fun String.decodeHex(ignoreWhitespace: Boolean) = when {
+      ignoreWhitespace -> decodeHexIgnoreWhitespace()
+      else -> commonDecodeHex()
+    }
   }
 }

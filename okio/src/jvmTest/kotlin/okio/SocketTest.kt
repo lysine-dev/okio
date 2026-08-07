@@ -35,6 +35,7 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.measureTime
 import okio.internal.DefaultSocket
 import org.junit.After
+import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -270,6 +271,46 @@ class SocketTest(val factory: Factory = Factory.Default) {
     assertFailsWith<SocketException> {
       unconnected.asOkioSocket()
     }
+  }
+
+  @Test
+  fun cancelIsQuiet() {
+    assumeTrue(factory == Factory.Default)
+
+    val (socketA, socketB) = createSocketPairThatThrowsOnClose(IOException("boom!"))
+    socketA.cancel()
+    socketB.cancel()
+  }
+
+  @Test
+  fun conscryptCrashIsQuiet() {
+    assumeTrue(factory == Factory.Default)
+
+    val (socketA, socketB) = createSocketPairThatThrowsOnClose(RuntimeException("bio == null"))
+    socketA.cancel()
+    socketB.cancel()
+  }
+
+  private fun createSocketPairThatThrowsOnClose(e: Throwable): Array<Socket> {
+    val localhost = InetAddress.getByName("localhost")
+
+    val serverSocket = ServerSocket()
+    serverSocket.bind(InetSocketAddress(localhost, 0))
+
+    val socketBFuture = CompletableFuture<java.net.Socket>()
+    thread(name = "createSocketPair") {
+      socketBFuture.complete(serverSocket.accept())
+    }
+
+    val socketA = object : java.net.Socket() {
+      override fun close() {
+        throw e
+      }
+    }
+    socketA.connect(InetSocketAddress(localhost, serverSocket.localPort))
+
+    val socketB = socketBFuture.get()
+    return arrayOf(socketA.asOkioSocket(), socketB.asOkioSocket())
   }
 
   @Suppress("ktlint:trailing-comma-on-declaration-site")

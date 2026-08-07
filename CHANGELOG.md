@@ -5,6 +5,34 @@ Change Log
 
  * None yet.
 
+## Version 3.18.1
+
+_2026-07-28_
+
+ * Fix: Restore binary-compatibility with Okio 3.17.x for Kotlin/Native users. When we introduced
+   the new `base64()` function, we inadvertently changed the binary signature! Ugh! This is now
+   fixed and we've automated binary-compatibility checking for Kotlin/Native going forward.
+
+
+## Version 3.18.0
+
+_2026-07-21_
+
+ * Fix: Use wide character APIs to better support of non-UTF-8 filesystems on Windows.
+ * Fix: Don't crash in `AssetFileSystem.exists()` when the underlying storage throws a
+   `FileNotFoundException`.
+ * Fix: Load WASI paths relative to their `preopen`. The platform behavior recently changed in
+   NodeJS, causing our `WasiFileSystem` to be unable to access files!
+ * New: Optionally ignore whitespace when decoding hexadecimal.
+ * New: Optionally omit padding when encoding Base64.
+ * New: `BufferedSource.readUInt()`, `BufferedSink.writeUInt()`, and similar functions for `UByte`,
+   `UShort` and `ULong`. Also add support for unsigned and little-endian.
+ * New: `BufferedSink.utf8Appendable()`. Use this to adapt an Okio sink to an `Appendable`.
+ * New: `Source.limit()` returns a wrapped source with a strict limit on how many bytes are
+   returned.
+ * New: `ByteString.equals(other, constantTime)` for subtle defense against timing attacks.
+
+
 ## Version 3.17.0
 
 _2026-03-11_
@@ -1080,4 +1108,4 @@ _2014-04-08_
 [maven_provided]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html
 [preview1]: https://github.com/WebAssembly/WASI/blob/main/legacy/preview1/docs.md
 [watchosX86]: https://blog.jetbrains.com/kotlin/2023/02/update-regarding-kotlin-native-targets/
-[xor_utf8]: https://github.com/square/okio/blob/bbb29c459e5ccf0f286e0b17ccdcacd7ac4bc2a9/okio/src/main/kotlin/okio/Utf8.kt#L302
+[xor_utf8]: https://github.com/lysine-dev/okio/blob/bbb29c459e5ccf0f286e0b17ccdcacd7ac4bc2a9/okio/src/main/kotlin/okio/Utf8.kt#L302

@@ -122,4 +122,4 @@ overview of these limitations.
    a valid path and a rejection of an invalid path.)
 
 
-[fake_fs_concurrency]: https://github.com/square/okio/issues/950
+[fake_fs_concurrency]: https://github.com/lysine-dev/okio/issues/950

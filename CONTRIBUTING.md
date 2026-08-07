@@ -34,5 +34,5 @@ Committer's Guides
  * [Releasing][releasing]
 
  [cla]: https://spreadsheets.google.com/spreadsheet/viewform?formkey=dDViT2xzUHAwRkI3X3k5Z0lQM091OGc6MQ&ndplr=1
- [releasing]: http://square.github.io/okio/releasing/
- [security]: http://square.github.io/okio/security/
+ [releasing]: https://lysine.dev/okio/releasing/
+ [security]: https://lysine.dev/okio/security/
