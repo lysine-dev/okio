@@ -16,8 +16,10 @@
 package okio
 
 import kotlinx.cinterop.CPointer
+import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.alloc
+import kotlinx.cinterop.convert
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.ptr
 import kotlinx.cinterop.usePinned
@@ -84,8 +86,9 @@ internal class UnixFileHandle(
     }
   }
 
+  @OptIn(UnsafeNumber::class)
   override fun protectedResize(size: Long) {
-    if (ftruncate(fileno(file), size) == -1) {
+    if (ftruncate(fileno(file), size.convert()) == -1) {
       throw errnoToIOException(errno)
     }
   }

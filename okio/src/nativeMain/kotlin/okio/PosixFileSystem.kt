@@ -15,9 +15,7 @@
  */
 package okio
 
-import kotlinx.cinterop.get
 import okio.Path.Companion.toPath
-import okio.internal.toPath
 import platform.posix.EEXIST
 import platform.posix.errno
 

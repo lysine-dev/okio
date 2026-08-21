@@ -46,7 +46,7 @@ expect fun isBrowser(): Boolean
  * The file system that GitHub actions gives us doesn't do anything when we `touch` a file.
  */
 val fileSystemHasGoodMetadata: Boolean
-  get() = getEnv("GITHUB_WORKSPACE") == null
+  get() = getEnv("GITHUB_WORKSPACE") == null && getEnv("ANDROID_DATA") == null
 
 val FileMetadata.createdAt: Instant?
   get() {

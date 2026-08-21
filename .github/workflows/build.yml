@@ -59,10 +59,18 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v6
 
+      - name: Build Android native test binary
+        run: ./gradlew :okio:androidNativeX64TestBinaries
+
       - uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 24
-          script: ./gradlew :okio-assetfilesystem:connectedCheck
+          arch: x86_64
+          script: |
+            adb push okio/build/bin/androidNativeX64/debugTest/test.kexe /data/local/tmp
+            adb push okio-testing-support /data/local/tmp/okio/okio-testing-support
+            adb shell "OKIO_ROOT=/data/local/tmp/okio /data/local/tmp/test.kexe"
+            ./gradlew :okio-assetfilesystem:connectedCheck
 
   loom:
     runs-on: ubuntu-latest
