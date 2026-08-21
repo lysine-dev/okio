@@ -1,0 +1,344 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>FileHandle</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    okio-parent
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">3.19.0-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":okio/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":okio/commonMain" data-filter=":okio/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    okio-parent
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="okio::okio/FileHandle///PointingToDeclaration//-1366145587">
+  <div class="breadcrumbs"><a href="../../index.html">okio</a><span class="delimiter">/</span><a href="../index.html">okio</a><span class="delimiter">/</span><span class="current">FileHandle</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>File</span><wbr><span><span>Handle</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">FileHandle</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>readWrite<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="../-closeable/index.html">Closeable</a></div><p class="paragraph">An open file for reading and writing; using either streaming and random access.</p><p class="paragraph">Use <a href="read.html">read</a> and <a href="write.html">write</a> to perform one-off random-access reads and writes. Use <a href="source.html">source</a>, <a href="sink.html">sink</a>, and <a href="appending-sink.html">appendingSink</a> for streaming reads and writes.</p><p class="paragraph">File handles must be closed when they are no longer needed. It is an error to read, write, or create streams after a file handle is closed. The operating system resources held by a file handle will be released once the file handle <strong>and</strong> all of its streams are closed.</p><p class="paragraph">Although this class offers both reading and writing APIs, file handle instances may be read-only or write-only. For example, a handle to a file on a read-only file system will throw an exception if a write is attempted.</p><p class="paragraph">File handles may be used by multiple threads concurrently. But the individual sources and sinks produced by a file handle are not safe for concurrent use.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-1007762080%2FConstructors%2F-1366145587" anchor-label="FileHandle" id="-1007762080%2FConstructors%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-file-handle.html"><span>File</span><wbr><span><span>Handle</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1007762080%2FConstructors%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">readWrite<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1168004492%2FProperties%2F-1366145587" anchor-label="lock" id="-1168004492%2FProperties%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lock.html"><span><span>lock</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1168004492%2FProperties%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="lock.html">lock</a><span class="token operator">: </span><a href="../-lock/index.html">Lock</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1072888754%2FProperties%2F-1366145587" anchor-label="readWrite" id="1072888754%2FProperties%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="read-write.html"><span>read</span><wbr><span><span>Write</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1072888754%2FProperties%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="read-write.html">readWrite</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">True if this handle supports both reading and writing. If this is false all write operations including <a href="write.html">write</a>, <a href="sink.html">sink</a>, <a href="resize.html">resize</a>, and <a href="flush.html">flush</a> will all throw <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-illegal-state-exception/index.html">IllegalStateException</a> if called.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-613171296%2FFunctions%2F-1366145587" anchor-label="appendingSink" id="-613171296%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="appending-sink.html"><span>appending</span><wbr><span><span>Sink</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-613171296%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="appending-sink.html"><span class="token function">appendingSink</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-sink/index.html">Sink</a></div><div class="brief "><p class="paragraph">Returns a sink that writes to this starting at the end. The returned sink must be closed when it is no longer needed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1738499971%2FFunctions%2F-1366145587" anchor-label="close" id="1738499971%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="close.html"><span><span>close</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1738499971%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="close.html"><span class="token function">close</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Closes this object and releases the resources it holds. It is an error to use an object after it has been closed. It is safe to close an object more than once.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="337088503%2FFunctions%2F-1366145587" anchor-label="flush" id="337088503%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="flush.html"><span><span>flush</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="337088503%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="flush.html"><span class="token function">flush</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Pushes all buffered bytes to their final destination.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1125248634%2FFunctions%2F-1366145587" anchor-label="position" id="-1125248634%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="position.html"><span><span>position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1125248634%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="position.html"><span class="token function">position</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sink<span class="token operator">: </span><a href="../-sink/index.html">Sink</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Returns the position of <a href="position.html">sink</a> in the file. The argument <a href="position.html">sink</a> must be either a sink produced by this file handle, or a <a href="../-buffered-sink/index.html">BufferedSink</a> that directly wraps such a sink. If the parameter is a <a href="../-buffered-sink/index.html">BufferedSink</a>, it adjusts for buffered bytes.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="position.html"><span class="token function">position</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">source<span class="token operator">: </span><a href="../-source/index.html">Source</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Returns the position of <a href="position.html">source</a> in the file. The argument <a href="position.html">source</a> must be either a source produced by this file handle, or a <a href="../-buffered-source/index.html">BufferedSource</a> that directly wraps such a source. If the parameter is a <a href="../-buffered-source/index.html">BufferedSource</a>, it adjusts for buffered bytes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1565356384%2FFunctions%2F-1366145587" anchor-label="read" id="1565356384%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="read.html"><span><span>read</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1565356384%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="read.html"><span class="token function">read</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fileOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">sink<span class="token operator">: </span><a href="../-buffer/index.html">Buffer</a><span class="token punctuation">, </span></span><span class="parameter ">byteCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Reads at least 1, and up to <a href="read.html">byteCount</a> bytes from this starting at <a href="read.html">fileOffset</a> and appends them to <a href="read.html">sink</a>. Returns the number of bytes read, or -1 if <a href="read.html">fileOffset</a> equals <a href="size.html">size</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="read.html"><span class="token function">read</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fileOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">array<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token punctuation">, </span></span><span class="parameter ">arrayOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">byteCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Reads at least 1, and up to <a href="read.html">byteCount</a> bytes from this starting at <a href="read.html">fileOffset</a> and copies them to <a href="read.html">array</a> at <a href="read.html">arrayOffset</a>. Returns the number of bytes read, or -1 if <a href="read.html">fileOffset</a> equals <a href="size.html">size</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="666427424%2FFunctions%2F-1366145587" anchor-label="reposition" id="666427424%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="reposition.html"><span><span>reposition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="666427424%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="reposition.html"><span class="token function">reposition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sink<span class="token operator">: </span><a href="../-sink/index.html">Sink</a><span class="token punctuation">, </span></span><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Change the position of <a href="reposition.html">sink</a> in the file to <a href="reposition.html">position</a>. The argument <a href="reposition.html">sink</a> must be either a sink produced by this file handle, or a <a href="../-buffered-sink/index.html">BufferedSink</a> that directly wraps such a sink. If the parameter is a <a href="../-buffered-sink/index.html">BufferedSink</a>, it emits for buffered bytes.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="reposition.html"><span class="token function">reposition</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">source<span class="token operator">: </span><a href="../-source/index.html">Source</a><span class="token punctuation">, </span></span><span class="parameter ">position<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Change the position of <a href="reposition.html">source</a> in the file to <a href="reposition.html">position</a>. The argument <a href="reposition.html">source</a> must be either a source produced by this file handle, or a <a href="../-buffered-source/index.html">BufferedSource</a> that directly wraps such a source. If the parameter is a <a href="../-buffered-source/index.html">BufferedSource</a>, it will skip or clear buffered bytes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1261334578%2FFunctions%2F-1366145587" anchor-label="resize" id="-1261334578%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="resize.html"><span><span>resize</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1261334578%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="resize.html"><span class="token function">resize</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">size<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Changes the number of bytes in this file to <a href="resize.html">size</a>. This will remove bytes from the end if the new size is smaller. It will add <code class="lang-kotlin">0</code> bytes to the end if it is larger.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1437787565%2FFunctions%2F-1366145587" anchor-label="sink" id="1437787565%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sink.html"><span><span>sink</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1437787565%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="sink.html"><span class="token function">sink</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fileOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">0</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-sink/index.html">Sink</a></div><div class="brief "><p class="paragraph">Returns a sink that writes to this starting at <a href="sink.html">fileOffset</a>. The returned sink must be closed when it is no longer needed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1373326430%2FFunctions%2F-1366145587" anchor-label="size" id="1373326430%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="size.html"><span><span>size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1373326430%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="size.html"><span class="token function">size</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Returns the total number of bytes in the file. This will change if the file size changes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="995161013%2FFunctions%2F-1366145587" anchor-label="source" id="995161013%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="source.html"><span><span>source</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="995161013%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="source.html"><span class="token function">source</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fileOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">0</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-source/index.html">Source</a></div><div class="brief "><p class="paragraph">Returns a source that reads from this starting at <a href="source.html">fileOffset</a>. The returned source must be closed when it is no longer needed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="253760156%2FFunctions%2F-1366145587" anchor-label="write" id="253760156%2FFunctions%2F-1366145587" data-filterable-set=":okio/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="write.html"><span><span>write</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="253760156%2FFunctions%2F-1366145587"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="write.html"><span class="token function">write</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fileOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">source<span class="token operator">: </span><a href="../-buffer/index.html">Buffer</a><span class="token punctuation">, </span></span><span class="parameter ">byteCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Removes <a href="write.html">byteCount</a> bytes from <a href="write.html">source</a> and writes them to this at <a href="write.html">fileOffset</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="write.html"><span class="token function">write</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">fileOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">array<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token punctuation">, </span></span><span class="parameter ">arrayOffset<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">byteCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Reads <a href="write.html">byteCount</a> bytes from <a href="write.html">array</a> and writes them to this at <a href="write.html">fileOffset</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
