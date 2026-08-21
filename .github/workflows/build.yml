@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v6
+        uses: gradle/actions/wrapper-validation@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - uses: actions/setup-java@v5
         with:
@@ -57,7 +57,7 @@ jobs:
           distribution: 'zulu'
           java-version-file: .github/workflows/.java-version
 
-      - uses: gradle/actions/setup-gradle@v6
+      - uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -75,7 +75,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v6
+        uses: gradle/actions/wrapper-validation@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - uses: actions/setup-java@v5
         with:
@@ -99,7 +99,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v6
+        uses: gradle/actions/wrapper-validation@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - uses: actions/setup-java@v5
         with:
