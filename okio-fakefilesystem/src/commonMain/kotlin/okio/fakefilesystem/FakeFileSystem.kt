@@ -23,10 +23,12 @@ import okio.ArrayIndexOutOfBoundsException
 import okio.Buffer
 import okio.ByteString
 import okio.FileHandle
+import okio.FileLock
 import okio.FileMetadata
 import okio.FileNotFoundException
 import okio.FileSystem
 import okio.IOException
+import okio.LockMode
 import okio.Path
 import okio.Path.Companion.toPath
 import okio.Sink
@@ -102,6 +104,9 @@ class FakeFileSystem private constructor(
 
   /** Files that are currently open and need to be closed to avoid resource leaks. */
   private val openFiles = mutableListOf<OpenFile>()
+
+  /** Lock coordination points. */
+  private val locks = mutableMapOf<Path, FakeFileSystemLock>()
 
   /** Forbid all access after [close]. */
   private var closed = false
@@ -804,4 +809,26 @@ class FakeFileSystem private constructor(
   }
 
   override fun toString() = "FakeFileSystem"
+
+  /**
+   * Obtain an Exclusive or Shared Lock on [path].
+   *
+   * @throws IOException if [path] does not exist, the FileSystem or the path does not
+   * support file locking, or the lock cannot be acquired. This method does not wait for the lock
+   * to become available.
+   */
+  @Throws(IOException::class)
+  override fun lock(
+    path: Path,
+    mode: LockMode,
+  ): FileLock {
+    val canonicalPath = canonicalizeInternal(path)
+    return locks.getOrPut(canonicalPath) {
+      FakeFileSystemLock(canonicalPath)
+    }.lock(mode)
+  }
+}
+
+expect class FakeFileSystemLock constructor(path: Path) {
+  fun lock(mode: LockMode): FileLock
 }

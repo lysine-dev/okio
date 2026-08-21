@@ -17,6 +17,9 @@ package okio
 
 import java.io.InterruptedIOException
 import java.io.RandomAccessFile
+import java.nio.channels.FileChannel
+import java.nio.channels.OverlappingFileLockException
+import java.nio.file.StandardOpenOption
 import okio.Path.Companion.toOkioPath
 
 /**
@@ -143,6 +146,26 @@ internal open class JvmSystemFileSystem : FileSystem() {
     throw IOException("unsupported")
   }
 
+  @Suppress("NewApi")
+  @Throws(IOException::class)
+  override fun lock(
+    path: Path,
+    mode: LockMode,
+  ): FileLock = lock(path.toNioPath(), mode)
+
+  class JvmFileLock(val fileLock: java.nio.channels.FileLock) : FileLock {
+    override val isShared: Boolean
+      get() = fileLock.isShared
+    override val isValid: Boolean
+      get() = fileLock.isValid
+
+    override fun close() {
+      // Close the channel, since it has to be open anyway.
+      // And avoids a possible IOException.
+      fileLock.channel().close()
+    }
+  }
+
   override fun toString() = "JvmSystemFileSystem"
 
   // We have to implement existence verification non-atomically on the JVM because there's no API
@@ -153,5 +176,27 @@ internal open class JvmSystemFileSystem : FileSystem() {
 
   private fun Path.requireCreate() {
     if (exists(this)) throw IOException("$this already exists.")
+  }
+
+  companion object {
+    @Suppress("NewApi")
+    @Throws(IOException::class)
+    fun lock(
+      nioPath: java.nio.file.Path,
+      mode: LockMode,
+    ): FileLock {
+      val channel = FileChannel.open(
+        nioPath,
+        if (mode == LockMode.Exclusive) StandardOpenOption.APPEND else StandardOpenOption.READ,
+      )
+
+      try {
+        val lock = channel.lock(0, Long.MAX_VALUE, mode == LockMode.Shared)
+
+        return JvmFileLock(lock)
+      } catch (e: OverlappingFileLockException) {
+        throw IOException("Could not lock $nioPath", e)
+      }
+    }
   }
 }

@@ -294,5 +294,8 @@ object TestUtil {
     return reversed.toShort()
   }
 
-  fun assumeNotWindows() = Assume.assumeFalse(System.getProperty("os.name").lowercase(Locale.getDefault()).contains("win"))
+  fun assumeNotWindows() = Assume.assumeFalse(isWindows())
+
+  fun isWindows(): Boolean =
+    System.getProperty("os.name").lowercase(Locale.getDefault()).contains("win")
 }
