@@ -30,7 +30,6 @@ import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Timeout
 
-
 @Timeout(5, unit = TimeUnit.SECONDS)
 class PipeKotlinTest {
 

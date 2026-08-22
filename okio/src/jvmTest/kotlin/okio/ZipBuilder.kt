@@ -17,7 +17,6 @@ package okio
 
 import org.junit.jupiter.api.Assumptions.assumeTrue
 
-
 /**
  * Execute the `zip` command line program to create reference zip files for testing.
  *

@@ -59,13 +59,13 @@ class ConstantTimeEqualsTimingTest {
       if (ctMatch > ctMismatch) ctMatch.toDouble() / ctMismatch else ctMismatch.toDouble() / ctMatch
     assertTrue(
       ctRatio < 3.0,
-      "CT(match)=$ctMatch ns and CT(mismatch)=$ctMismatch ns differ by ${ctRatio}x (expected <3x)"
+      "CT(match)=$ctMatch ns and CT(mismatch)=$ctMismatch ns differ by ${ctRatio}x (expected <3x)",
     )
 
     // normal(mismatch) must be significantly faster than CT(mismatch): normal short-circuits at byte 0.
     assertTrue(
       normalMismatch * 50L < ctMismatch,
-      "normal(mismatch)=$normalMismatch ns should be <2% of CT(mismatch)=$ctMismatch ns (short-circuit at byte 0)"
+      "normal(mismatch)=$normalMismatch ns should be <2% of CT(mismatch)=$ctMismatch ns (short-circuit at byte 0)",
     )
   }
 

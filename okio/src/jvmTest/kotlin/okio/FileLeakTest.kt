@@ -33,8 +33,8 @@ import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
 import okio.internal.ResourceFileSystem
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Assumptions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 private const val PROC_SELF_FD = "/proc/self/fd"

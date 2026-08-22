@@ -26,11 +26,11 @@ import kotlin.time.Duration.Companion.minutes
 import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
 
-class FakeWindowsFileSystemTest: FakeFileSystemTest(fakeConfig("C:\\".toPath()) {emulateWindows()})
+class FakeWindowsFileSystemTest : FakeFileSystemTest(fakeConfig("C:\\".toPath()) { emulateWindows() })
 
-class FakeUnixFileSystemTest: FakeFileSystemTest(fakeConfig("/".toPath()) {emulateUnix()})
+class FakeUnixFileSystemTest : FakeFileSystemTest(fakeConfig("/".toPath()) { emulateUnix() })
 
-class StrictFakeFileSystemTest : FakeFileSystemTest(fakeConfig( "/".toPath()) {})
+class StrictFakeFileSystemTest : FakeFileSystemTest(fakeConfig("/".toPath()) {})
 
 private fun fakeConfig(temporaryDirectory: Path, fsBlock: FakeFileSystem.() -> Unit): FakeFileSystemTest.Config {
   val clock = FakeClock()
@@ -490,5 +490,4 @@ abstract class FakeFileSystemTest internal constructor(config: Config) : Abstrac
   )
 
   internal class Config(val fakeClock: FakeClock, val fakeFileSystem: FakeFileSystem, val temporaryDirectory: Path)
-
 }
