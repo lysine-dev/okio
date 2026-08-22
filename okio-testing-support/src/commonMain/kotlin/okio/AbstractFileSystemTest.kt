@@ -1736,6 +1736,20 @@ abstract class AbstractFileSystemTest(
     }
   }
 
+  @Test fun fileHandleResizeToZero() {
+    val path = base / "file-handle-resize-to-zero"
+    fileSystem.openReadWrite(path).use { handle ->
+
+      handle.sink().buffer().use { sink ->
+        sink.writeUtf8("abcde")
+      }
+
+      handle.resize(0L)
+
+      assertEquals(0L, handle.size())
+    }
+  }
+
   @Test fun fileHandleResizeLarger() {
     val path = base / "file-handle-resize-larger"
     fileSystem.openReadWrite(path).use { handle ->
