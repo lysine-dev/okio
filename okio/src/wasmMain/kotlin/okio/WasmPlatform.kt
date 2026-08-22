@@ -17,3 +17,9 @@ package okio
 
 internal actual val PLATFORM_DIRECTORY_SEPARATOR: String
   get() = "/"
+
+// FIXME Should wasmJs be shared with js?
+//  Maybe create a new webMain source set?
+//  And what about wasmWasi? I don't think that wasi provides any APIS to get these..
+internal actual fun getCurrentThreadId() = 0L
+internal actual fun getAvailableProcessors() = 1
