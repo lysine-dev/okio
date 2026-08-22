@@ -21,7 +21,6 @@ import java.io.File
 import java.nio.file.Files
 import kotlin.text.Charsets.UTF_8
 import okio.TestUtil.SEGMENT_SIZE
-import okio.TestUtil.newFile
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.fail

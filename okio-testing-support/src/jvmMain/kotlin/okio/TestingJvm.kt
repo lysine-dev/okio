@@ -15,6 +15,10 @@
  */
 package okio
 
+import java.io.File
+
 actual fun isBrowser() = false
 
 actual fun getEnv(name: String): String? = System.getenv(name)
+
+fun File.newFile(): File = File.createTempFile("tmp_file", null, this)

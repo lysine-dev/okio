@@ -25,7 +25,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.text.Charsets.UTF_8
-import okio.TestUtil.newFile
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 
