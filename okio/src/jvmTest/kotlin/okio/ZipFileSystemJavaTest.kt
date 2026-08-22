@@ -19,7 +19,7 @@ import app.cash.burst.InterceptTest
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import okio.Path.Companion.toPath
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ZipFileSystemJavaTest {
   private val fileSystem = FileSystem.SYSTEM

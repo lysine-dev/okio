@@ -15,6 +15,7 @@
  */
 package okio
 
+import java.io.File
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.nio.channels.ReadableByteChannel
@@ -24,14 +25,13 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.text.Charsets.UTF_8
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 
 /** Test interop between our beloved Okio and java.nio.  */
 class NioTest {
-  @JvmField @Rule
-  var temporaryFolder = TemporaryFolder()
+  @TempDir
+  lateinit var temporaryFolder: File
 
   @Test
   fun sourceIsOpen() {

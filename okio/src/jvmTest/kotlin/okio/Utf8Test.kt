@@ -24,10 +24,10 @@ import kotlin.text.Charsets.UTF_8
 import okio.ByteString.Companion.decodeHex
 import okio.ByteString.Companion.of
 import okio.TestUtil.SEGMENT_SIZE
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class Utf8Test {
   @Test

@@ -24,7 +24,7 @@ import kotlin.test.assertFalse
 import kotlin.test.fail
 import kotlin.time.Clock
 import okio.FileSystem.Companion.asOkioFileSystem
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * This test will run using [NioSystemFileSystem] by default. If [java.nio.file.Files] is not found

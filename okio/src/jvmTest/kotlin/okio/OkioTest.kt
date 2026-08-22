@@ -17,20 +17,19 @@ package okio
 
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.nio.file.Files
 import kotlin.text.Charsets.UTF_8
 import okio.TestUtil.SEGMENT_SIZE
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 
 class OkioTest {
-  @JvmField
-  @Rule
-  var temporaryFolder = TemporaryFolder()
+  @TempDir
+  lateinit var temporaryFolder: File
 
   @Test
   fun readWriteFile() {

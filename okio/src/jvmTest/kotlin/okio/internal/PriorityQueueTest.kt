@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.nanoseconds
 import okio.AsyncTimeout
 import okio.PriorityQueue
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class PriorityQueueTest {
   private val TIME_UNIT = TimeUnit.NANOSECONDS

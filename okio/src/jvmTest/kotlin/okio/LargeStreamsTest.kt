@@ -24,8 +24,8 @@ import okio.ByteString.Companion.decodeHex
 import okio.HashingSink.Companion.sha256
 import okio.TestUtil.SEGMENT_SIZE
 import okio.TestUtil.randomSource
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 /** Slow running tests that run a large amount of data through a stream.  */
 class LargeStreamsTest {

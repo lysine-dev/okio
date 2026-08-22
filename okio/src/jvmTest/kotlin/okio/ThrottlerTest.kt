@@ -18,8 +18,8 @@ package okio
 import app.cash.burst.InterceptTest
 import kotlin.test.Ignore
 import okio.TestUtil.randomSource
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 @Ignore("These tests are flaky and fail on slower hardware, need to be improved")
 class ThrottlerTest {
@@ -35,7 +35,7 @@ class ThrottlerTest {
   private val executorService = TestExecutor(threads)
   private var stopwatch = Stopwatch()
 
-  @Before fun setup() {
+  @BeforeEach fun setup() {
     throttler.bytesPerSecond(4 * size, 4096, 8192)
     throttlerSlow.bytesPerSecond(2 * size, 4096, 8192)
     stopwatch = Stopwatch()

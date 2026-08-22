@@ -26,8 +26,8 @@ import java.util.zip.Inflater
 import java.util.zip.InflaterInputStream
 import okio.TestUtil.SEGMENT_SIZE
 import okio.TestUtil.randomBytes
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class DeflaterSinkTest {
   @Test
@@ -40,7 +40,7 @@ class DeflaterSinkTest {
     deflaterSink.write(data, data.size)
     deflaterSink.close()
     val inflated = inflate(sink)
-    Assert.assertEquals(original, inflated.readUtf8())
+    Assertions.assertEquals(original, inflated.readUtf8())
   }
 
   @Test
@@ -53,7 +53,7 @@ class DeflaterSinkTest {
     deflaterSink.write(data, data.size)
     deflaterSink.flush()
     val inflated = inflate(sink)
-    Assert.assertEquals(original, inflated.readUtf8())
+    Assertions.assertEquals(original, inflated.readUtf8())
   }
 
   @Test
@@ -66,7 +66,7 @@ class DeflaterSinkTest {
     deflaterSink.write(data, data.size)
     deflaterSink.close()
     val inflated = inflate(sink)
-    Assert.assertEquals(original, inflated.readUtf8())
+    Assertions.assertEquals(original, inflated.readUtf8())
   }
 
   @Test
@@ -79,7 +79,7 @@ class DeflaterSinkTest {
     deflaterSink.write(data, data.size)
     deflaterSink.close()
     val inflated = inflate(sink)
-    Assert.assertEquals(original, inflated.readByteString())
+    Assertions.assertEquals(original, inflated.readByteString())
   }
 
   @Test
@@ -91,7 +91,7 @@ class DeflaterSinkTest {
     val byteCount = SEGMENT_SIZE * 4
     deflaterSink.write(Buffer().writeUtf8("a".repeat(byteCount)), byteCount.toLong())
     deflaterSink.close()
-    Assert.assertEquals("a".repeat(byteCount), inflate(buffer).readUtf8(byteCount.toLong()))
+    Assertions.assertEquals("a".repeat(byteCount), inflate(buffer).readUtf8(byteCount.toLong()))
   }
 
   @Test
@@ -107,7 +107,7 @@ class DeflaterSinkTest {
       deflaterSink.close()
       sink.skip(i.toLong())
       val inflated = inflate(sink)
-      Assert.assertEquals(original, inflated.readUtf8())
+      Assertions.assertEquals(original, inflated.readUtf8())
     }
   }
 
@@ -127,9 +127,9 @@ class DeflaterSinkTest {
     deflaterSink.write(Buffer().writeUtf8("a".repeat(SEGMENT_SIZE)), SEGMENT_SIZE.toLong())
     try {
       deflaterSink.close()
-      Assert.fail()
+      Assertions.fail()
     } catch (expected: IOException) {
-      Assert.assertEquals("first", expected.message)
+      Assertions.assertEquals("first", expected.message)
     }
     mockSink.assertLogContains("close()")
   }

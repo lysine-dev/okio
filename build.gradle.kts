@@ -138,6 +138,10 @@ subprojects {
     }
   }
 
+  tasks.withType<Test> {
+    useJUnitPlatform()
+  }
+
   tasks.withType<AbstractKotlinCompile<*>>().configureEach {
     compilerOptions.apply {
       freeCompilerArgs.add("-Xexpect-actual-classes")

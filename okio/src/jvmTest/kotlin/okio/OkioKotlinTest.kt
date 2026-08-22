@@ -24,13 +24,12 @@ import java.io.File
 import java.net.Socket
 import java.nio.file.StandardOpenOption
 import java.nio.file.StandardOpenOption.APPEND
-import org.junit.Ignore
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 
 class OkioKotlinTest {
-  @get:Rule val temp = TemporaryFolder()
+  @TempDir lateinit var temp: File
 
   @Test fun outputStreamSink() {
     val baos = ByteArrayOutputStream()
@@ -96,11 +95,10 @@ class OkioKotlinTest {
     assertThat(buffer.readUtf8()).isEqualTo("a")
   }
 
-  @Ignore("Not sure how to test this")
+  @Disabled("Not sure how to test this")
   @Test
   fun pathSourceWithOptions() {
-    val folder = temp.newFolder()
-    val file = File(folder, "new.txt")
+    val file = File(temp, "new.txt")
     file.toPath().source(StandardOpenOption.CREATE_NEW)
     // This still throws NoSuchFileException...
   }
