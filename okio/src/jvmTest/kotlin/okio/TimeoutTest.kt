@@ -16,15 +16,13 @@
 package okio
 
 import java.util.concurrent.TimeUnit
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.Timeout as JUnitTimeout
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Timeout
 
+@Timeout(5, unit = TimeUnit.SECONDS)
 class TimeoutTest {
-  @JvmField @Rule
-  val timeout = JUnitTimeout(5, TimeUnit.SECONDS)
 
   @Test fun intersectWithReturnsAValue() {
     val timeoutA = Timeout()

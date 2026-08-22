@@ -19,9 +19,9 @@ import java.io.EOFException
 import java.io.IOException
 import kotlin.text.Charsets.UTF_8
 import okio.TestUtil.SEGMENT_SIZE
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
 
 /**
  * Tests solely for the behavior of RealBufferedSource's implementation. For generic

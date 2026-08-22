@@ -19,7 +19,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isGreaterThan
 import java.util.concurrent.TimeUnit
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ThrottlerTakeTest {
   private var nowNanos = 0L

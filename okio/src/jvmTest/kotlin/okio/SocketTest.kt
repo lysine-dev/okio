@@ -34,10 +34,10 @@ import kotlin.test.assertFailsWith
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.measureTime
 import okio.internal.DefaultSocket
-import org.junit.After
-import org.junit.Assume.assumeTrue
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assumptions.assumeTrue
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 @Burst
 class SocketTest(val factory: Factory = Factory.Default) {
@@ -45,7 +45,7 @@ class SocketTest(val factory: Factory = Factory.Default) {
   private lateinit var peerSocket: Socket
   private lateinit var peer: AsyncSocket
 
-  @Before
+  @BeforeEach
   fun setUp() {
     val socketPair = factory.createSocketPair()
     this.socket = socketPair[0]
@@ -53,7 +53,7 @@ class SocketTest(val factory: Factory = Factory.Default) {
     this.peer = AsyncSocket(peerSocket)
   }
 
-  @After
+  @AfterEach
   fun tearDown() {
     peer.close()
     socket.source.close()

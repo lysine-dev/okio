@@ -16,15 +16,15 @@
 package okio
 
 import app.cash.burst.Burst
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertNotSame
 import kotlin.test.assertSame
-import kotlin.test.assertTrue
 import okio.Buffer.UnsafeCursor
 import okio.TestUtil.deepCopy
-import org.junit.Assume.assumeTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assumptions.assumeTrue
+import org.junit.jupiter.api.Test
 
 @Burst
 class BufferCursorKotlinTest(

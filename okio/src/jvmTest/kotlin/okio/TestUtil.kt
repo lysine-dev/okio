@@ -15,6 +15,7 @@
  */
 package okio
 
+import java.io.File
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
@@ -25,13 +26,14 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import okio.ByteString.Companion.encodeUtf8
-import org.junit.Assume
+import org.junit.jupiter.api.Assumptions
 
 object TestUtil {
   // Necessary to make an internal member visible to Java.
   @JvmField val SEGMENT_POOL_MAX_SIZE = SegmentPool.MAX_SIZE
   const val SEGMENT_SIZE = Segment.SIZE
   const val REPLACEMENT_CODE_POINT: Int = okio.REPLACEMENT_CODE_POINT
+  const val TMP_FILE_PREFIX = "tmp_file"
 
   @JvmStatic fun segmentPoolByteCount() = SegmentPool.byteCount
 
@@ -294,5 +296,7 @@ object TestUtil {
     return reversed.toShort()
   }
 
-  fun assumeNotWindows() = Assume.assumeFalse(System.getProperty("os.name").lowercase(Locale.getDefault()).contains("win"))
+  fun assumeNotWindows() = Assumptions.assumeFalse(System.getProperty("os.name").lowercase(Locale.getDefault()).contains("win"))
+
+  fun File.newFile(): File = File.createTempFile(TMP_FILE_PREFIX, null, this)
 }

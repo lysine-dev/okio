@@ -134,7 +134,6 @@ kotlin {
       dependsOn(zlibTest)
       dependencies {
         implementation(libs.test.junit5)
-        implementation(libs.test.junit.vintage)
         implementation(libs.test.jimfs)
       }
     }
@@ -237,6 +236,10 @@ kotlin {
 }
 
 tasks {
+  withType<Test> {
+    useJUnitPlatform()
+  }
+
   val jvmJar by getting(Jar::class) {
     // BundleTaskExtension() crashes unless there's a 'main' source set.
     sourceSets.create(SourceSet.MAIN_SOURCE_SET_NAME)

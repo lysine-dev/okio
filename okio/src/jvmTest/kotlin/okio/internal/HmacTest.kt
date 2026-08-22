@@ -20,8 +20,8 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import kotlin.random.Random
 import okio.ByteString
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 /**
  * Check the [Hmac] implementation against the reference [Mac] JVM implementation.
@@ -43,7 +43,7 @@ class HmacTest(
     mac.update(bytes)
     val hmacValue = mac.digest()
 
-    Assert.assertArrayEquals(expected, hmacValue)
+    Assertions.assertArrayEquals(expected, hmacValue)
   }
 
   @Test
@@ -53,7 +53,7 @@ class HmacTest(
     }
     val hmacValue = mac.digest()
 
-    Assert.assertArrayEquals(expected, hmacValue)
+    Assertions.assertArrayEquals(expected, hmacValue)
   }
 }
 
