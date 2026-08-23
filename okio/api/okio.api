@@ -458,6 +458,12 @@ public abstract class okio/FileHandle : java/io/Closeable {
 	public final fun write (J[BII)V
 }
 
+public abstract interface class okio/FileLock : java/lang/AutoCloseable {
+	public fun getFileHandle ()Lokio/FileHandle;
+	public abstract fun isShared ()Z
+	public abstract fun isValid ()Z
+}
+
 public final class okio/FileMetadata {
 	public fun <init> ()V
 	public fun <init> (ZZLokio/Path;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Long;Ljava/lang/Long;Ljava/util/Map;)V
@@ -512,6 +518,8 @@ public abstract class okio/FileSystem : java/io/Closeable {
 	public final fun listRecursively (Lokio/Path;)Lkotlin/sequences/Sequence;
 	public fun listRecursively (Lokio/Path;Z)Lkotlin/sequences/Sequence;
 	public static synthetic fun listRecursively$default (Lokio/FileSystem;Lokio/Path;ZILjava/lang/Object;)Lkotlin/sequences/Sequence;
+	public fun lock (Lokio/Path;Lokio/LockMode;)Lokio/FileLock;
+	public static synthetic fun lock$default (Lokio/FileSystem;Lokio/Path;Lokio/LockMode;ILjava/lang/Object;)Lokio/FileLock;
 	public final fun metadata (Lokio/Path;)Lokio/FileMetadata;
 	public abstract fun metadataOrNull (Lokio/Path;)Lokio/FileMetadata;
 	public abstract fun openReadOnly (Lokio/Path;)Lokio/FileHandle;
@@ -662,6 +670,14 @@ public final class okio/InflaterSource : okio/Source {
 	public final fun readOrInflate (Lokio/Buffer;J)J
 	public final fun refill ()Z
 	public fun timeout ()Lokio/Timeout;
+}
+
+public final class okio/LockMode : java/lang/Enum {
+	public static final field Exclusive Lokio/LockMode;
+	public static final field Shared Lokio/LockMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lokio/LockMode;
+	public static fun values ()[Lokio/LockMode;
 }
 
 public final class okio/Okio {

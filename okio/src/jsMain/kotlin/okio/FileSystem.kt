@@ -98,6 +98,13 @@ actual abstract class FileSystem : Closeable {
   actual override fun close() {
   }
 
+  actual open fun lock(
+    path: Path,
+    mode: LockMode,
+  ): FileLock {
+    throw IOException("This file system does not support locking.")
+  }
+
   actual companion object {
     actual val SYSTEM_TEMPORARY_DIRECTORY: Path = tmpdir.toPath()
   }

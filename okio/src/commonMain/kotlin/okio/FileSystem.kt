@@ -391,6 +391,19 @@ expect abstract class FileSystem() : Closeable {
   @Throws(IOException::class)
   override fun close()
 
+  /**
+   * Obtain an Exclusive or Shared Lock on [path].
+   *
+   * @throws IOException if [path] does not exist, the FileSystem or the path does not
+   * support file locking, or the lock cannot be acquired. This method does not wait for the lock
+   * to become available.
+   */
+  @Throws(IOException::class)
+  open fun lock(
+    path: Path,
+    mode: LockMode = LockMode.Exclusive,
+  ): FileLock
+
   companion object {
     /**
      * Returns a writable temporary directory on [SYSTEM].
@@ -407,4 +420,17 @@ expect abstract class FileSystem() : Closeable {
      */
     val SYSTEM_TEMPORARY_DIRECTORY: Path
   }
+}
+
+enum class LockMode {
+  Exclusive,
+  Shared,
+}
+
+interface FileLock : AutoCloseable {
+  val isShared: Boolean
+  val isValid: Boolean
+
+  val fileHandle: FileHandle
+    get() = TODO()
 }

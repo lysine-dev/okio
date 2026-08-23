@@ -117,6 +117,14 @@ actual abstract class FileSystem : Closeable {
   actual override fun close() {
   }
 
+  @Throws(IOException::class)
+  actual open fun lock(
+    path: Path,
+    mode: LockMode,
+  ): FileLock {
+    throw IOException("This file system does not support locking.")
+  }
+
   actual companion object {
     /**
      * The current process's host file system. Use this instance directly, or dependency inject a
