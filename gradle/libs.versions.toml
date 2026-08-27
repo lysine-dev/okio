@@ -28,5 +28,5 @@ tapmoc-gradle-plugin = { module =  "com.gradleup.tapmoc:com.gradleup.tapmoc.grad
 test-assertk = "com.willowtreeapps.assertk:assertk:0.28.1"
 test-jimfs = "com.google.jimfs:jimfs:1.3.2"
 test-junit = { module = "junit:junit", version = "4.13.2" }
-test-junit5 = { module = "org.junit.jupiter:junit-jupiter-api", version = "5.13.4" }
+test-junit5 = { module = "org.junit.jupiter:junit-jupiter-api", version = "5.14.4" }
 vanniktech-publish-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.37.0" }
