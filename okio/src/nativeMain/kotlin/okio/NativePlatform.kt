@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Square, Inc.
+ * Copyright (C) 2026 Square, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,14 @@
  */
 package okio
 
-internal actual object SegmentPool {
-  actual val MAX_SIZE: Int = 0
+import kotlin.experimental.ExperimentalNativeApi
+import kotlin.native.concurrent.ObsoleteWorkersApi
+import kotlin.native.concurrent.Worker
 
-  actual val byteCount: Int = 0
+@OptIn(ObsoleteWorkersApi::class, ExperimentalStdlibApi::class)
+internal actual fun getCurrentThreadId() =
+  Worker.current.platformThreadId.toLong()
 
-  actual fun take(): Segment = Segment()
-
-  actual fun recycle(segment: Segment) {
-  }
-}
+@OptIn(ExperimentalNativeApi::class)
+internal actual fun getAvailableProcessors() =
+  Platform.getAvailableProcessors()
