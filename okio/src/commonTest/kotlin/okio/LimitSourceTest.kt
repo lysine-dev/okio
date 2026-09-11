@@ -15,31 +15,29 @@
  */
 package okio
 
-import app.cash.burst.Burst
 import assertk.assertThat
 import assertk.assertions.hasMessage
 import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
-import kotlin.test.Test
+import de.infix.testBalloon.framework.core.testSuite
 import kotlin.test.assertFailsWith
 
-@Burst
-internal class LimitSourceTest {
-  @Test
-  fun happyPath(throwIfSourceIsLonger: Boolean) {
-    val delegate = Buffer().writeUtf8("abcdefghijklmnop")
-    val limitSource = delegate.limit(16L, throwIfSourceIsLonger = throwIfSourceIsLonger)
-    val buffer = Buffer()
-    assertThat(limitSource.read(buffer, 10L)).isEqualTo(10L)
-    assertThat(buffer.readUtf8()).isEqualTo("abcdefghij")
-    assertThat(limitSource.read(buffer, 10L)).isEqualTo(6L)
-    assertThat(buffer.readUtf8()).isEqualTo("klmnop")
-    assertThat(limitSource.read(buffer, 10L)).isEqualTo(-1L)
-    assertThat(buffer.readUtf8()).isEqualTo("")
+val LimitSourceTest by testSuite {
+  for (throwIfSourceIsLonger in listOf(true, false)) {
+    test("happyPath throwIfSourceIsLonger=$throwIfSourceIsLonger") {
+      val delegate = Buffer().writeUtf8("abcdefghijklmnop")
+      val limitSource = delegate.limit(16L, throwIfSourceIsLonger = throwIfSourceIsLonger)
+      val buffer = Buffer()
+      assertThat(limitSource.read(buffer, 10L)).isEqualTo(10L)
+      assertThat(buffer.readUtf8()).isEqualTo("abcdefghij")
+      assertThat(limitSource.read(buffer, 10L)).isEqualTo(6L)
+      assertThat(buffer.readUtf8()).isEqualTo("klmnop")
+      assertThat(limitSource.read(buffer, 10L)).isEqualTo(-1L)
+      assertThat(buffer.readUtf8()).isEqualTo("")
+    }
   }
 
-  @Test
-  fun delegateTooLong() {
+  test("delegateTooLong") {
     val delegate = Buffer().writeUtf8("abcdefghijklmnopqr")
     val limitSource = delegate.limit(16L)
     val buffer = Buffer()
@@ -51,8 +49,7 @@ internal class LimitSourceTest {
     assertThat(buffer.readUtf8()).isEqualTo("")
   }
 
-  @Test
-  fun delegateTooLongFencepost() {
+  test("delegateTooLongFencepost") {
     val delegate = Buffer().writeUtf8("abcdefghijklmnop")
     val limitSource = delegate.limit(10L)
     val buffer = Buffer()
@@ -62,8 +59,7 @@ internal class LimitSourceTest {
     assertThat(buffer.readUtf8()).isEmpty()
   }
 
-  @Test
-  fun delegateTooLongThrowIfSourceIsLonger() {
+  test("delegateTooLongThrowIfSourceIsLonger") {
     val delegate = Buffer().writeUtf8("abcdefghijklmnopqr")
     val limitSource = delegate.limit(16L, throwIfSourceIsLonger = true)
     val buffer = Buffer()
@@ -83,8 +79,7 @@ internal class LimitSourceTest {
     assertThat(buffer.readUtf8()).isEmpty() // Doesn't produce any bytes!
   }
 
-  @Test
-  fun delegateTooLongThrowIfSourceIsLongerFencepost() {
+  test("delegateTooLongThrowIfSourceIsLongerFencepost") {
     val delegate = Buffer().writeUtf8("abcdefghijklmnop")
     val limitSource = delegate.limit(10L, throwIfSourceIsLonger = true)
     val buffer = Buffer()
@@ -104,38 +99,39 @@ internal class LimitSourceTest {
     assertThat(buffer.readUtf8()).isEmpty() // Doesn't produce any bytes!
   }
 
-  @Test
-  fun delegateTooShort(throwIfSourceIsLonger: Boolean) {
-    val delegate = Buffer().writeUtf8("abcdefghijklmn")
-    val limitSource = delegate.limit(16L, throwIfSourceIsLonger = throwIfSourceIsLonger)
-    val buffer = Buffer()
-    assertThat(limitSource.read(buffer, 10L)).isEqualTo(10L)
-    assertThat(buffer.readUtf8()).isEqualTo("abcdefghij")
-    assertThat(limitSource.read(buffer, 10L)).isEqualTo(4L)
-    assertThat(buffer.readUtf8()).isEqualTo("klmn")
+  for (throwIfSourceIsLonger in listOf(true, false)) {
+    test("delegateTooShort throwIfSourceIsLonger=$throwIfSourceIsLonger") {
+      val delegate = Buffer().writeUtf8("abcdefghijklmn")
+      val limitSource = delegate.limit(16L, throwIfSourceIsLonger = throwIfSourceIsLonger)
+      val buffer = Buffer()
+      assertThat(limitSource.read(buffer, 10L)).isEqualTo(10L)
+      assertThat(buffer.readUtf8()).isEqualTo("abcdefghij")
+      assertThat(limitSource.read(buffer, 10L)).isEqualTo(4L)
+      assertThat(buffer.readUtf8()).isEqualTo("klmn")
 
-    val e1 = assertFailsWith<EOFException> {
-      limitSource.read(buffer, 10L)
-    }
-    assertThat(e1).hasMessage("expected 16 bytes but got 14")
+      val e1 = assertFailsWith<EOFException> {
+        limitSource.read(buffer, 10L)
+      }
+      assertThat(e1).hasMessage("expected 16 bytes but got 14")
 
-    val e2 = assertFailsWith<EOFException> {
-      limitSource.read(buffer, 10L)
+      val e2 = assertFailsWith<EOFException> {
+        limitSource.read(buffer, 10L)
+      }
+      assertThat(e2).hasMessage("expected 16 bytes but got 14")
     }
-    assertThat(e2).hasMessage("expected 16 bytes but got 14")
   }
 
-  @Test
-  fun byteCountNotNegative(throwIfSourceIsLonger: Boolean) {
-    val source = Buffer()
-    val e = assertFailsWith<IllegalArgumentException> {
-      source.limit(-2L, throwIfSourceIsLonger = throwIfSourceIsLonger)
+  for (throwIfSourceIsLonger in listOf(true, false)) {
+    test("byteCountNotNegative throwIfSourceIsLonger=$throwIfSourceIsLonger") {
+      val source = Buffer()
+      val e = assertFailsWith<IllegalArgumentException> {
+        source.limit(-2L, throwIfSourceIsLonger = throwIfSourceIsLonger)
+      }
+      assertThat(e).hasMessage("byteCount < 0: -2")
     }
-    assertThat(e).hasMessage("byteCount < 0: -2")
   }
 
-  @Test
-  fun zeroByteTarget() {
+  test("zeroByteTarget") {
     val delegate = Buffer().writeUtf8("abcdefg")
     val limitSource = delegate.limit(0L)
     val buffer = Buffer()
@@ -145,8 +141,7 @@ internal class LimitSourceTest {
     assertThat(delegate.readUtf8()).isEqualTo("abcdefg")
   }
 
-  @Test
-  fun zeroByteTargetThrowIfSourceIsLonger() {
+  test("zeroByteTargetThrowIfSourceIsLonger") {
     val delegate = Buffer().writeUtf8("abcdefg")
     val limitSource = delegate.limit(0L, throwIfSourceIsLonger = true)
     val buffer = Buffer()
