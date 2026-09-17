@@ -15,12 +15,12 @@
  */
 package okio
 
-import app.cash.burst.Burst
 import assertk.assertThat
 import assertk.assertions.isBetween
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
+import de.infix.testBalloon.framework.core.testSuite
 import java.io.InterruptedIOException
 import java.net.InetAddress
 import java.net.InetSocketAddress
@@ -34,264 +34,235 @@ import kotlin.test.assertFailsWith
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.measureTime
 import okio.internal.DefaultSocket
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assumptions.assumeTrue
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 
-@Burst
-class SocketTest(val factory: Factory = Factory.Default) {
-  private lateinit var socket: Socket
-  private lateinit var peerSocket: Socket
-  private lateinit var peer: AsyncSocket
+val SocketTest by testSuite {
+  for (factory in SocketTestFactory.entries) {
+    testSuite(factory.name) {
+      testFixture { SocketFixture(factory) } asContextForEach {
+        test("happyPath") {
+          val bufferedSource = socket.source.buffer()
+          val bufferedSink = socket.sink.buffer()
 
-  @BeforeEach
-  fun setUp() {
-    val socketPair = factory.createSocketPair()
-    this.socket = socketPair[0]
-    this.peerSocket = socketPair[1]
-    this.peer = AsyncSocket(peerSocket)
-  }
+          peer.write("one")
+          assertThat(bufferedSource.readUtf8LineStrict()).isEqualTo("one")
 
-  @AfterEach
-  fun tearDown() {
-    peer.close()
-    socket.source.close()
-    try {
-      socket.sink.close()
-    } catch (_: IOException) {
-      // Ignore exception if data was left in 'sink'.
-    }
-  }
+          bufferedSink.writeUtf8("two\n")
+          bufferedSink.flush()
+          assertThat(peer.read()).isEqualTo("two")
 
-  @Test
-  fun happyPath() {
-    val bufferedSource = socket.source.buffer()
-    val bufferedSink = socket.sink.buffer()
+          peer.write("three")
+          assertThat(bufferedSource.readUtf8LineStrict()).isEqualTo("three")
 
-    peer.write("one")
-    assertThat(bufferedSource.readUtf8LineStrict()).isEqualTo("one")
+          bufferedSink.writeUtf8("four\n")
+          bufferedSink.flush()
+          assertThat(peer.read()).isEqualTo("four")
+        }
 
-    bufferedSink.writeUtf8("two\n")
-    bufferedSink.flush()
-    assertThat(peer.read()).isEqualTo("two")
+        test("sourceIsReadableAfterSinkIsClosed") {
+          peer.closeSource()
+          socket.sink.close()
 
-    peer.write("three")
-    assertThat(bufferedSource.readUtf8LineStrict()).isEqualTo("three")
+          peer.write("Hello")
+          assertThat(socket.source.buffer().readUtf8Line()).isEqualTo("Hello")
 
-    bufferedSink.writeUtf8("four\n")
-    bufferedSink.flush()
-    assertThat(peer.read()).isEqualTo("four")
-  }
+          socket.source.close()
+          peer.closeSink()
+        }
 
-  @Test
-  fun sourceIsReadableAfterSinkIsClosed() {
-    peer.closeSource()
-    socket.sink.close()
+        test("sinkIsWritableAfterSourceIsClosed") {
+          peer.closeSink()
+          socket.source.close()
 
-    peer.write("Hello")
-    assertThat(socket.source.buffer().readUtf8Line()).isEqualTo("Hello")
+          val bufferedSink = socket.sink.buffer()
+          bufferedSink.writeUtf8("Hello\n")
+          bufferedSink.flush()
+          assertThat(peer.read()).isEqualTo("Hello")
 
-    socket.source.close()
-    peer.closeSink()
-  }
+          socket.sink.close()
+          peer.closeSource()
+        }
 
-  @Test
-  fun sinkIsWritableAfterSourceIsClosed() {
-    peer.closeSink()
-    socket.source.close()
+        test("localCancelCausesSubsequentReadToFail") {
+          peer.write("Hello")
 
-    val bufferedSink = socket.sink.buffer()
-    bufferedSink.writeUtf8("Hello\n")
-    bufferedSink.flush()
-    assertThat(peer.read()).isEqualTo("Hello")
+          socket.cancel()
 
-    socket.sink.close()
-    peer.closeSource()
-  }
+          assertFailsWith<IOException> {
+            socket.source.buffer().readUtf8Line()
+          }
+        }
 
-  @Test
-  fun localCancelCausesSubsequentReadToFail() {
-    peer.write("Hello")
+        test("localCancelCausesSubsequentWriteToFail") {
+          socket.cancel()
 
-    socket.cancel()
+          val bufferedSink = socket.sink.buffer()
+          bufferedSink.writeUtf8("Hello\n")
+          assertFailsWith<IOException> {
+            bufferedSink.flush()
+          }
+        }
 
-    assertFailsWith<IOException> {
-      socket.source.buffer().readUtf8Line()
-    }
-  }
+        test("peerCloseCausesSubsequentLocalReadToFail") {
+          peer.closeSink()
 
-  @Test
-  fun localCancelCausesSubsequentWriteToFail() {
-    socket.cancel()
+          val bufferedSource = socket.source.buffer()
+          assertFailsWith<IOException> {
+            bufferedSource.readUtf8LineStrict()
+          }
+        }
 
-    val bufferedSink = socket.sink.buffer()
-    bufferedSink.writeUtf8("Hello\n")
-    assertFailsWith<IOException> {
-      bufferedSink.flush()
-    }
-  }
+        test("peerCancelCausesSubsequentLocalReadToFail") {
+          peerSocket.cancel()
 
-  @Test
-  fun peerCloseCausesSubsequentLocalReadToFail() {
-    peer.closeSink()
+          val bufferedSource = socket.source.buffer()
+          assertFailsWith<IOException> {
+            bufferedSource.readUtf8LineStrict()
+          }
+        }
 
-    val bufferedSource = socket.source.buffer()
-    assertFailsWith<IOException> {
-      bufferedSource.readUtf8LineStrict()
-    }
-  }
+        test("readTimeout") {
+          val bufferedSource = socket.source.buffer()
+          bufferedSource.timeout().timeout(500, TimeUnit.MILLISECONDS)
 
-  @Test
-  fun peerCancelCausesSubsequentLocalReadToFail() {
-    peerSocket.cancel()
+          val duration = measureTime {
+            assertFailsWith<InterruptedIOException> {
+              bufferedSource.readUtf8Line()
+            }
+          }
 
-    val bufferedSource = socket.source.buffer()
-    assertFailsWith<IOException> {
-      bufferedSource.readUtf8LineStrict()
-    }
-  }
+          assertThat(duration).isBetween(250.milliseconds, 750.milliseconds)
+        }
 
-  @Test
-  fun readTimeout() {
-    val bufferedSource = socket.source.buffer()
-    bufferedSource.timeout().timeout(500, TimeUnit.MILLISECONDS)
+        /** Make a large-enough write to saturate the outgoing write buffer. */
+        test("writeTimeout") {
+          val bufferedSink = socket.sink.buffer()
+          bufferedSink.timeout().timeout(500, TimeUnit.MILLISECONDS)
 
-    val duration = measureTime {
-      assertFailsWith<InterruptedIOException> {
-        bufferedSource.readUtf8Line()
+          val duration = measureTime {
+            assertFailsWith<InterruptedIOException> {
+              bufferedSink.write(ByteArray(1024 * 1024 * 16))
+            }
+          }
+
+          assertThat(duration).isBetween(250.milliseconds, 750.milliseconds)
+        }
+
+        test("closeSourceDoesNotCloseJavaNetSocket") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+
+          socket.source.close()
+          assertThat(javaNetSocket.isInputShutdown).isTrue()
+          assertThat(javaNetSocket.isOutputShutdown).isFalse()
+          assertThat(javaNetSocket.isClosed).isFalse()
+        }
+
+        test("closeSinkDoesNotCloseJavaNetSocket") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+
+          socket.sink.close()
+          assertThat(javaNetSocket.isInputShutdown).isFalse()
+          assertThat(javaNetSocket.isOutputShutdown).isTrue()
+          assertThat(javaNetSocket.isClosed).isFalse()
+        }
+
+        test("closeSourceThenSinkClosesJavaNetSocket") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+
+          socket.source.close()
+          socket.sink.close()
+          assertThat(javaNetSocket.isClosed).isTrue()
+        }
+
+        test("closeSinkThenSourceClosesJavaNetSocket") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+
+          socket.sink.close()
+          socket.source.close()
+          assertThat(javaNetSocket.isClosed).isTrue()
+        }
+
+        test("closeSinkThenSourceClosesJavaNetSocketEvenIfStreamsAlreadyClosed") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+          javaNetSocket.shutdownInput()
+          javaNetSocket.shutdownOutput()
+          assertThat(javaNetSocket.isClosed).isFalse()
+
+          socket.sink.close()
+          socket.source.close()
+          assertThat(javaNetSocket.isClosed).isTrue()
+        }
+
+        test("closeSourceIsIdempotent") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+
+          socket.source.close()
+          assertThat(javaNetSocket.isInputShutdown).isTrue()
+          assertThat(javaNetSocket.isClosed).isFalse()
+          socket.source.close()
+          assertThat(javaNetSocket.isInputShutdown).isTrue()
+          assertThat(javaNetSocket.isClosed).isFalse()
+        }
+
+        test("closeSinkIsIdempotent") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+
+          socket.sink.close()
+          assertThat(javaNetSocket.isOutputShutdown).isTrue()
+          assertThat(javaNetSocket.isClosed).isFalse()
+          socket.sink.close()
+          assertThat(javaNetSocket.isOutputShutdown).isTrue()
+          assertThat(javaNetSocket.isClosed).isFalse()
+        }
+
+        test("cannotCreateOkioSocketFromClosedJavaNetSocket") {
+          val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return@test
+          javaNetSocket.close()
+
+          assertFailsWith<SocketException> {
+            javaNetSocket.asOkioSocket()
+          }
+        }
+
+        test("cannotCreateOkioSocketFromUnconnectedJavaNetSocket") {
+          val unconnected = SocketFactory.getDefault().createSocket()
+          assertFailsWith<SocketException> {
+            unconnected.asOkioSocket()
+          }
+        }
+
+        test("cancelIsQuiet") {
+          if (factory != SocketTestFactory.Default) return@test
+
+          val (socketA, socketB) = createSocketPairThatThrowsOnClose(IOException("boom!"))
+          socketA.cancel()
+          socketB.cancel()
+        }
+
+        test("conscryptCrashIsQuiet") {
+          if (factory != SocketTestFactory.Default) return@test
+
+          val (socketA, socketB) = createSocketPairThatThrowsOnClose(RuntimeException("bio == null"))
+          socketA.cancel()
+          socketB.cancel()
+        }
       }
     }
+  }
+}
 
-    assertThat(duration).isBetween(250.milliseconds, 750.milliseconds)
+private class SocketFixture(factory: SocketTestFactory) : AutoCloseable {
+  val socket: Socket
+  val peerSocket: Socket
+  val peer: AsyncSocket
+
+  init {
+    val pair = factory.createSocketPair()
+    socket = pair[0]
+    peerSocket = pair[1]
+    peer = AsyncSocket(peerSocket)
   }
 
-  /** Make a large-enough write to saturate the outgoing write buffer. */
-  @Test
-  fun writeTimeout() {
-    val bufferedSink = socket.sink.buffer()
-    bufferedSink.timeout().timeout(500, TimeUnit.MILLISECONDS)
-
-    val duration = measureTime {
-      assertFailsWith<InterruptedIOException> {
-        bufferedSink.write(ByteArray(1024 * 1024 * 16))
-      }
-    }
-
-    assertThat(duration).isBetween(250.milliseconds, 750.milliseconds)
-  }
-
-  @Test
-  fun closeSourceDoesNotCloseJavaNetSocket() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-
-    socket.source.close()
-    assertThat(javaNetSocket.isInputShutdown).isTrue()
-    assertThat(javaNetSocket.isOutputShutdown).isFalse()
-    assertThat(javaNetSocket.isClosed).isFalse()
-  }
-
-  @Test
-  fun closeSinkDoesNotCloseJavaNetSocket() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-
-    socket.sink.close()
-    assertThat(javaNetSocket.isInputShutdown).isFalse()
-    assertThat(javaNetSocket.isOutputShutdown).isTrue()
-    assertThat(javaNetSocket.isClosed).isFalse()
-  }
-
-  @Test
-  fun closeSourceThenSinkClosesJavaNetSocket() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-
-    socket.source.close()
-    socket.sink.close()
-    assertThat(javaNetSocket.isClosed).isTrue()
-  }
-
-  @Test
-  fun closeSinkThenSourceClosesJavaNetSocket() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-
-    socket.sink.close()
-    socket.source.close()
-    assertThat(javaNetSocket.isClosed).isTrue()
-  }
-
-  @Test
-  fun closeSinkThenSourceClosesJavaNetSocketEvenIfStreamsAlreadyClosed() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-    javaNetSocket.shutdownInput()
-    javaNetSocket.shutdownOutput()
-    assertThat(javaNetSocket.isClosed).isFalse()
-
-    socket.sink.close()
-    socket.source.close()
-    assertThat(javaNetSocket.isClosed).isTrue()
-  }
-
-  @Test
-  fun closeSourceIsIdempotent() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-
-    socket.source.close()
-    assertThat(javaNetSocket.isInputShutdown).isTrue()
-    assertThat(javaNetSocket.isClosed).isFalse()
-    socket.source.close()
-    assertThat(javaNetSocket.isInputShutdown).isTrue()
-    assertThat(javaNetSocket.isClosed).isFalse()
-  }
-
-  @Test
-  fun closeSinkIsIdempotent() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-
-    socket.sink.close()
-    assertThat(javaNetSocket.isOutputShutdown).isTrue()
-    assertThat(javaNetSocket.isClosed).isFalse()
-    socket.sink.close()
-    assertThat(javaNetSocket.isOutputShutdown).isTrue()
-    assertThat(javaNetSocket.isClosed).isFalse()
-  }
-
-  @Test
-  fun cannotCreateOkioSocketFromClosedJavaNetSocket() {
-    val javaNetSocket = (this.socket as? DefaultSocket)?.socket ?: return
-    javaNetSocket.close()
-
-    assertFailsWith<SocketException> {
-      javaNetSocket.asOkioSocket()
-    }
-  }
-
-  @Test
-  fun cannotCreateOkioSocketFromUnconnectedJavaNetSocket() {
-    val unconnected = SocketFactory.getDefault().createSocket()
-    assertFailsWith<SocketException> {
-      unconnected.asOkioSocket()
-    }
-  }
-
-  @Test
-  fun cancelIsQuiet() {
-    assumeTrue(factory == Factory.Default)
-
-    val (socketA, socketB) = createSocketPairThatThrowsOnClose(IOException("boom!"))
-    socketA.cancel()
-    socketB.cancel()
-  }
-
-  @Test
-  fun conscryptCrashIsQuiet() {
-    assumeTrue(factory == Factory.Default)
-
-    val (socketA, socketB) = createSocketPairThatThrowsOnClose(RuntimeException("bio == null"))
-    socketA.cancel()
-    socketB.cancel()
-  }
-
-  private fun createSocketPairThatThrowsOnClose(e: Throwable): Array<Socket> {
+  fun createSocketPairThatThrowsOnClose(e: Throwable): Array<Socket> {
     val localhost = InetAddress.getByName("localhost")
 
     val serverSocket = ServerSocket()
@@ -313,34 +284,40 @@ class SocketTest(val factory: Factory = Factory.Default) {
     return arrayOf(socketA.asOkioSocket(), socketB.asOkioSocket())
   }
 
-  @Suppress("ktlint:trailing-comma-on-declaration-site")
-  enum class Factory {
-    /** Implements an okio.Socket using the `java.net.Socket` API on OS sockets. */
-    Default {
-      override fun createSocketPair(): Array<Socket> {
-        val localhost = InetAddress.getByName("localhost")
-
-        val serverSocket = ServerSocket()
-        serverSocket.bind(InetSocketAddress(localhost, 0))
-
-        val socketBFuture = CompletableFuture<java.net.Socket>()
-        thread(name = "createSocketPair") {
-          socketBFuture.complete(serverSocket.accept())
-        }
-
-        val socketA = SocketFactory.getDefault().createSocket()
-        socketA.connect(InetSocketAddress(localhost, serverSocket.localPort))
-
-        val socketB = socketBFuture.get()
-        return arrayOf(socketA.asOkioSocket(), socketB.asOkioSocket())
-      }
-    },
-
-    Pipes {
-      override fun createSocketPair() = inMemorySocketPair(1024)
-    };
-
-    /** Returns two mutually-connected sockets. */
-    abstract fun createSocketPair(): Array<Socket>
+  override fun close() {
+    peer.close()
+    socket.source.close()
+    runCatching { socket.sink.close() } // Ignore exception if data was left in 'sink'.
   }
+}
+
+@Suppress("ktlint:trailing-comma-on-declaration-site")
+enum class SocketTestFactory {
+  /** Implements an okio.Socket using the `java.net.Socket` API on OS sockets. */
+  Default {
+    override fun createSocketPair(): Array<Socket> {
+      val localhost = InetAddress.getByName("localhost")
+
+      val serverSocket = ServerSocket()
+      serverSocket.bind(InetSocketAddress(localhost, 0))
+
+      val socketBFuture = CompletableFuture<java.net.Socket>()
+      thread(name = "createSocketPair") {
+        socketBFuture.complete(serverSocket.accept())
+      }
+
+      val socketA = SocketFactory.getDefault().createSocket()
+      socketA.connect(InetSocketAddress(localhost, serverSocket.localPort))
+
+      val socketB = socketBFuture.get()
+      return arrayOf(socketA.asOkioSocket(), socketB.asOkioSocket())
+    }
+  },
+
+  Pipes {
+    override fun createSocketPair() = inMemorySocketPair(1024)
+  };
+
+  /** Returns two mutually-connected sockets. */
+  abstract fun createSocketPair(): Array<Socket>
 }

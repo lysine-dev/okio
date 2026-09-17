@@ -15,14 +15,22 @@
  */
 package okio
 
+import de.infix.testBalloon.framework.core.testSuite
 import okio.Path.Companion.toPath
 
-class WasiFileSystemTest : AbstractFileSystemTest(
-  clock = WasiClock,
-  fileSystem = WasiFileSystem,
-  windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
-  allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
-  allowAtomicMoveFromFileToDirectory = false,
-  temporaryDirectory = "/tmp".toPath(),
-  closeBehavior = CloseBehavior.DoesNothing,
-)
+val WasiFileSystemTest by testSuite {
+  fileSystemTests(
+    newFixture = {
+      FileSystemFixture(
+        clock = WasiClock,
+        fileSystem = WasiFileSystem,
+        windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
+        allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
+        allowAtomicMoveFromFileToDirectory = false,
+        temporaryDirectory = "/tmp".toPath(),
+        closeBehavior = CloseBehavior.DoesNothing,
+        variant = FileSystemVariant.Wasi,
+      )
+    },
+  )
+}

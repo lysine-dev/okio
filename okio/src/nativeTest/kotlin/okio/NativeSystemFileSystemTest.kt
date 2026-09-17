@@ -15,14 +15,22 @@
  */
 package okio
 
+import de.infix.testBalloon.framework.core.testSuite
 import kotlin.time.Clock
 
-class NativeSystemFileSystemTest : AbstractFileSystemTest(
-  clock = Clock.System,
-  fileSystem = FileSystem.SYSTEM,
-  windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
-  allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
-  allowAtomicMoveFromFileToDirectory = false,
-  temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-  closeBehavior = CloseBehavior.DoesNothing,
-)
+val NativeSystemFileSystemTest by testSuite {
+  fileSystemTests(
+    newFixture = {
+      FileSystemFixture(
+        clock = Clock.System,
+        fileSystem = FileSystem.SYSTEM,
+        windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
+        allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
+        allowAtomicMoveFromFileToDirectory = false,
+        temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
+        closeBehavior = CloseBehavior.DoesNothing,
+        variant = FileSystemVariant.System,
+      )
+    },
+  )
+}

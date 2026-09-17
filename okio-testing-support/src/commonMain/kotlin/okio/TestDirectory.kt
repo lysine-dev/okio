@@ -15,22 +15,28 @@
  */
 package okio
 
-import app.cash.burst.TestFunction
-import app.cash.burst.TestInterceptor
+import de.infix.testBalloon.framework.core.TestSuiteScope
 
 /**
- * A temporary directory on [fileSystem] that's usable for the current test.
+ * A scope that provides a temporary directory on [fileSystem] that's usable for the current test.
  */
-class TestDirectory(
-  val fileSystem: FileSystem,
-  val temporaryDirectory: Path = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-) : TestInterceptor {
-  lateinit var path: Path
-    private set
+fun TestSuiteScope.testDirectory(
+  fileSystem: FileSystem,
+  temporaryDirectory: Path = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
+) = testFixture { fileSystem.createTestPath(temporaryDirectory) }
 
-  override fun intercept(testFunction: TestFunction) {
-    path = temporaryDirectory / "${testFunction.functionName}-${randomToken(16)}"
-    fileSystem.createDirectories(path)
-    testFunction()
+/**
+ * A scope that provides temporary directories on [fileSystem] that's usable for the current test.
+ */
+fun TestSuiteScope.testDirectories(
+  fileSystem: FileSystem,
+  vararg temporaryDirectories: Path,
+) = testFixture {
+  temporaryDirectories.map { parent ->
+    fileSystem.createTestPath(parent)
   }
+}
+
+fun FileSystem.createTestPath(directory: Path): Path {
+  return (directory / "test-${randomToken(16)}").also { createDirectories(it) }
 }

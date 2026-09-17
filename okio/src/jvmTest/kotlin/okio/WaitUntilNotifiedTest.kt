@@ -15,203 +15,199 @@
  */
 package okio
 
-import app.cash.burst.Burst
-import app.cash.burst.InterceptTest
+import de.infix.testBalloon.framework.core.testSuite
 import java.io.InterruptedIOException
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.milliseconds
-import okio.TestUtil.assumeNotWindows
+import okio.TestUtil.isWindows
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.fail
-import org.junit.jupiter.api.Test
 
-@Burst
-class WaitUntilNotifiedTest(
-  factory: TimeoutFactory,
-) {
-  private val timeout = factory.newTimeout()
+val WaitUntilNotifiedTest by testSuite {
+  for (factory in TimeoutFactory.entries) {
+    testSuite(factory.name) {
+      testFixture { WaitUntilNotifiedFixture(factory) } asContextForEach {
 
-  @InterceptTest
-  private val testExecutor = TestExecutor(0)
+        test("notified") {
+          synchronized(this) {
+            timeout.timeout(5000, TimeUnit.MILLISECONDS)
+            val start = now()
+            testExecutor.schedule(1000.milliseconds) {
+              synchronized(this) {
+                (this as Object).notify()
+              }
+            }
+            timeout.waitUntilNotified(this)
+            assertElapsed(1000.0, start)
+          }
+        }
 
-  @Test
-  @Synchronized
-  fun notified() {
-    timeout.timeout(5000, TimeUnit.MILLISECONDS)
-    val start = now()
-    testExecutor.schedule(1000.milliseconds) {
-      synchronized(this@WaitUntilNotifiedTest) {
-        (this as Object).notify()
+        test("timeout") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            timeout.timeout(1000, TimeUnit.MILLISECONDS)
+            val start = now()
+            try {
+              timeout.waitUntilNotified(this)
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("timeout", expected.message)
+            }
+            assertElapsed(1000.0, start)
+          }
+        }
+
+        test("deadline") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            timeout.deadline(1000, TimeUnit.MILLISECONDS)
+            val start = now()
+            try {
+              timeout.waitUntilNotified(this)
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("timeout", expected.message)
+            }
+            assertElapsed(1000.0, start)
+          }
+        }
+
+        test("deadlineBeforeTimeout") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            timeout.timeout(5000, TimeUnit.MILLISECONDS)
+            timeout.deadline(1000, TimeUnit.MILLISECONDS)
+            val start = now()
+            try {
+              timeout.waitUntilNotified(this)
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("timeout", expected.message)
+            }
+            assertElapsed(1000.0, start)
+          }
+        }
+
+        test("timeoutBeforeDeadline") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            timeout.timeout(1000, TimeUnit.MILLISECONDS)
+            timeout.deadline(5000, TimeUnit.MILLISECONDS)
+            val start = now()
+            try {
+              timeout.waitUntilNotified(this)
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("timeout", expected.message)
+            }
+            assertElapsed(1000.0, start)
+          }
+        }
+
+        test("deadlineAlreadyReached") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            timeout.deadlineNanoTime(System.nanoTime())
+            val start = now()
+            try {
+              timeout.waitUntilNotified(this)
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("timeout", expected.message)
+            }
+            assertElapsed(0.0, start)
+          }
+        }
+
+        test("threadInterrupted") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            val start = now()
+            Thread.currentThread().interrupt()
+            try {
+              timeout.waitUntilNotified(this)
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("interrupted", expected.message)
+              assertTrue(Thread.interrupted())
+            }
+            assertElapsed(0.0, start)
+          }
+        }
+
+        test("threadInterruptedOnThrowIfReached") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            Thread.currentThread().interrupt()
+            try {
+              timeout.throwIfReached()
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("interrupted", expected.message)
+              assertTrue(Thread.interrupted())
+            }
+          }
+        }
+
+        test("cancelBeforeWaitDoesNothing") {
+          if (isWindows()) return@test
+          synchronized(this) {
+            timeout.timeout(1000, TimeUnit.MILLISECONDS)
+            timeout.cancel()
+            val start = now()
+            try {
+              timeout.waitUntilNotified(this)
+              fail()
+            } catch (expected: InterruptedIOException) {
+              assertEquals("timeout", expected.message)
+            }
+            assertElapsed(1000.0, start)
+          }
+        }
+
+        test("canceledTimeoutDoesNotThrowWhenNotNotifiedOnTime") {
+          synchronized(this) {
+            timeout.timeout(1000, TimeUnit.MILLISECONDS)
+            timeout.cancelLater(500)
+
+            val start = now()
+            timeout.waitUntilNotified(this) // Returns early but doesn't throw.
+            assertElapsed(1000.0, start)
+          }
+        }
+
+        test("multipleCancelsAreIdempotent") {
+          synchronized(this) {
+            timeout.timeout(1000, TimeUnit.MILLISECONDS)
+            timeout.cancelLater(250)
+            timeout.cancelLater(500)
+            timeout.cancelLater(750)
+
+            val start = now()
+            timeout.waitUntilNotified(this) // Returns early but doesn't throw.
+            assertElapsed(1000.0, start)
+          }
+        }
       }
     }
-    timeout.waitUntilNotified(this)
-    assertElapsed(1000.0, start)
   }
+}
 
-  @Test
-  @Synchronized
-  fun timeout() {
-    assumeNotWindows()
-    timeout.timeout(1000, TimeUnit.MILLISECONDS)
-    val start = now()
-    try {
-      timeout.waitUntilNotified(this)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("timeout", expected.message)
-    }
-    assertElapsed(1000.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun deadline() {
-    assumeNotWindows()
-    timeout.deadline(1000, TimeUnit.MILLISECONDS)
-    val start = now()
-    try {
-      timeout.waitUntilNotified(this)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("timeout", expected.message)
-    }
-    assertElapsed(1000.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun deadlineBeforeTimeout() {
-    assumeNotWindows()
-    timeout.timeout(5000, TimeUnit.MILLISECONDS)
-    timeout.deadline(1000, TimeUnit.MILLISECONDS)
-    val start = now()
-    try {
-      timeout.waitUntilNotified(this)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("timeout", expected.message)
-    }
-    assertElapsed(1000.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun timeoutBeforeDeadline() {
-    assumeNotWindows()
-    timeout.timeout(1000, TimeUnit.MILLISECONDS)
-    timeout.deadline(5000, TimeUnit.MILLISECONDS)
-    val start = now()
-    try {
-      timeout.waitUntilNotified(this)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("timeout", expected.message)
-    }
-    assertElapsed(1000.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun deadlineAlreadyReached() {
-    assumeNotWindows()
-    timeout.deadlineNanoTime(System.nanoTime())
-    val start = now()
-    try {
-      timeout.waitUntilNotified(this)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("timeout", expected.message)
-    }
-    assertElapsed(0.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun threadInterrupted() {
-    assumeNotWindows()
-    val start = now()
-    Thread.currentThread().interrupt()
-    try {
-      timeout.waitUntilNotified(this)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("interrupted", expected.message)
-      assertTrue(Thread.interrupted())
-    }
-    assertElapsed(0.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun threadInterruptedOnThrowIfReached() {
-    assumeNotWindows()
-    Thread.currentThread().interrupt()
-    try {
-      timeout.throwIfReached()
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("interrupted", expected.message)
-      assertTrue(Thread.interrupted())
-    }
-  }
-
-  @Test
-  @Synchronized
-  fun cancelBeforeWaitDoesNothing() {
-    assumeNotWindows()
-    timeout.timeout(1000, TimeUnit.MILLISECONDS)
-    timeout.cancel()
-    val start = now()
-    try {
-      timeout.waitUntilNotified(this)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("timeout", expected.message)
-    }
-    assertElapsed(1000.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun canceledTimeoutDoesNotThrowWhenNotNotifiedOnTime() {
-    timeout.timeout(1000, TimeUnit.MILLISECONDS)
-    timeout.cancelLater(500)
-
-    val start = now()
-    timeout.waitUntilNotified(this) // Returns early but doesn't throw.
-    assertElapsed(1000.0, start)
-  }
-
-  @Test
-  @Synchronized
-  fun multipleCancelsAreIdempotent() {
-    timeout.timeout(1000, TimeUnit.MILLISECONDS)
-    timeout.cancelLater(250)
-    timeout.cancelLater(500)
-    timeout.cancelLater(750)
-
-    val start = now()
-    timeout.waitUntilNotified(this) // Returns early but doesn't throw.
-    assertElapsed(1000.0, start)
-  }
+private class WaitUntilNotifiedFixture(factory: TimeoutFactory) : AutoCloseable {
+  val timeout = factory.newTimeout()
+  val testExecutor = TestExecutor(0)
 
   /** Returns the nanotime in milliseconds as a double for measuring timeouts.  */
-  private fun now(): Double {
-    return System.nanoTime() / 1000000.0
-  }
+  fun now() = System.nanoTime() / 1_000_000.0
 
   /**
    * Fails the test unless the time from start until now is duration, accepting differences in
    * -50..+450 milliseconds.
    */
-  private fun assertElapsed(duration: Double, start: Double) {
-    assertEquals(duration, now() - start - 200.0, 250.0)
-  }
+  fun assertElapsed(duration: Double, start: Double) = assertEquals(duration, now() - start - 200.0, 250.0)
 
-  private fun Timeout.cancelLater(delay: Long) {
-    testExecutor.schedule(delay.milliseconds) {
-      cancel()
-    }
-  }
+  fun Timeout.cancelLater(delay: Long) = testExecutor.schedule(delay.milliseconds) { cancel() }
+
+  override fun close() = testExecutor.close()
 }
