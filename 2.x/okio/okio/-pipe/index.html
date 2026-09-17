@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Pipe</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+    <link href="../../../styles/style.css" rel="Stylesheet">
+    <link href="../../../styles/logo-styles.css" rel="Stylesheet">
+    <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+    <link href="../../../styles/main.css" rel="Stylesheet">
+    <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/main.js" async="async"></script>
+    <link href="../../../images/logo-square.png">
+    <link href="../../../styles/dokka-logo.css" rel="Stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <script type="text/javascript" src="../../../scripts/pages.js"></script>
+        <script type="text/javascript" src="../../../scripts/main.js"></script>
+        <div class="main-content" id="content" pageIds="okio/Pipe///PointingToDeclaration//-1136039540">
+          <div class="navigation-wrapper" id="navigation-wrapper">
+            <div class="breadcrumbs"><a href="../../index.html">okio</a>/<a href="../index.html">okio</a>/<a href="index.html">Pipe</a></div>
+            <div class="pull-right d-flex">
+              <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":okio:dokkaHtml/jvmMain">jvm</button></div>
+              <div id="searchBar"></div>
+            </div>
+          </div>
+          <div class="cover ">
+            <h1 class="cover"><span>Pipe</span></h1>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">class <a href="index.html">Pipe</a>(maxBufferSize: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">A source and a sink that are attached. The sink's output is the source's input. Typically each is accessed by its own thread: a producer thread writes data to the sink and a consumer thread reads data from the source.</p><p class="paragraph">This class uses a buffer to decouple source and sink. This buffer has a user-specified maximum size. When a producer thread outruns its consumer the buffer fills up and eventually writes to the sink will block until the consumer has caught up. Symmetrically, if a consumer outruns its producer reads block until there is data to be read. Limits on the amount of time spent waiting for the other party can be configured with <a href="../-timeout/index.html">timeouts</a> on the source and the sink.</p><p class="paragraph">When the sink is closed, source reads will continue to complete normally until the buffer has been exhausted. At that point reads will return -1, indicating the end of the stream. But if the source is closed first, writes to the sink will immediately fail with an <a href="../-i-o-exception/index.html">IOException</a>.</p><p class="paragraph">A pipe may be canceled to immediately fail writes to the sink and reads from the source.</p></div></div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+            <div class="tabs-section-body">
+              <h2 class="tabbedcontent">Constructors</h2>
+              <div class="table" data-togglable="Constructors"><a data-name="%5Bokio%2FPipe%2FPipe%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1136039540" anchor-label="Pipe" id="%5Bokio%2FPipe%2FPipe%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue TabbedContent">
+                    <div class=""><span class="inline-flex"><a href="-pipe.html">Pipe</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FPipe%2FPipe%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="-pipe.html">Pipe</a>(maxBufferSize: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="%5Bokio%2FPipe%2Fcancel%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="cancel" id="%5Bokio%2FPipe%2Fcancel%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="cancel.html">cancel</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FPipe%2Fcancel%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="cancel.html">cancel</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FPipe%2Fcancel%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="cancel" id="%5Bokio%2FPipe%2Fcancel%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FPipe%2Fcancel%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="cancel" id="%5Bokio%2FPipe%2Fcancel%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Fail any in-flight and future operations.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="equals" id="%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-timeout/-companion/index.html#%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">equals</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open operator fun <a href="../-timeout/-companion/index.html#%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">equals</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FPipe%2Ffold%2F%23okio.Sink%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="fold" id="%5Bokio%2FPipe%2Ffold%2F%23okio.Sink%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="fold.html">fold</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FPipe%2Ffold%2F%23okio.Sink%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="fold.html">fold</a>(sink: <a href="../-sink/index.html">Sink</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FPipe%2Ffold%2F%23okio.Sink%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="fold" id="%5Bokio%2FPipe%2Ffold%2F%23okio.Sink%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FPipe%2Ffold%2F%23okio.Sink%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="fold" id="%5Bokio%2FPipe%2Ffold%2F%23okio.Sink%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Writes any buffered contents of this pipe to <code>sink</code>, then replace this pipe's source with <code>sink</code>.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="hashCode" id="%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">hashCode</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">hashCode</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="toString" id="%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">toString</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">toString</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="%5Bokio%2FPipe%2Fsink%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" anchor-label="sink" id="%5Bokio%2FPipe%2Fsink%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="sink.html">sink</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FPipe%2Fsink%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><a data-name="%5Bokio%2FPipe%2Fsink%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" anchor-label="sink" id="%5Bokio%2FPipe%2Fsink%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="sink.html">sink</a>: <a href="../-sink/index.html">Sink</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FPipe%2Fsource%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" anchor-label="source" id="%5Bokio%2FPipe%2Fsource%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="source.html">source</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FPipe%2Fsource%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><a data-name="%5Bokio%2FPipe%2Fsource%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" anchor-label="source" id="%5Bokio%2FPipe%2Fsource%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="source.html">source</a>: <a href="../-source/index.html#%5Bokio%2FSource%2F%2F%2FPointingToDeclaration%2F%5D%2FExtensions%2F-1136039540">Source</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+

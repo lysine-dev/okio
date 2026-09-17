@@ -1,0 +1,355 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>UnsafeCursor</title>
+    <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../../";</script>
+    <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async="async"></script>
+    <link href="../../../../styles/style.css" rel="Stylesheet">
+    <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+    <link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
+    <link href="../../../../styles/main.css" rel="Stylesheet">
+    <script type="text/javascript" src="../../../../scripts/clipboard.js" async="async"></script>
+    <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async="async"></script>
+    <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
+    <script type="text/javascript" src="../../../../scripts/main.js" async="async"></script>
+    <link href="../../../../images/logo-square.png">
+    <link href="../../../../styles/dokka-logo.css" rel="Stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <script type="text/javascript" src="../../../../scripts/pages.js"></script>
+        <script type="text/javascript" src="../../../../scripts/main.js"></script>
+        <div class="main-content" id="content" pageIds="okio/Buffer.UnsafeCursor///PointingToDeclaration//1222689122">
+          <div class="navigation-wrapper" id="navigation-wrapper">
+            <div class="breadcrumbs"><a href="../../../index.html">okio</a>/<a href="../../index.html">okio</a>/<a href="../index.html">Buffer</a>/<a href="index.html">UnsafeCursor</a></div>
+            <div class="pull-right d-flex">
+              <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector common-like" data-active="" data-filter=":okio:dokkaHtml/commonMain">common</button><button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":okio:dokkaHtml/jvmMain">jvm</button></div>
+              <div id="searchBar"></div>
+            </div>
+          </div>
+          <div class="cover ">
+            <h1 class="cover"><span>Unsafe</span><wbr></wbr><span>Cursor</span></h1>
+            <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+              <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">class <a href="index.html">UnsafeCursor</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">A handle to the underlying data in a buffer. This handle is unsafe because it does not enforce its own invariants. Instead, it assumes a careful user who has studied Okio's implementation details and their consequences.</p><p class="paragraph"><p class="paragraph">Buffer Internals</p> ----------------</p><p class="paragraph">Most code should use <code>Buffer</code> as a black box: a class that holds 0 or more bytes of data with efficient APIs to append data to the end and to consume data from the front. Usually this is also the most efficient way to use buffers because it allows Okio to employ several optimizations, including:</p><ul><li><p class="paragraph">Fast Allocation: Buffers use a shared pool of memory that is not zero-filled before use.</p></li><li><p class="paragraph">Fast Resize: A buffer's capacity can change without copying its contents.</p></li><li><p class="paragraph">Fast Move: Memory ownership can be reassigned from one buffer to another.</p></li><li><p class="paragraph">Fast Copy: Multiple buffers can share the same underlying memory.</p></li><li><p class="paragraph">Fast Encoding and Decoding: Common operations like UTF-8 encoding and decimal decoding     do not require intermediate objects to be allocated.</p></li></ul><p class="paragraph">These optimizations all leverage the way Okio stores data internally. Okio Buffers are implemented using a doubly-linked list of segments. Each segment is a contiguous range within a 8 KiB <code>ByteArray</code>. Each segment has two indexes, <code>start</code>, the offset of the first byte of the array containing application data, and <code>end</code>, the offset of the first byte beyond <code>start</code> whose data is undefined.</p><p class="paragraph">New buffers are empty and have no segments:</p><div class="sample-container"><code class="" theme="idea"><pre>val buffer = Buffer()</pre></code></div><p class="paragraph">We append 7 bytes of data to the end of our empty buffer. Internally, the buffer allocates a segment and writes its new data there. The lone segment has an 8 KiB byte array but only 7 bytes of data:</p><div class="sample-container"><code class="" theme="idea"><pre>buffer.writeUtf8(&quot;sealion&quot;)<br><br>// [ 's', 'e', 'a', 'l', 'i', 'o', 'n', '?', '?', '?', ...]<br>//    ^                                  ^<br>// start = 0                          end = 7</pre></code></div><p class="paragraph">When we read 4 bytes of data from the buffer, it finds its first segment and returns that data to us. As bytes are read the data is consumed. The segment tracks this by adjusting its internal indices.</p><div class="sample-container"><code class="" theme="idea"><pre>buffer.readUtf8(4) // &quot;seal&quot;<br><br>// [ 's', 'e', 'a', 'l', 'i', 'o', 'n', '?', '?', '?', ...]<br>//                        ^              ^<br>//                     start = 4      end = 7</pre></code></div><p class="paragraph">As we write data into a buffer we fill up its internal segments. When a write doesn't fit into a buffer's last segment, additional segments are allocated and appended to the linked list of segments. Each segment has its own start and end indexes tracking where the user's data begins and ends.</p><div class="sample-container"><code class="" theme="idea"><pre>val xoxo = new Buffer()<br>xoxo.writeUtf8(&quot;xo&quot;.repeat(5_000))<br><br>// [ 'x', 'o', 'x', 'o', 'x', 'o', 'x', 'o', ..., 'x', 'o', 'x', 'o']<br>//    ^                                                               ^<br>// start = 0                                                      end = 8192<br>//<br>// [ 'x', 'o', 'x', 'o', ..., 'x', 'o', 'x', 'o', '?', '?', '?', ...]<br>//    ^                                            ^<br>// start = 0                                   end = 1808</pre></code></div><p class="paragraph">The start index is always inclusive and the end index is always exclusive. The data preceding the start index is undefined, and the data at and following the end index is undefined.</p><p class="paragraph">After the last byte of a segment has been read, that segment may be returned to an internal segment pool. In addition to reducing the need to do garbage collection, segment pooling also saves the JVM from needing to zero-fill byte arrays. Okio doesn't need to zero-fill its arrays because it always writes memory before it reads it. But if you look at a segment in a debugger you may see its effects. In this example, one of the &quot;xoxo&quot; segments above is reused in an unrelated buffer:</p><div class="sample-container"><code class="" theme="idea"><pre>val abc = new Buffer()<br>abc.writeUtf8(&quot;abc&quot;)<br><br>// [ 'a', 'b', 'c', 'o', 'x', 'o', 'x', 'o', ...]<br>//    ^              ^<br>// start = 0     end = 3</pre></code></div><p class="paragraph">There is an optimization in <code>Buffer.clone()</code> and other methods that allows two segments to share the same underlying byte array. Clones can't write to the shared byte array; instead they allocate a new (private) segment early.</p><div class="sample-container"><code class="" theme="idea"><pre>val nana = new Buffer()<br>nana.writeUtf8(&quot;na&quot;.repeat(2_500))<br>nana.readUtf8(2) // &quot;na&quot;<br><br>// [ 'n', 'a', 'n', 'a', ..., 'n', 'a', 'n', 'a', '?', '?', '?', ...]<br>//              ^                                  ^<br>//           start = 2                         end = 5000<br><br>nana2 = nana.clone()<br>nana2.writeUtf8(&quot;batman&quot;)<br><br>// [ 'n', 'a', 'n', 'a', ..., 'n', 'a', 'n', 'a', '?', '?', '?', ...]<br>//              ^                                  ^<br>//           start = 2                         end = 5000<br>//<br>// [ 'b', 'a', 't', 'm', 'a', 'n', '?', '?', '?', ...]<br>//    ^                             ^<br>//  start = 0                    end = 6</pre></code></div><p class="paragraph">Segments are not shared when the shared region is small (ie. less than 1 KiB). This is intended to prevent fragmentation in sharing-heavy use cases.</p><p class="paragraph"><p class="paragraph">Unsafe Cursor API</p> -----------------</p><p class="paragraph">This class exposes privileged access to the internal byte arrays of a buffer. A cursor either references the data of a single segment, it is before the first segment (<code>offset == -1</code>), or it is after the last segment (<code>offset == buffer.size</code>).</p><p class="paragraph">Call <a href="seek.html">UnsafeCursor.seek</a> to move the cursor to the segment that contains a specified offset. After seeking, <a href="data.html">UnsafeCursor.data</a> references the segment's internal byte array, <a href="start.html">UnsafeCursor.start</a> is the segment's start and <a href="end.html">UnsafeCursor.end</a> is its end.</p><p class="paragraph">Call <a href="next.html">UnsafeCursor.next</a> to advance the cursor to the next segment. This returns -1 if there are no further segments in the buffer.</p><p class="paragraph">Use <a href="../read-unsafe.html">Buffer.readUnsafe</a> to create a cursor to read buffer data and <a href="../read-and-write-unsafe.html">Buffer.readAndWriteUnsafe</a> to create a cursor to read and write buffer data. In either case, always call <a href="close.html">UnsafeCursor.close</a> when done with a cursor. This is convenient with Kotlin's <a href="../../use.html">use</a> extension function. In this example we read all of the bytes in a buffer into a byte array:</p><div class="sample-container"><code class="" theme="idea"><pre>val bufferBytes = ByteArray(buffer.size.toInt())<br><br>buffer.readUnsafe().use { cursor -&gt;<br>  while (cursor.next() != -1) {<br>    System.arraycopy(cursor.data, cursor.start,<br>        bufferBytes, cursor.offset.toInt(), cursor.end - cursor.start);<br>  }<br>}</pre></code></div><p class="paragraph">Change the capacity of a buffer with <a href="resize-buffer.html">resizeBuffer</a>. This is only permitted for read+write cursors. The buffer's size always changes from the end: shrinking it removes bytes from the end; growing it adds capacity to the end.</p><p class="paragraph"><p class="paragraph">Warnings</p> --------</p><p class="paragraph">Most application developers should avoid this API. Those that must use this API should respect these warnings.</p><p class="paragraph">Don't mutate a cursor. This class has public, non-final fields because that is convenient for low-level I/O frameworks. Never assign values to these fields; instead use the cursor API to adjust these.</p><p class="paragraph">Never mutate <code>data</code> unless you have read+write access. You are on the honor system to never write the buffer in read-only mode. Read-only mode may be more efficient than read+write mode because it does not need to make private copies of shared segments.</p><p class="paragraph">Only access data in <code>[start..end)</code>. Other data in the byte array is undefined! It may contain private or sensitive data from other parts of your process.</p><p class="paragraph">Always fill the new capacity when you grow a buffer. New capacity is not zero-filled and may contain data from other parts of your process. Avoid leaking this information by always writing something to the newly-allocated capacity. Do not assume that new capacity will be filled with <code>0</code>; it will not be.</p><p class="paragraph">Do not access a buffer while is being accessed by a cursor. Even simple read-only operations like Buffer.clone are unsafe because they mark segments as shared.</p><p class="paragraph">Do not hard-code the segment size in your application. It is possible that segment sizes will change with advances in hardware. Future versions of Okio may even have heterogeneous segment sizes.</p><p class="paragraph">These warnings are intended to help you to use this API safely. It's here for developers that need absolutely the most throughput. Since that's you, here's one final performance tip. You can reuse instances of this class if you like. Use the overloads of <a href="../read-unsafe.html">Buffer.readUnsafe</a> and <a href="../read-and-write-unsafe.html">Buffer.readAndWriteUnsafe</a> that take a cursor and close it after use.</p></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">class <a href="index.html">UnsafeCursor</a> : <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html">Closeable</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>            </div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+            <div class="tabs-section-body">
+              <h2 class="tabbedcontent">Constructors</h2>
+              <div class="table" data-togglable="Constructors"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FUnsafeCursor%2F%23%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1936238634" anchor-label="UnsafeCursor" id="%5Bokio%2FBuffer.UnsafeCursor%2FUnsafeCursor%2F%23%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue TabbedContent">
+                    <div class=""><span class="inline-flex"><a href="index.html#%5Bokio%2FBuffer.UnsafeCursor%2FUnsafeCursor%2F%23%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1936238634">UnsafeCursor</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2FUnsafeCursor%2F%23%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1936238634"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag common-like">common</div>
+                      </div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="index.html#%5Bokio%2FBuffer.UnsafeCursor%2FUnsafeCursor%2F%23%2FPointingToDeclaration%2F%5D%2FConstructors%2F-1936238634">UnsafeCursor</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fclose%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="close" id="%5Bokio%2FBuffer.UnsafeCursor%2Fclose%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="close.html">close</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Fclose%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="close.html">close</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open override fun <a href="close.html">close</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="equals" id="%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><span data-unresolved-link="kotlin/Any/equals/#kotlin.Any?/PointingToDeclaration/">equals</span><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open operator fun <a href="../../-timeout/-companion/index.html#%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634">equals</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open operator fun <a href="../../-timeout/-companion/index.html#%5Bkotlin%2FAny%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">equals</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="expandBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="expand-buffer.html">expandBuffer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="expand-buffer.html">expandBuffer</a>(minByteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="expandBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="expandBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Grow the buffer by adding a contiguous range of capacity in a single segment.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="expand-buffer.html">expandBuffer</a>(minByteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="expandBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FexpandBuffer%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hashCode" id="%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><span data-unresolved-link="kotlin/Any/hashCode/#/PointingToDeclaration/">hashCode</span><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open fun <a href="../../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634">hashCode</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="../../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">hashCode</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="next" id="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="next.html">next</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="next.html">next</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="next" id="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="next" id="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Seeks to the next range of bytes, advancing the offset by <code>end - start</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="next.html">next</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="next" id="%5Bokio%2FBuffer.UnsafeCursor%2Fnext%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="resizeBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="resize-buffer.html">resizeBuffer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="resize-buffer.html">resizeBuffer</a>(newSize: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="resizeBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="resizeBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Change the size of the buffer so that it equals <span data-unresolved-link="okio/Buffer.UnsafeCursor/newSize/#/PointingToCallableParameters(-1)/">newSize</span> by either adding new capacity at the end or truncating the buffer at the end.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="resize-buffer.html">resizeBuffer</a>(newSize: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="resizeBuffer" id="%5Bokio%2FBuffer.UnsafeCursor%2FresizeBuffer%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="seek" id="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="seek.html">seek</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="seek.html">seek</a>(offset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="seek" id="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="seek" id="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Reposition the cursor so that the data at <a href="offset.html">offset</a> is readable at <code>data[start]</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="seek.html">seek</a>(offset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="seek" id="%5Bokio%2FBuffer.UnsafeCursor%2Fseek%2F%23kotlin.Long%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toString" id="%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><span data-unresolved-link="kotlin/Any/toString/#/PointingToDeclaration/">toString</span><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open fun <a href="../../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634">toString</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="../../-timeout/-companion/index.html#%5Bkotlin%2FAny%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540">toString</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fbuffer%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="buffer" id="%5Bokio%2FBuffer.UnsafeCursor%2Fbuffer%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="buffer.html">buffer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Fbuffer%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fbuffer%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="buffer" id="%5Bokio%2FBuffer.UnsafeCursor%2Fbuffer%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html">JvmField</a>()</div></div>var <a href="buffer.html">buffer</a>: <a href="../index.html">Buffer</a>? = null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fdata%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="data" id="%5Bokio%2FBuffer.UnsafeCursor%2Fdata%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="data.html">data</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Fdata%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fdata%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="data" id="%5Bokio%2FBuffer.UnsafeCursor%2Fdata%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html">JvmField</a>()</div></div>var <a href="data.html">data</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>? = null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fend%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="end" id="%5Bokio%2FBuffer.UnsafeCursor%2Fend%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="end.html">end</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Fend%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fend%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="end" id="%5Bokio%2FBuffer.UnsafeCursor%2Fend%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html">JvmField</a>()</div></div>var <a href="end.html">end</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Foffset%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="offset" id="%5Bokio%2FBuffer.UnsafeCursor%2Foffset%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="offset.html">offset</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Foffset%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Foffset%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="offset" id="%5Bokio%2FBuffer.UnsafeCursor%2Foffset%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html">JvmField</a>()</div></div>var <a href="offset.html">offset</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FreadWrite%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="readWrite" id="%5Bokio%2FBuffer.UnsafeCursor%2FreadWrite%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="read-write.html">readWrite</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2FreadWrite%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2FreadWrite%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="readWrite" id="%5Bokio%2FBuffer.UnsafeCursor%2FreadWrite%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html">JvmField</a>()</div></div>var <a href="read-write.html">readWrite</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fstart%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="start" id="%5Bokio%2FBuffer.UnsafeCursor%2Fstart%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="start.html">start</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FBuffer.UnsafeCursor%2Fstart%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><a data-name="%5Bokio%2FBuffer.UnsafeCursor%2Fstart%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="start" id="%5Bokio%2FBuffer.UnsafeCursor%2Fstart%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html">JvmField</a>()</div></div>var <a href="start.html">start</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+

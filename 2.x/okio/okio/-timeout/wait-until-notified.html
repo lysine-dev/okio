@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>waitUntilNotified</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+    <link href="../../../styles/style.css" rel="Stylesheet">
+    <link href="../../../styles/logo-styles.css" rel="Stylesheet">
+    <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+    <link href="../../../styles/main.css" rel="Stylesheet">
+    <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/main.js" async="async"></script>
+    <link href="../../../images/logo-square.png">
+    <link href="../../../styles/dokka-logo.css" rel="Stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <script type="text/javascript" src="../../../scripts/pages.js"></script>
+        <script type="text/javascript" src="../../../scripts/main.js"></script>
+        <div class="main-content" id="content" pageIds="okio/Timeout/waitUntilNotified/#kotlin.Any/PointingToDeclaration//-1136039540">
+          <div class="navigation-wrapper" id="navigation-wrapper">
+            <div class="breadcrumbs"><a href="../../index.html">okio</a>/<a href="../index.html">okio</a>/<a href="index.html">Timeout</a>/<a href="wait-until-notified.html">waitUntilNotified</a></div>
+            <div class="pull-right d-flex">
+              <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":okio:dokkaHtml/jvmMain">jvm</button></div>
+              <div id="searchBar"></div>
+            </div>
+          </div>
+          <div class="cover ">
+            <h1 class="cover"><span>wait</span><wbr></wbr><span>Until</span><wbr></wbr><span>Notified</span></h1>
+          </div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="wait-until-notified.html">waitUntilNotified</a>(monitor: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<p class="paragraph">Waits on <code>monitor</code> until it is notified. Throws <a href="https://docs.oracle.com/javase/8/docs/api/java/io/InterruptedIOException.html">InterruptedIOException</a> if either the thread is interrupted or if this timeout elapses before <code>monitor</code> is notified. The caller must be synchronized on <code>monitor</code>.</p><p class="paragraph">Here's a sample class that uses <code>waitUntilNotified()</code> to await a specific state. Note that the call is made within a loop to avoid unnecessary waiting and to mitigate spurious notifications.</p><div class="sample-container"><code class="" theme="idea"><pre>class Dice {<br>  Random random = new Random();<br>  int latestTotal;<br><br>  public synchronized void roll() {<br>    latestTotal = 2 + random.nextInt(6) + random.nextInt(6);<br>    System.out.println(&quot;Rolled &quot; + latestTotal);<br>    notifyAll();<br>  }<br><br>  public void rollAtFixedRate(int period, TimeUnit timeUnit) {<br>    Executors.newScheduledThreadPool(0).scheduleAtFixedRate(new Runnable() {<br>      public void run() {<br>        roll();<br>      }<br>    }, 0, period, timeUnit);<br>  }<br><br>  public synchronized void awaitTotal(Timeout timeout, int total)<br>      throws InterruptedIOException {<br>    while (latestTotal != total) {<br>      timeout.waitUntilNotified(this);<br>    }<br>  }<br>}</pre></code></div></div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+
