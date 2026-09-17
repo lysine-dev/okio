@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Square, Inc.
+ * Copyright (C) 2026 Square, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,38 @@
  */
 package okio
 
-import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
+import platform.windows.CloseHandle
+import platform.windows.CreateMutexA
+import platform.windows.INFINITE
+import platform.windows.ReleaseMutex
+import platform.windows.WaitForSingleObject
 
-internal actual val PLATFORM_DIRECTORY_SEPARATOR: String
-  get() = "/"
+actual class Lock : Closeable {
+  val mutex = CreateMutexA(
+    null,
+    0,
+    null
+  ) ?: throw lastErrorToIOException()
 
-actual typealias Lock = Unit
+  override fun close() {
+    CloseHandle(mutex)
+  }
+}
 
-internal actual fun newLock(): Lock = Unit
-internal actual inline fun Lock.destroy() = Unit
+internal actual fun newLock(): Lock = Lock()
+internal actual inline fun Lock.destroy() = close()
 
-@OptIn(ExperimentalContracts::class)
 actual inline fun <T> Lock.withLock(action: () -> T): T {
   contract {
     callsInPlace(action, InvocationKind.EXACTLY_ONCE)
   }
 
-  return action()
+  try {
+    WaitForSingleObject(mutex, INFINITE)
+    return action()
+  } finally {
+    ReleaseMutex(mutex)
+  }
 }
