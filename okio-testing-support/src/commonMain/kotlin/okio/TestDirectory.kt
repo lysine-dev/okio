@@ -23,7 +23,9 @@ import de.infix.testBalloon.framework.core.TestSuiteScope
 fun TestSuiteScope.testDirectory(
   fileSystem: FileSystem,
   temporaryDirectory: Path = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-) = testFixture { fileSystem.createTestPath(temporaryDirectory) }
+) = testFixture { fileSystem.createTestPath(temporaryDirectory) } closeWith {
+    fileSystem.deleteRecursively(this)
+}
 
 /**
  * A scope that provides temporary directories on [fileSystem] that's usable for the current test.
