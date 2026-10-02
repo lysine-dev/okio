@@ -17,6 +17,7 @@ package okio
 
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
+import de.infix.testBalloon.framework.core.testSuite
 import java.io.InterruptedIOException
 import java.nio.file.FileSystems
 import kotlin.test.assertEquals
@@ -24,67 +25,94 @@ import kotlin.test.assertFalse
 import kotlin.test.fail
 import kotlin.time.Clock
 import okio.FileSystem.Companion.asOkioFileSystem
-import org.junit.jupiter.api.Test
 
 /**
  * This test will run using [NioSystemFileSystem] by default. If [java.nio.file.Files] is not found
  * on the classpath, [JvmSystemFileSystem] will be use instead.
  */
-class NioSystemFileSystemTest : AbstractFileSystemTest(
-  clock = Clock.System,
-  fileSystem = FileSystem.SYSTEM,
-  windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
-  allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
-  allowAtomicMoveFromFileToDirectory = false,
-  temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-  closeBehavior = CloseBehavior.DoesNothing,
-)
-
-class JvmSystemFileSystemTest : AbstractFileSystemTest(
-  clock = Clock.System,
-  fileSystem = JvmSystemFileSystem(),
-  windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
-  allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
-  allowAtomicMoveFromFileToDirectory = false,
-  temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-  closeBehavior = CloseBehavior.DoesNothing,
-) {
-
-  @Test fun checkInterruptedBeforeDeleting() {
-    Thread.currentThread().interrupt()
-    try {
-      fileSystem.delete(base)
-      fail()
-    } catch (expected: InterruptedIOException) {
-      assertEquals("interrupted", expected.message)
-      assertFalse(Thread.interrupted())
-    }
-  }
+val NioSystemFileSystemTest by testSuite {
+  fileSystemTests(
+    newFixture = {
+      FileSystemFixture(
+        clock = Clock.System,
+        fileSystem = FileSystem.SYSTEM,
+        windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
+        allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
+        allowAtomicMoveFromFileToDirectory = false,
+        temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
+        closeBehavior = CloseBehavior.DoesNothing,
+        variant = FileSystemVariant.System,
+      )
+    },
+  )
 }
 
-class NioJimFileSystemWrappingFileSystemTest : AbstractFileSystemTest(
-  clock = Clock.System,
-  fileSystem = Jimfs
-    .newFileSystem(
-      when (Path.DIRECTORY_SEPARATOR == "\\") {
-        true -> Configuration.windows()
-        false -> Configuration.unix()
-      },
-    ).asOkioFileSystem(),
-  windowsLimitations = false,
-  allowClobberingEmptyDirectories = true,
-  allowAtomicMoveFromFileToDirectory = true,
-  temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-  closeBehavior = CloseBehavior.Closes,
-)
+val JvmSystemFileSystemTest by testSuite {
+  fileSystemTests(
+    newFixture = {
+      FileSystemFixture(
+        clock = Clock.System,
+        fileSystem = JvmSystemFileSystem(),
+        windowsLimitations = Path.DIRECTORY_SEPARATOR == "\\",
+        allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
+        allowAtomicMoveFromFileToDirectory = false,
+        temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
+        closeBehavior = CloseBehavior.DoesNothing,
+        variant = FileSystemVariant.System,
+      )
+    },
+    extraTests = {
+      test("checkInterruptedBeforeDeleting") {
+        Thread.currentThread().interrupt()
+        try {
+          fileSystem.delete(base)
+          fail()
+        } catch (expected: InterruptedIOException) {
+          assertEquals("interrupted", expected.message)
+          assertFalse(Thread.interrupted())
+        }
+      }
+    },
+  )
+}
 
-class NioDefaultFileSystemWrappingFileSystemTest : AbstractFileSystemTest(
-  clock = Clock.System,
-  fileSystem = FileSystems.getDefault().asOkioFileSystem(),
-  windowsLimitations = false,
-  allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
-  allowAtomicMoveFromFileToDirectory = false,
-  allowRenameWhenTargetIsOpen = Path.DIRECTORY_SEPARATOR != "\\",
-  temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
-  closeBehavior = CloseBehavior.Unsupported,
-)
+val NioJimFileSystemWrappingFileSystemTest by testSuite {
+  fileSystemTests(
+    newFixture = {
+      FileSystemFixture(
+        clock = Clock.System,
+        fileSystem = Jimfs
+          .newFileSystem(
+            when (Path.DIRECTORY_SEPARATOR == "\\") {
+              true -> Configuration.windows()
+              false -> Configuration.unix()
+            },
+          ).asOkioFileSystem(),
+        windowsLimitations = false,
+        allowClobberingEmptyDirectories = true,
+        allowAtomicMoveFromFileToDirectory = true,
+        temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
+        closeBehavior = CloseBehavior.Closes,
+        variant = FileSystemVariant.JimfsWrapping,
+      )
+    },
+  )
+}
+
+val NioDefaultFileSystemWrappingFileSystemTest by testSuite {
+  fileSystemTests(
+    newFixture = {
+      FileSystemFixture(
+        clock = Clock.System,
+        fileSystem = FileSystems.getDefault().asOkioFileSystem(),
+        windowsLimitations = false,
+        allowClobberingEmptyDirectories = Path.DIRECTORY_SEPARATOR == "\\",
+        allowAtomicMoveFromFileToDirectory = false,
+        allowRenameWhenTargetIsOpen = Path.DIRECTORY_SEPARATOR != "\\",
+        temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY,
+        closeBehavior = CloseBehavior.Unsupported,
+        variant = FileSystemVariant.System,
+      )
+    },
+  )
+}

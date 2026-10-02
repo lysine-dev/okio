@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.dsl.JsModuleKind
 
 plugins {
   kotlin("multiplatform")
-  id("app.cash.burst")
+  id("de.infix.testBalloon")
   id("org.jetbrains.dokka")
   id("com.vanniktech.maven.publish.base")
   id("binary-compatibility-validator")
@@ -43,6 +43,7 @@ kotlin {
       dependencies {
         implementation(libs.kotlin.test)
         implementation(libs.kotlin.time)
+        implementation(libs.test.balloon.core)
 
         implementation(projects.okioFakefilesystem)
         implementation(projects.okioTestingSupport)
