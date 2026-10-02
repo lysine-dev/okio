@@ -1,0 +1,878 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ByteString</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+    <link href="../../../styles/style.css" rel="Stylesheet">
+    <link href="../../../styles/logo-styles.css" rel="Stylesheet">
+    <link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+    <link href="../../../styles/main.css" rel="Stylesheet">
+    <script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+    <script type="text/javascript" src="../../../scripts/main.js" async="async"></script>
+    <link href="../../../images/logo-square.png">
+    <link href="../../../styles/dokka-logo.css" rel="Stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <script type="text/javascript" src="../../../scripts/pages.js"></script>
+        <script type="text/javascript" src="../../../scripts/main.js"></script>
+        <div class="main-content" id="content" pageIds="okio/ByteString///PointingToDeclaration//1222689122">
+          <div class="navigation-wrapper" id="navigation-wrapper">
+            <div class="breadcrumbs"><a href="../../index.html">okio</a>/<a href="../index.html">okio</a>/<a href="index.html">ByteString</a></div>
+            <div class="pull-right d-flex">
+              <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector common-like" data-active="" data-filter=":okio:dokkaHtml/commonMain">common</button><button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":okio:dokkaHtml/jvmMain">jvm</button></div>
+              <div id="searchBar"></div>
+            </div>
+          </div>
+          <div class="cover ">
+            <h1 class="cover"><span>Byte</span><wbr></wbr><span>String</span></h1>
+            <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+              <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open class <a href="index.html">ByteString</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html">Comparable</a>&lt;<a href="index.html">ByteString</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">An immutable sequence of bytes.</p><p class="paragraph">Byte strings compare lexicographically as a sequence of unsigned bytes. That is, the byte string <code>ff</code> sorts after <code>00</code>. This is counter to the sort order of the corresponding bytes, where <code>-1</code> sorts before <code>0</code>.</p><p class="paragraph">Full disclosure: this class provides untrusted input and output streams with raw access to the underlying byte array. A hostile stream implementation could keep a reference to the mutable byte string, violating the immutable guarantee of this class. For this reason a byte string's immutability guarantee cannot be relied upon for security in applets and other environments that run both trusted and untrusted code in the same process.</p></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open class <a href="index.html">ByteString</a> : <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html">Serializable</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html">Comparable</a>&lt;<a href="index.html">ByteString</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>            </div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+            <div class="tabs-section-body">
+              <h2 class="">Types</h2>
+              <div class="table" data-togglable="Types"><a data-name="%5Bokio%2FByteString.Companion%2F%2F%2FPointingToDeclaration%2F%5D%2FClasslikes%2F1222689122" anchor-label="Companion" id="%5Bokio%2FByteString.Companion%2F%2F%2FPointingToDeclaration%2F%5D%2FClasslikes%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="-companion/index.html">Companion</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString.Companion%2F%2F%2FPointingToDeclaration%2F%5D%2FClasslikes%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">object <a href="-companion/index.html">Companion</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="%5Bokio%2FByteString%2FasByteBuffer%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="asByteBuffer" id="%5Bokio%2FByteString%2FasByteBuffer%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="as-byte-buffer.html">asByteBuffer</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FasByteBuffer%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="as-byte-buffer.html">asByteBuffer</a>(): <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html">ByteBuffer</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FasByteBuffer%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="asByteBuffer" id="%5Bokio%2FByteString%2FasByteBuffer%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FasByteBuffer%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="asByteBuffer" id="%5Bokio%2FByteString%2FasByteBuffer%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Returns a <code>ByteBuffer</code> view of the bytes in this <code>ByteString</code>.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="base64" id="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="base64.html">base64</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="base64.html">base64</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="base64" id="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="base64" id="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns this byte string encoded as <a href="http://www.ietf.org/rfc/rfc2045.txt">Base64</a>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="base64.html">base64</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="base64" id="%5Bokio%2FByteString%2Fbase64%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="base64Url" id="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="base64-url.html">base64Url</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="base64-url.html">base64Url</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="base64Url" id="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="base64Url" id="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns this byte string encoded as <a href="http://www.ietf.org/rfc/rfc4648.txt">URL-safe Base64</a>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="base64-url.html">base64Url</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="base64Url" id="%5Bokio%2FByteString%2Fbase64Url%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FcompareTo%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="compareTo" id="%5Bokio%2FByteString%2FcompareTo%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="compare-to.html">compareTo</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FcompareTo%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open operator override fun <a href="compare-to.html">compareTo</a>(other: <a href="index.html">ByteString</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FendsWith%2F%23kotlin.ByteArray%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FendsWith%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="endsWith" id="%5Bokio%2FByteString%2FendsWith%2F%23kotlin.ByteArray%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FendsWith%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="ends-with.html">endsWith</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FendsWith%2F%23kotlin.ByteArray%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FendsWith%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="ends-with.html">endsWith</a>(suffix: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace">fun <a href="ends-with.html">endsWith</a>(suffix: <a href="index.html">ByteString</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="equals" id="%5Bokio%2FByteString%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="equals.html">equals</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fequals%2F%23kotlin.Any%3F%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open operator override fun <a href="equals.html">equals</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>?): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="get" id="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="get.html">get</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html">JvmName</a>(<span>name = <span class="breakable-word">&quot;getByte&quot;</span></span><wbr></wbr>)</div></div>operator fun <a href="get.html">get</a>(index: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte/index.html">Byte</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="get" id="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="get" id="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the byte at <code>index</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html">JvmName</a>(<span>name = <span class="breakable-word">&quot;getByte&quot;</span></span><wbr></wbr>)</div></div>operator fun <a href="get.html">get</a>(index: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte/index.html">Byte</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="get" id="%5Bokio%2FByteString%2Fget%2F%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hashCode" id="%5Bokio%2FByteString%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="hash-code.html">hashCode</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FhashCode%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open override fun <a href="hash-code.html">hashCode</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hex" id="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="hex.html">hex</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="hex.html">hex</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hex" id="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="hex" id="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns this byte string encoded in hexadecimal.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="hex.html">hex</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hex" id="%5Bokio%2FByteString%2Fhex%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha1" id="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="hmac-sha1.html">hmacSha1</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="hmac-sha1.html">hmacSha1</a>(key: <a href="index.html">ByteString</a>): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha1" id="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="hmacSha1" id="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the 160-bit SHA-1 HMAC of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="hmac-sha1.html">hmacSha1</a>(key: <a href="index.html">ByteString</a>): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha1" id="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="hmacSha1" id="%5Bokio%2FByteString%2FhmacSha1%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Returns the 160-bit SHA-1 HMAC of this byte string.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha256" id="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="hmac-sha256.html">hmacSha256</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="hmac-sha256.html">hmacSha256</a>(key: <a href="index.html">ByteString</a>): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha256" id="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="hmacSha256" id="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the 256-bit SHA-256 HMAC of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="hmac-sha256.html">hmacSha256</a>(key: <a href="index.html">ByteString</a>): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha256" id="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="hmacSha256" id="%5Bokio%2FByteString%2FhmacSha256%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Returns the 256-bit SHA-256 HMAC of this byte string.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha512" id="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="hmac-sha512.html">hmacSha512</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="hmac-sha512.html">hmacSha512</a>(key: <a href="index.html">ByteString</a>): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha512" id="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="hmacSha512" id="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the 512-bit SHA-512 HMAC of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="hmac-sha512.html">hmacSha512</a>(key: <a href="index.html">ByteString</a>): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="hmacSha512" id="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="hmacSha512" id="%5Bokio%2FByteString%2FhmacSha512%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Returns the 512-bit SHA-512 HMAC of this byte string.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FindexOf%2F%23kotlin.ByteArray%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FindexOf%2F%23okio.ByteString%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="indexOf" id="%5Bokio%2FByteString%2FindexOf%2F%23kotlin.ByteArray%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FindexOf%2F%23okio.ByteString%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="index-of.html">indexOf</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FindexOf%2F%23kotlin.ByteArray%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FindexOf%2F%23okio.ByteString%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>fun <a href="index-of.html">indexOf</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>fun <a href="index-of.html">indexOf</a>(other: <a href="index.html">ByteString</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>open fun <a href="index-of.html">indexOf</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>fun <a href="index-of.html">indexOf</a>(other: <a href="index.html">ByteString</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FlastIndexOf%2F%23kotlin.ByteArray%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FlastIndexOf%2F%23okio.ByteString%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="lastIndexOf" id="%5Bokio%2FByteString%2FlastIndexOf%2F%23kotlin.ByteArray%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FlastIndexOf%2F%23okio.ByteString%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="last-index-of.html">lastIndexOf</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FlastIndexOf%2F%23kotlin.ByteArray%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FlastIndexOf%2F%23okio.ByteString%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="last-index-of.html">lastIndexOf</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace">fun <a href="last-index-of.html">lastIndexOf</a>(other: <a href="index.html">ByteString</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>open fun <a href="last-index-of.html">lastIndexOf</a>(other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>fun <a href="last-index-of.html">lastIndexOf</a>(other: <a href="index.html">ByteString</a>, fromIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="md5" id="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="md5.html">md5</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="md5.html">md5</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="md5" id="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="md5" id="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the 128-bit MD5 hash of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="md5.html">md5</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="md5" id="%5Bokio%2FByteString%2Fmd5%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="rangeEquals" id="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="range-equals.html">rangeEquals</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="range-equals.html">rangeEquals</a>(offset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>, otherOffset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, byteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="rangeEquals" id="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="rangeEquals" id="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns true if the bytes of this in <code>[offset..offset+byteCount)</code> equal the bytes of <code>other</code> in <code>[otherOffset..otherOffset+byteCount)</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="range-equals.html">rangeEquals</a>(offset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, other: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>, otherOffset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, byteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="rangeEquals" id="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23kotlin.ByteArray%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="range-equals.html">rangeEquals</a>(offset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, other: <a href="index.html">ByteString</a>, otherOffset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, byteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="rangeEquals" id="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="rangeEquals" id="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns true if the bytes of this in <code>[offset..offset+byteCount)</code> equal the bytes of <code>other</code> in <code>[otherOffset..otherOffset+byteCount)</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="range-equals.html">rangeEquals</a>(offset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, other: <a href="index.html">ByteString</a>, otherOffset: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, byteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="rangeEquals" id="%5Bokio%2FByteString%2FrangeEquals%2F%23kotlin.Int%23okio.ByteString%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha1" id="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="sha1.html">sha1</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="sha1.html">sha1</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha1" id="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="sha1" id="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the 160-bit SHA-1 hash of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="sha1.html">sha1</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha1" id="%5Bokio%2FByteString%2Fsha1%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha256" id="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="sha256.html">sha256</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="sha256.html">sha256</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha256" id="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="sha256" id="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the 256-bit SHA-256 hash of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="sha256.html">sha256</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha256" id="%5Bokio%2FByteString%2Fsha256%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha512" id="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="sha512.html">sha512</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="sha512.html">sha512</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha512" id="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="sha512" id="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the 512-bit SHA-512 hash of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="sha512.html">sha512</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="sha512" id="%5Bokio%2FByteString%2Fsha512%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FstartsWith%2F%23kotlin.ByteArray%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FstartsWith%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="startsWith" id="%5Bokio%2FByteString%2FstartsWith%2F%23kotlin.ByteArray%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FstartsWith%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="starts-with.html">startsWith</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FstartsWith%2F%23kotlin.ByteArray%2FPointingToDeclaration%2F%2C+okio%2FByteString%2FstartsWith%2F%23okio.ByteString%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="starts-with.html">startsWith</a>(prefix: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace">fun <a href="starts-with.html">startsWith</a>(prefix: <a href="index.html">ByteString</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fstring%2F%23java.nio.charset.Charset%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="string" id="%5Bokio%2FByteString%2Fstring%2F%23java.nio.charset.Charset%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="string.html">string</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fstring%2F%23java.nio.charset.Charset%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="string.html">string</a>(charset: <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/charset/Charset.html">Charset</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fstring%2F%23java.nio.charset.Charset%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="string" id="%5Bokio%2FByteString%2Fstring%2F%23java.nio.charset.Charset%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fstring%2F%23java.nio.charset.Charset%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="string" id="%5Bokio%2FByteString%2Fstring%2F%23java.nio.charset.Charset%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Constructs a new <code>String</code> by decoding the bytes using <code>charset</code>.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="substring" id="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="substring.html">substring</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="substring.html">substring</a>(beginIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0, endIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="substring" id="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="substring" id="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns a byte string that is a substring of this byte string, beginning at the specified <code>beginIndex</code> and ends at the specified <code>endIndex</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace"><div class="block"><div class="block">@<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html">JvmOverloads</a>()</div></div>open fun <a href="substring.html">substring</a>(beginIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = 0, endIndex: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a> = size): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="substring" id="%5Bokio%2FByteString%2Fsubstring%2F%23kotlin.Int%23kotlin.Int%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toAsciiLowercase" id="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="to-ascii-lowercase.html">toAsciiLowercase</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="to-ascii-lowercase.html">toAsciiLowercase</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toAsciiLowercase" id="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="toAsciiLowercase" id="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns a byte string equal to this byte string, but with the bytes 'A' through 'Z' replaced with the corresponding byte in 'a' through 'z'.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="to-ascii-lowercase.html">toAsciiLowercase</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toAsciiLowercase" id="%5Bokio%2FByteString%2FtoAsciiLowercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toAsciiUppercase" id="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="to-ascii-uppercase.html">toAsciiUppercase</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="to-ascii-uppercase.html">toAsciiUppercase</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toAsciiUppercase" id="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="toAsciiUppercase" id="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns a byte string equal to this byte string, but with the bytes 'a' through 'z' replaced with the corresponding byte in 'A' through 'Z'.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="to-ascii-uppercase.html">toAsciiUppercase</a>(): <a href="index.html">ByteString</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toAsciiUppercase" id="%5Bokio%2FByteString%2FtoAsciiUppercase%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toByteArray" id="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="to-byte-array.html">toByteArray</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="to-byte-array.html">toByteArray</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toByteArray" id="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="toByteArray" id="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns a byte array containing a copy of the bytes in this <code>ByteString</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="to-byte-array.html">toByteArray</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toByteArray" id="%5Bokio%2FByteString%2FtoByteArray%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toString" id="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="to-string.html">toString</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">open override fun <a href="to-string.html">toString</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toString" id="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="toString" id="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns a human-readable string that describes the contents of this byte string.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open override fun <a href="to-string.html">toString</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="toString" id="%5Bokio%2FByteString%2FtoString%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="utf8" id="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="utf8.html">utf8</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="utf8.html">utf8</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="utf8" id="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" anchor-label="utf8" id="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Constructs a new <code>String</code> by decoding the bytes as <code>UTF-8</code>.</div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="utf8.html">utf8</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" anchor-label="utf8" id="%5Bokio%2FByteString%2Futf8%2F%23%2FPointingToDeclaration%2F%5D%2FFunctions%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="%5Bokio%2FByteString%2Fwrite%2F%23java.io.OutputStream%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="write" id="%5Bokio%2FByteString%2Fwrite%2F%23java.io.OutputStream%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="write.html">write</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fwrite%2F%23java.io.OutputStream%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="platform-tags ">
+                        <div class="platform-tag jvm-like">jvm</div>
+                      </div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">open fun <a href="write.html">write</a>(out: <a href="https://docs.oracle.com/javase/8/docs/api/java/io/OutputStream.html">OutputStream</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="%5Bokio%2FByteString%2Fwrite%2F%23java.io.OutputStream%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="write" id="%5Bokio%2FByteString%2Fwrite%2F%23java.io.OutputStream%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a><div class="brief "><a data-name="%5Bokio%2FByteString%2Fwrite%2F%23java.io.OutputStream%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" anchor-label="write" id="%5Bokio%2FByteString%2Fwrite%2F%23java.io.OutputStream%2FPointingToDeclaration%2F%5D%2FFunctions%2F-1136039540" data-filterable-set=":okio:dokkaHtml/jvmMain"></a>Writes the contents of this byte string to <code>out</code>.</div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="size" id="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a>
+                <div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="size.html">size</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain" data-active="" data-toggle=":okio:dokkaHtml/commonMain">common</button><button class="platform-bookmark jvm-like" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain" data-toggle=":okio:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><a data-name="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="size" id="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="size.html">size</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1936238634" anchor-label="size" id="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F-1936238634" data-filterable-set=":okio:dokkaHtml/commonMain"></a>Returns the number of bytes in this ByteString.</div></div><div class="content sourceset-depenent-content" data-togglable=":okio:dokkaHtml/jvmMain"><a data-name="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" anchor-label="size" id="%5Bokio%2FByteString%2Fsize%2F%23%2FPointingToDeclaration%2F%5D%2FProperties%2F1222689122" data-filterable-set=":okio:dokkaHtml/commonMain :okio:dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="size.html">size</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+
