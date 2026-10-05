@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>expandBuffer</title>
+    <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../../";</script>
+    <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async="async"></script>
+    <link href="../../../../styles/style.css" rel="Stylesheet">
+    <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+    <link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
+    <link href="../../../../styles/main.css" rel="Stylesheet">
+    <script type="text/javascript" src="../../../../scripts/clipboard.js" async="async"></script>
+    <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async="async"></script>
+    <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
+    <script type="text/javascript" src="../../../../scripts/main.js" async="async"></script>
+    <link href="../../../../images/logo-square.png">
+    <link href="../../../../styles/dokka-logo.css" rel="Stylesheet">
+  </head>
+  <body>
+    <div id="container">
+      <div id="leftColumn">
+        <div id="logo"></div>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <div id="leftToggler"><span class="icon-toggler"></span></div>
+        <script type="text/javascript" src="../../../../scripts/pages.js"></script>
+        <script type="text/javascript" src="../../../../scripts/main.js"></script>
+        <div class="main-content" id="content" pageIds="okio/Buffer.UnsafeCursor/expandBuffer/#kotlin.Int/PointingToDeclaration//1222689122">
+          <div class="navigation-wrapper" id="navigation-wrapper">
+            <div class="breadcrumbs"><a href="../../../index.html">okio</a>/<a href="../../index.html">okio</a>/<a href="../index.html">Buffer</a>/<a href="index.html">UnsafeCursor</a>/<a href="expand-buffer.html">expandBuffer</a></div>
+            <div class="pull-right d-flex">
+              <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector common-like" data-active="" data-filter=":okio:dokkaHtml/commonMain">common</button><button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":okio:dokkaHtml/jvmMain">jvm</button></div>
+              <div id="searchBar"></div>
+            </div>
+          </div>
+          <div class="cover ">
+            <h1 class="cover"><span>expand</span><wbr></wbr><span>Buffer</span></h1>
+          </div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag common-like">common</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="expand-buffer.html">expandBuffer</a>(minByteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<p class="paragraph">Grow the buffer by adding a contiguous range of capacity in a single segment. This adds at least <span data-unresolved-link="okio/Buffer.UnsafeCursor/minByteCount/#/PointingToCallableParameters(-1)/">minByteCount</span> bytes but may add up to a full segment of additional capacity.</p><p class="paragraph">As a side-effect this cursor will <a href="seek.html">seek</a>. It will move <a href="offset.html">offset</a> to the first byte of newly-added capacity. This is the size of the buffer prior to the <code>expandBuffer()</code> call.</p><p class="paragraph">If <span data-unresolved-link="okio/Buffer.UnsafeCursor/minByteCount/#/PointingToCallableParameters(-1)/">minByteCount</span> bytes are available in the buffer's current tail segment that will be used; otherwise another segment will be allocated and appended. In either case this returns the number of bytes of capacity added to this buffer.</p><p class="paragraph">Warning: it is the caller’s responsibility to either write new data to every byte of the newly-allocated capacity, or to <a href="resize-buffer.html">shrink</a> the buffer to the data written. Failure to do so may cause serious security problems as the data in the returned buffers is not zero filled. Buffers may contain dirty pooled segments that hold very sensitive data from other parts of the current process.</p><h4 class="">Return</h4><p class="paragraph">the number of bytes expanded by. Not less than <code>minByteCount</code>.</p><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":okio:dokkaHtml/commonMain" data-filterable-set=":okio:dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">minByteCount</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">the size of the contiguous capacity. Must be positive and not greater     than the capacity size of a single segment (8 KiB).</p></div></div></div></div></div></div></div></div></div></div></div>
+<div class="divergent-group" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="with-platform-tags"><span class="pull-right">
+  <div class="platform-tags ">
+    <div class="platform-tag jvm-like">jvm</div>
+  </div>
+</span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div class="symbol monospace">fun <a href="expand-buffer.html">expandBuffer</a>(minByteCount: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":okio:dokkaHtml/jvmMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":okio:dokkaHtml/jvmMain" data-filterable-set=":okio:dokkaHtml/jvmMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">minByteCount</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">the size of the contiguous capacity. Must be positive and not greater     than the capacity size of a single segment (8 KiB).</p></div></div></div></div></div></div></div></div></div></div></div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2020 Copyright</span><span class="pull-right"><span>Sponsored and developed by dokka</span><a href="https://github.com/Kotlin/dokka"><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  </body>
+</html>
+
