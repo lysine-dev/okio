@@ -15,19 +15,18 @@
  */
 package okio
 
-import app.cash.burst.InterceptTest
 import com.google.common.jimfs.Configuration
 import com.google.common.jimfs.Jimfs
+import de.infix.testBalloon.framework.core.testSuite
 import java.nio.file.StandardOpenOption
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
 import kotlin.test.assertEquals
 import okio.FileSystem.Companion.asOkioFileSystem
-import org.junit.jupiter.api.Test
 
-class JimfsOkioRoundTripTest {
-  private val temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY
-  private val jimFs = Jimfs.newFileSystem(
+val JimfsOkioRoundTripTest by testSuite {
+  val temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY
+  val jimFs = Jimfs.newFileSystem(
     when (Path.DIRECTORY_SEPARATOR == "\\") {
       true -> Configuration.windows()
       false -> Configuration.unix()
@@ -35,33 +34,30 @@ class JimfsOkioRoundTripTest {
       .setWorkingDirectory(temporaryDirectory.toString())
       .build(),
   )
-  private val jimFsRoot = jimFs.rootDirectories.first()
-  private val okioFs = jimFs.asOkioFileSystem()
+  val jimFsRoot = jimFs.rootDirectories.first()
+  val okioFs = jimFs.asOkioFileSystem()
 
-  @InterceptTest
-  private val baseTestDirectory = TestDirectory(okioFs, temporaryDirectory)
-  private val base: Path get() = baseTestDirectory.path
+  testDirectory(okioFs, temporaryDirectory) asParameterForEach {
 
-  @Test
-  fun writeOkioReadJim() {
-    val path = base / "file-handle-write-okio-and-read-jim"
+    test("writeOkioReadJim") { base ->
+      val path = base / "file-handle-write-okio-and-read-jim"
 
-    okioFs.write(path) {
-      writeUtf8("abcdefghijklmnop")
+      okioFs.write(path) {
+        writeUtf8("abcdefghijklmnop")
+      }
+
+      assertEquals("abcdefghijklmnop", jimFsRoot.resolve(path.toString()).readText(Charsets.UTF_8))
     }
 
-    assertEquals("abcdefghijklmnop", jimFsRoot.resolve(path.toString()).readText(Charsets.UTF_8))
-  }
+    test("writeJimReadOkio") { base ->
+      val path = base / "file-handle-write-jim-and-read-okio"
+      jimFsRoot.resolve(path.toString()).writeText("abcdefghijklmnop", Charsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.WRITE)
 
-  @Test
-  fun writeJimReadOkio() {
-    val path = base / "file-handle-write-jim-and-read-okio"
-    jimFsRoot.resolve(path.toString()).writeText("abcdefghijklmnop", Charsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.WRITE)
-
-    okioFs.openReadWrite(path).use { handle ->
-      handle.source().buffer().use { source ->
-        assertEquals("abcde", source.readUtf8(5))
-        assertEquals("fghijklmnop", source.readUtf8())
+      okioFs.openReadWrite(path).use { handle ->
+        handle.source().buffer().use { source ->
+          assertEquals("abcde", source.readUtf8(5))
+          assertEquals("fghijklmnop", source.readUtf8())
+        }
       }
     }
   }
