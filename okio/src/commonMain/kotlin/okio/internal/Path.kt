@@ -91,8 +91,10 @@ private fun Path.rootLength(): Int {
     return 1
   }
 
-  // Look for a root like `C:\`.
-  if (bytes.size > 2 && bytes[1] == ':'.code.toByte() && bytes[2] == '\\'.code.toByte()) {
+  // Look for a root like `C:\` or `C:/`.
+  if (bytes.size > 2 && bytes[1] == ':'.code.toByte() &&
+    (bytes[2] == '\\'.code.toByte() || bytes[2] == '/'.code.toByte())
+  ) {
     val c = bytes[0].toInt().toChar()
     if (c !in 'a'..'z' && c !in 'A'..'Z') return -1
     return 3
@@ -113,7 +115,6 @@ internal inline fun Path.commonIsRelative(): Boolean {
 
 @Suppress("NOTHING_TO_INLINE")
 internal inline fun Path.commonVolumeLetter(): Char? {
-  if (bytes.indexOf(SLASH) != -1) return null
   if (bytes.size < 2) return null
   if (bytes[1] != ':'.code.toByte()) return null
   val c = bytes[0].toInt().toChar()
@@ -396,7 +397,7 @@ private fun Byte.toSlash(): ByteString {
 }
 
 private fun Buffer.startsWithVolumeLetterAndColon(slash: ByteString): Boolean {
-  if (slash != BACKSLASH) return false
+  if (slash != BACKSLASH && slash != SLASH) return false
   if (size < 2) return false
   if (get(1) != ':'.code.toByte()) return false
   val b = get(0).toInt().toChar()
