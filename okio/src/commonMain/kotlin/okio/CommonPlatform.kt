@@ -32,6 +32,9 @@ expect inline fun <T> Lock.withLock(action: () -> T): T
 
 internal expect fun newLock(): Lock
 
+internal expect fun getCurrentThreadId(): Long
+internal expect fun getAvailableProcessors(): Int
+
 expect open class IOException(message: String?, cause: Throwable?) : Exception {
   constructor(message: String?)
   constructor()
