@@ -31,6 +31,7 @@ actual typealias ArrayIndexOutOfBoundsException = java.lang.ArrayIndexOutOfBound
 actual typealias Lock = ReentrantLock
 
 internal actual fun newLock(): Lock = ReentrantLock()
+internal actual inline fun Lock.destroy() = Unit
 
 actual inline fun <T> Lock.withLock(action: () -> T): T {
   contract {
