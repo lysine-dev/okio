@@ -54,6 +54,44 @@ class ThrottlerTakeTest {
     assertElapsed(250L)
   }
 
+  @Test fun takeWithResetAllocation() {
+    val firstRate = 1 * 1024L // 1 KiB/s
+    val secondRate = 10 * 1024L // 10 KiB/s
+
+    // initial rate
+    throttler.bytesPerSecond(
+      bytesPerSecond = firstRate,
+      waitByteCount = firstRate,
+      maxByteCount = firstRate,
+      applyRateImmediately = false,
+    )
+    take(firstRate)
+    assertElapsed(0L)
+
+    // increase the rate but don't reset allocation (this is the default behavior of okio)
+    throttler.bytesPerSecond(
+      bytesPerSecond = secondRate,
+      waitByteCount = secondRate,
+      maxByteCount = secondRate,
+      applyRateImmediately = false,
+    )
+    // the rate change doesn't take effect immediately
+    // this is not ideal for apps like download managers that expect rate changes to take effect immediately
+    take(secondRate)
+    assertElapsed(1000L)
+
+    // reset the allocation
+    throttler.bytesPerSecond(
+      bytesPerSecond = secondRate,
+      waitByteCount = secondRate,
+      maxByteCount = secondRate,
+      applyRateImmediately = true,
+    )
+    // take should immediately return our requested byte count without waiting
+    take(secondRate)
+    assertElapsed(0L)
+  }
+
   @Test fun takeFullyTimeElapsed() {
     throttler.bytesPerSecond(bytesPerSecond = 20, waitByteCount = 5, maxByteCount = 10)
 
