@@ -60,12 +60,17 @@ class Throttler internal constructor(
     bytesPerSecond: Long,
     waitByteCount: Long = this.waitByteCount,
     maxByteCount: Long = this.maxByteCount,
+    applyRateImmediately: Boolean = false,
   ) {
     lock.withLock {
       require(bytesPerSecond >= 0)
       require(waitByteCount > 0)
       require(maxByteCount >= waitByteCount)
 
+      if (applyRateImmediately) {
+        // Apply the new rate immediately by resetting `allocatedUntil`.
+        this.allocatedUntil = System.nanoTime()
+      }
       this.bytesPerSecond = bytesPerSecond
       this.waitByteCount = waitByteCount
       this.maxByteCount = maxByteCount
