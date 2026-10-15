@@ -116,14 +116,21 @@ internal suspend fun SequenceScope<Path>.collectRecursively(
     yield(path)
   }
 
-  val children = fileSystem.listOrNull(path) ?: listOf()
+  val children =
+    (if (followSymlinks || fileSystem.metadataOrNull(path)?.symlinkTarget == null) {
+      fileSystem.listOrNull(path)
+    } else {
+      null
+    }) ?: listOf()
   if (children.isNotEmpty()) {
     // Figure out if path is a symlink and detect symlink cycles.
     var symlinkPath = path
     var symlinkCount = 0
+    val chain = mutableSetOf(path)
     while (true) {
       if (followSymlinks && symlinkPath in stack) throw IOException("symlink cycle at $path")
       symlinkPath = fileSystem.symlinkTarget(symlinkPath) ?: break
+      if (followSymlinks && !chain.add(symlinkPath)) throw IOException("symlink cycle at $path")
       symlinkCount++
     }
 
