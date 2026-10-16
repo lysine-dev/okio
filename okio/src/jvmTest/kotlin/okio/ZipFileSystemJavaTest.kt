@@ -15,28 +15,24 @@
  */
 package okio
 
-import app.cash.burst.InterceptTest
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import de.infix.testBalloon.framework.core.testSuite
 import okio.Path.Companion.toPath
-import org.junit.jupiter.api.Test
 
-class ZipFileSystemJavaTest {
-  private val fileSystem = FileSystem.SYSTEM
+val ZipFileSystemJavaTest by testSuite {
+  val fileSystem = FileSystem.SYSTEM
 
-  @InterceptTest
-  private val baseTestDirectory = TestDirectory(fileSystem)
-  private val base: Path get() = baseTestDirectory.path
-
-  @Test
-  fun zipFileSystemApi() {
-    val zipPath = ZipBuilder(base)
-      .addEntry("hello.txt", "Hello World")
-      .build()
-    val zipFileSystem = fileSystem.openZip(zipPath)
-    zipFileSystem.source("hello.txt".toPath(false)).buffer().use { source ->
-      val content = source.readUtf8()
-      assertThat(content).isEqualTo("Hello World")
+  testDirectory(fileSystem) asParameterForEach {
+    test("zipFileSystemApi") { base ->
+      val zipPath = ZipBuilder(base)
+        .addEntry("hello.txt", "Hello World")
+        .build()
+      val zipFileSystem = fileSystem.openZip(zipPath)
+      zipFileSystem.source("hello.txt".toPath(false)).buffer().use { source ->
+        val content = source.readUtf8()
+        assertThat(content).isEqualTo("Hello World")
+      }
     }
   }
 }

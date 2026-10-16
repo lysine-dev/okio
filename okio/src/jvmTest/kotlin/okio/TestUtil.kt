@@ -25,7 +25,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import okio.ByteString.Companion.encodeUtf8
-import org.junit.jupiter.api.Assumptions
 
 object TestUtil {
   // Necessary to make an internal member visible to Java.
@@ -294,5 +293,5 @@ object TestUtil {
     return reversed.toShort()
   }
 
-  fun assumeNotWindows() = Assumptions.assumeFalse(System.getProperty("os.name").lowercase(Locale.getDefault()).contains("win"))
+  fun isWindows() = System.getProperty("os.name").lowercase(Locale.getDefault()).contains("win")
 }
