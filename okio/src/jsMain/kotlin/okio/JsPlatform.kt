@@ -16,7 +16,7 @@
 package okio
 
 /*
- * This file exposes Node.js `os` and `path` APIs to Kotlin/JS, using reasonable default behaviors
+ * This file exposes Node.js `os`, `path` and `worker_threads` APIs to Kotlin/JS, using reasonable default behaviors
  * if those symbols aren't available.
  *
  * This was originally implemented using a Kotlin/JS [JsModule], but that broke browser builds
@@ -50,3 +50,18 @@ private val path: dynamic
 
 internal val tmpdir: String
   get() = os?.tmpdir() as? String ?: "/tmp"
+
+private val worker_threads: dynamic
+  get() {
+    return try {
+      js("require('worker_threads')")
+    } catch (t: Throwable) {
+      null
+    }
+  }
+
+internal actual fun getCurrentThreadId() =
+  (worker_threads?.threadId as? Int)?.toLong() ?: 0L
+
+internal actual fun getAvailableProcessors() =
+  os?.availableParallelism() as? Int ?: js("navigator.hardwareConcurrency") as? Int ?: 1
