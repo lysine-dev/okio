@@ -15,8 +15,7 @@
  */
 package okio
 
-import app.cash.burst.InterceptTest
-import kotlin.test.Test
+import de.infix.testBalloon.framework.core.testSuite
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
@@ -27,67 +26,58 @@ import okio.Path.Companion.toPath
  *
  * This tracks the `preopens` attribute in `.mjs` script in `okio-wasifilesystem/build.gradle.kts`.
  */
-class WasiFileSystemPreopensTest {
-  private val fileSystem = WasiFileSystem
+val WasiFileSystemPreopensTest by testSuite {
+  val fileSystem = WasiFileSystem
+  testDirectories(fileSystem, "/a".toPath(), "/b".toPath()) asParameterForEach {
 
-  @InterceptTest
-  private val testDirectoryA = TestDirectory(fileSystem, "/a".toPath())
-  private val baseA: Path get() = testDirectoryA.path
-
-  @InterceptTest
-  private val testDirectoryB = TestDirectory(fileSystem, "/b".toPath())
-  private val baseB: Path get() = testDirectoryB.path
-
-  @Test
-  fun operateOnPreopens() {
-    fileSystem.write(baseA / "a.txt") {
-      writeUtf8("hello world a")
-    }
-    fileSystem.write(baseB / "b.txt") {
-      writeUtf8("bello burld")
-    }
-    assertEquals(
-      "hello world a".length.toLong(),
-      fileSystem.metadata(baseA / "a.txt").size,
-    )
-    assertEquals(
-      "bello burld".length.toLong(),
-      fileSystem.metadata(baseB / "b.txt").size,
-    )
-  }
-
-  @Test
-  fun operateAcrossPreopens() {
-    fileSystem.write(baseA / "a.txt") {
-      writeUtf8("hello world")
+    test("operateOnPreopens") { (baseA, baseB) ->
+      fileSystem.write(baseA / "a.txt") {
+        writeUtf8("hello world a")
+      }
+      fileSystem.write(baseB / "b.txt") {
+        writeUtf8("bello burld")
+      }
+      assertEquals(
+        "hello world a".length.toLong(),
+        fileSystem.metadata(baseA / "a.txt").size,
+      )
+      assertEquals(
+        "bello burld".length.toLong(),
+        fileSystem.metadata(baseB / "b.txt").size,
+      )
     }
 
-    fileSystem.atomicMove(baseA / "a.txt", baseB / "b.txt")
+    test("operateAcrossPreopens") { (baseA, baseB) ->
+      fileSystem.write(baseA / "a.txt") {
+        writeUtf8("hello world")
+      }
 
-    assertEquals(
-      "hello world",
-      fileSystem.read(baseB / "b.txt") {
-        readUtf8()
-      },
-    )
-  }
+      fileSystem.atomicMove(baseA / "a.txt", baseB / "b.txt")
 
-  @Test
-  fun cannotOperateOutsideOfPreopens() {
-    val noPreopen = "/c/absent".toPath()
-    assertFailsWith<FileNotFoundException> {
-      fileSystem.createDirectory(noPreopen)
+      assertEquals(
+        "hello world",
+        fileSystem.read(baseB / "b.txt") {
+          readUtf8()
+        },
+      )
     }
-    assertFailsWith<FileNotFoundException> {
-      fileSystem.sink(noPreopen)
-    }
-    assertNull(fileSystem.metadataOrNull(noPreopen))
-    assertFailsWith<FileNotFoundException> {
-      fileSystem.metadata(noPreopen)
-    }
-    assertNull(fileSystem.listOrNull(noPreopen))
-    assertFailsWith<FileNotFoundException> {
-      fileSystem.list(noPreopen)
+
+    test("cannotOperateOutsideOfPreopens") {
+      val noPreopen = "/c/absent".toPath()
+      assertFailsWith<FileNotFoundException> {
+        fileSystem.createDirectory(noPreopen)
+      }
+      assertFailsWith<FileNotFoundException> {
+        fileSystem.sink(noPreopen)
+      }
+      assertNull(fileSystem.metadataOrNull(noPreopen))
+      assertFailsWith<FileNotFoundException> {
+        fileSystem.metadata(noPreopen)
+      }
+      assertNull(fileSystem.listOrNull(noPreopen))
+      assertFailsWith<FileNotFoundException> {
+        fileSystem.list(noPreopen)
+      }
     }
   }
 }

@@ -15,7 +15,7 @@
  */
 package okio
 
-import app.cash.burst.Burst
+import de.infix.testBalloon.framework.core.testSuite
 import kotlin.test.assertNotSame
 import kotlin.test.assertSame
 import okio.Buffer.UnsafeCursor
@@ -23,96 +23,95 @@ import okio.TestUtil.deepCopy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Assumptions.assumeTrue
-import org.junit.jupiter.api.Test
 
-@Burst
-class BufferCursorKotlinTest(
-  private val bufferFactory: BufferFactory,
-) {
-  @Test fun acquireReadOnlyDoesNotCopySharedDataArray() {
-    val buffer = deepCopy(bufferFactory.newBuffer())
-    assumeTrue(buffer.size > 0L)
+val BufferCursorKotlinTest by testSuite {
+  for (bufferFactory in BufferFactory.entries) {
+    testSuite(bufferFactory.name) {
+      test("acquireReadOnlyDoesNotCopySharedDataArray") {
+        val buffer = deepCopy(bufferFactory.newBuffer())
+        if (buffer.size <= 0L) return@test
 
-    val shared = buffer.clone()
-    assertTrue(buffer.head!!.shared)
+        val shared = buffer.clone()
+        assertTrue(buffer.head!!.shared)
 
-    buffer.readUnsafe().use { cursor ->
-      cursor.seek(0)
-      assertSame(cursor.data, shared.head!!.data)
-    }
-  }
+        buffer.readUnsafe().use { cursor ->
+          cursor.seek(0)
+          assertSame(cursor.data, shared.head!!.data)
+        }
+      }
 
-  @Test fun acquireReadWriteDoesNotCopyUnsharedDataArray() {
-    val buffer = deepCopy(bufferFactory.newBuffer())
-    assumeTrue(buffer.size > 0L)
-    assertFalse(buffer.head!!.shared)
+      test("acquireReadWriteDoesNotCopyUnsharedDataArray") {
+        val buffer = deepCopy(bufferFactory.newBuffer())
+        if (buffer.size <= 0L) return@test
+        assertFalse(buffer.head!!.shared)
 
-    val originalData = buffer.head!!.data
+        val originalData = buffer.head!!.data
 
-    buffer.readAndWriteUnsafe().use { cursor ->
-      cursor.seek(0)
-      assertSame(cursor.data, originalData)
-    }
-  }
+        buffer.readAndWriteUnsafe().use { cursor ->
+          cursor.seek(0)
+          assertSame(cursor.data, originalData)
+        }
+      }
 
-  @Test fun acquireReadWriteCopiesSharedDataArray() {
-    val buffer = deepCopy(bufferFactory.newBuffer())
-    assumeTrue(buffer.size > 0L)
+      test("acquireReadWriteCopiesSharedDataArray") {
+        val buffer = deepCopy(bufferFactory.newBuffer())
+        if (buffer.size <= 0L) return@test
 
-    val shared = buffer.clone()
-    assertTrue(buffer.head!!.shared)
+        val shared = buffer.clone()
+        assertTrue(buffer.head!!.shared)
 
-    buffer.readAndWriteUnsafe().use { cursor ->
-      cursor.seek(0)
-      assertNotSame(cursor.data, shared.head!!.data)
-    }
-  }
+        buffer.readAndWriteUnsafe().use { cursor ->
+          cursor.seek(0)
+          assertNotSame(cursor.data, shared.head!!.data)
+        }
+      }
 
-  @Test fun writeSharedSegments() {
-    val buffer = bufferFactory.newBuffer()
+      test("writeSharedSegments") {
+        val buffer = bufferFactory.newBuffer()
 
-    // Make a deep copy. This buffer's segments are not shared.
-    val deepCopy = deepCopy(buffer)
-    assertTrue(deepCopy.head == null || !deepCopy.head!!.shared)
+        // Make a deep copy. This buffer's segments are not shared.
+        val deepCopy = deepCopy(buffer)
+        assertTrue(deepCopy.head == null || !deepCopy.head!!.shared)
 
-    // Make a shallow copy. Both buffers' segments are shared as a side effect.
-    val shallowCopy = buffer.clone()
-    assertTrue(shallowCopy.head == null || shallowCopy.head!!.shared)
-    assertTrue(buffer.head == null || buffer.head!!.shared)
+        // Make a shallow copy. Both buffers' segments are shared as a side effect.
+        val shallowCopy = buffer.clone()
+        assertTrue(shallowCopy.head == null || shallowCopy.head!!.shared)
+        assertTrue(buffer.head == null || buffer.head!!.shared)
 
-    val expected = Buffer()
-    expected.writeUtf8("x".repeat(buffer.size.toInt()))
+        val expected = Buffer()
+        expected.writeUtf8("x".repeat(buffer.size.toInt()))
 
-    buffer.readAndWriteUnsafe().use { cursor ->
-      while (cursor.next() != -1) {
-        cursor.data!!.fill('x'.code.toByte(), cursor.start, cursor.end)
+        buffer.readAndWriteUnsafe().use { cursor ->
+          while (cursor.next() != -1) {
+            cursor.data!!.fill('x'.code.toByte(), cursor.start, cursor.end)
+          }
+        }
+
+        // The buffer was fully changed.
+        assertEquals(expected, buffer)
+
+        // The buffer we're shared with is unchanged.
+        assertEquals(deepCopy, shallowCopy)
+      }
+
+      /** As an optimization it's okay to use the same cursor on multiple buffers.  */
+      test("cursorReuse") {
+        val cursor = UnsafeCursor()
+
+        val buffer1 = bufferFactory.newBuffer()
+        buffer1.readUnsafe(cursor)
+        assertSame(buffer1, cursor.buffer)
+        assertFalse(cursor.readWrite)
+        cursor.close()
+        assertSame(null, cursor.buffer)
+
+        val buffer2 = bufferFactory.newBuffer()
+        buffer2.readAndWriteUnsafe(cursor)
+        assertSame(buffer2, cursor.buffer)
+        assertTrue(cursor.readWrite)
+        cursor.close()
+        assertSame(null, cursor.buffer)
       }
     }
-
-    // The buffer was fully changed.
-    assertEquals(expected, buffer)
-
-    // The buffer we're shared with is unchanged.
-    assertEquals(deepCopy, shallowCopy)
-  }
-
-  /** As an optimization it's okay to use the same cursor on multiple buffers.  */
-  @Test fun cursorReuse() {
-    val cursor = UnsafeCursor()
-
-    val buffer1 = bufferFactory.newBuffer()
-    buffer1.readUnsafe(cursor)
-    assertSame(buffer1, cursor.buffer)
-    assertFalse(cursor.readWrite)
-    cursor.close()
-    assertSame(null, cursor.buffer)
-
-    val buffer2 = bufferFactory.newBuffer()
-    buffer2.readAndWriteUnsafe(cursor)
-    assertSame(buffer2, cursor.buffer)
-    assertTrue(cursor.readWrite)
-    cursor.close()
-    assertSame(null, cursor.buffer)
   }
 }

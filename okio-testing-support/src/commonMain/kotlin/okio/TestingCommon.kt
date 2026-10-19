@@ -15,9 +15,15 @@
  */
 package okio
 
+import de.infix.testBalloon.framework.core.TestConfig
+import de.infix.testBalloon.framework.core.aroundEachTest
+import de.infix.testBalloon.framework.core.testScope
 import kotlin.random.Random
 import kotlin.test.assertEquals
+import kotlin.time.Duration
 import kotlin.time.Instant
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.withTimeout
 import okio.ByteString.Companion.toByteString
 import okio.Path.Companion.toPath
 
@@ -82,3 +88,15 @@ expect fun getEnv(name: String): String?
 val okioRoot: Path by lazy {
   getEnv("OKIO_ROOT")!!.toPath()
 }
+
+fun TestConfig.withTestTimeout(timeout: Duration) = this
+  .testScope(isEnabled = false)
+  .aroundEachTest { action ->
+    try {
+      withTimeout(timeout) {
+        action()
+      }
+    } catch (cancellation: TimeoutCancellationException) {
+      throw AssertionError("$cancellation", cancellation)
+    }
+  }
