@@ -637,6 +637,23 @@ abstract class AbstractFileSystemTest(
   }
 
   @Test
+  fun listRecursivelyOnSymlink() {
+    if (!supportsSymlink()) return
+
+    val baseA = base / "a"
+    val baseAA = baseA / "a"
+    val baseB = base / "b"
+    val baseBA = baseB / "a"
+
+    baseA.createDirectory()
+    baseAA.writeUtf8("aa")
+    fileSystem.createSymlink(baseB, baseA)
+
+    val sequence = fileSystem.listRecursively(baseB, followSymlinks = false)
+    assertEquals(listOf(baseBA), sequence.toList())
+  }
+
+  @Test
   fun listRecursiveWithSpecialCharacterNamedFiles() {
     val baseA = base / "ä"
     val baseASuperSaiyan = baseA / "超サイヤ人"
@@ -650,6 +667,23 @@ abstract class AbstractFileSystemTest(
 
     val sequence = fileSystem.listRecursively(base)
     assertEquals(listOf(baseB, baseBIliad, baseA, baseASuperSaiyan), sequence.toList())
+  }
+
+  @Test
+  fun listRecursiveOnSymlinkWithSpecialCharacterNamedFiles() {
+    if (!supportsSymlink()) return
+
+    val baseA = base / "ä"
+    val baseASuperSaiyan = baseA / "超サイヤ人"
+    val baseB = base / "ß"
+    val baseBSuperSaiyan = baseB / "超サイヤ人"
+
+    baseA.createDirectory()
+    baseASuperSaiyan.writeUtf8("aa")
+    fileSystem.createSymlink(baseB, baseA)
+
+    val sequence = fileSystem.listRecursively(baseB, followSymlinks = false)
+    assertEquals(listOf(baseBSuperSaiyan), sequence.toList())
   }
 
   @Test
@@ -1424,6 +1458,7 @@ abstract class AbstractFileSystemTest(
     assertFalse(fileSystem.exists(baseA))
     assertTrue(fileSystem.exists(base))
   }
+
 
   @Test
   fun deleteRecursivelyOnBrokenSymlinkSucceeds() {
