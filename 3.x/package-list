@@ -1,0 +1,16 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:okio/Buffer/equals/#kotlin.Any?/PointingToDeclaration/okio/okio/-buffer/[non-jvm]equals.html
+$dokka.location:okio/Buffer/hashCode/#/PointingToDeclaration/okio/okio/-buffer/[non-jvm]hash-code.html
+$dokka.location:okio/Buffer/toString/#/PointingToDeclaration/okio/okio/-buffer/[non-jvm]to-string.html
+$dokka.location:okio/FileSystem.Companion/SYSTEM/#/PointingToDeclaration/okio/okio/-file-system/-companion/[native]-s-y-s-t-e-m.html
+module:okio
+okio
+module:okio-assetfilesystem
+okio.assetfilesystem
+module:okio-fakefilesystem
+okio.fakefilesystem
+module:okio-nodefilesystem
+okio
+module:okio-wasifilesystem
+okio
