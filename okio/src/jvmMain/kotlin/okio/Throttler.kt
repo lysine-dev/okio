@@ -40,12 +40,12 @@ import kotlin.concurrent.withLock
  */
 class Throttler internal constructor(
   private val getCurrentNanoTime: () -> Long,
+) {
   /**
    * The nanoTime that we've consumed all bytes through. This is never greater than the current
-   * nanoTime plus nanosForMaxByteCount.
+   * nanoTime plus maxByteCount.
    */
-  private var allocatedUntil: Long = getCurrentNanoTime(),
-) {
+  private var allocatedUntil: Long = getCurrentNanoTime()
   private var bytesPerSecond: Long = 0L
   private var waitByteCount: Long = 8 * 1024 // 8 KiB.
   private var maxByteCount: Long = 256 * 1024 // 256 KiB.
