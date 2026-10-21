@@ -1459,7 +1459,6 @@ abstract class AbstractFileSystemTest(
     assertTrue(fileSystem.exists(base))
   }
 
-
   @Test
   fun deleteRecursivelyOnBrokenSymlinkSucceeds() {
     if (!supportsSymlink()) return
