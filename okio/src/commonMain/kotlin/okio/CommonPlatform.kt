@@ -31,6 +31,7 @@ expect class Lock
 expect inline fun <T> Lock.withLock(action: () -> T): T
 
 internal expect fun newLock(): Lock
+internal expect inline fun Lock.destroy()
 
 expect open class IOException(message: String?, cause: Throwable?) : Exception {
   constructor(message: String?)
