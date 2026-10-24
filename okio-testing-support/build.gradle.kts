@@ -50,7 +50,7 @@ kotlin {
         // On the JVM the kotlin-test library resolves to one of three implementations based on
         // which testing framework is in use. JUnit is used downstream, but Gradle can't know that
         // here and thus fails to select a variant automatically. Declare it manually instead.
-        api(libs.kotlin.test.junit)
+        api(libs.kotlin.test.junit5)
       }
     }
 

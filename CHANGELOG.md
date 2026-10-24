@@ -5,6 +5,16 @@ Change Log
 
  * None yet.
 
+## Version 3.18.2
+
+_2026-09-04_
+
+ * Fix: Don't change behavior of base64-encoding. We introduced a bug in Okio 3.18.1 that caused
+   base64 strings to be encoded without padding, even though the previous and expected behavior is
+   to encode such strings with padding (`=` characters). The bug impacts callers who compiled
+   against Okio releases `< 3.18.0`, and executed on Okio releases `>= 3.18`.
+
+
 ## Version 3.18.1
 
 _2026-07-28_

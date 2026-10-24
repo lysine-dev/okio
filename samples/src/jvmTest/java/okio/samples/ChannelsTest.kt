@@ -17,6 +17,7 @@ package okio.samples
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import java.io.File
 import java.nio.channels.FileChannel
 import java.nio.channels.ReadableByteChannel
 import java.nio.file.Files
@@ -25,16 +26,15 @@ import java.util.EnumSet
 import okio.Buffer
 import okio.Timeout
 import okio.buffer
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
+import okio.newFile
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 
 class ChannelsTest {
-  @JvmField
-  @Rule
-  var temporaryFolder = TemporaryFolder()
+  @TempDir
+  lateinit var temporaryFolder: File
 
   @Test
   fun testReadChannel() {

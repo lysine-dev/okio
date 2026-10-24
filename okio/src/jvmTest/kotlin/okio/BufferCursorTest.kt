@@ -20,14 +20,14 @@ import java.util.Arrays
 import okio.ByteString.Companion.of
 import okio.TestUtil.SEGMENT_SIZE
 import okio.TestUtil.deepCopy
-import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
-import org.junit.Assert.fail
-import org.junit.Assume.assumeTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Assumptions.assumeTrue
+import org.junit.jupiter.api.Test
 
 @Burst
 class BufferCursorTest(
@@ -125,7 +125,7 @@ class BufferCursorTest(
     try {
       var lastOffset = cursor.offset
       while (cursor.next().toLong() != -1L) {
-        Assert.assertTrue(cursor.offset > lastOffset)
+        Assertions.assertTrue(cursor.offset > lastOffset)
         lastOffset = cursor.offset
       }
       assertEquals(buffer.size, cursor.offset)

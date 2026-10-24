@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.gradleup.tapmoc.configureKotlinCompatibility
 import java.nio.charset.StandardCharsets
 import org.gradle.api.GradleException
 import org.gradle.api.JavaVersion
@@ -24,7 +25,6 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import tapmoc.configureKotlinCompatibility
 
 class BuildSupport : Plugin<Project> {
   override fun apply(project: Project) {

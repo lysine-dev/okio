@@ -15,7 +15,7 @@
  */
 package okio
 
-import org.junit.Assume.assumeTrue
+import org.junit.jupiter.api.Assumptions.assumeTrue
 
 /**
  * Execute the `zip` command line program to create reference zip files for testing.
@@ -53,7 +53,7 @@ class ZipBuilder(
   fun archiveComment(archiveComment: String) = apply { this.archiveComment = archiveComment }
 
   fun build(): Path {
-    assumeTrue("ZipBuilder doesn't work on Windows", Path.DIRECTORY_SEPARATOR == "/")
+    assumeTrue(Path.DIRECTORY_SEPARATOR == "/", "ZipBuilder doesn't work on Windows")
 
     val archive = directory / "${randomToken(16)}.zip"
     val anyZip64 = entries.any { it.zip64 }

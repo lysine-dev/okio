@@ -33,8 +33,8 @@ import okio.TestUtil.assertByteArraysEquals
 import okio.TestUtil.assertEquivalent
 import okio.TestUtil.makeSegments
 import okio.TestUtil.reserialize
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 @Burst
 class ByteStringJavaTest(

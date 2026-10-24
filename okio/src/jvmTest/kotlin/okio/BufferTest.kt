@@ -28,10 +28,10 @@ import okio.TestUtil.SEGMENT_SIZE
 import okio.TestUtil.bufferWithRandomSegmentLayout
 import okio.TestUtil.segmentPoolByteCount
 import okio.TestUtil.segmentSizes
-import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
 
 /**
  * Tests solely for the behavior of Buffer's implementation. For generic BufferedSink or
@@ -450,8 +450,8 @@ class BufferTest {
   fun equalsAndHashCode() {
     val a = Buffer().writeUtf8("dog")
     val b = Buffer().writeUtf8("hotdog")
-    Assert.assertNotEquals(a, b)
-    Assert.assertNotEquals(a.hashCode().toLong(), b.hashCode().toLong())
+    Assertions.assertNotEquals(a, b)
+    Assertions.assertNotEquals(a.hashCode().toLong(), b.hashCode().toLong())
     b.readUtf8(3) // Leaves b containing 'dog'.
     assertEquals(a, b)
     assertEquals(a.hashCode().toLong(), b.hashCode().toLong())
@@ -468,8 +468,8 @@ class BufferTest {
     assertEquals(a.hashCode().toLong(), b.hashCode().toLong())
     data[data.size / 2]++ // Change a single byte.
     val c = bufferWithRandomSegmentLayout(dice, data)
-    Assert.assertNotEquals(a, c)
-    Assert.assertNotEquals(a.hashCode().toLong(), c.hashCode().toLong())
+    Assertions.assertNotEquals(a, c)
+    Assertions.assertNotEquals(a.hashCode().toLong(), c.hashCode().toLong())
   }
 
   @Test

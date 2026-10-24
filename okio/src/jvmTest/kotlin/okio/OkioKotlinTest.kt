@@ -24,13 +24,12 @@ import java.io.File
 import java.net.Socket
 import java.nio.file.StandardOpenOption
 import java.nio.file.StandardOpenOption.APPEND
-import org.junit.Ignore
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 
 class OkioKotlinTest {
-  @get:Rule val temp = TemporaryFolder()
+  @TempDir lateinit var temp: File
 
   @Test fun outputStreamSink() {
     val baos = ByteArrayOutputStream()
@@ -49,27 +48,25 @@ class OkioKotlinTest {
 
   @Test fun fileSink() {
     val file = temp.newFile()
-    val sink = file.sink()
-    sink.write(Buffer().writeUtf8("a"), 1L)
+    file.sink().use { it.write(Buffer().writeUtf8("a"), 1L) }
     assertThat(file.readText()).isEqualTo("a")
   }
 
   @Test fun fileAppendingSink() {
     val file = temp.newFile()
     file.writeText("a")
-    val sink = file.sink(append = true)
-    sink.write(Buffer().writeUtf8("b"), 1L)
-    sink.close()
+    file.sink(append = true).use { it.write(Buffer().writeUtf8("b"), 1L) }
     assertThat(file.readText()).isEqualTo("ab")
   }
 
   @Test fun fileSource() {
     val file = temp.newFile()
     file.writeText("a")
-    val source = file.source()
-    val buffer = Buffer()
-    source.read(buffer, 1L)
-    assertThat(buffer.readUtf8()).isEqualTo("a")
+    file.source().use { source ->
+      val buffer = Buffer()
+      source.read(buffer, 1L)
+      assertThat(buffer.readUtf8()).isEqualTo("a")
+    }
   }
 
   @Test fun pathSink() {
@@ -96,11 +93,10 @@ class OkioKotlinTest {
     assertThat(buffer.readUtf8()).isEqualTo("a")
   }
 
-  @Ignore("Not sure how to test this")
+  @Disabled("Not sure how to test this")
   @Test
   fun pathSourceWithOptions() {
-    val folder = temp.newFolder()
-    val file = File(folder, "new.txt")
+    val file = File(temp, "new.txt")
     file.toPath().source(StandardOpenOption.CREATE_NEW)
     // This still throws NoSuchFileException...
   }

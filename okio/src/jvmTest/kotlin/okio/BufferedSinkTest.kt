@@ -25,9 +25,9 @@ import okio.ByteString.Companion.decodeHex
 import okio.ByteString.Companion.encodeUtf8
 import okio.TestUtil.SEGMENT_SIZE
 import okio.TestUtil.segmentSizes
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
 
 @Burst
 class BufferedSinkTest(
@@ -324,7 +324,7 @@ class BufferedSinkTest(
     sink.writeDecimalLong(value).writeUtf8("zzz").flush()
     val expected = java.lang.Long.toString(value) + "zzz"
     val actual = data.readUtf8()
-    assertEquals("$value expected $expected but was $actual", actual, expected)
+    assertEquals(actual, expected, "$value expected $expected but was $actual")
   }
 
   @Test
@@ -370,6 +370,6 @@ class BufferedSinkTest(
     sink.writeHexadecimalUnsignedLong(value).writeUtf8("zzz").flush()
     val expected = String.format("%x", value) + "zzz"
     val actual = data.readUtf8()
-    assertEquals("$value expected $expected but was $actual", actual, expected)
+    assertEquals(actual, expected, "$value expected $expected but was $actual")
   }
 }

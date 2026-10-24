@@ -23,17 +23,15 @@ import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.test.assertFailsWith
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.nanoseconds
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.Timeout as JUnitTimeout
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Timeout
 
+@Timeout(5, unit = TimeUnit.SECONDS)
 class PipeKotlinTest {
-  @JvmField @Rule
-  val timeout = JUnitTimeout(5, TimeUnit.SECONDS)
 
   @InterceptTest
   private val executorService = TestExecutor(1)
@@ -143,7 +141,7 @@ class PipeKotlinTest {
           sinkBuffer.flush()
         }
 
-        override fun timeout(): Timeout {
+        override fun timeout(): okio.Timeout {
           return sinkBuffer.timeout()
         }
 

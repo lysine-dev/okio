@@ -17,7 +17,7 @@ package okio
 
 import app.cash.burst.Burst
 import kotlin.random.Random
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 @Burst
 class CipherSinkTest(

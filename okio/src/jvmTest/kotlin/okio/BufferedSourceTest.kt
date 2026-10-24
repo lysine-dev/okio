@@ -35,12 +35,12 @@ import okio.TestUtil.assertByteArrayEquals
 import okio.TestUtil.assertByteArraysEquals
 import okio.TestUtil.randomBytes
 import okio.TestUtil.segmentSizes
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
-import org.junit.Assume.assumeTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Assumptions.assumeTrue
+import org.junit.jupiter.api.Test
 
 @Burst
 class BufferedSourceTest(
@@ -1227,7 +1227,7 @@ class BufferedSourceTest(
     sink.writeUtf8(s)
     sink.emit()
     val actual = source.readHexadecimalUnsignedLong()
-    assertEquals("$s --> $expected", expected, actual)
+    assertEquals(expected, actual, "$s --> $expected")
   }
 
   @Test
@@ -1289,7 +1289,7 @@ class BufferedSourceTest(
     sink.writeUtf8("zzz")
     sink.emit()
     val actual = source.readDecimalLong()
-    assertEquals("$s --> $expected", expected, actual)
+    assertEquals(expected, actual, "$s --> $expected")
     assertEquals("zzz", source.readUtf8())
   }
 

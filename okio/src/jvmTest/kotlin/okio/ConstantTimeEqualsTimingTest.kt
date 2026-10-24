@@ -16,8 +16,8 @@
 package okio
 
 import okio.ByteString.Companion.toByteString
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 /**
  * Statistical timing test for [ByteString.equals] with [constantTime]=true.
@@ -58,14 +58,14 @@ class ConstantTimeEqualsTimingTest {
     val ctRatio =
       if (ctMatch > ctMismatch) ctMatch.toDouble() / ctMismatch else ctMismatch.toDouble() / ctMatch
     assertTrue(
-      "CT(match)=$ctMatch ns and CT(mismatch)=$ctMismatch ns differ by ${ctRatio}x (expected <3x)",
       ctRatio < 3.0,
+      "CT(match)=$ctMatch ns and CT(mismatch)=$ctMismatch ns differ by ${ctRatio}x (expected <3x)",
     )
 
     // normal(mismatch) must be significantly faster than CT(mismatch): normal short-circuits at byte 0.
     assertTrue(
-      "normal(mismatch)=$normalMismatch ns should be <2% of CT(mismatch)=$ctMismatch ns (short-circuit at byte 0)",
       normalMismatch * 50L < ctMismatch,
+      "normal(mismatch)=$normalMismatch ns should be <2% of CT(mismatch)=$ctMismatch ns (short-circuit at byte 0)",
     )
   }
 

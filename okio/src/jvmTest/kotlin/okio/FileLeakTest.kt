@@ -32,10 +32,10 @@ import kotlin.test.assertTrue
 import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
 import okio.internal.ResourceFileSystem
-import org.junit.After
-import org.junit.Assume.assumeTrue
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assumptions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 private const val PROC_SELF_FD = "/proc/self/fd"
 
@@ -47,7 +47,7 @@ class FileLeakTest {
   private val fakeDirectory = "/another/".toPath()
   private val fakeEntry2 = fakeDirectory / "another.file"
 
-  @Before
+  @BeforeEach
   fun setup() {
     fakeFileSystem = FakeFileSystem()
     with(fakeFileSystem) {
@@ -69,7 +69,7 @@ class FileLeakTest {
     }
   }
 
-  @After
+  @AfterEach
   fun tearDown() {
     fakeFileSystem.checkNoOpenFiles()
   }
@@ -103,7 +103,7 @@ class FileLeakTest {
 
   @Test
   fun fileLeakInResourceFileSystemTest() {
-    assumeTrue("File descriptor symbolic link available only on Linux", Path(PROC_SELF_FD).exists())
+    Assumptions.assumeTrue(Path(PROC_SELF_FD).exists(), "File descriptor symbolic link available only on Linux")
     // Create a test file that will be opened and cached by the classloader
     val zipPath = ZipBuilder(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / randomToken(16))
       .addEntry("test.txt", "I'm part of a test!")

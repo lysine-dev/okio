@@ -1460,6 +1460,49 @@ abstract class AbstractFileSystemTest(
   }
 
   @Test
+  fun deleteRecursivelyOnBrokenSymlinkSucceeds() {
+    if (!supportsSymlink()) return
+
+    val target = base / "target"
+    val link = base / "link"
+    fileSystem.createSymlink(link, target)
+
+    fileSystem.deleteRecursively(link)
+    assertFalse(fileSystem.exists(link))
+  }
+
+  @Test
+  fun deleteRecursivelyOnMutualSymlinkCycleSucceeds() {
+    if (!supportsSymlink()) return
+
+    val linkA = base / "linkA"
+    val linkB = base / "linkB"
+    fileSystem.createSymlink(linkA, linkB)
+    fileSystem.createSymlink(linkB, linkA)
+
+    fileSystem.deleteRecursively(base)
+    assertFalse(fileSystem.exists(base))
+  }
+
+  @Test
+  fun listRecursivelyDoesNotFollowSymlinksWhenFalse() {
+    if (!supportsSymlink()) return
+
+    val targetDir = base / "targetDir"
+    targetDir.createDirectory()
+    (targetDir / "file.txt").writeUtf8("hello")
+
+    val link = base / "link"
+    fileSystem.createSymlink(link, targetDir)
+
+    val listed = fileSystem.listRecursively(base, followSymlinks = false).toList()
+    assertTrue(targetDir in listed)
+    assertTrue(targetDir / "file.txt" in listed)
+    assertTrue(link in listed)
+    assertFalse(link / "file.txt" in listed)
+  }
+
+  @Test
   fun fileMetadata() {
     val minTime = clock.now()
     val path = base / "file-metadata"

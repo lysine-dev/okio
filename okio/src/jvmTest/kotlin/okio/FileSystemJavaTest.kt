@@ -30,7 +30,7 @@ import okio.ByteString.Companion.encodeUtf8
 import okio.Path.Companion.toOkioPath
 import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class FileSystemJavaTest {
   @Test

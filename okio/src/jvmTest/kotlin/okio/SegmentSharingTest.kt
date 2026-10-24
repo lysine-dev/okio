@@ -22,7 +22,7 @@ import okio.ByteString.Companion.encodeUtf8
 import okio.TestUtil.assertEquivalent
 import okio.TestUtil.bufferWithSegments
 import okio.TestUtil.takeAllPoolSegments
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /** Tests behavior optimized by sharing segments between buffers and byte strings.  */
 class SegmentSharingTest {

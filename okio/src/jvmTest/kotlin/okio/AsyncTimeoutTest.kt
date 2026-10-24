@@ -22,14 +22,14 @@ import java.util.concurrent.LinkedBlockingDeque
 import java.util.concurrent.TimeUnit
 import okio.ByteString.Companion.of
 import okio.TestUtil.bufferWithRandomSegmentLayout
-import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
-import org.junit.Before
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 /**
  * This test uses four timeouts of varying durations: 250ms, 500ms, 750ms and
@@ -42,7 +42,7 @@ class AsyncTimeoutTest {
   private val c = RecordingAsyncTimeout()
   private val d = RecordingAsyncTimeout()
 
-  @Before
+  @BeforeEach
   fun setUp() {
     a.timeout(250, TimeUnit.MILLISECONDS)
     b.timeout(500, TimeUnit.MILLISECONDS)
@@ -154,7 +154,7 @@ class AsyncTimeoutTest {
   fun reEnterAfterTimeout() {
     a.timeout(1, TimeUnit.MILLISECONDS)
     a.enter()
-    Assert.assertSame(a, timedOut.take())
+    Assertions.assertSame(a, timedOut.take())
     assertTrue(a.exit())
     a.enter()
     assertFalse(a.exit())
@@ -345,7 +345,7 @@ class AsyncTimeoutTest {
    * unexpected timeout because although the sink was making steady forward
    * progress, doing it all as a single write caused a timeout.
    */
-  @Ignore("Flaky")
+  @Disabled("Flaky")
   @Test
   fun sinkSplitsLargeWrites() {
     val data = ByteArray(512 * 1024)

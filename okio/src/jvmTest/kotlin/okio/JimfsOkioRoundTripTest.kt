@@ -23,7 +23,7 @@ import kotlin.io.path.readText
 import kotlin.io.path.writeText
 import kotlin.test.assertEquals
 import okio.FileSystem.Companion.asOkioFileSystem
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class JimfsOkioRoundTripTest {
   private val temporaryDirectory = FileSystem.SYSTEM_TEMPORARY_DIRECTORY

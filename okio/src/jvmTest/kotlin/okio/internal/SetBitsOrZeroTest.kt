@@ -18,7 +18,7 @@ package okio.internal
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import java.util.concurrent.atomic.AtomicInteger
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class SetBitsOrZeroTest {
   @Test

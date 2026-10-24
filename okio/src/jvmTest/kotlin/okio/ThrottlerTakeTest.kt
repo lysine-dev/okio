@@ -19,12 +19,12 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isGreaterThan
 import java.util.concurrent.TimeUnit
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ThrottlerTakeTest {
   private var nowNanos = 0L
   private var elapsedNanos = 0L
-  private val throttler = Throttler(allocatedUntil = nowNanos)
+  private val throttler = Throttler(getCurrentNanoTime = ::nowNanos)
 
   @Test fun takeByByteCount() {
     throttler.bytesPerSecond(bytesPerSecond = 20, waitByteCount = 5, maxByteCount = 10)
@@ -52,6 +52,30 @@ class ThrottlerTakeTest {
     // Wait a quarter second for each subsequent 5 bytes (that's waitByteCount again).
     assertThat(take(100L)).isEqualTo(5L)
     assertElapsed(250L)
+  }
+
+  @Test fun rateMustBeAppliedImmediately() {
+    val firstRate = 1 * 1024L // 1 KiB/s
+    val secondRate = 10 * 1024L // 10 KiB/s
+
+    // initial rate
+    throttler.bytesPerSecond(
+      bytesPerSecond = firstRate,
+      waitByteCount = firstRate,
+      maxByteCount = firstRate,
+    )
+    take(firstRate)
+    assertElapsed(0L)
+
+    // increase the rate
+    throttler.bytesPerSecond(
+      bytesPerSecond = secondRate,
+      waitByteCount = secondRate,
+      maxByteCount = secondRate,
+    )
+    // take should immediately return our requested byte count without waiting
+    take(secondRate)
+    assertElapsed(0L)
   }
 
   @Test fun takeFullyTimeElapsed() {

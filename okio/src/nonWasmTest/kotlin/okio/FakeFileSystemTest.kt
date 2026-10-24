@@ -26,43 +26,29 @@ import kotlin.time.Duration.Companion.minutes
 import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
 
-class FakeWindowsFileSystemTest private constructor(clock: FakeClock) : FakeFileSystemTest(
-  fakeFileSystem = FakeFileSystem(clock = clock).also { it.emulateWindows() },
-  fakeClock = clock,
-  temporaryDirectory = "C:\\".toPath(),
-) {
-  constructor() : this(FakeClock())
+class FakeWindowsFileSystemTest : FakeFileSystemTest(fakeConfig("C:\\".toPath()) { emulateWindows() })
+
+class FakeUnixFileSystemTest : FakeFileSystemTest(fakeConfig("/".toPath()) { emulateUnix() })
+
+class StrictFakeFileSystemTest : FakeFileSystemTest(fakeConfig("/".toPath()) {})
+
+private fun fakeConfig(temporaryDirectory: Path, fsBlock: FakeFileSystem.() -> Unit): FakeFileSystemTest.Config {
+  val clock = FakeClock()
+  return FakeFileSystemTest.Config(clock, FakeFileSystem(clock).apply(fsBlock), temporaryDirectory)
 }
 
-class FakeUnixFileSystemTest private constructor(clock: FakeClock) : FakeFileSystemTest(
-  fakeFileSystem = FakeFileSystem(clock = clock).also { it.emulateUnix() },
-  fakeClock = clock,
-  temporaryDirectory = "/".toPath(),
-) {
-  constructor() : this(FakeClock())
-}
-
-class StrictFakeFileSystemTest private constructor(clock: FakeClock) : FakeFileSystemTest(
-  fakeFileSystem = FakeFileSystem(clock = clock),
-  fakeClock = clock,
-  temporaryDirectory = "/".toPath(),
-) {
-  constructor() : this(FakeClock())
-}
-
-abstract class FakeFileSystemTest internal constructor(
-  private val fakeFileSystem: FakeFileSystem,
-  private val fakeClock: FakeClock,
-  temporaryDirectory: Path,
-) : AbstractFileSystemTest(
-  clock = fakeFileSystem.clock,
-  fileSystem = fakeFileSystem,
-  windowsLimitations = !fakeFileSystem.allowMovingOpenFiles,
-  allowClobberingEmptyDirectories = fakeFileSystem.allowClobberingEmptyDirectories,
+abstract class FakeFileSystemTest internal constructor(config: Config) : AbstractFileSystemTest(
+  clock = config.fakeFileSystem.clock,
+  fileSystem = config.fakeFileSystem,
+  windowsLimitations = !config.fakeFileSystem.allowMovingOpenFiles,
+  allowClobberingEmptyDirectories = config.fakeFileSystem.allowClobberingEmptyDirectories,
   allowAtomicMoveFromFileToDirectory = false,
-  temporaryDirectory = temporaryDirectory,
+  temporaryDirectory = config.temporaryDirectory,
   closeBehavior = CloseBehavior.Closes,
 ) {
+
+  private val fakeFileSystem = config.fakeFileSystem
+  private val fakeClock = config.fakeClock
 
   @Test
   fun openPathsIncludesOpenSink() {
@@ -502,4 +488,6 @@ abstract class FakeFileSystemTest internal constructor(
   internal data class ContentTypeExtra(
     val contentType: String,
   )
+
+  internal class Config(val fakeClock: FakeClock, val fakeFileSystem: FakeFileSystem, val temporaryDirectory: Path)
 }

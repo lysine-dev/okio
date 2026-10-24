@@ -45,7 +45,7 @@ import okio.Path
 import okio.Path.Companion.toPath
 import okio.TestDirectory
 import okio.ZipBuilder
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ResourceFileSystemTest {
   private val fileSystem = FileSystem.RESOURCES as ResourceFileSystem
@@ -294,23 +294,23 @@ class ResourceFileSystemTest {
 
   @Test
   fun testResourceFromJar() {
-    val path = "LICENSE-junit.txt".toPath()
+    val path = "go/NOTICE".toPath()
 
     val metadata = fileSystem.metadataOrNull(path)!!
 
-    assertThat(metadata.size).isNotNull().isGreaterThan(10000L)
+    assertThat(metadata.size).isNotNull().isGreaterThan(100L)
     assertThat(metadata.isRegularFile).isTrue()
     assertThat(metadata.isDirectory).isFalse()
 
     val content = fileSystem.read(path) { readUtf8Line() }
 
-    assertThat(content).isEqualTo("JUnit")
+    assertThat(content).isEqualTo("The files in this directory are copied from Go:")
   }
 
   @Test
   fun testClassFilesOmittedFromJar() {
-    assertThat(fileSystem.list("/org/junit/rules".toPath())).isEmpty()
-    assertThat(fileSystem.metadataOrNull("/org/junit/Test.class".toPath())).isNull()
+    assertThat(fileSystem.list("/org/junit/jupiter/api/function".toPath())).isEmpty()
+    assertThat(fileSystem.metadataOrNull("/org/junit/jupiter/Test.class".toPath())).isNull()
   }
 
   @Test
@@ -344,7 +344,7 @@ class ResourceFileSystemTest {
     assertThat(metadata?.isDirectory).isNotNull().isTrue()
 
     val files = fileSystem.list(path).map { it.name }
-    assertThat(files).containsAtLeast("matchers", "rules")
+    assertThat(files).containsAtLeast("jupiter", "platform")
     assertThat(files.filter { it.endsWith(".class") }).isEmpty()
   }
 

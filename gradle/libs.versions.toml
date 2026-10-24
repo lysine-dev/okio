@@ -8,11 +8,11 @@ ktlint = "0.48.2"
 
 [libraries]
 android-desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
-android-gradle-plugin = { module = "com.android.tools.build:gradle", version = "9.3.1" }
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version = "9.4.1" }
 androidx-test-ext-junit = { module = "androidx.test.ext:junit", version = "1.3.0" }
 androidx-test-runner = { module = "androidx.test:runner", version = "1.7.0" }
-binary-compatibility-validator-gradle-plugin = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin", version = "0.18.1" }
-bnd = { module = "biz.aQute.bnd:biz.aQute.bnd.gradle", version = "7.3.0" }
+binary-compatibility-validator-gradle-plugin = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin", version = "0.18.2" }
+bnd = { module = "biz.aQute.bnd:biz.aQute.bnd.gradle", version = "7.4.0" }
 burst-gradle-plugin = { module = "app.cash.burst:burst-gradle-plugin", version.ref = "burst" }
 burst-runtime = { module = "app.cash.burst:burst", version.ref = "burst" }
 dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "2.2.0" }
@@ -21,11 +21,12 @@ jmh-generator = { module = "org.openjdk.jmh:jmh-generator-annprocess", version.r
 jmh-gradle-plugin = { module = "me.champeau.jmh:jmh-gradle-plugin", version = "0.7.3" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
 kotlin-time = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.8.0-0.6.x-compat" }
 spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "8.0.0" }
-tapmoc-gradle-plugin = { module =  "com.gradleup.tapmoc:com.gradleup.tapmoc.gradle.plugin", version = "0.4.2"}
+tapmoc-gradle-plugin = { module =  "com.gradleup.tapmoc:com.gradleup.tapmoc.gradle.plugin", version = "0.5.0"}
 test-assertk = "com.willowtreeapps.assertk:assertk:0.28.1"
-test-jimfs = "com.google.jimfs:jimfs:1.3.1"
+test-jimfs = "com.google.jimfs:jimfs:1.3.2"
 test-junit = { module = "junit:junit", version = "4.13.2" }
+test-junit5 = { module = "org.junit.jupiter:junit-jupiter-api", version = "5.14.4" }
 vanniktech-publish-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.37.0" }

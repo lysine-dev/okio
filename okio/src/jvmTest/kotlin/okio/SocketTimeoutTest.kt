@@ -24,9 +24,9 @@ import java.net.ServerSocket
 import java.net.Socket
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
-import org.junit.Assert.assertTrue
-import org.junit.Assert.fail
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
 
 class SocketTimeoutTest {
   @Test
@@ -77,8 +77,8 @@ class SocketTimeoutTest {
     }
     val elapsed = System.nanoTime() - start
     socket.close()
-    assertTrue("elapsed: $elapsed", TimeUnit.NANOSECONDS.toMillis(elapsed) >= 500)
-    assertTrue("elapsed: $elapsed", TimeUnit.NANOSECONDS.toMillis(elapsed) <= 750)
+    assertTrue(TimeUnit.NANOSECONDS.toMillis(elapsed) >= 500, "elapsed: $elapsed")
+    assertTrue(TimeUnit.NANOSECONDS.toMillis(elapsed) <= 750, "elapsed: $elapsed")
   }
 
   companion object {

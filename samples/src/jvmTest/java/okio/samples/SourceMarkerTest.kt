@@ -21,8 +21,8 @@ import assertk.assertions.isEqualTo
 import java.io.IOException
 import java.util.Arrays
 import okio.Buffer
-import org.junit.Assert.fail
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Test
 
 class SourceMarkerTest {
   @Test

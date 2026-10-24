@@ -18,7 +18,7 @@ package okio
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import kotlin.test.assertFailsWith
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class BufferKotlinTest {
   @Test fun get() {

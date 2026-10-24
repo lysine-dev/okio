@@ -39,12 +39,13 @@ import kotlin.concurrent.withLock
  *    bytes that will be returned before any waiting.
  */
 class Throttler internal constructor(
+  private val getCurrentNanoTime: () -> Long,
+) {
   /**
    * The nanoTime that we've consumed all bytes through. This is never greater than the current
-   * nanoTime plus nanosForMaxByteCount.
+   * nanoTime plus maxByteCount.
    */
-  private var allocatedUntil: Long,
-) {
+  private var allocatedUntil: Long = getCurrentNanoTime()
   private var bytesPerSecond: Long = 0L
   private var waitByteCount: Long = 8 * 1024 // 8 KiB.
   private var maxByteCount: Long = 256 * 1024 // 256 KiB.
@@ -52,7 +53,7 @@ class Throttler internal constructor(
   val lock: ReentrantLock = ReentrantLock()
   val condition: Condition = lock.newCondition()
 
-  constructor() : this(allocatedUntil = System.nanoTime())
+  constructor() : this(getCurrentNanoTime = System::nanoTime)
 
   /** Sets the rate at which bytes will be allocated. Use 0 for no limit. */
   @JvmOverloads
@@ -66,6 +67,7 @@ class Throttler internal constructor(
       require(waitByteCount > 0)
       require(maxByteCount >= waitByteCount)
 
+      this.allocatedUntil = getCurrentNanoTime()
       this.bytesPerSecond = bytesPerSecond
       this.waitByteCount = waitByteCount
       this.maxByteCount = maxByteCount
@@ -82,7 +84,7 @@ class Throttler internal constructor(
 
     lock.withLock {
       while (true) {
-        val now = System.nanoTime()
+        val now = getCurrentNanoTime()
         val byteCountOrWaitNanos = byteCountOrWaitNanos(now, byteCount)
         if (byteCountOrWaitNanos >= 0) return byteCountOrWaitNanos
         condition.awaitNanos(-byteCountOrWaitNanos)

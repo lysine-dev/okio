@@ -28,10 +28,10 @@ import okio.ByteString.Companion.decodeBase64
 import okio.ByteString.Companion.encodeUtf8
 import okio.TestUtil.SEGMENT_SIZE
 import okio.TestUtil.randomBytes
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Assume.assumeFalse
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.Assumptions.assumeFalse
+import org.junit.jupiter.api.Test
 
 @Burst
 class InflaterSourceTest(
