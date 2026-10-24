@@ -30,7 +30,9 @@ import platform.windows.FlushFileBuffers
 import platform.windows.GetFileSizeEx
 import platform.windows.GetLastError
 import platform.windows.HANDLE
+import platform.windows.INVALID_SET_FILE_POINTER
 import platform.windows.LARGE_INTEGER
+import platform.windows.NO_ERROR
 import platform.windows.ReadFile
 import platform.windows.SetEndOfFile
 import platform.windows.SetFilePointer
@@ -146,7 +148,7 @@ internal class WindowsFileHandle(
         lpDistanceToMoveHigh = distanceToMoveHigh.ptr,
         dwMoveMethod = FILE_BEGIN.toUInt(),
       )
-      if (movePointerResult == 0U) {
+      if (movePointerResult == INVALID_SET_FILE_POINTER && GetLastError().toInt() != NO_ERROR) {
         throw lastErrorToIOException()
       }
       if (SetEndOfFile(file) == 0) {
