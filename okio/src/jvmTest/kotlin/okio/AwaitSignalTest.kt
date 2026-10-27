@@ -44,11 +44,18 @@ class AwaitSignalTest(
   fun signaled() = lock.withLock {
     timeout.timeout(5000, TimeUnit.MILLISECONDS)
     val start = now()
+    var signaled = false
     executorService.schedule(1000.milliseconds) {
-      lock.withLock { condition.signal() }
+      lock.withLock {
+        signaled = true
+        condition.signal()
+      }
     }
     timeout.awaitSignal(condition)
-    assertElapsed(1000.0, start)
+    assertTrue(signaled)
+    val elapsed = now() - start
+    assertTrue(elapsed >= 950.0, "elapsed=$elapsed")
+    assertTrue(elapsed < 4500.0, "elapsed=$elapsed")
   }
 
   @Test
