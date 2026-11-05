@@ -1,0 +1,407 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Timeout</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    okio-parent
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">3.19.0-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":okio/commonMain">common</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":okio/jvmMain">jvm</button>
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":okio/nonJvmMain">nonJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":okio/commonMain" data-filter=":okio/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":okio/jvmMain" data-filter=":okio/jvmMain">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":okio/nonJvmMain" data-filter=":okio/nonJvmMain">
+                                <span class="checkbox--icon"></span>
+                                nonJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    okio-parent
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="okio::okio/Timeout///PointingToDeclaration//168722633">
+  <div class="breadcrumbs"><a href="../../index.html">okio</a><span class="delimiter">/</span><a href="../index.html">okio</a><span class="delimiter">/</span><span class="current">Timeout</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Timeout</span></span></h1>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain" data-active="" data-toggle=":okio/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-toggle=":okio/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":okio/nonJvmMain" data-filterable-set=":okio/nonJvmMain" data-toggle=":okio/nonJvmMain">nonJvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">Timeout</a></div><p class="paragraph">A policy on how much time to spend on a task before giving up. When a task times out, it is left in an unspecified state and should be abandoned. For example, if reading from a source times out, that source should be closed and the read should be retried later. If writing to a sink times out, the same rules apply: close the sink and retry later.</p><h3 class="">Timeouts and Deadlines</h3><p class="paragraph">This class offers two complementary controls to define a timeout policy.</p><p class="paragraph"><strong>Timeouts</strong> specify the maximum time to wait for a single operation to complete. Timeouts are typically used to detect problems like network partitions. For example, if a remote peer doesn't return <i>any</i> data for ten seconds, we may assume that the peer is unavailable.</p><p class="paragraph"><strong>Deadlines</strong> specify the maximum time to spend on a job, composed of one or more operations. Use deadlines to set an upper bound on the time invested on a job. For example, a battery-conscious app may limit how much time it spends pre-loading content.</p></div><div class="content sourceset-dependent-content" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">Timeout</a></div><p class="paragraph">A policy on how much time to spend on a task before giving up. When a task times out, it is left in an unspecified state and should be abandoned. For example, if reading from a source times out, that source should be closed and the read should be retried later. If writing to a sink times out, the same rules apply: close the sink and retry later.</p><h3 class="">Timeouts and Deadlines</h3><p class="paragraph">This class offers two complementary controls to define a timeout policy.</p><p class="paragraph"><strong>Timeouts</strong> specify the maximum time to wait for a single operation to complete. Timeouts are typically used to detect problems like network partitions. For example, if a remote peer doesn't return <i>any</i> data for ten seconds, we may assume that the peer is unavailable.</p><p class="paragraph"><strong>Deadlines</strong> specify the maximum time to spend on a job, composed of one or more operations. Use deadlines to set an upper bound on the time invested on a job. For example, a battery-conscious app may limit how much time it spends pre-loading content.</p><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-async-timeout/index.html">AsyncTimeout</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-forwarding-timeout/index.html">ForwardingTimeout</a></div></span></div><div></div></div></div></div></div><div class="content sourceset-dependent-content" data-togglable=":okio/nonJvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">Timeout</a></div><p class="paragraph">A policy on how much time to spend on a task before giving up. When a task times out, it is left in an unspecified state and should be abandoned. For example, if reading from a source times out, that source should be closed and the read should be retried later. If writing to a sink times out, the same rules apply: close the sink and retry later.</p><h3 class="">Timeouts and Deadlines</h3><p class="paragraph">This class offers two complementary controls to define a timeout policy.</p><p class="paragraph"><strong>Timeouts</strong> specify the maximum time to wait for a single operation to complete. Timeouts are typically used to detect problems like network partitions. For example, if a remote peer doesn't return <i>any</i> data for ten seconds, we may assume that the peer is unavailable.</p><p class="paragraph"><strong>Deadlines</strong> specify the maximum time to spend on a job, composed of one or more operations. Use deadlines to set an upper bound on the time invested on a job. For example, a battery-conscious app may limit how much time it spends pre-loading content.</p></div>    </div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-1357692905%2FConstructors%2F-1221674454" anchor-label="Timeout" id="-1357692905%2FConstructors%2F-1221674454" data-filterable-set=":okio/jvmMain,:okio/nonJvmMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":okio/jvmMain,:okio/nonJvmMain" data-filterable-set=":okio/jvmMain,:okio/nonJvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-timeout.html"><span><span>Timeout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1357692905%2FConstructors%2F-1221674454"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":okio/nonJvmMain" data-filterable-set=":okio/nonJvmMain" data-toggle=":okio/nonJvmMain">nonJvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div><div class="content sourceset-dependent-content" data-togglable=":okio/nonJvmMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1548318529%2FClasslikes%2F168722633" anchor-label="Companion" id="-1548318529%2FClasslikes%2F168722633" data-filterable-set=":okio/commonMain,:okio/jvmMain,:okio/nonJvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/commonMain,:okio/jvmMain,:okio/nonJvmMain" data-filterable-set=":okio/commonMain,:okio/jvmMain,:okio/nonJvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1548318529%2FClasslikes%2F168722633"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/commonMain" data-filterable-set=":okio/commonMain" data-active="" data-toggle=":okio/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-toggle=":okio/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":okio/nonJvmMain" data-filterable-set=":okio/nonJvmMain" data-toggle=":okio/nonJvmMain">nonJvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div><div class="content sourceset-dependent-content" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div><div class="content sourceset-dependent-content" data-togglable=":okio/nonJvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1773707772%2FFunctions%2F987163273" anchor-label="awaitSignal" id="1773707772%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="await-signal.html"><span>await</span><wbr><span><span>Signal</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1773707772%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="await-signal.html"><span class="token function">awaitSignal</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/locks/Condition.html">Condition</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Waits on <code class="lang-kotlin">monitor</code> until it is signaled. Throws <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/InterruptedIOException.html">InterruptedIOException</a> if either the thread is interrupted or if this timeout elapses before <code class="lang-kotlin">monitor</code> is signaled. The caller must hold the lock that monitor is bound to.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-14364504%2FFunctions%2F987163273" anchor-label="cancel" id="-14364504%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cancel.html"><span><span>cancel</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-14364504%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="cancel.html"><span class="token function">cancel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Prevent all current applications of this timeout from firing. Use this when a time-limited operation should no longer be time-limited because the nature of the operation has changed.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1841569325%2FFunctions%2F987163273" anchor-label="clearDeadline" id="-1841569325%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear-deadline.html"><span>clear</span><wbr><span><span>Deadline</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1841569325%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="clear-deadline.html"><span class="token function">clearDeadline</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Timeout</a></div><div class="brief "><p class="paragraph">Clears the deadline.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1440795214%2FFunctions%2F987163273" anchor-label="clearTimeout" id="1440795214%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear-timeout.html"><span>clear</span><wbr><span><span>Timeout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1440795214%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="clear-timeout.html"><span class="token function">clearTimeout</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Timeout</a></div><div class="brief "><p class="paragraph">Clears the timeout. Operating system timeouts may still apply.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-82597878%2FFunctions%2F987163273" anchor-label="deadline" id="-82597878%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deadline.html"><span><span>deadline</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-82597878%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="deadline.html"><span class="token function">deadline</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">duration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">unit<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/TimeUnit.html">TimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Timeout</a></div><div class="brief "><p class="paragraph">Set a deadline of now plus <code class="lang-kotlin">duration</code> time.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1802871629%2FFunctions%2F987163273" anchor-label="deadlineNanoTime" id="-1802871629%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="deadline-nano-time.html"><span>deadline</span><wbr><span>Nano</span><wbr><span><span>Time</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1802871629%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="deadline-nano-time.html"><span class="token function">deadlineNanoTime</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Returns the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/System.html#nanoTime()">nano time</a> when the deadline will be reached.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="deadline-nano-time.html"><span class="token function">deadlineNanoTime</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">deadlineNanoTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Timeout</a></div><div class="brief "><p class="paragraph">Sets the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/System.html#nanoTime()">nano time</a> when the deadline will be reached. All operations must complete before this time. Use a deadline to set a maximum bound on the time spent on a sequence of operations.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-652618266%2FFunctions%2F987163273" anchor-label="hasDeadline" id="-652618266%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="has-deadline.html"><span>has</span><wbr><span><span>Deadline</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-652618266%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="has-deadline.html"><span class="token function">hasDeadline</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Returns true if a deadline is enabled.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1090892136%2FFunctions%2F987163273" anchor-label="intersectWith" id="-1090892136%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="intersect-with.html"><span>intersect</span><wbr><span><span>With</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1090892136%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="intersect-with.html">T</a><span class="token operator">&gt; </span><a href="intersect-with.html"><span class="token function">intersectWith</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Timeout</a><span class="token punctuation">, </span></span><span class="parameter ">block<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="intersect-with.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="intersect-with.html">T</a></div><div class="brief "><p class="paragraph">Applies the minimum intersection between this timeout and <code class="lang-kotlin">other</code>, run <code class="lang-kotlin">block</code>, then finally rollback this timeout's values.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1295441555%2FFunctions%2F987163273" anchor-label="throwIfReached" id="1295441555%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="throw-if-reached.html"><span>throw</span><wbr><span>If</span><wbr><span><span>Reached</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1295441555%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="throw-if-reached.html"><span class="token function">throwIfReached</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Throws an <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/InterruptedIOException.html">InterruptedIOException</a> if the deadline has been reached or if the current thread has been interrupted. This method doesn't detect timeouts; that should be implemented to asynchronously abort an in-progress operation.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="221100029%2FFunctions%2F987163273" anchor-label="timeout" id="221100029%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="timeout.html"><span><span>timeout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="221100029%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="timeout.html"><span class="token function">timeout</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">timeout<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">unit<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/TimeUnit.html">TimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Timeout</a></div><div class="brief "><p class="paragraph">Wait at most <code class="lang-kotlin">timeout</code> time before aborting an operation. Using a per-operation timeout means that as long as forward progress is being made, no sequence of operations will fail.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="299918922%2FFunctions%2F987163273" anchor-label="timeout" id="299918922%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/timeout.html"><span><span>timeout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="299918922%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">Timeout</a><span class="token punctuation">.</span><a href="-companion/timeout.html"><span class="token function">timeout</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">duration<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration/index.html">Duration</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Timeout</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html">Timeout</a><span class="token punctuation">.</span><a href="-companion/timeout.html"><span class="token function">timeout</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">timeout<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">unit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-duration-unit/index.html">DurationUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Timeout</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1753597060%2FFunctions%2F987163273" anchor-label="timeoutNanos" id="1753597060%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="timeout-nanos.html"><span>timeout</span><wbr><span><span>Nanos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1753597060%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="timeout-nanos.html"><span class="token function">timeoutNanos</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Returns the timeout in nanoseconds, or <code class="lang-kotlin">0</code> for no timeout.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="143102520%2FFunctions%2F987163273" anchor-label="waitUntilNotified" id="143102520%2FFunctions%2F987163273" data-filterable-set=":okio/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="wait-until-notified.html"><span>wait</span><wbr><span>Until</span><wbr><span><span>Notified</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="143102520%2FFunctions%2F987163273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":okio/jvmMain" data-filterable-set=":okio/jvmMain" data-active="" data-toggle=":okio/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":okio/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="wait-until-notified.html"><span class="token function">waitUntilNotified</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">monitor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Waits on <code class="lang-kotlin">monitor</code> until it is notified. Throws <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/io/InterruptedIOException.html">InterruptedIOException</a> if either the thread is interrupted or if this timeout elapses before <code class="lang-kotlin">monitor</code> is notified. The caller must be synchronized on <code class="lang-kotlin">monitor</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
