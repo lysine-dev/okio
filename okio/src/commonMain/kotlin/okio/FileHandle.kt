@@ -289,6 +289,7 @@ abstract class FileHandle(
       closed = true
       if (openStreamCount != 0) return
     }
+    lock.destroy()
     protectedClose()
   }
 
