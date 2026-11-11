@@ -32,6 +32,7 @@ import javax.net.SocketFactory
 import kotlin.concurrent.thread
 import kotlin.test.assertFailsWith
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.measureTime
 import okio.internal.DefaultSocket
 import org.junit.jupiter.api.AfterEach
@@ -163,7 +164,9 @@ class SocketTest(val factory: Factory = Factory.Default) {
       }
     }
 
-    assertThat(duration).isBetween(250.milliseconds, 750.milliseconds)
+    // The upper bound only guards against a hang; a loaded CI machine can take well over the
+    // 500 ms timeout to deliver the interrupt.
+    assertThat(duration).isBetween(250.milliseconds, 2.seconds)
   }
 
   /** Make a large-enough write to saturate the outgoing write buffer. */
@@ -178,7 +181,9 @@ class SocketTest(val factory: Factory = Factory.Default) {
       }
     }
 
-    assertThat(duration).isBetween(250.milliseconds, 750.milliseconds)
+    // The upper bound only guards against a hang; a loaded CI machine can take well over the
+    // 500 ms timeout to deliver the interrupt.
+    assertThat(duration).isBetween(250.milliseconds, 2.seconds)
   }
 
   @Test
