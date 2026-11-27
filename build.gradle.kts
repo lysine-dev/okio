@@ -154,6 +154,7 @@ subprojects {
     if (testJavaVersion != null) {
       javaLauncher.set(javaToolchains.launcherFor {
         languageVersion.set(JavaLanguageVersion.of(testJavaVersion))
+        vendor = JvmVendorSpec.AZUL
       })
     }
 
