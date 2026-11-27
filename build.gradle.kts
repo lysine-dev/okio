@@ -20,7 +20,7 @@ plugins {
 buildscript {
   dependencies {
     classpath(libs.android.gradle.plugin)
-    classpath(libs.burst.gradle.plugin)
+    classpath(libs.test.balloon.gradle.plugin)
     classpath(libs.dokka)
     classpath(libs.jmh.gradle.plugin)
     classpath(libs.binary.compatibility.validator.gradle.plugin)
@@ -154,6 +154,7 @@ subprojects {
     if (testJavaVersion != null) {
       javaLauncher.set(javaToolchains.launcherFor {
         languageVersion.set(JavaLanguageVersion.of(testJavaVersion))
+        vendor = JvmVendorSpec.AZUL
       })
     }
 

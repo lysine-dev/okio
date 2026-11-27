@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.konan.target.Family
 
 plugins {
   kotlin("multiplatform")
-  id("app.cash.burst")
+  id("de.infix.testBalloon")
   id("org.jetbrains.dokka")
   id("com.vanniktech.maven.publish.base")
   id("build-support")

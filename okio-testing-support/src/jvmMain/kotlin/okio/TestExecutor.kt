@@ -15,8 +15,6 @@
  */
 package okio
 
-import app.cash.burst.TestFunction
-import app.cash.burst.TestInterceptor
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 import java.util.concurrent.ScheduledExecutorService
@@ -28,27 +26,19 @@ import kotlin.time.Duration
 /**
  * Manages a `ExecutorService` and shuts it down after the test.
  */
-class TestExecutor(
-  private val corePoolSize: Int = 0,
-) : TestInterceptor {
-  lateinit var executorService: ScheduledExecutorService
-    private set
+class TestExecutor(corePoolSize: Int = 0) : AutoCloseable {
+  private val executorService: ScheduledExecutorService = when {
+    isLoom -> Executors.newScheduledThreadPool(corePoolSize, newVirtualThreadFactory())
+    else -> Executors.newScheduledThreadPool(corePoolSize)
+  }
 
   fun <T> submit(task: () -> T): Future<T> = executorService.submit<T>(task)
 
   fun <T> schedule(delay: Duration, command: () -> T): ScheduledFuture<T> =
     executorService.schedule(command, delay.inWholeNanoseconds, TimeUnit.NANOSECONDS)
 
-  override fun intercept(testFunction: TestFunction) {
-    executorService = when {
-      isLoom -> Executors.newScheduledThreadPool(corePoolSize, newVirtualThreadFactory())
-      else -> Executors.newScheduledThreadPool(corePoolSize)
-    }
-    try {
-      testFunction()
-    } finally {
-      executorService.shutdown()
-    }
+  override fun close() {
+    executorService.shutdown()
   }
 
   private companion object {
